@@ -49,7 +49,10 @@
               {{ store.locations }} {{ getCurrentText(mocks.labels.locations) }}
             </span>
           </div>
-          <button class="view-store">
+          <button
+            class="view-store"
+            (click)="viewStore(getCurrentText(store.name))"
+          >
             {{ getCurrentText(mocks.labels.viewStore) }}
           </button>
         </div>

@@ -1,0 +1,285 @@
+.market-products-page {
+  background-color: #F8FAFC; /* Consistent light background */
+  padding: 8rem 0 5rem;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #334155;
+}
+
+.market-products-page .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem; /* Consistent padding */
+}
+
+.market-products-page .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  padding: 1.5rem 2rem;
+  animation: fadeInSlideIn 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+@keyframes fadeInSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.market-products-page .header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1E293B;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.market-products-page .header h1 span {
+  font-size: 1.6rem;
+  color: #334155;
+  font-weight: 500;
+}
+
+.market-products-page .back-link {
+  padding: 0.8rem 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  background-color: #FFFFFF;
+  color: #334155;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+}
+
+.market-products-page .back-link:hover {
+  border-color: #6A2C70;
+  color: #1E293B;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.market-products-page .products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem; /* Consistent gap with search results */
+}
+
+.market-products-page .product-card {
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+  animation: popInScale 0.7s ease-out forwards;
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+@for $i from 1 through 6 {
+  .market-products-page .product-card:nth-child(#{$i}) {
+    animation-delay: #{$i * 0.08}s;
+  }
+}
+
+@keyframes popInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.market-products-page .product-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.market-products-page .product-card img {
+  width: 100%;
+  height: 180px; /* Consistent image height */
+  object-fit: contain; /* Use contain for product images */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  filter: brightness(0.99);
+  transition: filter 0.25s ease;
+}
+
+.market-products-page .product-card img:hover {
+  filter: brightness(1);
+}
+
+.market-products-page .product-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1E293B;
+  margin: 1.2rem 1.2rem 0.5rem; /* Adjust margin for product name */
+  line-height: 1.3;
+}
+
+.market-products-page .product-card .description {
+  font-size: 0.95rem;
+  color: #334155;
+  margin: 0 1.2rem 1rem;
+  flex-grow: 1; /* Allows description to take up available space */
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+}
+
+.market-products-page .product-card .price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #FF5733; /* Orange/red for price */
+  margin: 0 1.2rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.market-products-page .product-card .price .discount {
+  background: linear-gradient(90deg, #4CAF50 0%, #FF5733 100%); /* Warm Green to Orange/Red */
+  color: #FFFFFF;
+  padding: 0.2rem 0.6rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.market-products-page .product-card .add-to-cart {
+  padding: 0.8rem 1.2rem;
+  background: linear-gradient(90deg, #6A2C70 0%, #2A4874 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease-in-out;
+  letter-spacing: 0.3px;
+  margin: 0 1.2rem 1.2rem; /* Consistent margin for button */
+  align-self: flex-start; /* Align button to start within card */
+  width: calc(100% - 2.4rem); /* Fill width minus padding */
+}
+
+.market-products-page .product-card .add-to-cart:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(90deg, #4CAF50 0%, #FF5733 100%);
+}
+
+.market-products-page .product-card .add-to-cart:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.market-products-page .no-products {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #64748B;
+  padding: 3rem 0;
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .market-products-page {
+    padding: 6rem 0 3rem;
+  }
+
+  .market-products-page .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .market-products-page .header h1 {
+    font-size: 1.8rem;
+    text-align: left;
+  }
+
+  .market-products-page .header h1 span {
+    font-size: 1.3rem;
+  }
+
+  .market-products-page .back-link {
+    width: 100%;
+    text-align: center;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .market-products-page .products-grid {
+    grid-template-columns: 1fr; /* Single column on small screens */
+    gap: 1.5rem;
+  }
+
+  .market-products-page .product-card h3 {
+    font-size: 1.15rem;
+  }
+
+  .market-products-page .product-card .description {
+    font-size: 0.9rem;
+  }
+
+  .market-products-page .product-card .price {
+    font-size: 1.2rem;
+  }
+
+  .market-products-page .product-card .price .discount {
+    font-size: 0.8rem;
+  }
+
+  .market-products-page .product-card .add-to-cart {
+    width: calc(100% - 2.4rem);
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .market-products-page .no-products {
+    font-size: 1.1rem;
+    padding: 2rem 1rem;
+  }
+}

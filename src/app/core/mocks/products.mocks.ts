@@ -6,57 +6,57 @@ export const productsMocks = {
         { 
             id: 'dairy', 
             name: ['რძის პროდუქტები', 'Dairy', 'Молочные продукты'],
-            icon: 'dairy.png'
+            icon: 'dairy.jpg'
         },
         { 
             id: 'meat', 
             name: ['ხორცი', 'Meat', 'Мясо'],
-            icon: 'meat.png'
+            icon: 'meat.jpg'
         },
         { 
             id: 'bakery', 
             name: ['ცომეული', 'Bakery', 'Выпечка'],
-            icon: 'bakery.png'
+            icon: 'bakery.jpg'
         },
         { 
             id: 'beverages', 
             name: ['სასმელები', 'Beverages', 'Напитки'],
-            icon: 'beverages.png'
+            icon: 'beverages.jpg'
         },
         { 
             id: 'fruits', 
             name: ['ხილი', 'Fruits', 'Фрукты'],
-            icon: 'fruits.png'
+            icon: 'fruits.jpg'
         },
         { 
             id: 'vegetables', 
             name: ['ბოსტნეული', 'Vegetables', 'Овощи'],
-            icon: 'vegetables.png'
+            icon: 'vegetables.jpg'
         },
         { 
             id: 'snacks', 
             name: ['სნექები', 'Snacks', 'Закуски'],
-            icon: 'snacks.png'
+            icon: 'snacks.jpg'
         },
         { 
             id: 'frozen', 
             name: ['გაყინული', 'Frozen', 'Замороженные'],
-            icon: 'frozen.png'
+            icon: 'frozen.jpg'
         },
         { 
             id: 'cleaning', 
             name: ['საყოფაცხოვრებო', 'Cleaning', 'Бытовая химия'],
-            icon: 'cleaning.png'
+            icon: 'cleaning.jpg'
         },
         { 
             id: 'alcohol', 
             name: ['ალკოჰოლი', 'Alcohol', 'Алкоголь'],
-            icon: 'alcohol.png'
+            icon: 'alcohol.jpg'
         },
         { 
             id: 'health', 
             name: ['ჯანმრთელობა', 'Health', 'Здоровье'],
-            icon: 'health.png'
+            icon: 'health.jpg'
         }
     ],
     products: [

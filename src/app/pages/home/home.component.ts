@@ -43,7 +43,9 @@ export class HomeComponent {
   // Method to get random featured products
   getFeaturedProducts() {
     if (this.featuredProductsCache.length === 0) {
-      const shuffled = [...productsMocks.products].sort(() => 0.5 - Math.random());
+      const shuffled = [...productsMocks.products].sort(
+        () => 0.5 - Math.random()
+      );
       this.featuredProductsCache = shuffled.slice(0, 4); // Get 4 random products
     }
     return this.featuredProductsCache;
@@ -58,5 +60,14 @@ export class HomeComponent {
       (p: any) => p.price - (p.discount || 0) === minPrice
     );
     return { price: minPrice, market: market?.market || '' };
+  }
+  // Update the home component to add this method
+  viewStore(storeName: string) {
+    this.router.navigate([
+      '/',
+      this.languageService.getCurrentLanguageCode(),
+      'market-details',
+      storeName.toLowerCase(),
+    ]);
   }
 }

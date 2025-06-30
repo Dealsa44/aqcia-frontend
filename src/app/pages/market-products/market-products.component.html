@@ -1,0 +1,42 @@
+<!-- Update market-products.component.html -->
+<div class="market-products-page">
+  <div class="container">
+    <div class="header">
+      <h1>
+        {{ getCurrentText(market.name) }}
+        @if (category) {
+          <span> - {{ getCurrentText(category.name) }}</span>
+        }
+      </h1>
+      <a [routerLink]="['/', languageService.getCurrentLanguageCode(), 'market-details', marketId]" 
+         class="back-link">
+        {{ getCurrentText(['უკან მაღაზიაზე', 'Back to market', 'Назад в магазин']) }}
+      </a>
+    </div>
+
+    @if (products.length > 0) {
+      <div class="products-grid">
+        @for (product of products; track product.id) {
+          <div class="product-card">
+            <img [src]="'assets/imgs/products/' + product.image" [alt]="getCurrentText(product.name)" />
+            <h3>{{ getCurrentText(product.name) }}</h3>
+            <p class="description">{{ getCurrentText(product.description) }}</p>
+            <p class="price">
+              ₾{{ getMarketPrice(product).toFixed(2) }}
+              @if (hasDiscount(product)) {
+                <span class="discount">-{{ getDiscount(product).toFixed(0) }}%</span>
+              }
+            </p>
+            <button class="add-to-cart" (click)="addToCart(product)">
+              {{ getCurrentText(['კალათაში დამატება', 'Add to cart', 'Добавить в корзину']) }}
+            </button>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="no-products">
+        {{ getCurrentText(['პროდუქტები ვერ მოიძებნა', 'No products found', 'Товары не найдены']) }}
+      </div>
+    }
+  </div>
+</div>

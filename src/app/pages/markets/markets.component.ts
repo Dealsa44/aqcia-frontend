@@ -1,9 +1,10 @@
 // pages/markets/markets.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { marketsMocks } from '../../core/mocks/markets.mocks';
+
 
 @Component({
   selector: 'app-markets',
@@ -17,7 +18,10 @@ export class MarketsComponent {
   selectedCity = 0;
   Math = Math; // Expose Math to template
 
-  constructor(public languageService: LanguageService) {}
+  constructor(
+    public languageService: LanguageService,
+    public router: Router
+  ) {}
 
   getCurrentText(items: string[] | any[]) {
     return items[this.languageService.getCurrentLanguage()];
@@ -30,6 +34,11 @@ export class MarketsComponent {
   // Helper method to get star rating
   getStars(rating: number): string {
     return '★'.repeat(Math.floor(rating));
+  }
+  viewStore(marketName: string) {
+    this.router.navigate(
+      ['/', this.languageService.getCurrentLanguageCode(), 'market-details', marketName.toLowerCase()]
+    );
   }
   
 }
