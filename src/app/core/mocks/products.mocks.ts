@@ -27,6 +27,36 @@ export const productsMocks = {
             id: 'fruits', 
             name: ['ხილი', 'Fruits', 'Фрукты'],
             icon: 'fruits.png'
+        },
+        { 
+            id: 'vegetables', 
+            name: ['ბოსტნეული', 'Vegetables', 'Овощи'],
+            icon: 'vegetables.png'
+        },
+        { 
+            id: 'snacks', 
+            name: ['სნექები', 'Snacks', 'Закуски'],
+            icon: 'snacks.png'
+        },
+        { 
+            id: 'frozen', 
+            name: ['გაყინული', 'Frozen', 'Замороженные'],
+            icon: 'frozen.png'
+        },
+        { 
+            id: 'cleaning', 
+            name: ['საყოფაცხოვრებო', 'Cleaning', 'Бытовая химия'],
+            icon: 'cleaning.png'
+        },
+        { 
+            id: 'alcohol', 
+            name: ['ალკოჰოლი', 'Alcohol', 'Алкоголь'],
+            icon: 'alcohol.png'
+        },
+        { 
+            id: 'health', 
+            name: ['ჯანმრთელობა', 'Health', 'Здоровье'],
+            icon: 'health.png'
         }
     ],
     products: [
@@ -613,8 +643,809 @@ export const productsMocks = {
                 carbs: 0,
                 fat: 0
             }
+        },{
+            id: 31,
+            name: ['კარტოფილი', 'Potato', 'Картофель'],
+            image: 'potato.jpg',
+            category: 'vegetables',
+            description: [
+                'ახალი კარტოფილი',
+                'Fresh potatoes',
+                'Свежий картофель'
+            ],
+            prices: [
+                { market: 'Spar', price: 1.50, discount: 0, history: [1.50, 1.55, 1.45] },
+                { market: 'Magniti', price: 1.40, discount: 0, history: [1.40, 1.45, 1.35] }
+            ],
+            reviews: [
+                { 
+                    user: 'ნინო', 
+                    rating: 4, 
+                    comment: ['კარგი ხარისხი', 'Good quality', 'Хорошее качество'],
+                    date: '2023-07-27'
+                }
+            ],
+            nutrition: {
+                calories: 77,
+                protein: 2,
+                carbs: 17,
+                fat: 0.1
+            }
+        },
+        {
+            id: 32,
+            name: ['სტაფილო', 'Carrot', 'Морковь'],
+            image: 'carrot.jpg',
+            category: 'vegetables',
+            description: [
+                'ახალი სტაფილო',
+                'Fresh carrots',
+                'Свежая морковь'
+            ],
+            prices: [
+                { market: 'Carrefour', price: 1.20, discount: 0, history: [1.20, 1.25, 1.15] }
+            ],
+            reviews: [
+                { 
+                    user: 'გიორგი', 
+                    rating: 5, 
+                    comment: ['ტკბილი', 'Sweet', 'Сладкая'],
+                    date: '2023-07-28'
+                }
+            ],
+            nutrition: {
+                calories: 41,
+                protein: 0.9,
+                carbs: 10,
+                fat: 0.2
+            }
+        },
+        {
+            id: 33,
+            name: ['პომიდორი', 'Tomato', 'Помидор'],
+            image: 'tomato.jpg',
+            category: 'vegetables',
+            description: [
+                'ახალი პომიდორი',
+                'Fresh tomatoes',
+                'Свежие помидоры'
+            ],
+            prices: [
+                { market: 'Nikora', price: 2.50, discount: 0, history: [2.50, 2.60, 2.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'მარიამი', 
+                    rating: 4, 
+                    comment: ['გემრიელი', 'Tasty', 'Вкусные'],
+                    date: '2023-07-29'
+                }
+            ],
+            nutrition: {
+                calories: 18,
+                protein: 0.9,
+                carbs: 3.9,
+                fat: 0.2
+            }
+        },
+        {
+            id: 34,
+            name: ['კომბოსტო', 'Cabbage', 'Капуста'],
+            image: 'cabbage.jpg',
+            category: 'vegetables',
+            description: [
+                'ახალი კომბოსტო',
+                'Fresh cabbage',
+                'Свежая капуста'
+            ],
+            prices: [
+                { market: 'Agrohub', price: 1.80, discount: 0, history: [1.80, 1.85, 1.75] }
+            ],
+            reviews: [
+                { 
+                    user: 'თამარი', 
+                    rating: 4, 
+                    comment: ['სასარგებლო', 'Healthy', 'Полезная'],
+                    date: '2023-07-30'
+                }
+            ],
+            nutrition: {
+                calories: 25,
+                protein: 1.3,
+                carbs: 5.8,
+                fat: 0.1
+            }
+        },
+        {
+            id: 35,
+            name: ['კიტრი', 'Cucumber', 'Огурец'],
+            image: 'cucumber.jpg',
+            category: 'vegetables',
+            description: [
+                'ახალი ბოლოკი',
+                'Fresh cucumbers',
+                'Свежие огурцы'
+            ],
+            prices: [
+                { market: 'Spar', price: 1.70, discount: 0, history: [1.70, 1.75, 1.65] }
+            ],
+            reviews: [
+                { 
+                    user: 'ლევანი', 
+                    rating: 5, 
+                    comment: ['ახალი', 'Fresh', 'Свежие'],
+                    date: '2023-07-31'
+                }
+            ],
+            nutrition: {
+                calories: 16,
+                protein: 0.7,
+                carbs: 3.6,
+                fat: 0.1
+            }
+        },
+
+        // Snacks
+        {
+            id: 36,
+            name: ['ჩიფსი', 'Chips', 'Чипсы'],
+            image: 'chips.jpg',
+            category: 'snacks',
+            description: [
+                'ქართული ჩიფსი',
+                'Georgian chips',
+                'Грузинские чипсы'
+            ],
+            prices: [
+                { market: 'Magniti', price: 2.50, discount: 0, history: [2.50, 2.55, 2.45] }
+            ],
+            reviews: [
+                { 
+                    user: 'გიორგი', 
+                    rating: 3, 
+                    comment: ['ტკბილი', 'Salty', 'Солёные'],
+                    date: '2023-08-01'
+                }
+            ],
+            nutrition: {
+                calories: 536,
+                protein: 7,
+                carbs: 53,
+                fat: 34
+            }
+        },
+        {
+            id: 37,
+            name: ['თხილი', 'Nuts', 'Орехи'],
+            image: 'nuts.jpg',
+            category: 'snacks',
+            description: [
+                'არაქისი',
+                'Peanuts',
+                'Арахис'
+            ],
+            prices: [
+                { market: 'Carrefour', price: 3.20, discount: 0, history: [3.20, 3.25, 3.15] }
+            ],
+            reviews: [
+                { 
+                    user: 'ნინო', 
+                    rating: 5, 
+                    comment: ['გემრიელი', 'Tasty', 'Вкусные'],
+                    date: '2023-08-02'
+                }
+            ],
+            nutrition: {
+                calories: 567,
+                protein: 26,
+                carbs: 16,
+                fat: 49
+            }
+        },
+        {
+            id: 38,
+            name: ['შოკოლადი', 'Chocolate', 'Шоколад'],
+            image: 'chocolate.jpg',
+            category: 'snacks',
+            description: [
+                'რძიანი შოკოლადი',
+                'Milk chocolate',
+                'Молочный шоколад'
+            ],
+            prices: [
+                { market: 'Nikora', price: 2.80, discount: 0, history: [2.80, 2.85, 2.75] }
+            ],
+            reviews: [
+                { 
+                    user: 'მარიამი', 
+                    rating: 5, 
+                    comment: ['გემრიელი', 'Delicious', 'Вкусный'],
+                    date: '2023-08-03'
+                }
+            ],
+            nutrition: {
+                calories: 546,
+                protein: 7.7,
+                carbs: 59,
+                fat: 31
+            }
+        },
+        {
+            id: 39,
+            name: ['ფისთა', 'Pistachios', 'Фисташки'],
+            image: 'pistachios.jpg',
+            category: 'snacks',
+            description: [
+                'მარილიანი ფისთა',
+                'Salted pistachios',
+                'Солёные фисташки'
+            ],
+            prices: [
+                { market: 'Agrohub', price: 5.50, discount: 0, history: [5.50, 5.60, 5.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'თამარი', 
+                    rating: 4, 
+                    comment: ['კარგი', 'Good', 'Хорошие'],
+                    date: '2023-08-04'
+                }
+            ],
+            nutrition: {
+                calories: 562,
+                protein: 20,
+                carbs: 28,
+                fat: 45
+            }
+        },
+        {
+            id: 40,
+            name: ['პოპკორნი', 'Popcorn', 'Попкорн'],
+            image: 'popcorn.jpg',
+            category: 'snacks',
+            description: [
+                'მარილიანი პოპკორნი',
+                'Salted popcorn',
+                'Солёный попкорн'
+            ],
+            prices: [
+                { market: 'Spar', price: 1.90, discount: 0, history: [1.90, 1.95, 1.85] }
+            ],
+            reviews: [
+                { 
+                    user: 'ლევანი', 
+                    rating: 4, 
+                    comment: ['მსუბუქი', 'Light', 'Лёгкий'],
+                    date: '2023-08-05'
+                }
+            ],
+            nutrition: {
+                calories: 375,
+                protein: 12,
+                carbs: 78,
+                fat: 4
+            }
+        },
+
+        // Frozen
+        {
+            id: 41,
+            name: ['ყინულები', 'Ice Cream', 'Мороженое'],
+            image: 'ice_cream.jpg',
+            category: 'frozen',
+            description: [
+                'შოკოლადის ყინულები',
+                'Chocolate ice cream',
+                'Шоколадное мороженое'
+            ],
+            prices: [
+                { market: 'Magniti', price: 3.50, discount: 0, history: [3.50, 3.55, 3.45] }
+            ],
+            reviews: [
+                { 
+                    user: 'გიორგი', 
+                    rating: 5, 
+                    comment: ['გემრიელი', 'Delicious', 'Вкусное'],
+                    date: '2023-08-06'
+                }
+            ],
+            nutrition: {
+                calories: 207,
+                protein: 3.8,
+                carbs: 25,
+                fat: 11
+            }
+        },
+        {
+            id: 42,
+            name: ['გაყინული ბოსტნეული', 'Frozen Vegetables', 'Замороженные овощи'],
+            image: 'frozen_vegetables.jpg',
+            category: 'frozen',
+            description: [
+                'გაყინული ბროკოლი',
+                'Frozen broccoli',
+                'Замороженная брокколи'
+            ],
+            prices: [
+                { market: 'Carrefour', price: 2.80, discount: 0, history: [2.80, 2.85, 2.75] }
+            ],
+            reviews: [
+                { 
+                    user: 'ნინო', 
+                    rating: 4, 
+                    comment: ['სასარგებლო', 'Healthy', 'Полезные'],
+                    date: '2023-08-07'
+                }
+            ],
+            nutrition: {
+                calories: 34,
+                protein: 2.8,
+                carbs: 6.6,
+                fat: 0.4
+            }
+        },
+        {
+            id: 43,
+            name: ['გაყინული პიცა', 'Frozen Pizza', 'Замороженная пицца'],
+            image: 'frozen_pizza.jpg',
+            category: 'frozen',
+            description: [
+                'გაყინული მარგარიტა',
+                'Frozen Margherita pizza',
+                'Замороженная пицца Маргарита'
+            ],
+            prices: [
+                { market: 'Nikora', price: 6.50, discount: 0, history: [6.50, 6.60, 6.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'მარიამი', 
+                    rating: 4, 
+                    comment: ['კარგი', 'Good', 'Хорошая'],
+                    date: '2023-08-08'
+                }
+            ],
+            nutrition: {
+                calories: 268,
+                protein: 11,
+                carbs: 33,
+                fat: 10
+            }
+        },
+        {
+            id: 44,
+            name: ['გაყინული კრევეტი', 'Frozen Shrimp', 'Замороженные креветки'],
+            image: 'frozen_shrimp.jpg',
+            category: 'frozen',
+            description: [
+                'გაყინული წითელი კრევეტი',
+                'Frozen red shrimp',
+                'Замороженные красные креветки'
+            ],
+            prices: [
+                { market: 'Agrohub', price: 12.50, discount: 0, history: [12.50, 12.60, 12.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'თამარი', 
+                    rating: 5, 
+                    comment: ['საუკეთესო', 'Best', 'Лучшие'],
+                    date: '2023-08-09'
+                }
+            ],
+            nutrition: {
+                calories: 99,
+                protein: 24,
+                carbs: 0,
+                fat: 0.3
+            }
+        },
+        {
+            id: 45,
+            name: ['გაყინული ბერკოტები', 'Frozen Dumplings', 'Замороженные пельмени'],
+            image: 'frozen_dumplings.jpg',
+            category: 'frozen',
+            description: [
+                'გაყინული ქართული ხინკალი',
+                'Frozen Georgian khinkali',
+                'Замороженные грузинские хинкали'
+            ],
+            prices: [
+                { market: 'Spar', price: 8.50, discount: 0, history: [8.50, 8.60, 8.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'ლევანი', 
+                    rating: 4, 
+                    comment: ['კარგი', 'Good', 'Хорошие'],
+                    date: '2023-08-10'
+                }
+            ],
+            nutrition: {
+                calories: 275,
+                protein: 12,
+                carbs: 30,
+                fat: 12
+            }
+        },
+
+        // Cleaning
+        {
+            id: 46,
+            name: ['სარეცხი საშუალება', 'Laundry Detergent', 'Стиральный порошок'],
+            image: 'detergent.jpg',
+            category: 'cleaning',
+            description: [
+                'სარეცხი საშუალება 2 კგ',
+                'Laundry detergent 2kg',
+                'Стиральный порошок 2кг'
+            ],
+            prices: [
+                { market: 'Magniti', price: 7.50, discount: 0, history: [7.50, 7.60, 7.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'გიორგი', 
+                    rating: 4, 
+                    comment: ['კარგი', 'Good', 'Хороший'],
+                    date: '2023-08-11'
+                }
+            ],
+            nutrition: null
+        },
+        {
+            id: 47,
+            name: ['საჭურველი საშუალება', 'Dish Soap', 'Средство для мытья посуды'],
+            image: 'dish_soap.jpg',
+            category: 'cleaning',
+            description: [
+                'საჭურველი საშუალება 500მლ',
+                'Dish soap 500ml',
+                'Средство для мытья посуды 500мл'
+            ],
+            prices: [
+                { market: 'Carrefour', price: 2.50, discount: 0, history: [2.50, 2.55, 2.45] }
+            ],
+            reviews: [
+                { 
+                    user: 'ნინო', 
+                    rating: 5, 
+                    comment: ['კარგი', 'Good', 'Хорошее'],
+                    date: '2023-08-12'
+                }
+            ],
+            nutrition: null
+        },
+        {
+            id: 48,
+            name: ['საპონი', 'Soap', 'Мыло'],
+            image: 'soap.jpg',
+            category: 'cleaning',
+            description: [
+                'სახელური საპონი',
+                'Hand soap',
+                'Ручное мыло'
+            ],
+            prices: [
+                { market: 'Nikora', price: 1.20, discount: 0, history: [1.20, 1.25, 1.15] }
+            ],
+            reviews: [
+                { 
+                    user: 'მარიამი', 
+                    rating: 4, 
+                    comment: ['სასიამოვნო', 'Nice', 'Приятное'],
+                    date: '2023-08-13'
+                }
+            ],
+            nutrition: null
+        },
+        {
+            id: 49,
+            name: ['სარეცხი ბლოკი', 'Washing Block', 'Стиральный кубик'],
+            image: 'washing_block.jpg',
+            category: 'cleaning',
+            description: [
+                'სარეცხი ბლოკი 3 ცალი',
+                'Washing blocks 3pcs',
+                'Стиральные кубики 3шт'
+            ],
+            prices: [
+                { market: 'Agrohub', price: 3.50, discount: 0, history: [3.50, 3.55, 3.45] }
+            ],
+            reviews: [
+                { 
+                    user: 'თამარი', 
+                    rating: 4, 
+                    comment: ['კარგი', 'Good', 'Хорошие'],
+                    date: '2023-08-14'
+                }
+            ],
+            nutrition: null
+        },
+        {
+            id: 50,
+            name: ['სარეცხი თხევადი', 'Liquid Detergent', 'Жидкое средство для стирки'],
+            image: 'liquid_detergent.jpg',
+            category: 'cleaning',
+            description: [
+                'თხევადი სარეცხი საშუალება 1ლ',
+                'Liquid laundry detergent 1L',
+                'Жидкое средство для стирки 1л'
+            ],
+            prices: [
+                { market: 'Spar', price: 5.50, discount: 0, history: [5.50, 5.60, 5.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'ლევანი', 
+                    rating: 5, 
+                    comment: ['კარგი', 'Good', 'Хорошее'],
+                    date: '2023-08-15'
+                }
+            ],
+            nutrition: null
+        },
+
+        // Alcohol
+        {
+            id: 51,
+            name: ['ღვინო', 'Wine', 'Вино'],
+            image: 'wine.jpg',
+            category: 'alcohol',
+            description: [
+                'ქართული წითელი ღვინო',
+                'Georgian red wine',
+                'Грузинское красное вино'
+            ],
+            prices: [
+                { market: 'Magniti', price: 12.50, discount: 0, history: [12.50, 12.60, 12.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'გიორგი', 
+                    rating: 5, 
+                    comment: ['საუკეთესო', 'Best', 'Лучшее'],
+                    date: '2023-08-16'
+                }
+            ],
+            nutrition: {
+                calories: 125,
+                protein: 0,
+                carbs: 4,
+                fat: 0
+            }
+        },
+        {
+            id: 52,
+            name: ['ლუდი', 'Beer', 'Пиво'],
+            image: 'beer.jpg',
+            category: 'alcohol',
+            description: [
+                'ქართული ლუდი 500მლ',
+                'Georgian beer 500ml',
+                'Грузинское пиво 500мл'
+            ],
+            prices: [
+                { market: 'Carrefour', price: 2.50, discount: 0, history: [2.50, 2.55, 2.45] }
+            ],
+            reviews: [
+                { 
+                    user: 'ნინო', 
+                    rating: 4, 
+                    comment: ['კარგი', 'Good', 'Хорошее'],
+                    date: '2023-08-17'
+                }
+            ],
+            nutrition: {
+                calories: 43,
+                protein: 0.5,
+                carbs: 3.6,
+                fat: 0
+            }
+        },
+        {
+            id: 53,
+            name: ['ჭაჭა', 'Chacha', 'Чача'],
+            image: 'chacha.jpg',
+            category: 'alcohol',
+            description: [
+                'ქართული ჭაჭა 0.5ლ',
+                'Georgian chacha 0.5L',
+                'Грузинская чача 0.5л'
+            ],
+            prices: [
+                { market: 'Nikora', price: 15.50, discount: 0, history: [15.50, 15.60, 15.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'მარიამი', 
+                    rating: 5, 
+                    comment: ['საუკეთესო', 'Best', 'Лучшая'],
+                    date: '2023-08-18'
+                }
+            ],
+            nutrition: {
+                calories: 231,
+                protein: 0,
+                carbs: 0,
+                fat: 0
+            }
+        },
+        {
+            id: 54,
+            name: ['კონიაკი', 'Cognac', 'Коньяк'],
+            image: 'cognac.jpg',
+            category: 'alcohol',
+            description: [
+                'ქართული კონიაკი 0.7ლ',
+                'Georgian cognac 0.7L',
+                'Грузинский коньяк 0.7л'
+            ],
+            prices: [
+                { market: 'Agrohub', price: 25.50, discount: 0, history: [25.50, 25.60, 25.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'თამარი', 
+                    rating: 5, 
+                    comment: ['კარგი', 'Good', 'Хороший'],
+                    date: '2023-08-19'
+                }
+            ],
+            nutrition: {
+                calories: 231,
+                protein: 0,
+                carbs: 0,
+                fat: 0
+            }
+        },
+        {
+            id: 55,
+            name: ['ღვინის ბრენდი', 'Brandy', 'Бренди'],
+            image: 'brandy.jpg',
+            category: 'alcohol',
+            description: [
+                'ქართული ბრენდი 0.5ლ',
+                'Georgian brandy 0.5L',
+                'Грузинский бренди 0.5л'
+            ],
+            prices: [
+                { market: 'Spar', price: 18.50, discount: 0, history: [18.50, 18.60, 18.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'ლევანი', 
+                    rating: 4, 
+                    comment: ['კარგი', 'Good', 'Хороший'],
+                    date: '2023-08-20'
+                }
+            ],
+            nutrition: {
+                calories: 231,
+                protein: 0,
+                carbs: 0,
+                fat: 0
+            }
+        },
+
+        // Health
+        {
+            id: 56,
+            name: ['ვიტამინები', 'Vitamins', 'Витамины'],
+            image: 'vitamins.jpg',
+            category: 'health',
+            description: [
+                'მულტივიტამინები',
+                'Multivitamins',
+                'Мультивитамины'
+            ],
+            prices: [
+                { market: 'Magniti', price: 8.50, discount: 0, history: [8.50, 8.60, 8.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'გიორგი', 
+                    rating: 4, 
+                    comment: ['კარგი', 'Good', 'Хорошие'],
+                    date: '2023-08-21'
+                }
+            ],
+            nutrition: null
+        },
+        {
+            id: 57,
+            name: ['პრობიოტიკი', 'Probiotic', 'Пробиотик'],
+            image: 'probiotic.jpg',
+            category: 'health',
+            description: [
+                'პრობიოტიკური კაფსულები',
+                'Probiotic capsules',
+                'Пробиотические капсулы'
+            ],
+            prices: [
+                { market: 'Carrefour', price: 12.50, discount: 0, history: [12.50, 12.60, 12.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'ნინო', 
+                    rating: 5, 
+                    comment: ['სასარგებლო', 'Healthy', 'Полезные'],
+                    date: '2023-08-22'
+                }
+            ],
+            nutrition: null
+        },
+        {
+            id: 58,
+            name: ['ომეგა 3', 'Omega 3', 'Омега 3'],
+            image: 'omega3.jpg',
+            category: 'health',
+            description: [
+                'თევზის ზეთის კაფსულები',
+                'Fish oil capsules',
+                'Капсулы рыбьего жира'
+            ],
+            prices: [
+                { market: 'Nikora', price: 15.50, discount: 0, history: [15.50, 15.60, 15.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'მარიამი', 
+                    rating: 5, 
+                    comment: ['კარგი', 'Good', 'Хорошие'],
+                    date: '2023-08-23'
+                }
+            ],
+            nutrition: null
+        },
+        {
+            id: 59,
+            name: ['ვიტამინი C', 'Vitamin C', 'Витамин C'],
+            image: 'vitamin_c.jpg',
+            category: 'health',
+            description: [
+                'ვიტამინი C ტაბლეტები',
+                'Vitamin C tablets',
+                'Таблетки витамина C'
+            ],
+            prices: [
+                { market: 'Agrohub', price: 5.50, discount: 0, history: [5.50, 5.60, 5.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'თამარი', 
+                    rating: 4, 
+                    comment: ['კარგი', 'Good', 'Хорошие'],
+                    date: '2023-08-24'
+                }
+            ],
+            nutrition: null
+        },
+        {
+            id: 60,
+            name: ['კალციუმი', 'Calcium', 'Кальций'],
+            image: 'calcium.jpg',
+            category: 'health',
+            description: [
+                'კალციუმის ტაბლეტები',
+                'Calcium tablets',
+                'Таблетки кальция'
+            ],
+            prices: [
+                { market: 'Spar', price: 7.50, discount: 0, history: [7.50, 7.60, 7.40] }
+            ],
+            reviews: [
+                { 
+                    user: 'ლევანი', 
+                    rating: 4, 
+                    comment: ['კარგი', 'Good', 'Хорошие'],
+                    date: '2023-08-25'
+                }
+            ],
+            nutrition: null
         }
     ],
+
     cart: {
         title: ['კალათა', 'Cart', 'Корзина'],
         emptyMessage: ['კალათა ცარიელია', 'Cart is empty', 'Корзина пуста'],

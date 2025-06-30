@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { productsMocks } from '../../core/mocks/products.mocks';
-import { searchMocks } from '../../core/mocks/search.mocks'; // Import the new search mocks
+import { searchMocks } from '../../core/mocks/search.mocks';
 import { CartService } from '../../core/services/cart.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,13 +18,13 @@ import { Product } from '../../core/interfaces/product.interface';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  productsMocks = productsMocks; // For product and category data
-  searchMocks = searchMocks; // For translatable UI text
+  productsMocks = productsMocks;
+  searchMocks = searchMocks;
   searchTerm = '';
   selectedCategory = '';
-  products = productsMocks.products;
+  products: Product[] = productsMocks.products as Product[]; // Explicitly type as Product[]
   categories = productsMocks.categories;
-  filteredProducts = this.products;
+  filteredProducts: Product[] = this.products;
 
   constructor(
     public languageService: LanguageService,
@@ -45,14 +45,11 @@ export class SearchComponent implements OnInit {
   searchProducts() {
     const searchTermLower = this.searchTerm.toLowerCase();
     this.filteredProducts = this.products.filter((product: Product) => {
-      // Check all language versions of the product name
       const nameMatch = product.name.some((name: string) =>
         name.toLowerCase().includes(searchTermLower)
       );
-
       const categoryMatch =
         !this.selectedCategory || product.category === this.selectedCategory;
-
       return nameMatch && categoryMatch;
     });
   }
@@ -61,16 +58,16 @@ export class SearchComponent implements OnInit {
     return items[this.languageService.getCurrentLanguage()];
   }
 
-  getLowestPrice(product: any) {
-    const prices = product.prices.map((p: any) => p.price - (p.discount || 0));
+  getLowestPrice(product: Product) {
+    const prices = product.prices.map((p) => p.price - (p.discount || 0));
     const minPrice = Math.min(...prices);
     const market = product.prices.find(
-      (p: any) => p.price - (p.discount || 0) === minPrice
+      (p) => p.price - (p.discount || 0) === minPrice
     );
-    return { price: minPrice, market: market.market };
+    return { price: minPrice, market: market?.market || '' };
   }
 
-  addToCart(product: any) {
+  addToCart(product: Product) {
     this.cartService.addToCart({
       id: product.id,
       name: product.name,

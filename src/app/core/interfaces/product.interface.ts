@@ -16,7 +16,7 @@ export interface Product {
     comment: string[];
     date: string;
   }[];
-  nutrition: {
+  nutrition?: {
     calories: number;
     protein: number;
     carbs: number;

@@ -55,7 +55,7 @@ export class CartComponent {
   getSuggestedProducts() {
   if (this.suggestedProductsCache.length === 0) {
     const shuffled = [...productsMocks.products].sort(() => 0.5 - Math.random());
-    this.suggestedProductsCache = shuffled.slice(0, 4);
+    this.suggestedProductsCache = shuffled.slice(0, 9);
   }
   return this.suggestedProductsCache;
 }
