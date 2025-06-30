@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { FormsModule } from '@angular/forms';
-import { homeMocks } from '../../core/mocks/home.mocks'; // Import the new mocks
+import { homeMocks } from '../../core/mocks/home.mocks';
+import { productsMocks } from '../../core/mocks/products.mocks'; // Add this import
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ import { homeMocks } from '../../core/mocks/home.mocks'; // Import the new mocks
 })
 export class HomeComponent {
   searchTerm = '';
-  homeData = homeMocks; // Assign the mocks to a property
+  homeData = homeMocks;
+  private featuredProductsCache: any[] = []; // Cache for random products
 
   constructor(
     public languageService: LanguageService,
@@ -32,9 +34,29 @@ export class HomeComponent {
         ['/', this.languageService.getCurrentLanguageCode(), 'search'],
         {
           queryParams: { q: this.searchTerm },
-          queryParamsHandling: 'merge', // Preserve other query params if any
+          queryParamsHandling: 'merge',
         }
       );
     }
+  }
+
+  // Method to get random featured products
+  getFeaturedProducts() {
+    if (this.featuredProductsCache.length === 0) {
+      const shuffled = [...productsMocks.products].sort(() => 0.5 - Math.random());
+      this.featuredProductsCache = shuffled.slice(0, 4); // Get 4 random products
+    }
+    return this.featuredProductsCache;
+  }
+
+  // Method to get lowest price (similar to cart component)
+  getLowestPrice(product: any) {
+    if (!product.prices) return { price: 0, market: '' };
+    const prices = product.prices.map((p: any) => p.price - (p.discount || 0));
+    const minPrice = Math.min(...prices);
+    const market = product.prices.find(
+      (p: any) => p.price - (p.discount || 0) === minPrice
+    );
+    return { price: minPrice, market: market?.market || '' };
   }
 }

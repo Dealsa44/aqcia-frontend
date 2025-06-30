@@ -1,4 +1,3 @@
-<!-- footer.component.html -->
 <footer class="footer">
   <div class="container">
     <div class="footer-content">
@@ -16,9 +15,9 @@
           </ul>
         </div>
       }
-      
+
       <div class="footer-section">
-        <h3>{{ getCurrentText(['სოციალური ქსელი', 'Social Media', 'Социальные сети']) }}</h3>
+        <h3>{{ getCurrentText(footerData.socialSectionTitle) }}</h3>
         <div class="social-links">
           @for (social of footerData.social; track $index) {
             <a [href]="social.path" class="social-icon">
@@ -28,7 +27,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="footer-bottom">
       <p>{{ getCurrentText(footerData.copyright) }}</p>
     </div>

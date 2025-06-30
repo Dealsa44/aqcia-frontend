@@ -23,22 +23,22 @@
   </section>
 
   <section class="featured">
-    <div class="container">
-      <h2>
-        {{ getCurrentText(homeData.featuredProducts.title) }}
-      </h2>
+  <div class="container">
+    <h2>
+      {{ getCurrentText(homeData.featuredProducts.title) }}
+    </h2>
 
-      <div class="products-grid">
-        @for (product of [1,2,3,4]; track $index) {
-        <div class="product-card">
-          <img src="assets/imgs/products/bread.jpg" alt="Product" />
-          <h3>{{ getCurrentText(homeData.featuredProducts.productLabel) }} {{ product }}</h3>
-          <p class="price">${{ product }}.99</p>
-        </div>
-        }
+    <div class="products-grid">
+      @for (product of getFeaturedProducts(); track product.id) {
+      <div class="product-card">
+        <img [src]="'assets/imgs/products/' + product.image" [alt]="getCurrentText(product.name)" />
+        <h3>{{ getCurrentText(product.name) }}</h3>
+        <p class="price">₾{{ getLowestPrice(product).price.toFixed(2) }}</p>
       </div>
+      }
     </div>
-  </section>
+  </div>
+</section>
 
   <section class="how-it-works">
     <div class="container">

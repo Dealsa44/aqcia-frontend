@@ -16,6 +16,7 @@ export const footerMocks = {
       ]
     }
   ],
+  socialSectionTitle: ['სოციალური ქსელი', 'Social Media', 'Социальные сети'],
   social: [
     { icon: 'facebook', path: '#' },
     { icon: 'instagram', path: '#' },
