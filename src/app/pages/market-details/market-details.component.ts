@@ -123,9 +123,14 @@ export class MarketDetailsComponent {
   }
 
   getDiscount(product: any): number {
-    const price = product.prices.find((p: any) => 
+    const price = product.prices.find((p: any) =>
       p.market.toLowerCase() === this.marketId.toLowerCase()
     );
-    return price ? (price.discount / price.price * 100) : 0;
+    if (price) {
+      const discountPercentage = (price.discount / price.price) * 100;
+      // Round up to 2 decimal places
+      return Math.ceil(discountPercentage * 100) / 100;
+    }
+    return 0;
   }
 }

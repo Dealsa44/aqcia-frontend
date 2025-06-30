@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { productsMocks } from '../../core/mocks/products.mocks';
 import { marketsMocks } from '../../core/mocks/markets.mocks';
+import { marketProductsMocks } from '../../core/mocks/market-products.mocks'; // <--- Add this import
 import { CartService } from '../../core/services/cart.service';
 import { RouterModule } from '@angular/router';
 
@@ -22,6 +23,7 @@ export class MarketProductsComponent {
   market: any;
   products: any[] = [];
   category: any = null;
+  marketProductsMocks = marketProductsMocks; // <--- Add this line to make it accessible in the template
 
   constructor(
     private route: ActivatedRoute,
@@ -37,10 +39,10 @@ export class MarketProductsComponent {
   }
 
   loadProducts() {
-    this.market = marketsMocks.stores.find(store => 
+    this.market = marketsMocks.stores.find(store =>
       store.name[0].toLowerCase() === this.marketId.toLowerCase()
     );
-    
+
     if (!this.market) {
       this.router.navigate(['/', this.languageService.getCurrentLanguageCode(), 'markets']);
       return;
@@ -51,7 +53,7 @@ export class MarketProductsComponent {
       const matchesMarket = product.prices.some(
         (price: any) => price.market.toLowerCase() === this.marketId.toLowerCase()
       );
-      
+
       if (this.categoryId) {
         return matchesMarket && product.category === this.categoryId;
       }
@@ -68,10 +70,10 @@ export class MarketProductsComponent {
   }
 
   addToCart(product: any) {
-    const marketPrice = product.prices.find((p: any) => 
+    const marketPrice = product.prices.find((p: any) =>
       p.market.toLowerCase() === this.marketId.toLowerCase()
     );
-    
+
     if (marketPrice) {
       this.cartService.addToCart({
         id: product.id,
@@ -85,23 +87,28 @@ export class MarketProductsComponent {
   }
 
   getMarketPrice(product: any): number {
-    const price = product.prices.find((p: any) => 
+    const price = product.prices.find((p: any) =>
       p.market.toLowerCase() === this.marketId.toLowerCase()
     );
     return price ? price.price - (price.discount || 0) : 0;
   }
 
   hasDiscount(product: any): boolean {
-    const price = product.prices.find((p: any) => 
+    const price = product.prices.find((p: any) =>
       p.market.toLowerCase() === this.marketId.toLowerCase()
     );
     return price ? price.discount > 0 : false;
   }
 
   getDiscount(product: any): number {
-    const price = product.prices.find((p: any) => 
+    const price = product.prices.find((p: any) =>
       p.market.toLowerCase() === this.marketId.toLowerCase()
     );
-    return price ? (price.discount / price.price * 100) : 0;
+    if (price) {
+      const discountPercentage = (price.discount / price.price) * 100;
+      // Round up to 2 decimal places
+      return Math.ceil(discountPercentage * 100) / 100;
+    }
+    return 0;
   }
 }

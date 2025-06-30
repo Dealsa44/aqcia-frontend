@@ -1,4 +1,3 @@
-<!-- Update market-products.component.html -->
 <div class="market-products-page">
   <div class="container">
     <div class="header">
@@ -8,9 +7,9 @@
           <span> - {{ getCurrentText(category.name) }}</span>
         }
       </h1>
-      <a [routerLink]="['/', languageService.getCurrentLanguageCode(), 'market-details', marketId]" 
-         class="back-link">
-        {{ getCurrentText(['უკან მაღაზიაზე', 'Back to market', 'Назад в магазин']) }}
+      <a [routerLink]="['/', languageService.getCurrentLanguageCode(), 'market-details', marketId]"
+          class="back-link">
+        {{ getCurrentText(marketProductsMocks.backToMarket) }}
       </a>
     </div>
 
@@ -28,14 +27,14 @@
               }
             </p>
             <button class="add-to-cart" (click)="addToCart(product)">
-              {{ getCurrentText(['კალათაში დამატება', 'Add to cart', 'Добавить в корзину']) }}
+              {{ getCurrentText(marketProductsMocks.addToCart) }}
             </button>
           </div>
         }
       </div>
     } @else {
       <div class="no-products">
-        {{ getCurrentText(['პროდუქტები ვერ მოიძებნა', 'No products found', 'Товары не найдены']) }}
+        {{ getCurrentText(marketProductsMocks.noProductsFound) }}
       </div>
     }
   </div>
