@@ -1,0 +1,322 @@
+/* Search Page Color Palette: Refined & Functional */
+/* Overall Page Background: #F8FAFC (Very light, almost off-white) */
+/* Element Base Color: #FFFFFF (Pure white for cards, filters) */
+/* Primary Text: #1E293B (Dark slate blue for headings, product names) */
+/* Secondary Text/Labels: #334155 (Slate gray for descriptions, placeholders) */
+/* Accent Gradient (Buttons/Highlights): linear-gradient(90deg, #6A2C70 0%, #2A4874 100%) (Soft Purple to Soft Blue) */
+/* Secondary Accent Gradient (Hover/Active): linear-gradient(90deg, #4CAF50 0%, #FF5733 100%) (Warm Green to Orange/Red) */
+/* Accent Colors: */
+/* - #7B1FA2 (Deep Violet, for stars, price highlights) */
+/* - #4CAF50 (Warm Green, for success/positive elements) */
+/* - #FF5733 (Orange/Red, for strong price emphasis) */
+/* Borders/Subtle Details: rgba(0, 0, 0, 0.08) */
+/* Shadows: rgba(0, 0, 0, 0.06) - very light, diffused */
+
+.search-container {
+  background-color: #F8FAFC; /* Consistent light background */
+  padding: 8rem 0 5rem;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #334155;
+
+  .filters {
+    max-width: 1200px;
+    margin: 0 auto 3rem; /* Center filters and add bottom margin */
+    padding: 1.5rem;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06); /* Subtle shadow */
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Space between search input and category buttons */
+    animation: fadeInSlideIn 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(15px);
+
+    @keyframes fadeInSlideIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      font-size: 1.1rem;
+      color: #1E293B;
+      background-color: #F8FAFC;
+      transition: all 0.3s ease-in-out;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+
+      &::placeholder {
+        color: #64748B;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #6A2C70; /* Primary accent color */
+        box-shadow: 0 0 0 3px rgba(106, 44, 112, 0.15); /* Softer focus halo */
+      }
+    }
+
+    .category-filters {
+      display: flex;
+      flex-wrap: wrap; /* Allow buttons to wrap */
+      gap: 0.8rem; /* Space between buttons */
+      justify-content: center;
+
+      button {
+        padding: 0.8rem 1.5rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 25px;
+        background-color: #FFFFFF;
+        color: #334155;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+        &:hover {
+          border-color: #6A2C70;
+          color: #1E293B;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        &.active {
+          background: linear-gradient(90deg, #6A2C70 0%, #2A4874 100%); /* Soft purple to soft blue gradient */
+          color: #FFFFFF;
+          border-color: transparent;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        &.clear {
+          background-color: transparent;
+          color: #64748B;
+          border-color: #64748B;
+          &:hover {
+            background-color: #F0F2F5; /* Very light gray on hover */
+            color: #1E293B;
+            border-color: #1E293B;
+          }
+          &.active { /* Ensure clear button doesn't look active */
+            background: transparent;
+            color: #64748B;
+            border-color: #64748B;
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+
+  .results {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem; /* Ensure results align with filter container */
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem; /* Consistent gap with Markets page */
+
+    .product-card {
+      background-color: #FFFFFF;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+      animation: popInScale 0.7s ease-out forwards;
+      opacity: 0;
+      transform: scale(0.98);
+
+      @for $i from 1 through 6 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{$i * 0.08}s;
+        }
+      }
+
+      &:hover {
+        transform: translateY(-5px) scale(1.01);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+      }
+
+      img {
+        width: 100%;
+        height: 180px; /* Consistent image height with Markets page */
+        object-fit: contain; /* Use contain for product images */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        cursor: pointer;
+        filter: brightness(0.99);
+        transition: filter 0.25s ease;
+
+        &:hover {
+          filter: brightness(1);
+        }
+      }
+
+      .product-info {
+        padding: 1.2rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        text-align: left;
+
+        h3 {
+          font-size: 1.25rem; /* Slightly smaller for card titles */
+          font-weight: 600;
+          color: #1E293B;
+          margin-bottom: 0.5rem;
+          cursor: pointer;
+          transition: color 0.2s ease;
+          line-height: 1.3;
+
+          &:hover {
+            color: #6A2C70; /* Hover color for product name */
+          }
+        }
+
+        .price-info {
+          margin-top: auto; /* Push price and button to the bottom */
+          margin-bottom: 1rem;
+
+          .best-price {
+            font-size: 0.95rem;
+            color: #334155;
+            line-height: 1.5;
+
+            strong {
+              font-size: 1.3rem; /* Larger price amount */
+              font-weight: 700;
+              color: #FF5733; /* Orange/red for strong price */
+              margin-left: 0.3rem;
+            }
+            span:last-child { // Market name
+                font-weight: 500;
+                color: #7B1FA2; /* Deep violet for market name */
+            }
+          }
+        }
+
+        .add-to-cart {
+          padding: 0.8rem 1.2rem;
+          background: linear-gradient(90deg, #6A2C70 0%, #2A4874 100%);
+          color: #FFFFFF;
+          border: none;
+          border-radius: 25px;
+          font-size: 0.95rem;
+          font-weight: 600;
+          cursor: pointer;
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+          transition: all 0.25s ease-in-out;
+          letter-spacing: 0.3px;
+          align-self: flex-start;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(90deg, #4CAF50 0%, #FF5733 100%);
+          }
+
+          &:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+          }
+        }
+      }
+    }
+
+    @keyframes popInScale {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  }
+
+  .no-results {
+    text-align: center;
+    font-size: 1.3rem;
+    color: #64748B;
+    padding: 3rem 0;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  @media (max-width: 768px) {
+    padding: 6rem 0 3rem;
+
+    .filters {
+      padding: 1rem;
+      gap: 1rem;
+      margin-bottom: 2rem;
+
+      input[type="text"] {
+        font-size: 1rem;
+        padding: 0.8rem 1rem;
+      }
+
+      .category-filters {
+        gap: 0.6rem;
+        justify-content: flex-start; /* Align buttons to left on small screens */
+        overflow-x: auto; /* Enable horizontal scrolling for many buttons */
+        padding-bottom: 5px; /* Space for scrollbar */
+        &::-webkit-scrollbar {
+          height: 5px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: rgba(0,0,0,0.1);
+          border-radius: 5px;
+        }
+        &::-webkit-scrollbar-track {
+          background-color: transparent;
+        }
+
+        button {
+          flex-shrink: 0; /* Prevent buttons from shrinking */
+          padding: 0.7rem 1.2rem;
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    .product-grid {
+      grid-template-columns: 1fr; /* Single column on small screens */
+      gap: 1.5rem;
+
+      .product-card {
+        .product-info {
+          h3 {
+            font-size: 1.15rem;
+          }
+          .price-info {
+            .best-price {
+              font-size: 0.9rem;
+              strong {
+                font-size: 1.2rem;
+              }
+            }
+          }
+          .add-to-cart {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+
+    .no-results {
+      font-size: 1.1rem;
+      padding: 2rem 1rem;
+    }
+  }
+}

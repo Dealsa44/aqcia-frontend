@@ -1,0 +1,79 @@
+<div class="product-page">
+  <div class="container">
+    @if (product) {
+      <div class="product-details">
+        <div class="product-left">
+          <div class="product-image">
+            <img [src]="'assets/imgs/products/' + product.image"
+                 [alt]="getCurrentText(product.name)" />
+          </div>
+
+          <div class="product-info">
+            <h1>{{ getCurrentText(product.name) }}</h1>
+            <p class="description">{{ getCurrentText(product.description) }}</p>
+
+            <div class="best-price">
+              <h3>{{ getCurrentText(productData.bestPrice.label) }}</h3>
+              <div class="price">
+                <span class="amount">{{ getLowestPrice(product).price.toFixed(2) }} ₾</span>
+                <span class="market">{{ getLowestPrice(product).market }}</span>
+              </div>
+
+              <button class="add-to-cart" (click)="addToCart(product)">
+                {{ getCurrentText(productData.addToCartButton) }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-right">
+          <div class="price-comparison">
+            <h2>{{ getCurrentText(productData.priceComparison.title) }}</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>{{ getCurrentText(productData.priceComparison.tableHeaders.market) }}</th>
+                  <th>{{ getCurrentText(productData.priceComparison.tableHeaders.price) }}</th>
+                  <th>{{ getCurrentText(productData.priceComparison.tableHeaders.discount) }}</th>
+                  <th>{{ getCurrentText(productData.priceComparison.tableHeaders.finalPrice) }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (price of product.prices; track $index) {
+                <tr>
+                  <td>{{ price.market }}</td>
+                  <td>{{ price.price.toFixed(2) }} ₾</td>
+                  <td>{{ price.discount?.toFixed(2) || '0.00' }} ₾</td>
+                  <td>{{ (price.price - (price.discount || 0)).toFixed(2) }} ₾</td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+
+          <div class="reviews">
+            <h2>{{ getCurrentText(productData.reviews.title) }}</h2>
+            @if (product.reviews.length > 0) {
+              @for (review of product.reviews; track $index) {
+              <div class="review">
+                <div class="review-header">
+                  <span class="user">{{ review.user }}</span>
+                  <span class="rating">★ {{ review.rating }}</span>
+                  <span class="date">{{ review.date }}</span>
+                </div>
+                <p class="comment">{{ getCurrentText(review.comment) }}</p>
+              </div>
+              }
+            } @else {
+              <p>{{ getCurrentText(productData.reviews.noReviews) }}</p>
+            }
+          </div>
+        </div>
+      </div>
+    } @else {
+      <div class="not-found">
+        {{ getCurrentText(productData.productNotFound) }}
+      </div>
+    }
+  </div>
+</div>

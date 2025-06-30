@@ -1,0 +1,94 @@
+<div class="cart-page">
+  <div class="container">
+    <h1>{{ getCurrentText(cartMocks.title) }}</h1>
+
+    @if (cartService.getCartItems().length > 0) {
+      <div class="cart-items">
+        @for (item of cartService.getCartItems(); track item.id) {
+          @if (getProductById(item.id); as product) {
+            <div class="cart-item">
+              <img [src]="'assets/imgs/products/' + product.image"
+                   [alt]="getCurrentText(product.name)" />
+
+              <div class="item-info">
+                <h3>{{ getCurrentText(product.name) }}</h3>
+                <div class="price">
+                  {{ getLowestPrice(product).price.toFixed(2) }} ₾
+                  <span class="market">{{ getCurrentText(cartMocks.marketLabel) }}
+                  {{ getLowestPrice(product).market }}</span>
+                </div>
+
+                <div class="quantity-controls">
+                  <button (click)="cartService.decreaseQuantity(item.id)">-</button>
+                  <span>{{ item.quantity }}</span>
+                  <button (click)="cartService.increaseQuantity(item.id)">+</button>
+                </div>
+              </div>
+
+              <button class="remove-btn" (click)="cartService.removeFromCart(item.id)">
+                {{ getCurrentText(cartMocks.remove) }}
+              </button>
+            </div>
+          }
+        }
+      </div>
+
+      <div class="cart-summary">
+        <div class="total">
+          <span>{{ getCurrentText(cartMocks.total) }}:</span>
+          <span class="amount">{{ getTotal().toFixed(2) }} ₾</span>
+        </div>
+
+        <button class="checkout-btn">
+          {{ getCurrentText(cartMocks.checkout) }}
+        </button>
+      </div>
+    } @else {
+      <div class="empty-cart">
+        <div class="empty-cart-icon">
+          <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.7 15.3C4.3 15.7 4.6 16 5 16H17M17 13V16M9 19.5A1.5 1.5 0 1 0 9 22.5A1.5 1.5 0 1 0 9 19.5ZM20 19.5A1.5 1.5 0 1 0 20 22.5A1.5 1.5 0 1 0 20 19.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        
+        <div class="empty-cart-content">
+          <h2>{{ getCurrentText(cartMocks.emptyStateTitle) }}</h2>
+          <p>{{ getCurrentText(cartMocks.emptyStateSubtitle) }}</p>
+          
+          <div class="action-buttons">
+            <a [routerLink]="['/', languageService.getCurrentLanguageCode(), 'search']" class="primary-btn">
+              {{ getCurrentText(cartMocks.viewAllProducts) }}
+            </a>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Suggested Products Section (always visible) -->
+    <div class="suggested-products">
+      <h3>{{ getCurrentText(cartMocks.suggestedItemsTitle) }}</h3>
+      <div class="products-grid">
+        @for (product of getSuggestedProducts(); track product.id) {
+          <div class="suggested-product">
+            <img [src]="'assets/imgs/products/' + product.image"
+                 [alt]="getCurrentText(product.name)"
+                 [routerLink]="['/', languageService.getCurrentLanguageCode(), 'product', product.id]" />
+            
+            <div class="product-info">
+              <h4 [routerLink]="['/', languageService.getCurrentLanguageCode(), 'product', product.id]">
+                {{ getCurrentText(product.name) }}
+              </h4>
+              <div class="price">
+                <span class="current-price">{{ getLowestPrice(product).price.toFixed(2) }} ₾</span>
+                <span class="market">{{ getLowestPrice(product).market }}</span>
+              </div>
+              <button class="add-to-cart-btn" (click)="addToCart(product)">
+                {{ getCurrentText(cartMocks.addToCart) }}
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

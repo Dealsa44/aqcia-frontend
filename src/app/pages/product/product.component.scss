@@ -1,0 +1,439 @@
+/* Product Page Color Palette: Sleek & Detailed */
+/* Overall Page Background: #F8FAFC (Very light, almost off-white) */
+/* Element Base Color: #FFFFFF (Pure white for containers/cards) */
+/* Primary Text: #1E293B (Dark slate blue for main headings) */
+/* Secondary Text/Labels: #334155 (Slate gray for descriptions, table headers) */
+/* Accent Gradient (Buttons/Highlights): linear-gradient(90deg, #6A2C70 0%, #2A4874 100%) (Soft Purple to Soft Blue) */
+/* Secondary Accent Gradient (Hover/Active): linear-gradient(90deg, #4CAF50 0%, #FF5733 100%) (Warm Green to Orange/Red) */
+/* Accent Colors: */
+/* - #7B1FA2 (Deep Violet, for stars, price highlights) */
+/* - #4CAF50 (Warm Green, for success/positive elements) */
+/* - #FF5733 (Orange/Red, for strong price/discount emphasis) */
+/* Borders/Subtle Details: rgba(0, 0, 0, 0.08) */
+/* Shadows: rgba(0, 0, 0, 0.06) - very light, diffused */
+/* Table Borders: rgba(0, 0, 0, 0.1) */
+
+.product-page {
+  background-color: #F8FAFC; /* Light background for the whole page */
+  padding: 8rem 0 5rem;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #334155;
+  position: relative;
+  overflow: hidden;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .not-found {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #64748B;
+    padding: 5rem 0;
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .product-details {
+    display: flex;
+    gap: 3rem; /* Spacing between left and right sections */
+    background-color: #FFFFFF;
+    border-radius: 18px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08); /* More prominent but still diffused shadow */
+    padding: 2.5rem;
+    align-items: flex-start; /* Align content to the top */
+    animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    opacity: 0;
+    transform: translateY(20px);
+
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .product-left {
+      flex: 1; /* Takes up available space */
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center content within the left column */
+      padding-right: 1.5rem; /* Space from the divider */
+      border-right: 1px solid rgba(0, 0, 0, 0.05); /* Subtle vertical divider */
+    }
+
+    .product-image {
+      width: 100%;
+      max-width: 450px; /* Control image size */
+      height: 450px;
+      margin-bottom: 2rem;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Shadow for image */
+      transition: transform 0.3s ease-in-out;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Ensure image fits without cropping */
+        display: block;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      &:hover img {
+        transform: scale(1.05); /* Gentle zoom on hover */
+      }
+    }
+
+    .product-info {
+      width: 100%;
+      max-width: 450px; /* Align info width with image */
+      text-align: left; /* Align text within its container */
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #1E293B;
+        margin-bottom: 0.8rem;
+        text-align: left; /* Override section H1 center */
+      }
+
+      .description {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #334155;
+        margin-bottom: 2rem;
+      }
+
+      .best-price {
+        background-color: #F8FAFC; /* Lighter background for best price block */
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Align content to the left */
+
+        h3 {
+          font-size: 1.1rem;
+          color: #334155;
+          margin-bottom: 0.5rem;
+        }
+
+        .price {
+          display: flex;
+          align-items: baseline;
+          gap: 0.8rem;
+          margin-bottom: 1.5rem;
+
+          .amount {
+            font-size: 2.8rem; /* Large and bold for price */
+            font-weight: 800;
+            color: #FF5733; /* Eye-catching orange/red */
+            text-shadow: 0 2px 5px rgba(255, 87, 51, 0.2);
+          }
+
+          .market {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #7B1FA2; /* Deep violet for market name */
+          }
+        }
+
+        .add-to-cart {
+          padding: 1rem 2rem;
+          background: linear-gradient(90deg, #6A2C70 0%, #2A4874 100%); /* Soft purple to soft blue gradient */
+          color: #FFFFFF;
+          border: none;
+          border-radius: 30px;
+          font-size: 1.1rem;
+          font-weight: 600;
+          cursor: pointer;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          transition: all 0.3s ease-in-out;
+          letter-spacing: 0.5px;
+          align-self: flex-start; /* Align button to the left */
+
+          &:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(90deg, #4CAF50 0%, #FF5733 100%); /* Warm green to orange on hover */
+          }
+
+          &:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+    }
+
+    .product-right {
+      flex: 1.2; /* Slightly wider for tables/reviews */
+      display: flex;
+      flex-direction: column;
+      gap: 3rem; /* Space between comparison and reviews */
+      padding-left: 1.5rem;
+    }
+
+    .price-comparison, .reviews {
+      background-color: #FFFFFF;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+      padding: 2rem;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+
+      h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #1E293B;
+        margin-bottom: 1.5rem;
+        text-align: left;
+      }
+    }
+
+    .price-comparison {
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 0.5rem; /* Space between rows */
+
+        thead {
+          tr {
+            th {
+              text-align: left;
+              padding: 0.8rem 0.5rem;
+              font-size: 0.95rem;
+              font-weight: 600;
+              color: #334155;
+              border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+          }
+        }
+
+        tbody {
+          tr {
+            background-color: #F8FAFC; /* Light background for table rows */
+            border-radius: 8px;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+
+            &:hover {
+              background-color: #EBF2F7; /* Slightly darker on hover */
+              transform: translateY(-2px);
+            }
+
+            td {
+              padding: 1rem 0.5rem;
+              font-size: 0.95rem;
+              color: #334155;
+
+              &:first-child {
+                font-weight: 500;
+                color: #1E293B;
+                border-top-left-radius: 8px;
+                border-bottom-left-radius: 8px;
+              }
+              &:last-child {
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+              }
+            }
+
+            // Highlight the lowest price row (example based on final price)
+            &.lowest-price-row {
+              background: linear-gradient(90deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+              font-weight: 600;
+              border: 1px solid #4CAF50;
+              td {
+                color: #1E293B;
+                &:last-child {
+                  color: #4CAF50; /* Green for final lowest price */
+                  font-weight: 700;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .reviews {
+      .review {
+        background-color: #F8FAFC; /* Light background for individual reviews */
+        border-radius: 10px;
+        padding: 1.2rem;
+        margin-bottom: 1.2rem;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(0, 0, 0, 0.03);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .review-header {
+          display: flex;
+          align-items: center;
+          gap: 0.8rem;
+          margin-bottom: 0.6rem;
+          font-size: 0.9rem;
+
+          .user {
+            font-weight: 600;
+            color: #1E293B;
+          }
+
+          .rating {
+            color: #7B1FA2; /* Deep violet for review stars */
+            font-weight: 700;
+          }
+
+          .date {
+            color: #64748B;
+            margin-left: auto; /* Push date to the right */
+          }
+        }
+
+        .comment {
+          font-size: 0.95rem;
+          line-height: 1.5;
+          color: #334155;
+        }
+      }
+      .no-reviews {
+        font-style: italic;
+        color: #64748B;
+        text-align: center;
+        padding: 1rem 0;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    .product-details {
+      flex-direction: column;
+      gap: 2.5rem;
+      padding: 2rem;
+
+      .product-left, .product-right {
+        padding-right: 0;
+        padding-left: 0;
+        border-right: none; /* Remove vertical divider */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Add horizontal divider */
+        padding-bottom: 2.5rem;
+      }
+
+      .product-right {
+        padding-top: 2.5rem;
+        border-bottom: none;
+      }
+
+      .product-image {
+        max-width: 350px;
+        height: 350px;
+      }
+
+      .product-info {
+        max-width: 100%; /* Allow info to take full width */
+        text-align: center;
+
+        h1 {
+            text-align: center;
+        }
+
+        .description {
+            text-align: center;
+        }
+
+        .best-price {
+            align-items: center; /* Center content in best price block */
+        }
+
+        .add-to-cart {
+            align-self: center; /* Center button */
+        }
+      }
+
+      .price-comparison, .reviews {
+        h2 {
+            text-align: center;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 6rem 0 3rem;
+
+    .product-details {
+      padding: 1.5rem;
+      gap: 2rem;
+
+      .product-image {
+        max-width: 100%;
+        height: 280px;
+        margin-bottom: 1.5rem;
+      }
+
+      .product-info {
+        h1 {
+          font-size: 2rem;
+        }
+
+        .description {
+          font-size: 0.95rem;
+        }
+
+        .best-price {
+          padding: 1rem;
+          .price {
+            .amount {
+              font-size: 2.2rem;
+            }
+            .market {
+              font-size: 1rem;
+            }
+          }
+          .add-to-cart {
+            font-size: 1rem;
+            padding: 0.8rem 1.5rem;
+            width: 100%; /* Make button full width */
+          }
+        }
+      }
+
+      .product-left, .product-right {
+        padding-bottom: 2rem;
+        padding-top: 2rem;
+      }
+
+      .price-comparison, .reviews {
+        padding: 1.5rem;
+        h2 {
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+        }
+      }
+
+      .reviews {
+        .review {
+          padding: 1rem;
+          .review-header {
+            flex-wrap: wrap; /* Allow header elements to wrap */
+            gap: 0.5rem;
+            font-size: 0.85rem;
+          }
+          .comment {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+}

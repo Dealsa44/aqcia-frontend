@@ -1,0 +1,358 @@
+/* Markets Page Color Palette: Sleek & Refined */
+/* Overall Page Background: #F8FAFC (Very light, almost off-white) */
+/* Element Base Color: #FFFFFF (Pure white for cards, filters) */
+/* Primary Text: #1E293B (Dark slate blue for headings) */
+/* Secondary Text/Labels: #334155 (Slate gray for paragraphs/labels) */
+/* Accent Gradient (Buttons/Highlights): linear-gradient(90deg, #6A2C70 0%, #2A4874 100%) (Soft Purple to Soft Blue) */
+/* Secondary Accent Gradient (Hover/Active): linear-gradient(90deg, #4CAF50 0%, #FF5733 100%) (Warm Green to Orange/Red) */
+/* Accent Colors: */
+/* - #7B1FA2 (Deep Violet, for stars, subtle highlights) */
+/* - #4CAF50 (Warm Green, for active elements/delivery tags) */
+/* Borders/Subtle Details: rgba(0, 0, 0, 0.08) */
+/* Shadows: rgba(0, 0, 0, 0.06) - very light, diffused */
+
+.markets-page {
+  background-color: #F8FAFC; /* Very light, clean background */
+  padding: 8rem 0 5rem;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #334155;
+  position: relative;
+  overflow: hidden;
+
+  // Removed overt animated background blobs for a cleaner look.
+  // We can add subtle, very diffused patterns if a user specifically requests it later.
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 1; /* Ensure content is always on top */
+  }
+
+  h1 {
+    font-size: 3rem; /* Slightly smaller for refinement */
+    font-weight: 700; /* A bit less 'raw' than 800 */
+    color: #1E293B;
+    margin-bottom: 0.8rem;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    animation: slideInDown 0.7s ease-out forwards;
+    opacity: 0;
+  }
+
+  .subtitle {
+    font-size: 1.1rem; /* Slightly smaller */
+    color: #334155;
+    margin-bottom: 3.5rem; /* More space below subtitle */
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    animation: fadeIn 0.9s ease-out forwards 0.2s;
+    opacity: 0;
+  }
+
+  @keyframes slideInDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem; /* Reduced gap */
+    margin-bottom: 4rem;
+    background-color: #FFFFFF;
+    padding: 1.2rem 2rem; /* Reduced padding */
+    border-radius: 12px; /* Softer corners */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06); /* Lighter, more diffused shadow */
+    border: 1px solid rgba(0, 0, 0, 0.04); /* Very subtle border */
+    animation: slideInUp 0.8s ease-out forwards 0.4s;
+    opacity: 0;
+    transform: translateY(15px);
+
+    @keyframes slideInUp {
+      from { transform: translateY(15px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem; /* Reduced gap within filter elements */
+
+      label {
+        font-weight: 500; /* Less bold */
+        color: #334155; /* Softer color */
+        font-size: 1rem; /* Slightly smaller */
+      }
+    }
+
+    select {
+      padding: 0.7rem 1rem; /* Smaller padding */
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 6px; /* Slightly sharper corners */
+      background-color: #F8FAFC;
+      font-size: 0.95rem; /* Slightly smaller font */
+      color: #334155;
+      appearance: none;
+      background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23334155%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.1L146.2%20204.4%2018.5%2074.5a17.6%2017.6%200%200%200-25.1%2024.5l130.6%20120.7a17.7%2017.7%200%200%200%2025.1%200L287%2094c6.4-5.1%206.4-15.6%200-20.7z%22%2F%3E%3C%2Fsvg%3E'); /* Darker arrow */
+      background-repeat: no-repeat;
+      background-position: right 0.6rem center; /* Adjusted arrow position */
+      background-size: 10px; /* Smaller arrow */
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03); /* Subtle inner shadow */
+
+      &:hover {
+        border-color: rgba(123, 31, 162, 0.3); /* Softer hover border */
+      }
+      &:focus {
+        border-color: #7B1FA2;
+        box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.15); /* Softer focus shadow */
+        outline: none;
+      }
+    }
+
+    .rating-stars {
+      display: flex;
+      gap: 0.2rem; /* Tighter gap */
+
+      span {
+        font-size: 1.3rem; /* Slightly smaller stars */
+        color: #7B1FA2; /* Deep violet for stars */
+        cursor: pointer;
+        transition: transform 0.15s ease, color 0.15s ease;
+        line-height: 1; /* Better vertical alignment */
+
+        &:hover {
+          transform: scale(1.1);
+          color: #4CAF50; /* Warm green on hover */
+        }
+      }
+    }
+  }
+
+  .stores-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly smaller min-width */
+    gap: 2rem; /* Reduced gap between cards */
+
+    .store-card {
+      background-color: #FFFFFF;
+      border-radius: 15px; /* Softer radius */
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06); /* Lighter, more diffused shadow */
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+      animation: popInScale 0.7s ease-out forwards;
+      opacity: 0;
+      transform: scale(0.95); /* Start smaller for a pop-in effect */
+
+      @for $i from 1 through 6 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{$i * 0.08}s; /* Faster staggered animation */
+        }
+      }
+
+      &:hover {
+        transform: translateY(-5px) scale(1); /* Lighter lift, no scale increase */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12); /* More prominent shadow on hover */
+      }
+
+      img {
+        width: 100%;
+        height: 180px; /* Slightly smaller image height */
+        object-fit: cover;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        filter: brightness(0.99); /* Even less dim */
+        transition: filter 0.25s ease;
+
+        &:hover {
+          filter: brightness(1);
+        }
+      }
+
+      .store-info {
+        padding: 1.2rem; /* Reduced padding */
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        h2 {
+          font-size: 1.6rem; /* Slightly smaller */
+          font-weight: 600; /* Less bold than page title */
+          color: #1E293B;
+          margin-bottom: 0.4rem;
+          text-align: left;
+          text-shadow: none;
+          &::after {
+            display: none;
+          }
+        }
+
+        .address {
+          font-size: 0.9rem; /* Slightly smaller */
+          color: #64748B;
+          margin-bottom: 0.8rem;
+          text-align: left;
+        }
+
+        .rating {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem; /* Reduced gap */
+          margin-bottom: 1rem;
+          justify-content: flex-start;
+
+          .stars {
+            font-size: 1.2rem; /* Slightly smaller stars */
+            color: #7B1FA2;
+          }
+
+          .score {
+            font-size: 0.95rem; /* Slightly smaller score */
+            font-weight: 600;
+            color: #1E293B;
+          }
+        }
+
+        .details {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.6rem; /* Tighter gap for tags */
+          margin-top: auto;
+
+          span {
+            font-size: 0.85rem; /* Smaller tag font */
+            padding: 0.3rem 0.7rem; /* Smaller padding */
+            border-radius: 16px; /* Slightly tighter radius */
+            font-weight: 500;
+            color: #FFFFFF;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Lighter shadow */
+            transition: transform 0.2s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+            }
+          }
+
+          .delivery {
+            background: linear-gradient(90deg, #4CAF50 0%, #3a8a3e 100%); /* Solid green look with slight gradient */
+          }
+
+          .locations {
+            background: linear-gradient(90deg, #7B1FA2 0%, #612781 100%); /* Solid purple look with slight gradient */
+          }
+        }
+
+        .view-store {
+          margin-top: 1.5rem;
+          padding: 0.8rem 1.2rem; /* Smaller button padding */
+          background: linear-gradient(90deg, #6A2C70 0%, #2A4874 100%); /* Soft purple to soft blue gradient */
+          color: #FFFFFF;
+          border: none;
+          border-radius: 25px; /* Smaller radius */
+          font-size: 0.95rem; /* Smaller font */
+          font-weight: 600;
+          cursor: pointer;
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+          transition: all 0.25s ease-in-out;
+          letter-spacing: 0.3px; /* Slightly tighter spacing */
+          align-self: flex-start;
+
+          &:hover {
+            transform: translateY(-2px); /* Lighter lift */
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15); /* More prominent shadow on hover */
+            background: linear-gradient(90deg, #4CAF50 0%, #FF5733 100%); /* Transition to warmer gradient on hover */
+          }
+
+          &:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+          }
+        }
+      }
+    }
+
+    @keyframes popInScale {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 6rem 0 3rem;
+
+    h1 {
+      font-size: 2.2rem;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .filters {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+      margin-bottom: 2.5rem;
+      align-items: stretch; /* Stretch filters to fill width */
+
+      div {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.4rem;
+      }
+
+      select, .rating-stars {
+        width: 100%; /* Make select full width */
+      }
+
+      .rating-stars {
+        justify-content: center; /* Center stars */
+      }
+    }
+
+    .stores-list {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+
+      .store-card {
+        .store-info {
+          padding: 1rem;
+
+          h2 {
+            font-size: 1.4rem;
+          }
+
+          .address {
+            font-size: 0.85rem;
+          }
+
+          .details {
+            justify-content: center;
+          }
+
+          .view-store {
+            width: 100%;
+            text-align: center;
+            padding: 0.7rem 1rem;
+          }
+        }
+      }
+    }
+  }
+}

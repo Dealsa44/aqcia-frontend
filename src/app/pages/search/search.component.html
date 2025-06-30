@@ -1,0 +1,58 @@
+<div class="search-container">
+  <div class="filters">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="searchProducts()"
+      [placeholder]="getCurrentText(searchMocks.searchPlaceholder)"
+    />
+
+    <div class="category-filters">
+      <button
+        *ngFor="let category of categories"
+        [class.active]="selectedCategory === category.id"
+        (click)="selectCategory(category.id)"
+      >
+        {{ getCurrentText(category.name) }}
+      </button>
+      <button class="clear" (click)="clearFilters()">
+        {{ getCurrentText(searchMocks.clearFiltersButton) }}
+      </button>
+    </div>
+  </div>
+
+  <div class="results">
+    @if (filteredProducts.length > 0) {
+      <div class="product-grid">
+        @for (product of filteredProducts; track product.id) {
+          <div class="product-card">
+            <img
+              [src]="'assets/imgs/products/' + product.image"
+              [alt]="getCurrentText(product.name)"
+              [routerLink]="['/', languageService.getCurrentLanguageCode(), 'product', product.id]"
+            />
+            <div class="product-info">
+              <h3 [routerLink]="['/', languageService.getCurrentLanguageCode(), 'product', product.id]">
+                {{ getCurrentText(product.name) }}
+              </h3>
+              <div class="price-info">
+                <span class="best-price">
+                  {{ getCurrentText(searchMocks.bestPriceLabel) }}
+                  <strong>{{ getLowestPrice(product).price.toFixed(2) }} ₾</strong>
+                  ({{ getLowestPrice(product).market }})
+                </span>
+              </div>
+              <button class="add-to-cart" (click)="addToCart(product)">
+                {{ getCurrentText(searchMocks.addToCartButton) }}
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="no-results">
+        {{ getCurrentText(searchMocks.noResultsMessage) }}
+      </div>
+    }
+  </div>
+</div>

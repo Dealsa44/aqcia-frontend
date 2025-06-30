@@ -1,0 +1,62 @@
+<!-- navbar.component.html -->
+<nav class="navbar" [class.sticky]="isSticky">
+  <div class="container">
+    <a [routerLink]="['/', languageService.getCurrentLanguageCode(), 'home']" class="logo">
+      {{ getCurrentText(navData.logo) }}
+    </a>
+
+    <div class="nav-items" [class.active]="isMenuOpen">
+      @for (item of navData.items; track $index) {
+        <a [routerLink]="['/', languageService.getCurrentLanguageCode(), item.path]" 
+           class="nav-link"
+           (click)="isMenuOpen = false">
+          {{ getCurrentText(item.titles) }}
+        </a>
+      }
+      
+      <a [routerLink]="['/', languageService.getCurrentLanguageCode(), 'cart']" 
+         class="nav-link cart-link"
+         (click)="isMenuOpen = false">
+        <i class="fa fa-{{navData.cart.icon}}"></i>
+        <span>{{ getCurrentText(navData.cart.title) }}</span>
+      </a>
+      
+      <!-- Rest of the dropdowns remain the same -->
+      <div class="dropdown" (click)="$event.stopPropagation()">
+        <button class="dropdown-toggle" (click)="toggleCity()">
+          {{ getCurrentText(currentCity.name) }}
+        </button>
+        @if (isCityOpen) {
+          <div class="dropdown-menu">
+            @for (city of navData.cities; track $index) {
+              <button (click)="selectCity(city)">
+                {{ getCurrentText(city.name) }}
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="dropdown" (click)="$event.stopPropagation()">
+        <button class="dropdown-toggle" (click)="toggleLanguage()">
+          {{ navData.languages[languageService.getCurrentLanguage()].code.toUpperCase() }}
+        </button>
+        @if (isLanguageOpen) {
+          <div class="dropdown-menu">
+            @for (lang of navData.languages; track $index; let i = $index) {
+              <button (click)="setLanguage(i)">
+                {{ getCurrentText(lang.name) }} ({{ lang.code.toUpperCase() }})
+              </button>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <button class="hamburger" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>

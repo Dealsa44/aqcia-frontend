@@ -1,0 +1,36 @@
+<!-- footer.component.html -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      @for (section of footerData.sections; track $index) {
+        <div class="footer-section">
+          <h3>{{ getCurrentText(section.title) }}</h3>
+          <ul>
+            @for (link of section.links; track $index) {
+              <li>
+                <a [routerLink]="['/', languageService.getCurrentLanguageCode(), link.path]">
+                  {{ getCurrentText(link.text) }}
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+      
+      <div class="footer-section">
+        <h3>{{ getCurrentText(['სოციალური ქსელი', 'Social Media', 'Социальные сети']) }}</h3>
+        <div class="social-links">
+          @for (social of footerData.social; track $index) {
+            <a [href]="social.path" class="social-icon">
+              <img [src]="'assets/icons/' + social.icon + '.svg'" [alt]="social.icon">
+            </a>
+          }
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>{{ getCurrentText(footerData.copyright) }}</p>
+    </div>
+  </div>
+</footer>

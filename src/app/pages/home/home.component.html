@@ -1,0 +1,78 @@
+<main>
+  <section class="hero">
+    <div class="container">
+      <h1>
+        {{ getCurrentText(homeData.hero.title) }}
+      </h1>
+      <p class="subtitle">
+        {{ getCurrentText(homeData.hero.subtitle) }}
+      </p>
+
+      <div class="search-container">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (keyup.enter)="onSearch()"
+          [placeholder]="getCurrentText(homeData.hero.searchPlaceholder)"
+        />
+        <button class="search-btn" (click)="onSearch()">
+          {{ getCurrentText(homeData.hero.searchButton) }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="container">
+      <h2>
+        {{ getCurrentText(homeData.featuredProducts.title) }}
+      </h2>
+
+      <div class="products-grid">
+        @for (product of [1,2,3,4]; track $index) {
+        <div class="product-card">
+          <img src="assets/imgs/products/bread.jpg" alt="Product" />
+          <h3>{{ getCurrentText(homeData.featuredProducts.productLabel) }} {{ product }}</h3>
+          <p class="price">${{ product }}.99</p>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <div class="container">
+      <h2>
+        {{ getCurrentText(homeData.howItWorks.title) }}
+      </h2>
+
+      <div class="steps">
+        @for (step of homeData.howItWorks.steps; track $index) {
+        <div class="step">
+          <div class="step-number">{{ step.number }}</div>
+          <h3>
+            {{ getCurrentText(step.title) }}
+          </h3>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="stores">
+    <div class="container">
+      <h2>
+        {{ getCurrentText(homeData.popularStores.title) }}
+      </h2>
+
+      <div class="stores-grid">
+        @for (store of ['spar', 'carrefour', 'nikora', 'magniti']; track $index)
+        {
+        <div class="store-card">
+          <img [src]="'assets/imgs/stores/' + store + '.png'" [alt]="store" />
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+</main>
