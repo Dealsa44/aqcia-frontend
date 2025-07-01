@@ -1,6 +1,6 @@
 // core/services/cart.service.ts
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,9 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
   private cartItems: any[] = [];
   private cartSubject = new BehaviorSubject<any[]>(this.cartItems);
+  
+  // Expose as public readonly Observable
+  public readonly cart$: Observable<any[]> = this.cartSubject.asObservable();
 
   constructor() {
     this.loadCart();
@@ -17,13 +20,13 @@ export class CartService {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
       this.cartItems = JSON.parse(savedCart);
-      this.cartSubject.next(this.cartItems);
+      this.cartSubject.next([...this.cartItems]);
     }
   }
 
   private saveCart() {
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
-    this.cartSubject.next(this.cartItems);
+    this.cartSubject.next([...this.cartItems]); // Emit new array reference
   }
 
   getCartItems() {

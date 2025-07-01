@@ -13,5 +13,14 @@ export const cartMocks = {
   suggestedItemsTitle: ['რეკომენდებული პროდუქტები', 'Suggested Products', 'Рекомендуемые товары'],
   viewAllProducts: ['ყველა პროდუქტის ნახვა', 'View All Products', 'Посмотреть все товары'],
   popularItems: ['პოპულარული', 'Popular', 'Популярные'],
-  bestDeals: ['საუკეთესო შეთავაზებები', 'Best Deals', 'Лучшие предложения']
+  bestDeals: ['საუკეთესო შეთავაზებები', 'Best Deals', 'Лучшие предложения'],
+
+  bestCombinations: {
+    title: ['საუკეთესო კომბინაციები', 'Best Combinations', 'Лучшие комбинации'],
+    market: ['მარკეტი', 'Market', 'Магазин'],
+    productsAvailable: ['ხელმისაწვდომი პროდუქტები', 'Products Available', 'Доступные товары'],
+    totalPrice: ['საერთო ფასი', 'Total Price', 'Общая цена'],
+    pricePerProduct: ['საშუალო ფასი', 'Avg. Price', 'Средняя цена'],
+    bestOption: ['საუკეთესო ვარიანტი', 'Best Option', 'Лучший вариант']
+  }
 };
