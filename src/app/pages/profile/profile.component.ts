@@ -15,7 +15,7 @@ import { cartMocks } from '../../core/mocks/cart.mocks';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
   cartMocks = cartMocks;
@@ -57,10 +57,13 @@ export class ProfileComponent {
   }
 
   saveUserData() {
-    localStorage.setItem('user_' + this.profileData.id, JSON.stringify({
-      favoriteStores: this.favoriteStores,
-      recentSearches: this.recentSearches
-    }));
+    localStorage.setItem(
+      'user_' + this.profileData.id,
+      JSON.stringify({
+        favoriteStores: this.favoriteStores,
+        recentSearches: this.recentSearches,
+      })
+    );
   }
 
   toggleEditMode() {
@@ -74,7 +77,7 @@ export class ProfileComponent {
   saveProfile() {
     this.isLoading = true;
     this.errorMessage = '';
-    
+
     if (this.authService.updateProfile(this.profileData)) {
       this.successMessage = this.getCurrentText(profileMocks.profileUpdated);
       this.editMode = false;
@@ -84,7 +87,7 @@ export class ProfileComponent {
     } else {
       this.errorMessage = this.getCurrentText(profileMocks.updateError);
     }
-    
+
     this.isLoading = false;
   }
 
@@ -93,7 +96,7 @@ export class ProfileComponent {
   }
 
   removeFavoriteStore(storeName: string) {
-    this.favoriteStores = this.favoriteStores.filter(store => store !== storeName);
+    this.favoriteStores = this.favoriteStores.filter((store) => store !== storeName);
     this.saveUserData();
   }
 
@@ -103,7 +106,7 @@ export class ProfileComponent {
 
   getCartTotalPrice(): number {
     return this.cartService.getCartItems().reduce((total, item) => {
-      const product = productsMocks.products.find(p => p.id === item.id);
+      const product = productsMocks.products.find((p) => p.id === item.id);
       return total + (product ? this.getLowestPrice(product).price * item.quantity : 0);
     }, 0);
   }
@@ -115,5 +118,18 @@ export class ProfileComponent {
       (p: any) => p.price - (p.discount || 0) === minPrice
     );
     return { price: minPrice, market: market?.market || '' };
+  }
+
+  /**
+   * Navigates to the market details page for the given store.
+   * @param storeName The name of the store to view.
+   */
+  viewStore(storeName: string) {
+    this.router.navigate([
+      '/',
+      this.languageService.getCurrentLanguageCode(),
+      'market-details',
+      storeName.toLowerCase(),
+    ]);
   }
 }
