@@ -1,4 +1,3 @@
-// core/mocks/cart.mocks.ts
 export const cartMocks = {
   title: ['კალათა', 'Cart', 'Корзина'],
   emptyMessage: ['კალათა ცარიელია', 'Cart is empty', 'Корзина пуста'],
@@ -16,6 +15,10 @@ export const cartMocks = {
   viewAllProducts: ['ყველა პროდუქტის ნახვა', 'View All Products', 'Посмотреть все товары'],
   popularItems: ['პოპულარული', 'Popular', 'Популярные'],
   bestDeals: ['საუკეთესო შეთავაზებები', 'Best Deals', 'Лучшие предложения'],
+
+  // New labels for the collapse/expand feature
+  viewMore: ['მეტი ნახვა', 'View More', 'Показать больше'],
+  viewLess: ['ნაკლების ნახვა', 'View Less', 'Показать меньше'],
 
   bestCombinations: {
     title: ['საუკეთესო კომბინაციები', 'Best Combinations', 'Лучшие комбинации'],

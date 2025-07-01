@@ -8,7 +8,10 @@
         <div class="cart-items">
           @for (item of cartService.getCartItems(); track item.id) { @if
           (getProductById(item.id); as product) {
-          <div class="cart-item">
+          <div
+            class="cart-item"
+            *ngIf="showAllItems || $index < maxItemsToShow"
+          >
             <img
               [src]="'assets/imgs/products/' + product.image"
               [alt]="getCurrentText(product.name)"
@@ -42,7 +45,16 @@
               {{ getCurrentText(cartMocks.remove) }}
             </button>
           </div>
-          } }
+          } } @if (cartService.getCartItems().length > maxItemsToShow) {
+          <button class="toggle-view-btn" (click)="toggleShowAllItems()">
+            {{
+              showAllItems
+                ? getCurrentText(cartMocks.viewLess)
+                : getCurrentText(cartMocks.viewMore)
+            }}
+            <span class="icon" [class.expanded]="showAllItems"></span>
+          </button>
+          }
         </div>
 
         <div class="cart-summary">
@@ -89,7 +101,9 @@
               <div class="stat">
                 <span
                   >{{
-                    getCurrentText(cartMocks.bestCombinations.productsAvailable)
+                    getCurrentText(
+                      cartMocks.bestCombinations.productsAvailable
+                    )
                   }}:</span
                 >
                 <strong

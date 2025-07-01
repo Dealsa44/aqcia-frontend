@@ -1,4 +1,3 @@
-// pages/cart/cart.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../core/services/language.service';
@@ -21,6 +20,10 @@ export class CartComponent {
   marketsMocks = marketsMocks;
   private suggestedProductsCache: any[] = [];
   marketCombinations: any[] = [];
+
+  // New properties for collapse/expand functionality
+  showAllItems: boolean = false; // Initially show only a few items
+  maxItemsToShow: number = 3; // Number of items to show before collapsing
 
   constructor(
     public languageService: LanguageService,
@@ -145,5 +148,10 @@ export class CartComponent {
       }))
       .sort((a: any, b: any) => b.score - a.score)
       .slice(0, 3); // Display top 3 best combinations
+  }
+
+  // New method to toggle the display of all cart items
+  toggleShowAllItems() {
+    this.showAllItems = !this.showAllItems;
   }
 }
