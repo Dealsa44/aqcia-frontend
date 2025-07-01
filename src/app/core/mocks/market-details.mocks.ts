@@ -19,5 +19,7 @@ export const marketDetailsMocks = {
     title: ['მომხმარებელთა მიმოხილვები', 'Customer Reviews', 'Отзывы покупателей'],
     overallRating: ['საერთო რეიტინგი', 'Overall Rating', 'Общий рейтинг'],
     addReview: ['მიმოხილვის დამატება', 'Add Review', 'Добавить отзыв']
-  }
+  },
+  addFavorite: ['დამატება რჩეულებში', 'Add to favorites', 'Добавить в избранное'],
+  removeFavorite: ['წაშლა რჩეულებიდან', 'Remove from favorites', 'Удалить из избранного'],
 };

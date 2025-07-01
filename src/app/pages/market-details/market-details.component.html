@@ -2,7 +2,10 @@
 <div class="market-details-page">
   <div class="container">
     <div class="market-header">
-      <img [src]="'assets/imgs/stores/' + market.image" [alt]="getCurrentText(market.name)" />
+      <img
+        [src]="'assets/imgs/stores/' + market.image"
+        [alt]="getCurrentText(market.name)"
+      />
       <h1>{{ getCurrentText(market.name) }}</h1>
       <p class="description">{{ getCurrentText(marketData.description) }}</p>
       <div class="rating">
@@ -10,20 +13,47 @@
         <span class="score">{{ market.rating }}</span>
       </div>
     </div>
+    <!-- Add this near the market header -->
+    <button class="favorite-btn" (click)="toggleFavorite()">
+      {{ isFavorite ? "★" : "☆" }}
+      {{
+        isFavorite
+          ? getCurrentText(marketData.removeFavorite)
+          : getCurrentText(marketData.addFavorite)
+      }}
+    </button>
 
     <section class="categories-section">
       <h2>{{ getCurrentText(marketData.categoriesTitle) }}</h2>
       <div class="categories-grid">
         @for (category of categories; track category.id) {
-          <a [routerLink]="['/', languageService.getCurrentLanguageCode(), 'market-products', marketId, category.id]" 
-             class="category-card">
-            <img [src]="'assets/imgs/categories/' + category.icon" [alt]="getCurrentText(category.name)" />
-            <h3>{{ getCurrentText(category.name) }}</h3>
-          </a>
+        <a
+          [routerLink]="[
+            '/',
+            languageService.getCurrentLanguageCode(),
+            'market-products',
+            marketId,
+            category.id
+          ]"
+          class="category-card"
+        >
+          <img
+            [src]="'assets/imgs/categories/' + category.icon"
+            [alt]="getCurrentText(category.name)"
+          />
+          <h3>{{ getCurrentText(category.name) }}</h3>
+        </a>
         }
       </div>
-      <a [routerLink]="['/', languageService.getCurrentLanguageCode(), 'market-products', marketId]" 
-         class="view-all">
+      <a
+        [routerLink]="[
+          '/',
+          languageService.getCurrentLanguageCode(),
+          'market-products',
+          marketId
+        ]"
+        class="view-all"
+      >
         {{ getCurrentText(marketData.viewAllProducts) }}
       </a>
     </section>
@@ -32,19 +62,22 @@
       <h2>{{ getCurrentText(marketData.featuredProducts) }}</h2>
       <div class="products-grid">
         @for (product of featuredProducts; track product.id) {
-          <div class="product-card">
-            <img [src]="'assets/imgs/products/' + product.image" [alt]="getCurrentText(product.name)" />
-            <h3>{{ getCurrentText(product.name) }}</h3>
-            <p class="price">
-              ₾{{ getMarketPrice(product).toFixed(2) }}
-              @if (hasDiscount(product)) {
-                <span class="discount">-{{ getDiscount(product) }}%</span>
-              }
-            </p>
-            <button class="add-to-cart" (click)="addToCart(product)">
-              {{ getCurrentText(marketData.addToCart) }}
-            </button>
-          </div>
+        <div class="product-card">
+          <img
+            [src]="'assets/imgs/products/' + product.image"
+            [alt]="getCurrentText(product.name)"
+          />
+          <h3>{{ getCurrentText(product.name) }}</h3>
+          <p class="price">
+            ₾{{ getMarketPrice(product).toFixed(2) }}
+            @if (hasDiscount(product)) {
+            <span class="discount">-{{ getDiscount(product) }}%</span>
+            }
+          </p>
+          <button class="add-to-cart" (click)="addToCart(product)">
+            {{ getCurrentText(marketData.addToCart) }}
+          </button>
+        </div>
         }
       </div>
     </section>
@@ -72,7 +105,9 @@
       <div class="overall-rating">
         <span class="stars">{{ getStars(market.rating) }}</span>
         <span class="score">{{ market.rating }}</span>
-        <span class="label">{{ getCurrentText(marketData.reviews.overallRating) }}</span>
+        <span class="label">{{
+          getCurrentText(marketData.reviews.overallRating)
+        }}</span>
       </div>
       <!-- Reviews would be added here -->
       <button class="add-review">

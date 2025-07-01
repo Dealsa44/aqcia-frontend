@@ -1,0 +1,73 @@
+<!-- pages/login/login.component.html -->
+<div class="login-page">
+  <div class="container">
+    <div class="login-card">
+      <h1>{{ getCurrentText(loginMocks.title) }}</h1>
+      <p class="subtitle">{{ getCurrentText(loginMocks.subtitle) }}</p>
+
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <div class="form-group">
+          <label>{{ getCurrentText(loginMocks.emailOrUsernameLabel) }}</label>
+          <input 
+            type="text" 
+            [(ngModel)]="loginData.emailOrUsername" 
+            name="emailOrUsername" 
+            required
+            [placeholder]="getCurrentText(loginMocks.emailOrUsernamePlaceholder)">
+        </div>
+
+        <div class="form-group">
+          <label>{{ getCurrentText(loginMocks.passwordLabel) }}</label>
+          <input 
+            type="password" 
+            [(ngModel)]="loginData.password" 
+            name="password" 
+            required
+            [placeholder]="getCurrentText(loginMocks.passwordPlaceholder)">
+        </div>
+
+        <div class="form-group remember-me">
+          <input type="checkbox" id="rememberMe" name="rememberMe">
+          <label for="rememberMe">{{ getCurrentText(loginMocks.rememberMe) }}</label>
+        </div>
+
+        @if (errorMessage) {
+          <div class="error-message">
+            {{ errorMessage }}
+          </div>
+        }
+
+        <button type="submit" [disabled]="!loginForm.valid || isLoading">
+          {{ getCurrentText(loginMocks.loginButton) }}
+          @if (isLoading) {
+            <span class="spinner"></span>
+          }
+        </button>
+
+        <div class="links">
+          <a [routerLink]="['/', languageService.getCurrentLanguageCode(), 'forgot-password']">
+            {{ getCurrentText(loginMocks.forgotPassword) }}
+          </a>
+          <span>|</span>
+          <a [routerLink]="['/', languageService.getCurrentLanguageCode(), 'register']">
+            {{ getCurrentText(loginMocks.registerLink) }}
+          </a>
+        </div>
+
+        <div class="social-login">
+          <p>{{ getCurrentText(loginMocks.socialLoginText) }}</p>
+          <div class="social-buttons">
+            <button type="button" class="google">
+              <img src="assets/icons/google.svg" alt="Google">
+              {{ getCurrentText(loginMocks.googleButton) }}
+            </button>
+            <button type="button" class="facebook">
+              <img src="assets/icons/facebook.svg" alt="Facebook">
+              {{ getCurrentText(loginMocks.facebookButton) }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

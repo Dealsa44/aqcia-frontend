@@ -3,10 +3,6 @@ export const navbarMocks = {
   logo: ['GroceryCompare', 'GroceryCompare', 'GroceryCompare'],
   items: [
     { 
-      titles: ['მთავარი', 'Home', 'Главная'],
-      path: 'home'
-    },
-    { 
       titles: ['მარკეტები', 'Markets', 'Магазины'],
       path: 'markets'
     },
@@ -16,7 +12,13 @@ export const navbarMocks = {
     },
     { 
       titles: ['შესვლა', 'Login', 'Войти'],
-      path: 'login'
+      path: 'login',
+      authState: 'loggedOut' // Add this to identify login state
+    },
+    { 
+      titles: ['პროფილი', 'Profile', 'Профиль'],
+      path: 'profile',
+      authState: 'loggedIn' // Add this to identify logged in state
     }
   ],
   languages: [

@@ -1,0 +1,128 @@
+<div class="profile-page">
+  <div class="container">
+    <div class="profile-card">
+      <h1>{{ getCurrentText(profileMocks.title) }}</h1>
+
+      <div class="profile-header">
+        <div class="avatar">
+          <span>{{ profileData.username?.charAt(0)?.toUpperCase() }}</span>
+        </div>
+
+        @if (!editMode) {
+          <div class="profile-info">
+            <h2>{{ profileData.username }}</h2>
+            <p>{{ profileData.email }}</p>
+          </div>
+
+          <button class="edit-btn" (click)="toggleEditMode()">
+            {{ getCurrentText(profileMocks.editButton) }}
+          </button>
+        }
+      </div>
+
+      @if (editMode) {
+        <form class="edit-form" (ngSubmit)="saveProfile()" #profileForm="ngForm">
+          <div class="form-group">
+            <label>{{ getCurrentText(profileMocks.usernameLabel) }}</label>
+            <input type="text" [(ngModel)]="profileData.username" name="username" required>
+          </div>
+
+          <div class="form-group">
+            <label>{{ getCurrentText(profileMocks.emailLabel) }}</label>
+            <input type="email" [(ngModel)]="profileData.email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label>{{ getCurrentText(profileMocks.newPasswordLabel) }}</label>
+            <input type="password" [(ngModel)]="profileData.newPassword" name="newPassword"
+                   [placeholder]="getCurrentText(profileMocks.passwordPlaceholder)">
+          </div>
+
+          <div class="form-group">
+            <label>{{ getCurrentText(profileMocks.confirmPasswordLabel) }}</label>
+            <input type="password" [(ngModel)]="profileData.confirmPassword" name="confirmPassword"
+                   [placeholder]="getCurrentText(profileMocks.passwordPlaceholder)">
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="toggleEditMode()">
+              {{ getCurrentText(profileMocks.cancelButton) }}
+            </button>
+            <button type="submit" class="save-btn" [disabled]="!profileForm.valid || isLoading">
+              {{ getCurrentText(profileMocks.saveButton) }}
+              @if (isLoading) {
+                <span class="spinner"></span>
+              }
+            </button>
+          </div>
+        </form>
+      }
+
+      @if (errorMessage) {
+        <div class="error-message">
+          {{ errorMessage }}
+        </div>
+      }
+
+      @if (successMessage) {
+        <div class="success-message">
+          {{ successMessage }}
+        </div>
+      }
+
+      <div class="profile-content">
+        <div class="current-cart section-card">
+          <h3>{{ getCurrentText(profileMocks.currentCartTitle) }}</h3>
+          @if (cartService.getCartItems().length > 0) {
+            <div class="cart-summary">
+              <span>{{ cartService.getCartItems().length }} {{ getCurrentText(profileMocks.itemsCount) }}</span>
+              <span>{{ getCartTotalPrice().toFixed(2) }} ₾</span>
+            </div>
+            <button class="view-cart-btn" [routerLink]="['/', languageService.getCurrentLanguageCode(), 'cart']">
+              {{ getCurrentText(profileMocks.viewCartButton) }}
+            </button>
+          } @else {
+            <p>{{ getCurrentText(cartMocks.emptyMessage) }}</p>
+          }
+        </div>
+
+        <div class="favorite-stores section-card">
+          <h3>{{ getCurrentText(profileMocks.favoriteStoresTitle) }}</h3>
+          @if (favoriteStores.length > 0) {
+            <div class="stores-list">
+              @for (store of favoriteStores; track $index) {
+                <div class="store-item">
+                  <span>{{ store }}</span>
+                  <button class="remove-btn" (click)="removeFavoriteStore(store)">
+                    {{ getCurrentText(profileMocks.removeFavorite) }}
+                  </button>
+                </div>
+              }
+            </div>
+          } @else {
+            <p>{{ getCurrentText(profileMocks.noFavoriteStores) }}</p>
+          }
+        </div>
+
+        <div class="recent-searches section-card">
+          <h3>{{ getCurrentText(profileMocks.recentSearchesTitle) }}</h3>
+          @if (recentSearches.length > 0) {
+            <div class="searches-list">
+              @for (search of recentSearches; track $index) {
+                <div class="search-item">
+                  {{ search }}
+                </div>
+              }
+            </div>
+          } @else {
+            <p>{{ getCurrentText(profileMocks.noRecentSearches) }}</p>
+          }
+        </div>
+      </div>
+
+      <button class="logout-btn" (click)="logout()">
+        {{ getCurrentText(profileMocks.logoutButton) }}
+      </button>
+    </div>
+  </div>
+</div>

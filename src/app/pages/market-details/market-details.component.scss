@@ -504,4 +504,27 @@
     padding: 0.7rem 1.5rem;
     font-size: 0.9rem;
   }
+}// pages/market-details/market-details.component.scss
+.favorite-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease-in-out;
+  margin: 1rem auto;
+  display: block;
+
+  &:hover {
+    background: linear-gradient(90deg, #FF9800 0%, #4CAF50 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+  }
 }

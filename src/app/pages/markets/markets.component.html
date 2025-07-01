@@ -1,4 +1,3 @@
-<!-- pages/markets/markets.component.html -->
 <section class="markets-page">
   <div class="container">
     <h1>{{ getCurrentText(mocks.title) }}</h1>
@@ -56,6 +55,20 @@
             {{ getCurrentText(mocks.labels.viewStore) }}
           </button>
         </div>
+        <button
+          class="favorite-btn"
+          [class.favorited]="isFavorite(getCurrentText(store.name))"
+          (click)="toggleFavorite(getCurrentText(store.name))"
+          [attr.aria-label]="
+            isFavorite(getCurrentText(store.name))
+              ? 'Remove from favorites'
+              : 'Add to favorites'
+          "
+        >
+          <span class="favorite-icon">
+            {{ isFavorite(getCurrentText(store.name)) ? "★" : "☆" }}
+          </span>
+        </button>
       </div>
       }
     </div>

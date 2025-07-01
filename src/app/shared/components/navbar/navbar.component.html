@@ -6,7 +6,7 @@
     </a>
 
     <div class="nav-items" [class.active]="isMenuOpen">
-      @for (item of navData.items; track $index) {
+      @for (item of getNavItems(); track $index) {
         <a [routerLink]="['/', languageService.getCurrentLanguageCode(), item.path]" 
            class="nav-link"
            (click)="isMenuOpen = false">

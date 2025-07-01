@@ -4,17 +4,18 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LanguageService } from '../../../core/services/language.service';
 import { navbarMocks } from '../../../core/mocks/navbar.mocks';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
   @Output() cityChanged = new EventEmitter<string>();
-  
+
   navData = navbarMocks;
   currentCity = this.navData.cities[0];
   isMenuOpen = false;
@@ -22,8 +23,10 @@ export class NavbarComponent {
   isCityOpen = false;
   isSticky = false;
 
-  constructor(public languageService: LanguageService) {}
-
+  constructor(
+    public languageService: LanguageService,
+    public authService: AuthService
+  ) {}
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
@@ -54,5 +57,15 @@ export class NavbarComponent {
 
   getCurrentText(items: string[] | any[]) {
     return items[this.languageService.getCurrentLanguage()];
+  }
+
+  getNavItems() {
+    return this.navData.items.filter((item) => {
+      if (!item.authState) return true;
+      return (
+        item.authState ===
+        (this.authService.isLoggedIn() ? 'loggedIn' : 'loggedOut')
+      );
+    });
   }
 }

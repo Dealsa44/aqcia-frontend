@@ -1,0 +1,102 @@
+<div class="register-page">
+  <div class="container">
+    <div class="register-card">
+      <h1>{{ getCurrentText(registerMocks.title) }}</h1>
+      <p class="subtitle">{{ getCurrentText(registerMocks.subtitle) }}</p>
+
+      <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+        <div class="form-group">
+          <label>{{ getCurrentText(registerMocks.usernameLabel) }}</label>
+          <input
+            type="text"
+            [(ngModel)]="registerData.username"
+            name="username"
+            required
+            [placeholder]="getCurrentText(registerMocks.usernamePlaceholder)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>{{ getCurrentText(registerMocks.emailLabel) }}</label>
+          <input
+            type="email"
+            [(ngModel)]="registerData.email"
+            name="email"
+            required
+            [placeholder]="getCurrentText(registerMocks.emailPlaceholder)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>{{ getCurrentText(registerMocks.passwordLabel) }}</label>
+          <input
+            type="password"
+            [(ngModel)]="registerData.password"
+            name="password"
+            required
+            minlength="6"
+            [placeholder]="getCurrentText(registerMocks.passwordPlaceholder)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>{{
+            getCurrentText(registerMocks.confirmPasswordLabel)
+          }}</label>
+          <input
+            type="password"
+            [(ngModel)]="registerData.confirmPassword"
+            name="confirmPassword"
+            required
+            [placeholder]="
+              getCurrentText(registerMocks.confirmPasswordPlaceholder)
+            "
+          />
+        </div>
+
+        <div class="form-group terms">
+          <input
+            type="checkbox"
+            id="terms"
+            name="terms"
+            [(ngModel)]="termsAccepted"
+            required
+          />
+          <label for="terms">{{
+            getCurrentText(registerMocks.termsText)
+          }}</label>
+        </div>
+
+        @if (errorMessage) {
+        <div class="error-message">
+          {{ errorMessage }}
+        </div>
+        } @if (successMessage) {
+        <div class="success-message">
+          {{ successMessage }}
+        </div>
+        }
+
+        <button type="submit" [disabled]="!registerForm.valid || isLoading">
+          {{ getCurrentText(registerMocks.registerButton) }}
+          @if (isLoading) {
+          <span class="spinner"></span>
+          }
+        </button>
+
+        <div class="login-link">
+          {{ getCurrentText(registerMocks.loginLink) }}
+          <a
+            [routerLink]="[
+              '/',
+              languageService.getCurrentLanguageCode(),
+              'login'
+            ]"
+          >
+            {{ getCurrentText(loginMocks.loginButton) }}
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

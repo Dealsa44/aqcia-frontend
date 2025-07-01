@@ -1,0 +1,50 @@
+// core/mocks/profile.mocks.ts
+export const profileMocks = {
+  title: ['პროფილი', 'Profile', 'Профиль'],
+  editButton: ['რედაქტირება', 'Edit', 'Редактировать'],
+  saveButton: ['შენახვა', 'Save', 'Сохранить'],
+  cancelButton: ['გაუქმება', 'Cancel', 'Отмена'],
+  logoutButton: ['გამოსვლა', 'Logout', 'Выход'],
+  usernameLabel: ['მომხმარებელი', 'Username', 'Имя пользователя'],
+  emailLabel: ['იმეილი', 'Email', 'Email'],
+  passwordLabel: ['პაროლი', 'Password', 'Пароль'],
+  newPasswordLabel: ['ახალი პაროლი', 'New Password', 'Новый пароль'],
+  confirmPasswordLabel: [
+    'გაიმეორეთ პაროლი',
+    'Confirm Password',
+    'Подтвердите пароль',
+  ],
+  currentCartTitle: ['მიმდინარე კალათა', 'Current Cart', 'Текущая корзина'],
+  itemsCount: ['ნივთები', 'items', 'товары'],
+  viewCartButton: ['კალათის ნახვა', 'View Cart', 'Просмотреть корзину'],
+  favoriteStoresTitle: [
+    'რჩეული მაღაზიები',
+    'Favorite Stores',
+    'Избранные магазины',
+  ],
+  noFavoriteStores: [
+    'რჩეული მაღაზიები არ გაქვთ',
+    'No favorite stores',
+    'Нет избранных магазинов',
+  ],
+  removeFavorite: ['წაშლა', 'Remove', 'Удалить'],
+  recentSearchesTitle: ['ბოლო ძიებები', 'Recent Searches', 'Последние поиски'],
+  noRecentSearches: [
+    'ბოლო ძიებები არ გაქვთ',
+    'No recent searches',
+    'Нет последних поисков',
+  ],
+  profileUpdated: ['პროფილი განახლდა', 'Profile updated', 'Профиль обновлен'],
+  updateError: [
+    'განახლება ვერ მოხერხდა',
+    'Update failed',
+    'Не удалось обновить',
+  ],
+  passwordUpdated: ['პაროლი განახლდა', 'Password updated', 'Пароль обновлен'],
+  passwordError: [
+    'პაროლის განახლება ვერ მოხერხდა',
+    ,'Failed to update password',
+    'Не удалось обновить пароль',
+  ],
+  passwordPlaceholder: ['პაროლი', 'Password', 'Пароль'],
+};
