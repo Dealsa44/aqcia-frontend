@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class CartService {
   private cartItems: any[] = [];
   private cartSubject = new BehaviorSubject<any[]>(this.cartItems);
-  
+
   // Expose as public readonly Observable
   public readonly cart$: Observable<any[]> = this.cartSubject.asObservable();
 
@@ -68,6 +68,7 @@ export class CartService {
     }
   }
 
+  // This method will now be used by the "Delete All" button
   clearCart() {
     this.cartItems = [];
     this.saveCart();

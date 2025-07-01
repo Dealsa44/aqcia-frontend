@@ -213,9 +213,16 @@
       }
     }
 
-    .checkout-btn {
+    .cart-actions {
+      display: flex; /* Arrange buttons side-by-side */
+      gap: 1rem; /* Space between buttons */
+      width: 100%; /* Take full width */
+      justify-content: flex-end; /* Align buttons to the right */
+    }
+
+    .checkout-btn,
+    .clear-cart-btn {
       padding: 1rem 2.5rem;
-      background: linear-gradient(90deg, #6a2c70 0%, #2a4874 100%);
       color: #ffffff;
       border: none;
       border-radius: 30px;
@@ -225,11 +232,31 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       transition: all 0.3s ease-in-out;
       letter-spacing: 0.5px;
+      flex-grow: 0; /* Prevent buttons from stretching */
+      flex-shrink: 0;
+    }
+
+    .checkout-btn {
+      background: linear-gradient(90deg, #6a2c70 0%, #2a4874 100%);
 
       &:hover {
         transform: translateY(-3px) scale(1.01);
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
         background: linear-gradient(90deg, #4caf50 0%, #ff5733 100%);
+      }
+      &:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .clear-cart-btn {
+      background: linear-gradient(90deg, #f44336 0%, #d32f2f 100%); /* Red gradient for delete */
+
+      &:hover {
+        transform: translateY(-3px) scale(1.01);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(90deg, #d32f2f 0%, #f44336 100%);
       }
       &:active {
         transform: translateY(0);
@@ -558,6 +585,12 @@
     .best-combinations {
       margin-top: 2rem; /* Add back top margin when stacked */
     }
+
+    .cart-summary .cart-actions {
+      flex-direction: column; /* Stack buttons vertically on small screens */
+      align-items: center; /* Center them */
+      gap: 0.8rem;
+    }
   }
 
   @media (max-width: 768px) {
@@ -620,7 +653,8 @@
         }
       }
 
-      .checkout-btn {
+      .checkout-btn,
+      .clear-cart-btn {
         width: 100%;
         padding: 0.8rem 1.5rem;
         font-size: 1rem;

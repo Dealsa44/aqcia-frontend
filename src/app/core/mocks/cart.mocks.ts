@@ -1,3 +1,4 @@
+// core/mocks/cart.mocks.ts
 export const cartMocks = {
   title: ['კალათა', 'Cart', 'Корзина'],
   emptyMessage: ['კალათა ცარიელია', 'Cart is empty', 'Корзина пуста'],
@@ -6,7 +7,8 @@ export const cartMocks = {
   checkout: ['გადახდა', 'Checkout', 'Оплатить'],
   marketLabel: ['მარკეტი:', 'Market:', 'Магазин:'],
   addToCart: ['კალათაში დამატება', 'Add to cart', 'Добавить в корзину'],
-  
+  clearAll: ['ყველას წაშლა', 'Clear All', 'Очистить все'], // Added new label
+
   // New empty state content
   emptyStateTitle: ['შეავსე შენი კალათა!', 'Fill your cart!', 'Заполни корзину!'],
   emptyStateSubtitle: ['აღმოაჩინე საუკეთესო შეთავაზებები და დაამატე პროდუქტები', 'Discover the best deals and add products', 'Откройте лучшие предложения и добавьте товары'],
