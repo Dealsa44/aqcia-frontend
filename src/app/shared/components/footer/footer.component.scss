@@ -1,14 +1,14 @@
-/* Color Palette: Ethereal Gradient */
-/* Primary Base (Deep Blue): #0C2D57 */
-/* Secondary Base (Deep Purple): #4B0082 */
-/* Gradient Start: #185ADB (Vibrant Blue) */
-/* Gradient End: #8A2BE2 (Electric Purple) */
-/* Accent/Text: #E0FFFF (Light Cyan/Aqua) */
+/* Color Palette: Marketing Freshness (Greenish & Carrot) */
+/* Primary Base (Deep Forest Green): #1A5229 */
+/* Secondary Base (Warm Carrot Orange): #E57F3F */
+/* Gradient Start: #4CAF50 (Vibrant Green) */
+/* Gradient End: #FF9800 (Bright Orange) */
+/* Accent/Text: #F0F8FF (Alice Blue - a very light, almost white, blue) */
 /* Subtle Shadow: rgba(0, 0, 0, 0.4) */
 
 .footer {
-  background: linear-gradient(90deg, #0C2D57 0%, #4B0082 100%); /* Deep blue to deep purple base */
-  color: #E0FFFF; /* Light aqua text color */
+  background: linear-gradient(90deg, #1A5229 0%, #E57F3F 100%); /* Deep forest green to warm carrot orange base */
+  color: #F0F8FF; /* Alice Blue text color */
   padding: 3.5rem 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 6px 20px rgba(0, 0, 0, 0.35); /* Inner shadow for depth */
@@ -35,17 +35,17 @@
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 2.5rem;
     padding-bottom: 3rem;
-    border-bottom: 1px solid rgba(224, 255, 255, 0.2); /* Lighter border for separation */
+    border-bottom: 1px solid rgba(240, 248, 255, 0.2); /* Lighter border for separation */
   }
 
   .footer-section {
     h3 {
       font-size: 1.4rem;
-      color: #185ADB; /* Vibrant blue for headings */
+      color: #4CAF50; /* Vibrant green for headings */
       margin-bottom: 1.5rem;
       position: relative;
       padding-bottom: 0.6rem;
-      text-shadow: 0 0 5px rgba(24, 90, 219, 0.3);
+      text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
       animation: slideInLeft 0.8s ease-out;
 
       &::after {
@@ -55,7 +55,7 @@
         bottom: 0;
         width: 60px;
         height: 3px;
-        background: linear-gradient(90deg, #185ADB, #8A2BE2); /* Gradient underline */
+        background: linear-gradient(90deg, #4CAF50, #FF9800); /* Gradient underline */
         transition: width 0.4s ease-in-out;
       }
     }
@@ -78,7 +78,7 @@
         }
 
         a {
-          color: #E0FFFF;
+          color: #F0F8FF;
           text-decoration: none;
           font-size: 1rem;
           transition: all 0.3s ease-in-out;
@@ -93,14 +93,14 @@
             bottom: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, #185ADB, #8A2BE2);
+            background: linear-gradient(90deg, #4CAF50, #FF9800);
             transform: scaleX(0);
             transform-origin: right;
             transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
           }
 
           &:hover {
-            color: #8A2BE2; /* Electric purple on hover */
+            color: #FF9800; /* Bright orange on hover */
             transform: translateX(8px) scale(1.02);
             &::before {
               transform: scaleX(1);
@@ -120,7 +120,7 @@
         display: inline-flex;
         width: 45px;
         height: 45px;
-        background: linear-gradient(45deg, #185ADB, #8A2BE2); /* Gradient background for icons */
+        background: linear-gradient(45deg, #4CAF50, #FF9800); /* Gradient background for icons */
         border-radius: 50%;
         justify-content: center;
         align-items: center;
@@ -136,7 +136,7 @@
         }
 
         &:hover {
-          background: linear-gradient(45deg, #8A2BE2, #185ADB); /* Reverse gradient on hover */
+          background: linear-gradient(45deg, #FF9800, #4CAF50); /* Reverse gradient on hover */
           transform: translateY(-7px) scale(1.15) rotate(10deg);
           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
           img {
@@ -151,7 +151,7 @@
     text-align: center;
     padding-top: 2rem;
     font-size: 0.9rem;
-    color: rgba(224, 255, 255, 0.8); /* Slightly muted for copyright */
+    color: rgba(240, 248, 255, 0.8); /* Slightly muted for copyright */
     letter-spacing: 0.8px;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     animation: slideInUp 1s ease-out;

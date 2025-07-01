@@ -1,23 +1,23 @@
-/* Search Page Color Palette: Refined & Functional */
-/* Overall Page Background: #F8FAFC (Very light, almost off-white) */
+/* Search Page Color Palette: Marketing Greenish & Carrot */
+/* Overall Page Background: #F0F8EC (Very light green-cream) */
 /* Element Base Color: #FFFFFF (Pure white for cards, filters) */
-/* Primary Text: #1E293B (Dark slate blue for headings, product names) */
-/* Secondary Text/Labels: #334155 (Slate gray for descriptions, placeholders) */
-/* Accent Gradient (Buttons/Highlights): linear-gradient(90deg, #6A2C70 0%, #2A4874 100%) (Soft Purple to Soft Blue) */
-/* Secondary Accent Gradient (Hover/Active): linear-gradient(90deg, #4CAF50 0%, #FF5733 100%) (Warm Green to Orange/Red) */
+/* Primary Text: #2E472C (Deep forest green for headings, product names) */
+/* Secondary Text/Labels: #5A6A4E (Muted sage green for descriptions, placeholders) */
+/* Accent Gradient (Buttons/Highlights): linear-gradient(90deg, #4CAF50 0%, #FF9800 100%) (Vibrant Green to Bright Orange) */
+/* Secondary Accent Gradient (Hover/Active): linear-gradient(90deg, #FF9800 0%, #4CAF50 100%) (Bright Orange to Vibrant Green) - Reversed for energetic hover */
 /* Accent Colors: */
-/* - #7B1FA2 (Deep Violet, for stars, price highlights) */
-/* - #4CAF50 (Warm Green, for success/positive elements) */
-/* - #FF5733 (Orange/Red, for strong price emphasis) */
+/* - #E57F3F (Warm Carrot Orange, for stars, price highlights) */
+/* - #4CAF50 (Vibrant Green, for success/positive elements) */
+/* - #FF9800 (Bright Orange, for strong price emphasis) */
 /* Borders/Subtle Details: rgba(0, 0, 0, 0.08) */
 /* Shadows: rgba(0, 0, 0, 0.06) - very light, diffused */
 
 .search-container {
-  background-color: #F8FAFC; /* Consistent light background */
+  background-color: #F0F8EC; /* Consistent light green-cream background */
   padding: 8rem 0 5rem;
   min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #334155;
+  color: #5A6A4E; /* Muted sage green */
 
   .filters {
     max-width: 1200px;
@@ -45,19 +45,19 @@
       border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 8px;
       font-size: 1.1rem;
-      color: #1E293B;
-      background-color: #F8FAFC;
+      color: #2E472C; /* Deep forest green */
+      background-color: #F0F8EC; /* Lighter background for input */
       transition: all 0.3s ease-in-out;
       box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 
       &::placeholder {
-        color: #64748B;
+        color: #8C997C; /* Slightly lighter sage green for placeholder */
       }
 
       &:focus {
         outline: none;
-        border-color: #6A2C70; /* Primary accent color */
-        box-shadow: 0 0 0 3px rgba(106, 44, 112, 0.15); /* Softer focus halo */
+        border-color: #4CAF50; /* Vibrant Green */
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15); /* Softer focus halo */
       }
     }
 
@@ -72,7 +72,7 @@
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 25px;
         background-color: #FFFFFF;
-        color: #334155;
+        color: #5A6A4E; /* Muted sage green */
         font-size: 0.95rem;
         font-weight: 500;
         cursor: pointer;
@@ -80,14 +80,14 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 
         &:hover {
-          border-color: #6A2C70;
-          color: #1E293B;
+          border-color: #4CAF50; /* Vibrant Green */
+          color: #2E472C; /* Deep forest green */
           transform: translateY(-2px);
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
         }
 
         &.active {
-          background: linear-gradient(90deg, #6A2C70 0%, #2A4874 100%); /* Soft purple to soft blue gradient */
+          background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%); /* Vibrant Green to Bright Orange gradient */
           color: #FFFFFF;
           border-color: transparent;
           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
@@ -95,17 +95,17 @@
 
         &.clear {
           background-color: transparent;
-          color: #64748B;
-          border-color: #64748B;
+          color: #8C997C; /* Lighter sage green */
+          border-color: #8C997C;
           &:hover {
-            background-color: #F0F2F5; /* Very light gray on hover */
-            color: #1E293B;
-            border-color: #1E293B;
+            background-color: #F0F8EC; /* Very light green-cream on hover */
+            color: #2E472C; /* Deep forest green */
+            border-color: #2E472C;
           }
           &.active { /* Ensure clear button doesn't look active */
             background: transparent;
-            color: #64748B;
-            border-color: #64748B;
+            color: #8C997C;
+            border-color: #8C997C;
             box-shadow: none;
           }
         }
@@ -172,14 +172,14 @@
         h3 {
           font-size: 1.25rem; /* Slightly smaller for card titles */
           font-weight: 600;
-          color: #1E293B;
+          color: #2E472C; /* Deep forest green */
           margin-bottom: 0.5rem;
           cursor: pointer;
           transition: color 0.2s ease;
           line-height: 1.3;
 
           &:hover {
-            color: #6A2C70; /* Hover color for product name */
+            color: #4CAF50; /* Vibrant Green hover color for product name */
           }
         }
 
@@ -189,25 +189,25 @@
 
           .best-price {
             font-size: 0.95rem;
-            color: #334155;
+            color: #5A6A4E; /* Muted sage green */
             line-height: 1.5;
 
             strong {
               font-size: 1.3rem; /* Larger price amount */
               font-weight: 700;
-              color: #FF5733; /* Orange/red for strong price */
+              color: #FF9800; /* Bright Orange for strong price */
               margin-left: 0.3rem;
             }
             span:last-child { // Market name
                 font-weight: 500;
-                color: #7B1FA2; /* Deep violet for market name */
+                color: #E57F3F; /* Warm Carrot Orange for market name */
             }
           }
         }
 
         .add-to-cart {
           padding: 0.8rem 1.2rem;
-          background: linear-gradient(90deg, #6A2C70 0%, #2A4874 100%);
+          background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%); /* Vibrant Green to Bright Orange */
           color: #FFFFFF;
           border: none;
           border-radius: 25px;
@@ -222,7 +222,7 @@
           &:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-            background: linear-gradient(90deg, #4CAF50 0%, #FF5733 100%);
+            background: linear-gradient(90deg, #FF9800 0%, #4CAF50 100%); /* Reversed gradient on hover */
           }
 
           &:active {
@@ -242,7 +242,7 @@
   .no-results {
     text-align: center;
     font-size: 1.3rem;
-    color: #64748B;
+    color: #8C997C; /* Lighter sage green */
     padding: 3rem 0;
     background-color: #FFFFFF;
     border-radius: 15px;

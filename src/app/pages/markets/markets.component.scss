@@ -1,22 +1,22 @@
-/* Markets Page Color Palette: Sleek & Refined */
-/* Overall Page Background: #F8FAFC (Very light, almost off-white) */
+/* Markets Page Color Palette: Marketing Greenish & Carrot */
+/* Overall Page Background: #F0F8EC (Very light green-cream) */
 /* Element Base Color: #FFFFFF (Pure white for cards, filters) */
-/* Primary Text: #1E293B (Dark slate blue for headings) */
-/* Secondary Text/Labels: #334155 (Slate gray for paragraphs/labels) */
-/* Accent Gradient (Buttons/Highlights): linear-gradient(90deg, #6A2C70 0%, #2A4874 100%) (Soft Purple to Soft Blue) */
-/* Secondary Accent Gradient (Hover/Active): linear-gradient(90deg, #4CAF50 0%, #FF5733 100%) (Warm Green to Orange/Red) */
+/* Primary Text: #2E472C (Deep forest green for headings) */
+/* Secondary Text/Labels: #5A6A4E (Muted sage green for paragraphs/labels) */
+/* Accent Gradient (Buttons/Highlights): linear-gradient(90deg, #4CAF50 0%, #FF9800 100%) (Vibrant Green to Bright Orange) */
+/* Secondary Accent Gradient (Hover/Active): linear-gradient(90deg, #FF9800 0%, #4CAF50 100%) (Bright Orange to Vibrant Green) - Reversed for energetic hover */
 /* Accent Colors: */
-/* - #7B1FA2 (Deep Violet, for stars, subtle highlights) */
-/* - #4CAF50 (Warm Green, for active elements/delivery tags) */
+/* - #E57F3F (Warm Carrot Orange, for stars, subtle highlights) */
+/* - #4CAF50 (Vibrant Green, for active elements/delivery tags) */
 /* Borders/Subtle Details: rgba(0, 0, 0, 0.08) */
 /* Shadows: rgba(0, 0, 0, 0.06) - very light, diffused */
 
 .markets-page {
-  background-color: #F8FAFC; /* Very light, clean background */
+  background-color: #F0F8EC; /* Very light, clean green-cream background */
   padding: 8rem 0 5rem;
   min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #334155;
+  color: #5A6A4E; /* Muted sage green */
   position: relative;
   overflow: hidden;
 
@@ -34,7 +34,7 @@
   h1 {
     font-size: 3rem; /* Slightly smaller for refinement */
     font-weight: 700; /* A bit less 'raw' than 800 */
-    color: #1E293B;
+    color: #2E472C; /* Deep forest green */
     margin-bottom: 0.8rem;
     text-align: center;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow */
@@ -44,7 +44,7 @@
 
   .subtitle {
     font-size: 1.1rem; /* Slightly smaller */
-    color: #334155;
+    color: #5A6A4E; /* Muted sage green */
     margin-bottom: 3.5rem; /* More space below subtitle */
     text-align: center;
     max-width: 600px;
@@ -92,7 +92,7 @@
 
       label {
         font-weight: 500; /* Less bold */
-        color: #334155; /* Softer color */
+        color: #5A6A4E; /* Softer color */
         font-size: 1rem; /* Slightly smaller */
       }
     }
@@ -101,11 +101,11 @@
       padding: 0.7rem 1rem; /* Smaller padding */
       border: 1px solid rgba(0, 0, 0, 0.12);
       border-radius: 6px; /* Slightly sharper corners */
-      background-color: #F8FAFC;
+      background-color: #F0F8EC; /* Light green-cream */
       font-size: 0.95rem; /* Slightly smaller font */
-      color: #334155;
+      color: #5A6A4E; /* Muted sage green */
       appearance: none;
-      background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23334155%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.1L146.2%20204.4%2018.5%2074.5a17.6%2017.6%200%200%200-25.1%2024.5l130.6%20120.7a17.7%2017.7%200%200%200%2025.1%200L287%2094c6.4-5.1%206.4-15.6%200-20.7z%22%2F%3E%3C%2Fsvg%3E'); /* Darker arrow */
+      background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%235A6A4E%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.1L146.2%20204.4%2018.5%2074.5a17.6%2017.6%200%200%200-25.1%2024.5l130.6%20120.7a17.7%2017.7%200%200%200%2025.1%200L287%2094c6.4-5.1%206.4-15.6%200-20.7z%22%2F%3E%3C%2Fsvg%3E'); /* Muted sage green arrow */
       background-repeat: no-repeat;
       background-position: right 0.6rem center; /* Adjusted arrow position */
       background-size: 10px; /* Smaller arrow */
@@ -114,11 +114,11 @@
       box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03); /* Subtle inner shadow */
 
       &:hover {
-        border-color: rgba(123, 31, 162, 0.3); /* Softer hover border */
+        border-color: rgba(76, 175, 80, 0.3); /* Softer green hover border */
       }
       &:focus {
-        border-color: #7B1FA2;
-        box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.15); /* Softer focus shadow */
+        border-color: #4CAF50; /* Vibrant Green */
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15); /* Softer focus shadow */
         outline: none;
       }
     }
@@ -129,14 +129,14 @@
 
       span {
         font-size: 1.3rem; /* Slightly smaller stars */
-        color: #7B1FA2; /* Deep violet for stars */
+        color: #E57F3F; /* Warm Carrot Orange for stars */
         cursor: pointer;
         transition: transform 0.15s ease, color 0.15s ease;
         line-height: 1; /* Better vertical alignment */
 
         &:hover {
           transform: scale(1.1);
-          color: #4CAF50; /* Warm green on hover */
+          color: #FF9800; /* Bright Orange on hover */
         }
       }
     }
@@ -193,7 +193,7 @@
         h2 {
           font-size: 1.6rem; /* Slightly smaller */
           font-weight: 600; /* Less bold than page title */
-          color: #1E293B;
+          color: #2E472C; /* Deep forest green */
           margin-bottom: 0.4rem;
           text-align: left;
           text-shadow: none;
@@ -204,7 +204,7 @@
 
         .address {
           font-size: 0.9rem; /* Slightly smaller */
-          color: #64748B;
+          color: #8C997C; /* Lighter sage green */
           margin-bottom: 0.8rem;
           text-align: left;
         }
@@ -218,13 +218,13 @@
 
           .stars {
             font-size: 1.2rem; /* Slightly smaller stars */
-            color: #7B1FA2;
+            color: #E57F3F; /* Warm Carrot Orange */
           }
 
           .score {
             font-size: 0.95rem; /* Slightly smaller score */
             font-weight: 600;
-            color: #1E293B;
+            color: #2E472C; /* Deep forest green */
           }
         }
 
@@ -253,14 +253,14 @@
           }
 
           .locations {
-            background: linear-gradient(90deg, #7B1FA2 0%, #612781 100%); /* Solid purple look with slight gradient */
+            background: linear-gradient(90deg, #E57F3F 0%, #CC7038 100%); /* Solid carrot orange look with slight gradient */
           }
         }
 
         .view-store {
           margin-top: 1.5rem;
           padding: 0.8rem 1.2rem; /* Smaller button padding */
-          background: linear-gradient(90deg, #6A2C70 0%, #2A4874 100%); /* Soft purple to soft blue gradient */
+          background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%); /* Vibrant Green to Bright Orange gradient */
           color: #FFFFFF;
           border: none;
           border-radius: 25px; /* Smaller radius */
@@ -275,7 +275,7 @@
           &:hover {
             transform: translateY(-2px); /* Lighter lift */
             box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15); /* More prominent shadow on hover */
-            background: linear-gradient(90deg, #4CAF50 0%, #FF5733 100%); /* Transition to warmer gradient on hover */
+            background: linear-gradient(90deg, #FF9800 0%, #4CAF50 100%); /* Transition to warmer gradient on hover */
           }
 
           &:active {

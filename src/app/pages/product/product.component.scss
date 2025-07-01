@@ -1,24 +1,24 @@
-/* Product Page Color Palette: Sleek & Detailed */
-/* Overall Page Background: #F8FAFC (Very light, almost off-white) */
+/* Product Page Color Palette: Marketing Greenish & Carrot */
+/* Overall Page Background: #F0F8EC (Very light green-cream) */
 /* Element Base Color: #FFFFFF (Pure white for containers/cards) */
-/* Primary Text: #1E293B (Dark slate blue for main headings) */
-/* Secondary Text/Labels: #334155 (Slate gray for descriptions, table headers) */
-/* Accent Gradient (Buttons/Highlights): linear-gradient(90deg, #6A2C70 0%, #2A4874 100%) (Soft Purple to Soft Blue) */
-/* Secondary Accent Gradient (Hover/Active): linear-gradient(90deg, #4CAF50 0%, #FF5733 100%) (Warm Green to Orange/Red) */
+/* Primary Text: #2E472C (Deep forest green for main headings) */
+/* Secondary Text/Labels: #5A6A4E (Muted sage green for descriptions, table headers) */
+/* Accent Gradient (Buttons/Highlights): linear-gradient(90deg, #4CAF50 0%, #FF9800 100%) (Vibrant Green to Bright Orange) */
+/* Secondary Accent Gradient (Hover/Active): linear-gradient(90deg, #FF9800 0%, #4CAF50 100%) (Bright Orange to Vibrant Green) - Reversed for energetic hover */
 /* Accent Colors: */
-/* - #7B1FA2 (Deep Violet, for stars, price highlights) */
-/* - #4CAF50 (Warm Green, for success/positive elements) */
-/* - #FF5733 (Orange/Red, for strong price/discount emphasis) */
+/* - #E57F3F (Warm Carrot Orange, for stars, price highlights) */
+/* - #4CAF50 (Vibrant Green, for success/positive elements) */
+/* - #FF9800 (Bright Orange, for strong price/discount emphasis) */
 /* Borders/Subtle Details: rgba(0, 0, 0, 0.08) */
 /* Shadows: rgba(0, 0, 0, 0.06) - very light, diffused */
 /* Table Borders: rgba(0, 0, 0, 0.1) */
 
 .product-page {
-  background-color: #F8FAFC; /* Light background for the whole page */
+  background-color: #F0F8EC; /* Light green-cream background for the whole page */
   padding: 8rem 0 5rem;
   min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #334155;
+  color: #5A6A4E; /* Muted sage green */
   position: relative;
   overflow: hidden;
 
@@ -31,7 +31,7 @@
   .not-found {
     text-align: center;
     font-size: 1.5rem;
-    color: #64748B;
+    color: #8C997C; /* Lighter sage green */
     padding: 5rem 0;
     animation: fadeIn 0.8s ease-out forwards;
   }
@@ -98,7 +98,7 @@
       h1 {
         font-size: 2.5rem;
         font-weight: 700;
-        color: #1E293B;
+        color: #2E472C; /* Deep forest green */
         margin-bottom: 0.8rem;
         text-align: left; /* Override section H1 center */
       }
@@ -106,12 +106,12 @@
       .description {
         font-size: 1rem;
         line-height: 1.6;
-        color: #334155;
+        color: #5A6A4E; /* Muted sage green */
         margin-bottom: 2rem;
       }
 
       .best-price {
-        background-color: #F8FAFC; /* Lighter background for best price block */
+        background-color: #F0F8EC; /* Lighter background for best price block */
         border-radius: 12px;
         padding: 1.5rem;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -121,7 +121,7 @@
 
         h3 {
           font-size: 1.1rem;
-          color: #334155;
+          color: #5A6A4E; /* Muted sage green */
           margin-bottom: 0.5rem;
         }
 
@@ -134,20 +134,20 @@
           .amount {
             font-size: 2.8rem; /* Large and bold for price */
             font-weight: 800;
-            color: #FF5733; /* Eye-catching orange/red */
-            text-shadow: 0 2px 5px rgba(255, 87, 51, 0.2);
+            color: #FF9800; /* Eye-catching Bright Orange */
+            text-shadow: 0 2px 5px rgba(255, 152, 0, 0.2);
           }
 
           .market {
             font-size: 1.2rem;
             font-weight: 600;
-            color: #7B1FA2; /* Deep violet for market name */
+            color: #E57F3F; /* Warm Carrot Orange for market name */
           }
         }
 
         .add-to-cart {
           padding: 1rem 2rem;
-          background: linear-gradient(90deg, #6A2C70 0%, #2A4874 100%); /* Soft purple to soft blue gradient */
+          background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%); /* Vibrant Green to Bright Orange gradient */
           color: #FFFFFF;
           border: none;
           border-radius: 30px;
@@ -162,7 +162,7 @@
           &:hover {
             transform: translateY(-3px) scale(1.01);
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(90deg, #4CAF50 0%, #FF5733 100%); /* Warm green to orange on hover */
+            background: linear-gradient(90deg, #FF9800 0%, #4CAF50 100%); /* Reversed gradient on hover */
           }
 
           &:active {
@@ -191,7 +191,7 @@
       h2 {
         font-size: 1.8rem;
         font-weight: 600;
-        color: #1E293B;
+        color: #2E472C; /* Deep forest green */
         margin-bottom: 1.5rem;
         text-align: left;
       }
@@ -210,7 +210,7 @@
               padding: 0.8rem 0.5rem;
               font-size: 0.95rem;
               font-weight: 600;
-              color: #334155;
+              color: #5A6A4E; /* Muted sage green */
               border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             }
           }
@@ -218,23 +218,23 @@
 
         tbody {
           tr {
-            background-color: #F8FAFC; /* Light background for table rows */
+            background-color: #F0F8EC; /* Light background for table rows */
             border-radius: 8px;
             transition: background-color 0.2s ease, transform 0.2s ease;
 
             &:hover {
-              background-color: #EBF2F7; /* Slightly darker on hover */
+              background-color: #E6F0E0; /* Slightly darker green-cream on hover */
               transform: translateY(-2px);
             }
 
             td {
               padding: 1rem 0.5rem;
               font-size: 0.95rem;
-              color: #334155;
+              color: #5A6A4E; /* Muted sage green */
 
               &:first-child {
                 font-weight: 500;
-                color: #1E293B;
+                color: #2E472C; /* Deep forest green */
                 border-top-left-radius: 8px;
                 border-bottom-left-radius: 8px;
               }
@@ -248,11 +248,11 @@
             &.lowest-price-row {
               background: linear-gradient(90deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
               font-weight: 600;
-              border: 1px solid #4CAF50;
+              border: 1px solid #4CAF50; /* Vibrant Green border */
               td {
-                color: #1E293B;
+                color: #2E472C; /* Deep forest green */
                 &:last-child {
-                  color: #4CAF50; /* Green for final lowest price */
+                  color: #4CAF50; /* Vibrant Green for final lowest price */
                   font-weight: 700;
                 }
               }
@@ -264,7 +264,7 @@
 
     .reviews {
       .review {
-        background-color: #F8FAFC; /* Light background for individual reviews */
+        background-color: #F0F8EC; /* Light background for individual reviews */
         border-radius: 10px;
         padding: 1.2rem;
         margin-bottom: 1.2rem;
@@ -286,16 +286,16 @@
 
           .user {
             font-weight: 600;
-            color: #1E293B;
+            color: #2E472C; /* Deep forest green */
           }
 
           .rating {
-            color: #7B1FA2; /* Deep violet for review stars */
+            color: #E57F3F; /* Warm Carrot Orange for review stars */
             font-weight: 700;
           }
 
           .date {
-            color: #64748B;
+            color: #8C997C; /* Lighter sage green */
             margin-left: auto; /* Push date to the right */
           }
         }
@@ -303,12 +303,12 @@
         .comment {
           font-size: 0.95rem;
           line-height: 1.5;
-          color: #334155;
+          color: #5A6A4E; /* Muted sage green */
         }
       }
       .no-reviews {
         font-style: italic;
-        color: #64748B;
+        color: #8C997C; /* Lighter sage green */
         text-align: center;
         padding: 1rem 0;
       }

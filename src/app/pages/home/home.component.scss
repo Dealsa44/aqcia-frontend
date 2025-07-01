@@ -1,18 +1,18 @@
-/* Refined Color Palette: Aurora Glow (Lighter Version) */
-/* Overall Page/Lightest Background: #F8FAFC */ /* Very light, almost off-white with cool tint */
-/* Section Background 1: #EBF2F7 */ /* A soft, light blue-gray */
-/* Section Background 2: #DCE4ED */ /* A slightly deeper, but still light, blue-gray */
-/* Main Text/Paragraphs: #334155 */ /* Slate Gray - dark and readable */
-/* Heading Text: #1E293B */ /* Darker Slate Blue - for strong headings */
-/* Accent Gradient for elements/buttons: linear-gradient(45deg, #4CAF50, #FF5733) */ /* Warmer tones for pop */
-/* Primary Accent Color (for highlights/underline): #7B1FA2 */ /* Deep Violet - connects to original purple */
-/* Secondary Accent Color (for price/icons): #4CAF50 */ /* A vibrant green, for contrast */
+/* Refined Color Palette: Marketing Greenish & Carrot */
+/* Overall Page/Lightest Background: #F0F8EC */ /* Very light green-cream */
+/* Section Background 1: #E4F0E0 */ /* A soft, light sage green */
+/* Section Background 2: #DAE8D5 */ /* A slightly deeper, but still light, sage green */
+/* Main Text/Paragraphs: #5A6A4E */ /* Muted sage green - readable */
+/* Heading Text: #2E472C */ /* Deep forest green - for strong headings */
+/* Accent Gradient for elements/buttons: linear-gradient(45deg, #4CAF50, #FF9800) */ /* Vibrant Green to Bright Orange */
+/* Primary Accent Color (for highlights/underline): #E57F3F */ /* Warm Carrot Orange */
+/* Secondary Accent Color (for price/icons): #4CAF50 */ /* A vibrant green */
 /* Pure White for highest contrast elements: #FFFFFF */
 
 main {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #334155; /* Darker text for readability on light backgrounds */
-  background-color: #F8FAFC; /* Overall very light background for the page */
+  color: #5A6A4E; /* Muted sage green for readability on light backgrounds */
+  background-color: #F0F8EC; /* Overall very light green-cream background for the page */
 }
 
 .container {
@@ -23,8 +23,8 @@ main {
 
 /* --- Hero Section --- */
 .hero {
-  // Keeping this section with the original strong gradient for visual impact
-  background: linear-gradient(135deg, #0C2D57 0%, #4B0082 100%); /* Deep blue to deep purple gradient */
+  /* Updated: Using colors from the new palette for a cohesive look */
+  background: linear-gradient(135deg, #2E472C 0%, #5A6A4E 100%); /* Deep forest green to muted sage green */
   padding: 8rem 0 6rem;
   text-align: center;
   position: relative;
@@ -38,8 +38,9 @@ main {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at top left, rgba(24, 90, 219, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at bottom right, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+    /* Updated: Radial gradients from the new accent colors */
+    background: radial-gradient(circle at top left, rgba(76, 175, 80, 0.15) 0%, transparent 50%), /* Vibrant Green tint */
+                radial-gradient(circle at bottom right, rgba(229, 127, 63, 0.15) 0%, transparent 50%); /* Warm Carrot Orange tint */
     animation: backgroundPan 20s infinite alternate ease-in-out;
     z-index: 1;
   }
@@ -66,7 +67,7 @@ main {
 
   .subtitle {
     font-size: 1.4rem;
-    color: #E0FFFF; /* Light aqua for subtitle on dark background */
+    color: #F0F8EC; /* Very light green-cream for subtitle on dark background for good contrast */
     margin-bottom: 3rem;
     line-height: 1.6;
     max-width: 800px;
@@ -135,7 +136,7 @@ main {
     }
 
     .search-btn {
-      background: linear-gradient(45deg, #4CAF50, #FF5733); /* Warmer gradient button */
+      background: linear-gradient(45deg, #4CAF50, #FF9800); /* Vibrant Green to Bright Orange */
       color: #FFFFFF;
       border: none;
       padding: 1rem 2rem;
@@ -222,7 +223,7 @@ main {
 /* --- Sections Styling --- */
 section {
   padding: 5rem 0;
-  background-color: #EBF2F7; /* Light blue-gray for general sections */
+  background-color: #E4F0E0; /* Light sage green for general sections */
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -230,11 +231,11 @@ section {
 
   h2 {
     font-size: 2.5rem;
-    color: #1E293B; /* Darker slate blue for section titles */
+    color: #2E472C; /* Deep forest green for section titles */
     margin-bottom: 3rem;
     position: relative;
     display: inline-block;
-    text-shadow: 0 0 5px rgba(30, 41, 59, 0.3);
+    text-shadow: 0 0 5px rgba(46, 71, 44, 0.3); /* Greenish text shadow */
     animation: scaleIn 0.8s ease-out forwards;
     animation-delay: 0.2s;
     opacity: 0;
@@ -247,7 +248,7 @@ section {
       bottom: -10px;
       width: 80px;
       height: 4px;
-      background: linear-gradient(90deg, #7B1FA2, #4CAF50); /* Deep violet to green gradient underline */
+      background: linear-gradient(90deg, #E57F3F, #4CAF50); /* Warm Carrot Orange to Vibrant Green underline */
       border-radius: 2px;
       animation: expandUnderline 1s ease-out forwards;
       animation-delay: 0.4s;
@@ -291,7 +292,7 @@ section {
 
 /* --- Featured Products Section --- */
 .featured {
-  background-color: #F8FAFC; /* Lightest background for alternating section */
+  background-color: #F0F8EC; /* Lightest background for alternating section (green-cream) */
   padding: 6rem 0;
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
 
@@ -336,22 +337,22 @@ section {
 
       h3 {
         font-size: 1.3rem;
-        color: #1E293B; /* Darker heading on light card */
+        color: #2E472C; /* Deep forest green on light card */
         margin-bottom: 0.5rem;
       }
 
       .price {
         font-size: 1.5rem;
         font-weight: 700;
-        color: #FF5733; /* Rosy pink for price - strong contrast */
-        text-shadow: 0 0 3px rgba(255, 87, 51, 0.3);
+        color: #FF9800; /* Bright Orange for price - strong contrast */
+        text-shadow: 0 0 3px rgba(255, 152, 0, 0.3); /* Orange shadow */
       }
 
       &:hover {
         transform: translateY(-10px) scale(1.03);
         box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
-        background: linear-gradient(135deg, #EBF2F7 0%, #DCE4ED 100%); /* Subtle gradient on hover */
-        border-color: rgba(123, 31, 162, 0.2); /* Hint of purple on border */
+        background: linear-gradient(135deg, #E4F0E0 0%, #DAE8D5 100%); /* Subtle sage green gradient on hover */
+        border-color: rgba(76, 175, 80, 0.2); /* Hint of green on border */
         img {
           transform: scale(1.05) rotate(2deg);
         }
@@ -379,7 +380,7 @@ section {
 
 /* --- How It Works Section --- */
 .how-it-works {
-  background-color: #EBF2F7; /* Same as general section background */
+  background-color: #DAE8D5; /* Updated: Slightly deeper light sage green from palette */
   padding: 6rem 0;
 
   .steps {
@@ -411,7 +412,7 @@ section {
       .step-number {
         width: 60px;
         height: 60px;
-        background: linear-gradient(45deg, #7B1FA2, #4CAF50); /* Deep violet to green gradient for numbers */
+        background: linear-gradient(45deg, #E57F3F, #4CAF50); /* Warm Carrot Orange to Vibrant Green gradient for numbers */
         border-radius: 50%;
         display: flex;
         justify-content: center;
@@ -427,15 +428,15 @@ section {
 
       h3 {
         font-size: 1.4rem;
-        color: #1E293B; /* Darker heading on light card */
+        color: #2E472C; /* Deep forest green on light card */
         margin-bottom: 0.5rem;
       }
 
       &:hover {
         transform: translateY(-12px) scale(1.03);
         box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
-        background: linear-gradient(135deg, #EBF2F7 0%, #DCE4ED 100%); /* Subtle gradient on hover */
-        border-color: rgba(123, 31, 162, 0.2);
+        background: linear-gradient(135deg, #E4F0E0 0%, #DAE8D5 100%); /* Subtle sage green gradient on hover */
+        border-color: rgba(76, 175, 80, 0.2); /* Hint of green on border */
 
         .step-number {
           transform: scale(1.1) rotate(5deg);
@@ -466,7 +467,7 @@ section {
 
 /* --- Stores Section --- */
 .stores {
-  background-color: #DCE4ED; /* Slightly deeper light blue-gray for alternating section */
+  background-color: #E4F0E0; /* Updated: Soft, light sage green from palette */
   padding: 6rem 0;
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
 
@@ -509,11 +510,11 @@ section {
       &:hover {
         transform: translateY(-8px) scale(1.05) rotateY(0deg);
         box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
-        background: linear-gradient(135deg, #EBF2F7 0%, #DCE4ED 100%); /* Subtle gradient on hover */
-        border-color: rgba(123, 31, 162, 0.2);
+        background: linear-gradient(135deg, #E4F0E0 0%, #DAE8D5 100%); /* Subtle sage green gradient on hover */
+        border-color: rgba(76, 175, 80, 0.2); /* Hint of green on border */
         img {
           transform: scale(1.1);
-          filter: drop-shadow(0 0 15px rgba(123, 31, 162, 0.5)); /* Purple glow */
+          filter: drop-shadow(0 0 15px rgba(76, 175, 80, 0.5)); /* Green glow */
         }
       }
     }
