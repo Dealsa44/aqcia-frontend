@@ -14,7 +14,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
-  { path: ':lang/home', component: HomeComponent },
+  // { path: ':lang/home', component: HomeComponent },
   { path: ':lang/markets', component: MarketsComponent },
   { path: ':lang/search', component: SearchComponent },
   { path: ':lang/cart', component: CartComponent },
@@ -36,6 +36,6 @@ export const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard],
   },
-  { path: '', redirectTo: '/en/home', pathMatch: 'full' },
-  { path: '**', redirectTo: '/en/home' },
+  { path: '', redirectTo: '/en/search', pathMatch: 'full' },
+  { path: '**', redirectTo: '/en/search' },
 ];
