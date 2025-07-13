@@ -61,10 +61,9 @@
       }
     }
 
-    .category-filters {
+    .category-filter-actions {
       display: flex;
-      flex-wrap: wrap; /* Allow buttons to wrap */
-      gap: 0.8rem; /* Space between buttons */
+      gap: 1rem; /* Space between select categories and clear buttons */
       justify-content: center;
 
       button {
@@ -86,11 +85,16 @@
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
         }
 
-        &.active {
-          background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%); /* Vibrant Green to Bright Orange gradient */
-          color: #FFFFFF;
-          border-color: transparent;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        &.select-categories-button {
+            background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%); /* Vibrant Green to Bright Orange gradient */
+            color: #FFFFFF;
+            border-color: transparent;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            &:hover {
+                background: linear-gradient(90deg, #FF9800 0%, #4CAF50 100%); /* Reversed gradient on hover */
+                transform: translateY(-2px);
+                box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+            }
         }
 
         &.clear {
@@ -101,12 +105,6 @@
             background-color: #F0F8EC; /* Very light green-cream on hover */
             color: #2E472C; /* Deep forest green */
             border-color: #2E472C;
-          }
-          &.active { /* Ensure clear button doesn't look active */
-            background: transparent;
-            color: #8C997C;
-            border-color: #8C997C;
-            box-shadow: none;
           }
         }
       }
@@ -251,6 +249,179 @@
     animation: fadeIn 0.8s ease-out forwards;
   }
 
+  /* Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeInModal 0.3s ease-out;
+
+    @keyframes fadeInModal {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  }
+
+  .modal-content {
+    background-color: #FFFFFF;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    transform: translateY(0);
+    animation: slideInModal 0.3s ease-out;
+
+    @keyframes slideInModal {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    h2 {
+      color: #2E472C;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .category-checkboxes {
+      // Changed to flex column to stack items
+      display: flex;
+      flex-direction: column; // Stack items vertically
+      gap: 0.8rem; // Spacing between items
+      // Removed justify-content: center; as it's not needed for column layout
+      max-height: 300px; /* Limit height for scrollable categories */
+      overflow-y: auto; /* Enable scrolling */
+      padding-right: 10px; /* Space for scrollbar */
+      margin-bottom: 2rem;
+
+      /* Custom scrollbar for Webkit browsers */
+      &::-webkit-scrollbar {
+        width: 8px;
+        border-radius: 4px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(76, 175, 80, 0.4); /* Vibrant Green with transparency */
+        border-radius: 4px;
+      }
+      &::-webkit-scrollbar-track {
+        background-color: rgba(0, 0, 0, 0.05);
+        border-radius: 4px;
+      }
+
+      label {
+        // Ensure each label takes full width and is centered if needed
+        display: flex; // Use flex to center content within the label
+        align-items: center;
+        gap: 0.7rem;
+        font-size: 1.1rem;
+        color: #5A6A4E;
+        cursor: pointer;
+        transition: color 0.2s ease;
+        padding: 0.8rem 1rem; // Adjusted padding for better visual
+        border-radius: 8px; // Less pill-shaped, more rectangular
+        background-color: #F8FCF7; /* Lighter background for checkboxes */
+        border: 1px solid rgba(0, 0, 0, 0.08); // Slightly stronger border
+        width: 100%; // Make it take full width
+        justify-content: flex-start; // Align content to the left
+        // Removed white-space: nowrap; as we want text to wrap if it's too long within the full width.
+        // If you *still* want to prevent text wrapping for extremely long names, add `text-overflow: ellipsis; overflow: hidden;`
+
+        &:hover {
+          color: #2E472C;
+          background-color: #EBF5EB; /* Slightly darker on hover */
+          border-color: #4CAF50; // Green border on hover
+        }
+
+        input[type="checkbox"] {
+          appearance: none;
+          -webkit-appearance: none;
+          width: 22px;
+          height: 22px;
+          border: 2px solid #4CAF50; /* Vibrant Green border */
+          border-radius: 5px;
+          background-color: #FFFFFF;
+          cursor: pointer;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease-in-out;
+          flex-shrink: 0; // Prevent checkbox from shrinking
+
+          &:checked {
+            background-color: #4CAF50; /* Vibrant Green when checked */
+            border-color: #4CAF50;
+
+            &::before {
+              content: '✔'; /* Checkmark icon */
+              font-size: 16px;
+              color: #FFFFFF;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            }
+          }
+
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+          }
+        }
+      }
+    }
+
+    .apply-filters-button {
+      display: block;
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background: linear-gradient(90deg, #FF9800 0%, #4CAF50 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .close-modal-button {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: #8C997C;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      padding: 5px 10px; /* Add padding for easier clicking */
+      line-height: 1; /* Adjust line-height to center 'x' */
+
+      &:hover {
+        color: #2E472C;
+        transform: rotate(90deg); /* Small rotation on hover */
+      }
+    }
+  }
+
   @media (max-width: 768px) {
     padding: 6rem 0 3rem;
 
@@ -264,24 +435,12 @@
         padding: 0.8rem 1rem;
       }
 
-      .category-filters {
-        gap: 0.6rem;
-        justify-content: flex-start; /* Align buttons to left on small screens */
-        overflow-x: auto; /* Enable horizontal scrolling for many buttons */
-        padding-bottom: 5px; /* Space for scrollbar */
-        &::-webkit-scrollbar {
-          height: 5px;
-        }
-        &::-webkit-scrollbar-thumb {
-          background-color: rgba(0,0,0,0.1);
-          border-radius: 5px;
-        }
-        &::-webkit-scrollbar-track {
-          background-color: transparent;
-        }
+      .category-filter-actions {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+        gap: 0.8rem;
 
         button {
-          flex-shrink: 0; /* Prevent buttons from shrinking */
+          width: 100%; /* Make buttons full width */
           padding: 0.7rem 1.2rem;
           font-size: 0.9rem;
         }
@@ -317,6 +476,33 @@
     .no-results {
       font-size: 1.1rem;
       padding: 2rem 1rem;
+    }
+
+    /* Modal adjustments for small screens */
+    .modal-content {
+      padding: 1.5rem;
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .category-checkboxes {
+        // On small screens, keep them as column but adjust padding
+        gap: 0.6rem; // Slightly smaller gap on mobile
+        max-height: 250px;
+        label {
+          padding: 0.6rem 0.8rem;
+          font-size: 0.95rem;
+        }
+      }
+      .apply-filters-button {
+        font-size: 1rem;
+        padding: 0.8rem 1.2rem;
+      }
+      .close-modal-button {
+        font-size: 1.5rem;
+        top: 10px;
+        right: 10px;
+      }
     }
   }
 }

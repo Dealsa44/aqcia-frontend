@@ -2,7 +2,7 @@
   <div class="container">
     <h1>{{ getCurrentText(cartMocks.title) }}</h1>
 
-    @if (cartService.getCartItems().length > 0) {
+    @if (cartService.getTotalItemCount() > 0) {
     <div class="cart-content-wrapper">
       <div class="cart-left-column">
         <div class="cart-items">
@@ -211,7 +211,10 @@
               >
               <span class="market">{{ getLowestPrice(product).market }}</span>
             </div>
-            <button class="add-to-cart-btn" (click)="addToCart(product)">
+            <button
+              class="add-to-cart-btn"
+              (click)="addToCart(product, $event)"
+            >
               {{ getCurrentText(cartMocks.addToCart) }}
             </button>
           </div>

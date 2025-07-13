@@ -69,22 +69,19 @@ export class MarketProductsComponent {
     return items[this.languageService.getCurrentLanguage()];
   }
 
-  addToCart(product: any) {
-    const marketPrice = product.prices.find((p: any) =>
-      p.market.toLowerCase() === this.marketId.toLowerCase()
-    );
+  addToCart(product: any, event?: MouseEvent) {
+  const marketPrice = product.prices.find((p: any) =>
+    p.market.toLowerCase() === this.marketId.toLowerCase()
+  );
 
-    if (marketPrice) {
-      this.cartService.addToCart({
-        id: product.id,
-        name: product.name,
-        price: marketPrice.price - (marketPrice.discount || 0),
-        image: product.image,
-        quantity: 1,
-        market: this.marketId
-      });
-    }
+  if (marketPrice) {
+    this.cartService.addToCartWithAnimation({
+      ...product,
+      price: marketPrice.price - (marketPrice.discount || 0),
+      market: this.marketId
+    }, event);
   }
+}
 
   getMarketPrice(product: any): number {
     const price = product.prices.find((p: any) =>

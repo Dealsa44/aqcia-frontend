@@ -1,0 +1,9 @@
+<div class="animation-wrapper">
+  @for (animation of activeAnimations; track animation.id) {
+    <div class="animation-container" [style.left.px]="animation.startX" [style.top.px]="animation.startY">
+      <img [src]="animation.image" class="flying-product" 
+           [style.--target-x]="animation.deltaX + 'px'" 
+           [style.--target-y]="animation.deltaY + 'px'">
+    </div>
+  }
+</div>

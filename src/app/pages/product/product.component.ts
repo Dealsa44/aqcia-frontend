@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
-import { productsMocks } from '../../core/mocks/products.mocks'; // Assuming this mock exists for product data
+import { productsMocks } from '../../core/mocks/products.mocks';
 import { productMocks } from '../../core/mocks/product.mock';
-import { CartService } from '../../core/services/cart.service'; // Assuming this service exists
+import { CartService } from '../../core/services/cart.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -18,7 +18,7 @@ import { RouterModule } from '@angular/router';
 export class ProductComponent {
   product: any;
   currentImageIndex = 0;
-  productData = productMocks; // Assign productMocks to a property
+  productData = productMocks;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,19 +27,15 @@ export class ProductComponent {
   ) {
     this.route.params.subscribe(params => {
       const productId = +params['id'];
-      // Assuming productsMocks contains an array named 'products'
       this.product = productsMocks.products.find(p => p.id === productId);
     });
   }
 
   getCurrentText(items: string[] | any[]) {
-    // This is a safety check for when product.name or product.description might not be an array
-    // if you have some products defined without multi-language support in productsMocks.
-    // If all product names/descriptions are guaranteed to be arrays, this can be simplified.
     if (Array.isArray(items)) {
         return items[this.languageService.getCurrentLanguage()];
     }
-    return items; // Fallback if it's not an array (e.g., a simple string directly from productsMocks)
+    return items;
   }
 
   getLowestPrice(product: any) {
@@ -51,14 +47,13 @@ export class ProductComponent {
     return { price: minPrice, market: market.market };
   }
 
-  addToCart(product: any) {
-    this.cartService.addToCart({
+  addToCart(product: any, event?: MouseEvent) {
+    this.cartService.addToCartWithAnimation({
       id: product.id,
-      // Ensure that name is the current language string before passing to cart service
-      name: this.getCurrentText(product.name),
+      name: product.name, // Keep as array for language handling
       price: this.getLowestPrice(product).price,
       image: product.image,
       quantity: 1
-    });
+    }, event);
   }
 }

@@ -75,19 +75,21 @@ export class CartComponent {
     return this.suggestedProductsCache;
   }
 
-  addToCart(product: any) {
-    this.cartService.addToCart({
-      id: product.id,
-      name: product.name,
-      price: this.getLowestPrice(product).price,
-      image: product.image,
-      quantity: 1,
-    });
+  addToCart(product: any, event?: MouseEvent) {
+    this.cartService.addToCartWithAnimation(
+      {
+        ...product,
+        price: this.getLowestPrice(product).price,
+      },
+      event
+    );
   }
 
   calculateMarketCombinations() {
     const cartItems = this.cartService.getCartItems();
-    if (cartItems.length === 0) {
+    const totalItemCount = this.cartService.getTotalItemCount();
+
+    if (totalItemCount === 0) {
       this.marketCombinations = []; // Clear combinations if cart is empty
       return;
     }
@@ -123,13 +125,18 @@ export class CartComponent {
           marketStats[marketName] = {
             name: store.name,
             image: store.image,
-            availableProducts,
-            totalProducts: cartItems.length,
-            totalPrice,
-            // Ensure totalProductQuantity is not zero to avoid division by zero
-            avgPrice: totalProductQuantity > 0 ? totalPrice / totalProductQuantity : 0,
+            availableProducts, // Number of distinct products available
+            totalProducts: cartItems.length, // Total distinct products in cart
+            totalPrice, // Sum of (price * quantity) for all items
+            // Calculate average price per item (including quantities)
+            avgPrice:
+              totalProductQuantity > 0 ? totalPrice / totalProductQuantity : 0,
+            // Calculate availability percentage based on distinct products
             availabilityPercentage:
               (availableProducts / cartItems.length) * 100,
+            // Additional metric that considers quantities
+            quantityCoveragePercentage:
+              (totalProductQuantity / totalItemCount) * 100,
           };
         }
       }
@@ -139,15 +146,19 @@ export class CartComponent {
     this.marketCombinations = Object.values(marketStats)
       .map((market: any) => ({
         ...market,
-        // New scoring: Prioritize availability more strongly (e.g., 70% availability, 30% price)
-        // Adjust the weights (0.7 and 0.3) as needed to fine-tune the importance
-        // Lower avgPrice means higher score contribution
+        // Enhanced scoring that considers both availability and price efficiency
         score:
-          market.availabilityPercentage * 0.7 +
-          (market.avgPrice > 0 ? (1 / market.avgPrice) * 1000 : 0) * 0.3, // Add a check for avgPrice > 0
+          market.availabilityPercentage * 0.5 + // Weight for product availability
+          market.quantityCoveragePercentage * 0.3 + // Weight for quantity coverage
+          (market.avgPrice > 0 ? (1 / market.avgPrice) * 1000 : 0) * 0.2, // Weight for price
       }))
       .sort((a: any, b: any) => b.score - a.score)
       .slice(0, 3); // Display top 3 best combinations
+
+    // Add best badge to the first item
+    if (this.marketCombinations.length > 0) {
+      this.marketCombinations[0].isBest = true;
+    }
   }
 
   // New method to toggle the display of all cart items

@@ -1,10 +1,18 @@
 // shared/components/navbar/navbar.component.ts
-import { Component, EventEmitter, Output, HostListener } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  HostListener,
+  OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LanguageService } from '../../../core/services/language.service';
 import { navbarMocks } from '../../../core/mocks/navbar.mocks';
 import { AuthService } from '../../../core/services/auth.service';
+import { CartService } from '../../../core/services/cart.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +21,7 @@ import { AuthService } from '../../../core/services/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnDestroy {
   @Output() cityChanged = new EventEmitter<string>();
 
   navData = navbarMocks;
@@ -22,11 +30,18 @@ export class NavbarComponent {
   isLanguageOpen = false;
   isCityOpen = false;
   isSticky = false;
+  cartItemCount = 0;
+  private cartSubscription: Subscription;
 
   constructor(
     public languageService: LanguageService,
-    public authService: AuthService
-  ) {}
+    public authService: AuthService,
+    public cartService: CartService
+  ) {
+    this.cartSubscription = this.cartService.cart$.subscribe(() => {
+      this.cartItemCount = this.cartService.getTotalItemCount();
+    });
+  }
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
@@ -67,5 +82,8 @@ export class NavbarComponent {
         (this.authService.isLoggedIn() ? 'loggedIn' : 'loggedOut')
       );
     });
+  }
+  ngOnDestroy() {
+    this.cartSubscription.unsubscribe();
   }
 }
