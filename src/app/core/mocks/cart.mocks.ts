@@ -3,7 +3,7 @@ export const cartMocks = {
   emptyMessage: ['კალათა ცარიელია', 'Cart is empty', 'Корзина пуста'],
   total: ['ჯამი', 'Total', 'Итого'],
   remove: ['წაშლა', 'Remove', 'Удалить'],
-  checkout: ['გადახდა', 'Checkout', 'Оплатить'],
+  Completion: ['დასრულება', 'Completion', 'Завершение'],
   marketLabel: ['მარკეტი:', 'Market:', 'Магазин:'],
   addToCart: ['კალათაში დამატება', 'Add to cart', 'Добавить в корзину'],
   clearAll: ['ყველას წაშლა', 'Clear All', 'Очистить все'], // Added new label
@@ -19,7 +19,8 @@ export const cartMocks = {
   // New labels for the collapse/expand feature
   viewMore: ['მეტი ნახვა', 'View More', 'Показать больше'],
   viewLess: ['ნაკლების ნახვა', 'View Less', 'Показать меньше'],
-
+ 
+  viewAllCombinations: ['ყველა კომბინაციის ნახვა', 'View All Combinations', 'Посмотреть все комбинации'],
   bestCombinations: {
     title: ['საუკეთესო კომბინაციები', 'Best Combinations', 'Лучшие комбинации'],
     market: ['მარკეტი', 'Market', 'Магазин'],

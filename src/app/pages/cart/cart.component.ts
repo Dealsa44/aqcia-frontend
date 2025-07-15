@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { productsMocks } from '../../core/mocks/products.mocks';
 import { cartMocks } from '../../core/mocks/cart.mocks';
 import { marketsMocks } from '../../core/mocks/markets.mocks';
+import { combinationsMocks } from '../../core/mocks/combinations.mocks';
 
 @Component({
   selector: 'app-cart',
@@ -15,6 +16,7 @@ import { marketsMocks } from '../../core/mocks/markets.mocks';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent {
+  combinationsMocks = combinationsMocks;
   productsMocks = productsMocks;
   cartMocks = cartMocks;
   marketsMocks = marketsMocks;

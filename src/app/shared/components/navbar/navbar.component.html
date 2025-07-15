@@ -83,7 +83,13 @@
   </div>
 </nav>
 
-<div class="floating-cart" *ngIf="mobileView" (click)="navigateToCart()">
-  <i class="fa fa-{{ navData.cart.icon }}"></i>
-  <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+<div class="floating-cart-wrapper" *ngIf="mobileView">
+  <div class="floating-cart" (click)="navigateToCart()">
+    <span class="floating-cart-text">
+      {{ getCurrentText(navData.cart.goToCartText) }}
+      <span class="floating-cart-price">({{ getTotalPrice() }})</span>
+    </span>
+    <i class="fa fa-{{ navData.cart.icon }}"></i>
+    <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+  </div>
 </div>

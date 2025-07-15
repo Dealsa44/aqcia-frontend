@@ -1,0 +1,62 @@
+<!-- src/app/pages/combinations/combinations.component.html -->
+<div class="combinations-page">
+  <div class="container">
+    <div class="header">
+      <h1>{{ getCurrentText(combinationsMocks.title) }}</h1>
+      <p class="subtitle">{{ getCurrentText(combinationsMocks.subtitle) }}</p>
+      <a 
+        [routerLink]="['/', languageService.getCurrentLanguageCode(), 'cart']" 
+        class="back-btn"
+      >
+        {{ getCurrentText(combinationsMocks.backToCart) }}
+      </a>
+    </div>
+
+    @if (marketCombinations.length > 0) {
+    <div class="combinations-grid">
+      @for (market of marketCombinations; track market.name[0]) {
+      <div class="market-card" [class.best]="market.isBest">
+        <div class="market-header">
+          <img
+            [src]="'assets/imgs/stores/' + market.image"
+            [alt]="getCurrentText(market.name)"
+          />
+          <h4>{{ getCurrentText(market.name) }}</h4>
+          @if (market.isBest) {
+          <span class="best-badge">
+            {{ getCurrentText(combinationsMocks.bestOptionLabel) }}
+          </span>
+          }
+        </div>
+
+        <div class="market-stats">
+          <div class="stat">
+            <span>{{ getCurrentText(combinationsMocks.statsLabels.availability) }}:</span>
+            <strong
+              >{{ market.availableProducts }}/{{ market.totalProducts }}</strong
+            >
+            <span class="percentage"
+              >({{ market.availabilityPercentage.toFixed(0) }}%)</span
+            >
+          </div>
+
+          <div class="stat">
+            <span>{{ getCurrentText(combinationsMocks.statsLabels.price) }}:</span>
+            <strong>{{ market.totalPrice.toFixed(2) }} ₾</strong>
+          </div>
+
+          <div class="stat">
+            <span>{{ getCurrentText(combinationsMocks.statsLabels.coverage) }}:</span>
+            <strong>{{ market.quantityCoveragePercentage.toFixed(0) }}%</strong>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    } @else {
+    <div class="empty-state">
+      <p>{{ getCurrentText(cartMocks.emptyStateSubtitle) }}</p>
+    </div>
+    }
+  </div>
+</div>

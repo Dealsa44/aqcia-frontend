@@ -12,6 +12,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { CombinationsComponent } from './pages/combinations/combinations.component';
+import { EndingComponent } from './pages/ending/ending.component';
 
 export const routes: Routes = [
   // { path: ':lang/home', component: HomeComponent },
@@ -28,9 +30,12 @@ export const routes: Routes = [
     path: ':lang/market-products/:marketId/:categoryId',
     component: MarketProductsComponent,
   },
+  { path: ':lang/combinations', component: CombinationsComponent },
   { path: ':lang/login', component: LoginComponent },
   { path: ':lang/register', component: RegisterComponent },
   { path: ':lang/forgot-password', component: ForgotPasswordComponent },
+  { path: ':lang/ending', component: EndingComponent },
+
   {
     path: ':lang/profile',
     component: ProfileComponent,

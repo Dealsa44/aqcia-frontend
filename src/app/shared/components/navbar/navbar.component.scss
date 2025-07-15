@@ -449,34 +449,57 @@
   }
 }
 
-.floating-cart {
+.floating-cart-wrapper {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(45deg, #4caf50, #ff9800);
-  border-radius: 50%;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   z-index: 999;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.floating-cart {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(45deg, #4caf50, #ff9800);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  white-space: nowrap;
+  gap: 10px;
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
   }
 
-  /* Specific badge styling for the floating cart if needed */
+  .floating-cart-text {
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .floating-cart-price {
+    font-weight: 700;
+  }
+
+  i {
+    font-size: 1.3rem;
+  }
+
   .cart-badge {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: -8px;
+    right: -8px;
     background-color: #ff5252;
     color: white;
     border-radius: 50%;

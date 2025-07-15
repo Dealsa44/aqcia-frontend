@@ -31,6 +31,10 @@ export class CatalogComponent implements OnInit {
   selectedCategories: string[] = []; // New property to store multiple selected categories
   tempSelectedCategories: string[] = []; // Temporary storage for selections in modal
 
+  modalSearchTerm = '';
+  filteredModalCategories: any[] = [];
+  allCategories: any[] = [];
+
   constructor(
     public languageService: LanguageService,
     public cartService: CartService,
@@ -51,6 +55,43 @@ export class CatalogComponent implements OnInit {
           : [params['categories']];
       }
       this.searchProducts(); // Call searchProducts to apply initial filters
+    });
+
+    this.allCategories = this.categories.map((category) => ({
+      ...category,
+      productCount: this.products.filter((p) => p.category === category.id)
+        .length,
+    }));
+
+    this.filteredModalCategories = [...this.allCategories];
+  }
+  filterModalCategories() {
+    const searchTerm = this.modalSearchTerm.toLowerCase().trim();
+
+    if (!searchTerm) {
+      this.filteredModalCategories = [...this.allCategories];
+      return;
+    }
+
+    // Find categories where either:
+    // 1. The category name matches in any language
+    // 2. The category contains products with matching names
+    this.filteredModalCategories = this.allCategories.filter((category) => {
+      // Check category name match
+      const categoryNameMatch = category.name.some((name: string) =>
+        name.toLowerCase().includes(searchTerm)
+      );
+
+      // Check if any product in this category matches
+      const productMatch = this.products.some(
+        (product) =>
+          product.category === category.id &&
+          product.name.some((name: string) =>
+            name.toLowerCase().includes(searchTerm)
+          )
+      );
+
+      return categoryNameMatch || productMatch;
     });
   }
 
@@ -82,12 +123,14 @@ export class CatalogComponent implements OnInit {
   }
 
   addToCart(product: Product, event: MouseEvent) {
-  this.cartService.addToCartWithAnimation(product, event);
-}
+    this.cartService.addToCartWithAnimation(product, event);
+  }
 
   // --- Modal Logic ---
   openCategoryModal() {
-    this.tempSelectedCategories = [...this.selectedCategories]; // Copy current selections to temp
+    this.tempSelectedCategories = [...this.selectedCategories];
+    this.modalSearchTerm = '';
+    this.filteredModalCategories = [...this.allCategories];
     this.showCategoryModal = true;
   }
 
@@ -119,4 +162,28 @@ export class CatalogComponent implements OnInit {
     this.filteredProducts = this.products;
     this.closeCategoryModal(); // Ensure modal is closed if open
   }
+  getCategoryName(categoryId: string): string {
+    const category = this.categories.find((c) => c.id === categoryId);
+    return category ? this.getCurrentText(category.name) : '';
+  }
+
+  removeCategory(categoryId: string): void {
+    this.selectedCategories = this.selectedCategories.filter(
+      (id) => id !== categoryId
+    );
+    this.searchProducts(); // Update the filtered products
+  }
+  getProductsInCategoryCount(categoryId: string): number {
+    if (!this.modalSearchTerm) {
+      return this.products.filter((p) => p.category === categoryId).length;
+    }
+
+    const searchTerm = this.modalSearchTerm.toLowerCase();
+    return this.products.filter(
+      (p) =>
+        p.category === categoryId &&
+        p.name.some((name) => name.toLowerCase().includes(searchTerm))
+    ).length;
+  }
+  
 }

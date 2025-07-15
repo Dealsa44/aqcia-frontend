@@ -1,20 +1,38 @@
 <div class="search-container">
   <div class="filters">
-    <input
-      type="text"
-      [(ngModel)]="searchTerm"
-      (input)="searchProducts()"
-      [placeholder]="getCurrentText(catalogMocks.searchPlaceholder)"
-    />
-
     <div class="category-filter-actions">
-      <button class="select-categories-button" (click)="openCategoryModal()">
+      <button
+        class="select-categories-button main-category-button"
+        (click)="openCategoryModal()"
+      >
         {{ getCurrentText(catalogMocks.selectCategoriesButton) }}
       </button>
       <button class="clear" (click)="clearFilters()">
         {{ getCurrentText(catalogMocks.clearFiltersButton) }}
       </button>
     </div>
+    <div class="selected-categories" *ngIf="selectedCategories.length > 0">
+      <span class="selected-categories-label">
+        {{ getCurrentText(catalogMocks.selectedCategoriesLabel) }}:
+      </span>
+      <div class="category-tags">
+        <span
+          class="category-tag"
+          *ngFor="let categoryId of selectedCategories"
+        >
+          {{ getCategoryName(categoryId) }}
+          <button class="remove-category" (click)="removeCategory(categoryId)">
+            ×
+          </button>
+        </span>
+      </div>
+    </div>
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="searchProducts()"
+      [placeholder]="getCurrentText(catalogMocks.searchPlaceholder)"
+    />
   </div>
 
   <div class="results">
@@ -65,29 +83,50 @@
   </div>
 
   @if (showCategoryModal) {
-  <div class="modal-overlay" (click)="closeCategoryModal()">
-    <div class="modal-content" (click)="$event.stopPropagation()">
-      <h2>{{ getCurrentText(catalogMocks.selectCategoriesButton) }}</h2>
-      <div class="category-checkboxes">
-        @for (category of categories; track category.id) {
-        <label>
-          <input
-            type="checkbox"
-            [value]="category.id"
-            (change)="onCategoryCheckboxChange($event)"
-            [checked]="selectedCategories.includes(category.id)"
-          />
-          {{ getCurrentText(category.name) }}
-        </label>
-        }
-      </div>
-      <button class="apply-filters-button" (click)="applyCategoryFilters()">
-        {{ getCurrentText(catalogMocks.applyFiltersButton) }}
-      </button>
-      <button class="close-modal-button" (click)="closeCategoryModal()">
-        ✖
-      </button>
+ <div class="modal-overlay" (click)="closeCategoryModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>{{ getCurrentText(catalogMocks.selectCategoriesButton) }}</h2>
+
+    <div class="modal-search-container">
+      <input
+        type="text"
+        [(ngModel)]="modalSearchTerm"
+        (input)="filterModalCategories()"
+        [placeholder]="getCurrentText(catalogMocks.modalSearchPlaceholder)"
+        class="modal-search-input"
+      />
     </div>
+    
+    <div class="category-checkboxes">
+      @if (filteredModalCategories.length > 0) {
+        @for (category of filteredModalCategories; track category.id) {
+          <label class="category-item">
+            <input
+              type="checkbox"
+              [value]="category.id"
+              (change)="onCategoryCheckboxChange($event)"
+              [checked]="selectedCategories.includes(category.id)"
+            />
+            {{ getCurrentText(category.name) }}
+            <span class="product-count">
+              ({{ getProductsInCategoryCount(category.id) }})
+            </span>
+          </label>
+        }
+      } @else {
+        <div class="no-results">
+          {{ getCurrentText(catalogMocks.noResultsMessage) }}
+        </div>
+      }
+    </div>
+    
+    <button class="apply-filters-button" (click)="applyCategoryFilters()">
+      {{ getCurrentText(catalogMocks.applyFiltersButton) }}
+    </button>
+    <button class="close-modal-button" (click)="closeCategoryModal()">
+      ✖
+    </button>
   </div>
+</div>
   }
 </div>

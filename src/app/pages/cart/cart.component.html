@@ -67,8 +67,15 @@
             <button class="clear-cart-btn" (click)="cartService.clearCart()">
               {{ getCurrentText(cartMocks.clearAll) }}
             </button>
-            <button class="checkout-btn">
-              {{ getCurrentText(cartMocks.checkout) }}
+            <button
+              class="checkout-btn"
+              [routerLink]="[
+                '/',
+                languageService.getCurrentLanguageCode(),
+                'ending'
+              ]"
+            >
+              {{ getCurrentText(cartMocks.Completion) }}
             </button>
           </div>
         </div>
@@ -79,7 +86,16 @@
         *ngIf="cartService.getCartItems().length > 0"
       >
         <h3>{{ getCurrentText(cartMocks.bestCombinations.title) }}</h3>
-
+        <a
+          [routerLink]="[
+            '/',
+            languageService.getCurrentLanguageCode(),
+            'combinations'
+          ]"
+          class="see-all-btn"
+        >
+          {{ getCurrentText(combinationsMocks.seeAllLabel) }}
+        </a>
         <div class="combinations-grid">
           <div
             *ngFor="let market of marketCombinations"

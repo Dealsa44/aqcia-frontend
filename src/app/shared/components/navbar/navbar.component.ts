@@ -111,4 +111,10 @@ export class NavbarComponent implements OnDestroy {
     this.cartSubscription.unsubscribe();
     this.resizeSubscription?.unsubscribe();
   }
+  getTotalPrice(): string {
+  const total = this.cartService.getTotalPrice();
+  // Format the price based on current language/currency
+  // You might want to adjust this based on your actual currency formatting needs
+  return `${total.toFixed(2)} ₾`; // Using Georgian Lari symbol as example
+}
 }
