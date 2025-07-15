@@ -12,7 +12,9 @@ import { LanguageService } from '../../../core/services/language.service';
 import { navbarMocks } from '../../../core/mocks/navbar.mocks';
 import { AuthService } from '../../../core/services/auth.service';
 import { CartService } from '../../../core/services/cart.service';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -32,15 +34,25 @@ export class NavbarComponent implements OnDestroy {
   isSticky = false;
   cartItemCount = 0;
   private cartSubscription: Subscription;
+  mobileView = window.innerWidth <= 992; // Initialize based on current width
+  private resizeSubscription: Subscription;
 
   constructor(
     public languageService: LanguageService,
     public authService: AuthService,
-    public cartService: CartService
+    public cartService: CartService,
+    public router: Router
   ) {
     this.cartSubscription = this.cartService.cart$.subscribe(() => {
       this.cartItemCount = this.cartService.getTotalItemCount();
     });
+    this.resizeSubscription = fromEvent(window, 'resize')
+      .pipe(
+        debounceTime(100) // Debounce to avoid excessive checks
+      )
+      .subscribe(() => {
+        this.mobileView = window.innerWidth <= 992;
+      });
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -83,7 +95,20 @@ export class NavbarComponent implements OnDestroy {
       );
     });
   }
+
+  get showFloatingCart(): boolean {
+    return this.mobileView;
+  }
+
+  navigateToCart() {
+    this.router.navigate([
+      '/',
+      this.languageService.getCurrentLanguageCode(),
+      'cart',
+    ]);
+  }
   ngOnDestroy() {
     this.cartSubscription.unsubscribe();
+    this.resizeSubscription?.unsubscribe();
   }
 }

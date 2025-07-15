@@ -78,3 +78,7 @@
     </button>
   </div>
 </nav>
+<div class="floating-cart" *ngIf="mobileView" (click)="navigateToCart()">
+  <i class="fa fa-{{ navData.cart.icon }}"></i>
+  <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+</div>

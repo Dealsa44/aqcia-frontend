@@ -16,7 +16,7 @@ interface AnimationInstance {
   selector: 'app-product-animation',
   imports: [CommonModule],
   templateUrl: './product-animation.component.html',
-  styleUrl: './product-animation.component.scss'
+  styleUrl: './product-animation.component.scss',
 })
 export class ProductAnimationComponent implements OnInit, OnDestroy {
   activeAnimations: AnimationInstance[] = [];
@@ -25,11 +25,13 @@ export class ProductAnimationComponent implements OnInit, OnDestroy {
   constructor(private productAnimationService: ProductAnimationService) {}
 
   ngOnInit() {
-    this.subscription = this.productAnimationService.currentAnimation.subscribe(data => {
-      if (data) {
-        this.startAnimation(data.image, data.clickX, data.clickY);
+    this.subscription = this.productAnimationService.currentAnimation.subscribe(
+      (data) => {
+        if (data) {
+          this.startAnimation(data.image, data.clickX, data.clickY);
+        }
       }
-    });
+    );
   }
 
   ngOnDestroy() {
@@ -37,10 +39,14 @@ export class ProductAnimationComponent implements OnInit, OnDestroy {
   }
 
   startAnimation(image: string, startX: number, startY: number) {
-    // Get the position of the cart icon
-    const cartElement = document.querySelector('.cart-link');
+    // Try to get the floating cart first, then fall back to navbar cart
+    let cartElement = document.querySelector('.floating-cart');
+    if (!cartElement) {
+      cartElement = document.querySelector('.cart-link');
+    }
+
     const cartRect = cartElement?.getBoundingClientRect();
-    
+
     if (!cartRect) {
       console.warn('Cart element not found');
       return;
@@ -48,29 +54,32 @@ export class ProductAnimationComponent implements OnInit, OnDestroy {
 
     const endX = cartRect.left + cartRect.width / 2;
     const endY = cartRect.top + cartRect.height / 2;
-    
+
     // Calculate the distance to fly
     const deltaX = endX - startX;
     const deltaY = endY - startY;
-    
+
     // Create a unique animation instance
-    const animationId = `animation-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const animationId = `animation-${Date.now()}-${Math.random()
+      .toString(36)
+      .substr(2, 9)}`;
     const animation: AnimationInstance = {
       id: animationId,
       image,
       startX,
       startY,
       deltaX,
-      deltaY
+      deltaY,
     };
 
     // Add to active animations
     this.activeAnimations.push(animation);
-    
+
     // Remove animation after it completes
-    // Update the setTimeout duration to match the animation duration
-setTimeout(() => {
-  this.activeAnimations = this.activeAnimations.filter(a => a.id !== animationId);
-}, 1000); // Keep this at 1000ms to match the 1s animation
+    setTimeout(() => {
+      this.activeAnimations = this.activeAnimations.filter(
+        (a) => a.id !== animationId
+      );
+    }, 1000);
   }
 }
