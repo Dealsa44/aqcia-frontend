@@ -87,10 +87,12 @@
 .cart-item img {
   width: 90px;
   height: 90px;
-  object-fit: contain;
+  object-fit: cover; /* Changed to match */
   border-radius: 8px;
   flex-shrink: 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  margin: 0;
 }
 
 .cart-item .item-info {
@@ -624,11 +626,13 @@
 .suggested-products .products-grid .suggested-product img {
   width: 100%;
   height: 160px;
-  object-fit: contain;
+  object-fit: cover;
   margin-bottom: 1rem;
   border-radius: 8px;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  margin: 0;
 }
 
 .suggested-products .products-grid .suggested-product .product-info {

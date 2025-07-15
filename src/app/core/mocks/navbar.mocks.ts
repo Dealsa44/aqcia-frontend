@@ -7,8 +7,8 @@ export const navbarMocks = {
       path: 'markets'
     },
     { 
-      titles: ['ძიება', 'Search', 'Поиск'],
-      path: 'search'
+      titles: ['კატალოგი', 'Catalog', 'Каталог'],
+      path: 'catalog'
     },
     { 
       titles: ['შესვლა', 'Login', 'Войти'],

@@ -2,7 +2,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { MarketsComponent } from './pages/markets/markets.component';
-import { SearchComponent } from './pages/search/search.component';
+import { CatalogComponent } from './pages/catalog/catalog.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductComponent } from './pages/product/product.component';
 import { MarketDetailsComponent } from './pages/market-details/market-details.component';
@@ -16,7 +16,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 export const routes: Routes = [
   // { path: ':lang/home', component: HomeComponent },
   { path: ':lang/markets', component: MarketsComponent },
-  { path: ':lang/search', component: SearchComponent },
+  { path: ':lang/catalog', component: CatalogComponent },
   { path: ':lang/cart', component: CartComponent },
   { path: ':lang/product/:id', component: ProductComponent },
   { path: ':lang/market-details/:id', component: MarketDetailsComponent },
@@ -36,6 +36,6 @@ export const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard],
   },
-  { path: '', redirectTo: '/en/search', pathMatch: 'full' },
-  { path: '**', redirectTo: '/en/search' },
+  { path: '', redirectTo: '/en/catalog', pathMatch: 'full' },
+  { path: '**', redirectTo: '/en/catlog' },
 ];

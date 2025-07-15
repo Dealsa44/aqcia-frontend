@@ -1,9 +1,10 @@
-<!-- navbar.component.html -->
 <nav class="navbar" [class.sticky]="isSticky">
   <div class="container">
     <a
-      [routerLink]="['/', languageService.getCurrentLanguageCode(), 'search']"
+      [routerLink]="['/', languageService.getCurrentLanguageCode(), 'catalog']"
       class="logo"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
     >
       {{ getCurrentText(navData.logo) }}
     </a>
@@ -18,6 +19,7 @@
         ]"
         class="nav-link"
         (click)="isMenuOpen = false"
+        routerLinkActive="active-link"
       >
         {{ getCurrentText(item.titles) }}
       </a>
@@ -27,15 +29,17 @@
         [routerLink]="['/', languageService.getCurrentLanguageCode(), 'cart']"
         class="nav-link cart-link"
         (click)="isMenuOpen = false"
+        routerLinkActive="active-link"
       >
         <i class="fa fa-{{ navData.cart.icon }}"></i>
-        <span>{{ getCurrentText(navData.cart.title) }}</span>
-        <span class="cart-badge" *ngIf="cartItemCount > 0">
-          {{ cartItemCount }}
+        <span>
+          {{ getCurrentText(navData.cart.title) }}
+          <span class="cart-badge" *ngIf="cartItemCount > 0">
+            {{ cartItemCount }}
+          </span>
         </span>
       </a>
 
-      <!-- Rest of the dropdowns remain the same -->
       <div class="dropdown" (click)="$event.stopPropagation()">
         <button class="dropdown-toggle" (click)="toggleCity()">
           {{ getCurrentText(currentCity.name) }}
@@ -78,6 +82,7 @@
     </button>
   </div>
 </nav>
+
 <div class="floating-cart" *ngIf="mobileView" (click)="navigateToCart()">
   <i class="fa fa-{{ navData.cart.icon }}"></i>
   <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>

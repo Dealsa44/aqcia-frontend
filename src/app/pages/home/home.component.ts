@@ -31,7 +31,7 @@ export class HomeComponent {
   onSearch() {
     if (this.searchTerm.trim()) {
       this.router.navigate(
-        ['/', this.languageService.getCurrentLanguageCode(), 'search'],
+        ['/', this.languageService.getCurrentLanguageCode(), 'catalog'],
         {
           queryParams: { q: this.searchTerm },
           queryParamsHandling: 'merge',

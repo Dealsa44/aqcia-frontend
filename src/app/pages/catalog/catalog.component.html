@@ -4,15 +4,15 @@
       type="text"
       [(ngModel)]="searchTerm"
       (input)="searchProducts()"
-      [placeholder]="getCurrentText(searchMocks.searchPlaceholder)"
+      [placeholder]="getCurrentText(catalogMocks.searchPlaceholder)"
     />
 
     <div class="category-filter-actions">
       <button class="select-categories-button" (click)="openCategoryModal()">
-        {{ getCurrentText(searchMocks.selectCategoriesButton) }}
+        {{ getCurrentText(catalogMocks.selectCategoriesButton) }}
       </button>
       <button class="clear" (click)="clearFilters()">
-        {{ getCurrentText(searchMocks.clearFiltersButton) }}
+        {{ getCurrentText(catalogMocks.clearFiltersButton) }}
       </button>
     </div>
   </div>
@@ -45,13 +45,13 @@
           </h3>
           <div class="price-info">
             <span class="best-price">
-              {{ getCurrentText(searchMocks.bestPriceLabel) }}
+              {{ getCurrentText(catalogMocks.bestPriceLabel) }}
               <strong>{{ getLowestPrice(product).price.toFixed(2) }} ₾</strong>
               ({{ getLowestPrice(product).market }})
             </span>
           </div>
           <button class="add-to-cart" (click)="addToCart(product, $event)">
-            {{ getCurrentText(searchMocks.addToCartButton) }}
+            {{ getCurrentText(catalogMocks.addToCartButton) }}
           </button>
         </div>
       </div>
@@ -59,7 +59,7 @@
     </div>
     } @else {
     <div class="no-results">
-      {{ getCurrentText(searchMocks.noResultsMessage) }}
+      {{ getCurrentText(catalogMocks.noResultsMessage) }}
     </div>
     }
   </div>
@@ -67,7 +67,7 @@
   @if (showCategoryModal) {
   <div class="modal-overlay" (click)="closeCategoryModal()">
     <div class="modal-content" (click)="$event.stopPropagation()">
-      <h2>{{ getCurrentText(searchMocks.selectCategoriesButton) }}</h2>
+      <h2>{{ getCurrentText(catalogMocks.selectCategoriesButton) }}</h2>
       <div class="category-checkboxes">
         @for (category of categories; track category.id) {
         <label>
@@ -82,7 +82,7 @@
         }
       </div>
       <button class="apply-filters-button" (click)="applyCategoryFilters()">
-        {{ getCurrentText(searchMocks.applyFiltersButton) }}
+        {{ getCurrentText(catalogMocks.applyFiltersButton) }}
       </button>
       <button class="close-modal-button" (click)="closeCategoryModal()">
         ✖

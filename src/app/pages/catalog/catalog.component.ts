@@ -1,9 +1,9 @@
-// pages/search/search.component.ts
+// pages/catalog/catalog.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { productsMocks } from '../../core/mocks/products.mocks';
-import { searchMocks } from '../../core/mocks/search.mocks';
+import { catalogMocks } from '../../core/mocks/catalog.mocks';
 import { CartService } from '../../core/services/cart.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,12 +15,12 @@ import { ProductAnimationService } from '../../core/services/product-animation.s
   selector: 'app-search',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+  templateUrl: './catalog.component.html',
+  styleUrls: ['./catalog.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class CatalogComponent implements OnInit {
   productsMocks = productsMocks;
-  searchMocks = searchMocks;
+  catalogMocks = catalogMocks;
   searchTerm = '';
   // selectedCategory = ''; // No longer needed for single selection
   products: Product[] = productsMocks.products as Product[]; // Explicitly type as Product[]
