@@ -1,11 +1,37 @@
-// src/app/pages/combinations/combinations.component.scss
+/* Color Palette: Inspired by modern delivery apps */
+/* Primary Background: #009FE3 (Vibrant Blue) */
+/* Secondary Accent: #FFC300 (Warm Yellow) */
+/* Text/Icons: #FFFFFF (Pure White) */
+/* Darker Text/Subtle Elements: #A0A0A0 (Light Gray) */
+/* Success/Call to Action: #4CAF50 (Green) */
+/* Danger/Notification: #F44336 (Red) */
+/* General Background (for dropdowns, off-canvas): #1B2B3B (Dark Slate) */
+/* Subtle Border/Separator: rgba(255, 255, 255, 0.1) */
+/* Shadow Color: rgba(0, 0, 0, 0.2) */
+
+/* Define color variables for clarity and easy modification */
+$color-primary-bg: #009FE3;
+$color-secondary-accent: #FFC300;
+$color-text-light: #FFFFFF;
+$color-text-dark: #A0A0A0;
+$color-success: #4CAF50;
+$color-danger: #F44336;
+$color-dark-slate: #1B2B3B;
+$color-border-subtle: rgba(255, 255, 255, 0.1);
+$color-shadow: rgba(0, 0, 0, 0.2);
+$color-hover-secondary: lighten($color-secondary-accent, 5%);
+$color-hover-primary: darken($color-primary-bg, 5%);
+$color-dark-slate-lighten: lighten($color-dark-slate, 3%);
+$color-dark-slate-darken: darken($color-dark-slate, 3%);
+
+
 .combinations-page {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 3rem 0;
   padding-top: 6rem;
-  background-color: #F0F8EC;
+  background-color: #F0F8EC; /* Retained from original for a light page background, but consider if this aligns with "modern delivery app" feel. Perhaps a lighter shade of blue or a pure white? For now, keeping as is.*/
   min-height: calc(100vh - 100px);
-  color: #5A6A4E;
+  color: $color-dark-slate; /* General text color for readability against a light background */
 }
 
 .combinations-page .container {
@@ -21,35 +47,35 @@
 
 .combinations-page .header h1 {
   font-size: 2.2rem;
-  color: #2E472C;
+  color: $color-primary-bg; /* Vibrant Blue for titles */
   margin-bottom: 0.5rem;
-  text-shadow: 0 2px 5px rgba(46, 71, 44, 0.2);
+  text-shadow: 0 2px 5px rgba(0, 159, 227, 0.2); /* Shadow with primary blue tint */
 }
 
 .combinations-page .header .subtitle {
   font-size: 1.1rem;
-  color: #5A6A4E;
+  color: $color-dark-slate; /* Dark Slate for subtitles */
   margin-bottom: 1.5rem;
 }
 
 .combinations-page .back-btn {
   padding: 0.8rem 1.5rem;
   border-radius: 30px;
-  border: 1px solid #4CAF50;
+  border: 1px solid $color-primary-bg; /* Border with Vibrant Blue */
   cursor: pointer;
   font-weight: 600;
   transition: all 0.3s ease-in-out;
   background-color: transparent;
-  color: #4CAF50;
+  color: $color-primary-bg; /* Vibrant Blue text */
   text-decoration: none;
   display: inline-block;
   margin-top: 1rem;
 }
 
 .combinations-page .back-btn:hover {
-  background-color: #4CAF50;
-  color: #FFFFFF;
-  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+  background-color: $color-primary-bg; /* Vibrant Blue on hover */
+  color: $color-text-light; /* Pure White text on hover */
+  box-shadow: 0 5px 15px rgba(0, 159, 227, 0.3); /* Shadow with primary blue tint on hover */
 }
 
 .combinations-page .combinations-grid {
@@ -60,18 +86,19 @@
 }
 
 .combinations-page .market-card {
-  background-color: #DAE8D5;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: $color-dark-slate; /* Dark Slate background */
+  box-shadow: 0 5px 15px $color-shadow; /* Darker shadow */
+  border: 1px solid $color-border-subtle; /* Subtle white border */
   border-radius: 10px;
   padding: 1.5rem;
   transition: all 0.3s ease-in-out;
+  color: $color-text-light; /* Light text for dark card background */
 }
 
 .combinations-page .market-card.best {
-  border: 2px solid #4CAF50;
-  background-color: lighten(#DAE8D5, 2%);
-  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.2);
+  border: 2px solid $color-secondary-accent; /* Warm Yellow border for best option */
+  background-color: $color-dark-slate-lighten; /* Slightly lighter dark slate for best option */
+  box-shadow: 0 8px 20px rgba(255, 195, 0, 0.2); /* Shadow with warm yellow tint */
 }
 
 .combinations-page .market-card .market-header {
@@ -88,21 +115,21 @@
   object-fit: contain;
   margin-bottom: 0.8rem;
   border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  background-color: #FFFFFF;
+  box-shadow: 0 2px 8px $color-shadow; /* Darker shadow */
+  background-color: $color-text-light; /* Pure White background for images */
   padding: 0.5rem;
 }
 
 .combinations-page .market-card .market-header h4 {
   font-size: 1.2rem;
-  color: #2E472C;
+  color: $color-primary-bg; /* Vibrant Blue for market names */
   margin-bottom: 0.5rem;
   text-align: center;
 }
 
 .combinations-page .market-card .market-header .best-badge {
-  background: linear-gradient(45deg, #4CAF50, #E57F3F);
-  color: #FFFFFF;
+  background-color: $color-secondary-accent; /* Warm Yellow */
+  color: $color-dark-slate; /* Dark Slate text for the badge */
   font-size: 0.9rem;
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
@@ -114,9 +141,9 @@
   display: flex;
   justify-content: space-between;
   font-size: 1rem;
-  color: #5A6A4E;
+  color: $color-text-dark; /* Light Gray for stats labels */
   padding: 0.5rem 0;
-  border-top: 1px dotted rgba(0, 0, 0, 0.05);
+  border-top: 1px dotted rgba(255, 255, 255, 0.1); /* Subtle white dotted border */
 }
 
 .combinations-page .market-card .market-stats .stat:first-child {
@@ -124,21 +151,22 @@
 }
 
 .combinations-page .market-card .market-stats .stat strong {
-  color: #2E472C;
+  color: $color-text-light; /* Pure White for strong values */
   font-weight: 700;
 }
 
 .combinations-page .market-card .market-stats .stat .percentage {
-  color: #4CAF50;
+  color: $color-success; /* Green for percentages */
   font-weight: 600;
 }
 
 .combinations-page .empty-state {
   text-align: center;
   padding: 2rem;
-  background-color: #FFFFFF;
+  background-color: $color-dark-slate; /* Dark Slate background for empty state */
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 5px 15px $color-shadow; /* Darker shadow */
+  color: $color-text-light; /* Pure White text for empty state */
 }
 
 @media (max-width: 768px) {

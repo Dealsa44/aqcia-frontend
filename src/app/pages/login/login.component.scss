@@ -1,20 +1,34 @@
-/* Refined Color Palette: Marketing Greenish & Carrot */
-/* Overall Page/Lightest Background: #F0F8EC */ /* Very light green-cream */
-/* Section Background 1: #E4F0E0 */ /* A soft, light sage green */
-/* Section Background 2: #DAE8D5 */ /* A slightly deeper, but still light, sage green */
-/* Main Text/Paragraphs: #5A6A4E */ /* Muted sage green - readable */
-/* Heading Text: #2E472C */ /* Deep forest green - for strong headings */
-/* Accent Gradient for elements/buttons: linear-gradient(45deg, #4CAF50, #FF9800) */ /* Vibrant Green to Bright Orange */
-/* Primary Accent Color (for highlights/underline): #E57F3F */ /* Warm Carrot Orange */
-/* Secondary Accent Color (for price/icons): #4CAF50 */ /* A vibrant green */
-/* Pure White for highest contrast elements: #FFFFFF */
+/* Color Palette: Inspired by modern delivery apps */
+/* Primary Background: #009FE3 (Vibrant Blue) */
+/* Secondary Accent: #FFC300 (Warm Yellow) */
+/* Text/Icons: #FFFFFF (Pure White) */
+/* Darker Text/Subtle Elements: #A0A0A0 (Light Gray) */
+/* Success/Call to Action: #4CAF50 (Green) */
+/* Danger/Notification: #F44336 (Red) */
+/* General Background (for dropdowns, off-canvas): #1B2B3B (Dark Slate) */
+/* Subtle Border/Separator: rgba(255, 255, 255, 0.1) */
+/* Shadow Color: rgba(0, 0, 0, 0.2) */
+
+/* Define color variables for clarity and easy modification */
+$color-primary-bg: #009FE3;
+$color-secondary-accent: #FFC300;
+$color-text-light: #FFFFFF;
+$color-text-dark: #A0A0A0;
+$color-success: #4CAF50;
+$color-danger: #F44336;
+$color-dark-slate: #1B2B3B;
+$color-border-subtle: rgba(255, 255, 255, 0.1);
+$color-shadow: rgba(0, 0, 0, 0.2);
+$color-hover-secondary: lighten($color-secondary-accent, 5%);
+$color-hover-primary: darken($color-primary-bg, 5%);
+$color-dark-slate-lighten: lighten($color-dark-slate, 3%);
+
 
 .login-page {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #F0F8EC; /* Overall very light green-cream background */
   display: flex;
   justify-content: center; /* Center horizontally */
-  align-items: center;   /* Center vertically */
+  align-items: center;    /* Center vertically */
   min-height: 100vh;
   padding: 2rem 1rem;
   box-sizing: border-box;
@@ -34,7 +48,7 @@
   }
 
   &::before {
-    background: #4CAF50; /* Vibrant Green */
+    background: $color-primary-bg; /* Vibrant Blue */
     width: 250px;
     height: 250px;
     top: -50px;
@@ -43,7 +57,7 @@
   }
 
   &::after {
-    background: #E57F3F; /* Warm Carrot Orange */
+    background: $color-secondary-accent; /* Warm Yellow */
     width: 200px;
     height: 200px;
     bottom: -50px;
@@ -59,10 +73,10 @@
 }
 
 .login-card {
-  background-color: #FFFFFF; /* Pure white for the card background */
+  background-color: $color-dark-slate-lighten; /* Slightly lighter Dark Slate for the card background */
   border-radius: 20px;
   padding: 1.5rem 2rem;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05); /* Soft, prominent shadow */
+  box-shadow: 0 15px 40px $color-shadow, 0 0 0 1px $color-border-subtle; /* Soft, prominent shadow */
   text-align: center;
   max-width: 500px; /* Increased from 400px to 500px */
   width: 100%;
@@ -87,11 +101,11 @@
 h1 {
   font-size: 2rem; /* Slightly reduced font size for less vertical space */
   font-weight: 700;
-  color: #2E472C; /* Deep forest green */
+  color: $color-primary-bg; /* Vibrant Blue for headings */
   margin-bottom: 0.6rem; /* Reduced margin */
   position: relative;
   display: inline-block;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 2px 5px rgba(0, 159, 227, 0.1); /* Shadow with primary blue tint */
 
   &::after {
     content: '';
@@ -101,7 +115,7 @@ h1 {
     bottom: -5px; /* Adjusted to fit subtitle spacing */
     width: 45px; /* Slightly shorter underline */
     height: 3px;
-    background: linear-gradient(90deg, #E57F3F, #4CAF50); /* Carrot to Green underline */
+    background: linear-gradient(90deg, $color-secondary-accent, $color-primary-bg); /* Warm Yellow to Vibrant Blue underline */
     border-radius: 1.5px;
     animation: expandUnderline 0.8s ease-out forwards 0.3s;
     opacity: 0;
@@ -121,7 +135,7 @@ h1 {
 
 .subtitle {
   font-size: 0.95rem; /* Slightly reduced font size */
-  color: #5A6A4E; /* Muted sage green */
+  color: $color-text-dark; /* Light Gray for subtitles */
   margin-bottom: 1.2rem; /* Reduced margin */
   line-height: 1.4; /* Reduced line height for compactness */
   animation: slideInText 0.8s ease-out forwards 0.5s;
@@ -171,7 +185,7 @@ form {
 label {
   display: block;
   font-size: 0.85rem; /* Slightly reduced font size */
-  color: #2E472C; /* Deep forest green for labels */
+  color: $color-text-light; /* Pure White for labels */
   margin-bottom: 0.3rem; /* Reduced margin */
   font-weight: 600;
 }
@@ -180,23 +194,23 @@ input[type="text"],
 input[type="password"] {
   width: 100%;
   padding: 0.8rem 1rem; /* Reduced padding */
-  border: 1px solid #DAE8D5; /* Slightly deeper sage green border */
+  border: 1px solid $color-border-subtle; /* Subtle white border */
   border-radius: 10px;
   font-size: 0.9rem; /* Slightly reduced font size */
-  color: #5A6A4E; /* Muted sage green for input text */
-  background-color: #F0F8EC; /* Very light green-cream for input background */
+  color: $color-text-light; /* Pure White for input text */
+  background-color: $color-dark-slate; /* Dark Slate for input background */
   transition: all 0.3s ease;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 
   &:focus {
     outline: none;
-    border-color: #4CAF50; /* Vibrant green on focus */
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2); /* Soft green glow */
-    background-color: #FFFFFF; /* White on focus */
+    border-color: $color-primary-bg; /* Vibrant Blue on focus */
+    box-shadow: 0 0 0 3px rgba(0, 159, 227, 0.2); /* Soft blue glow */
+    background-color: $color-dark-slate-lighten; /* Slightly lighter Dark Slate on focus */
   }
 
   &::placeholder {
-    color: #8C9F81; /* Lighter muted sage green */
+    color: $color-text-dark; /* Light Gray for placeholder */
   }
 }
 
@@ -211,21 +225,21 @@ input[type="password"] {
     -webkit-appearance: none;
     width: 17px; /* Slightly smaller checkbox */
     height: 17px; /* Slightly smaller checkbox */
-    border: 2px solid #DAE8D5;
+    border: 2px solid $color-border-subtle;
     border-radius: 6px;
-    background-color: #E4F0E0;
+    background-color: $color-dark-slate;
     cursor: pointer;
     position: relative;
     transition: all 0.2s ease-in-out;
     flex-shrink: 0;
 
     &:checked {
-      background-color: #4CAF50;
-      border-color: #4CAF50;
+      background-color: $color-primary-bg; /* Vibrant Blue when checked */
+      border-color: $color-primary-bg;
       &::after {
         content: '\2713';
         display: block;
-        color: #FFFFFF;
+        color: $color-text-light; /* Pure White checkmark */
         font-size: 11px; /* Smaller checkmark */
         position: absolute;
         top: 50%;
@@ -236,13 +250,13 @@ input[type="password"] {
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+      box-shadow: 0 0 0 3px rgba(0, 159, 227, 0.3);
     }
   }
 
   label {
     margin-bottom: 0;
-    color: #5A6A4E;
+    color: $color-text-dark; /* Light Gray */
     font-weight: 400;
     cursor: pointer;
     font-size: 0.85rem; /* Reduced font size */
@@ -250,9 +264,9 @@ input[type="password"] {
 }
 
 .error-message {
-  color: #E57F3F;
-  background-color: rgba(229, 127, 63, 0.1);
-  border: 1px solid #E57F3F;
+  color: $color-danger; /* Red for error text */
+  background-color: lighten($color-danger, 30%); /* Lighter red for error background */
+  border: 1px solid $color-danger;
   border-radius: 8px;
   padding: 0.6rem 0.9rem; /* Reduced padding */
   margin-top: 0.7rem; /* Reduced margin */
@@ -266,15 +280,15 @@ input[type="password"] {
 }
 
 button[type="submit"] {
-  background: linear-gradient(45deg, #4CAF50, #FF9800);
-  color: #FFFFFF;
+  background: $color-primary-bg; /* Vibrant Blue */
+  color: $color-text-light; /* Pure White */
   border: none;
   padding: 0.9rem 2rem; /* Reduced padding */
   border-radius: 30px;
   cursor: pointer;
   font-size: 0.95rem; /* Slightly reduced font size */
   font-weight: 700;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 159, 227, 0.2); /* Shadow with primary blue tint */
   transition: all 0.3s ease-in-out;
   letter-spacing: 0.5px;
   position: relative;
@@ -298,7 +312,8 @@ button[type="submit"] {
 
   &:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    background-color: $color-hover-primary; /* Darker blue on hover */
+    box-shadow: 0 12px 25px rgba(0, 159, 227, 0.3);
     &::after {
       left: 100%;
     }
@@ -306,11 +321,12 @@ button[type="submit"] {
 
   &:active {
     transform: translateY(0);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 10px rgba(0, 159, 227, 0.15);
   }
 
   &:disabled {
-    background: #cccccc;
+    background: $color-dark-slate; /* Dark Slate when disabled */
+    color: $color-text-dark; /* Light Gray text for disabled */
     cursor: not-allowed;
     box-shadow: none;
     transform: none;
@@ -334,7 +350,7 @@ button[type="submit"] {
 
 .spinner {
   border: 4px solid rgba(255, 255, 255, 0.3);
-  border-top: 4px solid #FFFFFF;
+  border-top: 4px solid $color-text-light; /* Pure White spinner */
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -361,7 +377,7 @@ button[type="submit"] {
   transform: translateY(10px);
 
   a {
-    color: #5A6A4E;
+    color: $color-primary-bg; /* Vibrant Blue for links */
     text-decoration: none;
     font-weight: 600;
     position: relative;
@@ -375,12 +391,12 @@ button[type="submit"] {
       bottom: 0;
       width: 0;
       height: 2px;
-      background: #E57F3F;
+      background: $color-secondary-accent; /* Warm Yellow underline */
       transition: width 0.3s ease;
     }
 
     &:hover {
-      color: #2E472C;
+      color: $color-hover-primary; /* Darker blue on hover */
       &::after {
         width: 100%;
       }
@@ -388,7 +404,7 @@ button[type="submit"] {
   }
 
   span {
-    color: #DAE8D5;
+    color: $color-border-subtle; /* Subtle white for separator */
   }
 }
 
@@ -406,13 +422,13 @@ button[type="submit"] {
 .social-login {
   margin-top: 1.2rem; /* Reduced margin */
   padding-top: 0.8rem; /* Reduced padding */
-  border-top: 1px solid #E4F0E0;
+  border-top: 1px solid $color-border-subtle;
   animation: fadeIn 0.8s ease-out forwards 1.3s;
   opacity: 0;
 }
 
 .social-login p {
-  color: #5A6A4E;
+  color: $color-text-dark; /* Light Gray */
   margin-bottom: 0.7rem; /* Reduced margin */
   font-size: 0.85rem; /* Slightly reduced font size */
 }
@@ -433,7 +449,7 @@ button[type="submit"] {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px $color-shadow;
 
     img {
       width: 18px; /* Slightly smaller icon */
@@ -442,23 +458,23 @@ button[type="submit"] {
     }
 
     &.google {
-      background-color: #FFFFFF;
-      color: #2E472C;
-      border: 1px solid #DAE8D5;
+      background-color: $color-text-light; /* Pure White */
+      color: $color-dark-slate; /* Dark Slate text */
+      border: 1px solid $color-border-subtle;
 
       &:hover {
-        background-color: #E4F0E0;
+        background-color: lighten($color-text-light, 2%);
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
       }
     }
 
     &.facebook {
-      background-color: #4267B2;
-      color: #FFFFFF;
-      border: 1px solid #4267B2;
+      background-color: #3b5998; /* Standard Facebook Blue */
+      color: $color-text-light; /* Pure White */
+      border: 1px solid #3b5998;
 
       &:hover {
-        background-color: #365899;
+        background-color: darken(#3b5998, 5%);
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
       }
     }

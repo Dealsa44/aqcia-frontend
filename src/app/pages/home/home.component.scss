@@ -1,18 +1,36 @@
-/* Refined Color Palette: Marketing Greenish & Carrot */
-/* Overall Page/Lightest Background: #F0F8EC */ /* Very light green-cream */
-/* Section Background 1: #E4F0E0 */ /* A soft, light sage green */
-/* Section Background 2: #DAE8D5 */ /* A slightly deeper, but still light, sage green */
-/* Main Text/Paragraphs: #5A6A4E */ /* Muted sage green - readable */
-/* Heading Text: #2E472C */ /* Deep forest green - for strong headings */
-/* Accent Gradient for elements/buttons: linear-gradient(45deg, #4CAF50, #FF9800) */ /* Vibrant Green to Bright Orange */
-/* Primary Accent Color (for highlights/underline): #E57F3F */ /* Warm Carrot Orange */
-/* Secondary Accent Color (for price/icons): #4CAF50 */ /* A vibrant green */
-/* Pure White for highest contrast elements: #FFFFFF */
+/* Color Palette: Inspired by modern delivery apps */
+/* Primary Background: #009FE3 (Vibrant Blue) */
+/* Secondary Accent: #FFC300 (Warm Yellow) */
+/* Text/Icons: #FFFFFF (Pure White) */
+/* Darker Text/Subtle Elements: #A0A0A0 (Light Gray) */
+/* Success/Call to Action: #4CAF50 (Green) */
+/* Danger/Notification: #F44336 (Red) */
+/* General Background (for dropdowns, off-canvas): #1B2B3B (Dark Slate) */
+/* Subtle Border/Separator: rgba(255, 255, 255, 0.1) */
+/* Shadow Color: rgba(0, 0, 0, 0.2) */
+
+/* Define color variables for clarity and easy modification */
+$color-primary-bg: #009FE3;
+$color-secondary-accent: #FFC300;
+$color-text-light: #FFFFFF;
+$color-text-dark: #A0A0A0;
+$color-success: #4CAF50;
+$color-danger: #F44336;
+$color-dark-slate: #1B2B3B;
+$color-border-subtle: rgba(255, 255, 255, 0.1);
+$color-shadow: rgba(0, 0, 0, 0.2);
+$color-dark-slate-lighten: lighten($color-dark-slate, 3%);
+$color-gradient-start: #007bff; // A slightly darker blue for gradient
+$color-gradient-end: #0056b3; // Even darker blue for gradient
+$color-section-bg-darker: #152330; // Slightly darker than $color-dark-slate for contrast
+$color-section-bg-lighter: #2a3e52; // Slightly lighter than $color-dark-slate for contrast
+$color-card-bg: #273A4F; // A distinct dark shade for cards
+$color-highlight-gradient: linear-gradient(45deg, #00C6FF, #0072FF); // Blue-ish gradient for highlight
 
 main {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #5A6A4E; /* Muted sage green for readability on light backgrounds */
-  background-color: #F0F8EC; /* Overall very light green-cream background for the page */
+  color: $color-text-light; /* Pure White for general text */
+  background-color: $color-dark-slate; /* Overall Dark Slate background for the page */
 }
 
 .container {
@@ -23,13 +41,12 @@ main {
 
 /* --- Hero Section --- */
 .hero {
-  /* Updated: Using colors from the new palette for a cohesive look */
-  background: linear-gradient(135deg, #2E472C 0%, #5A6A4E 100%); /* Deep forest green to muted sage green */
+  background: linear-gradient(135deg, $color-primary-bg 0%, $color-gradient-end 100%); /* Vibrant Blue to Darker Blue */
   padding: 8rem 0 6rem;
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: inset 0 -10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 -10px 30px rgba(0, 0, 0, 0.5); /* Stronger shadow for depth */
 
   &::before {
     content: '';
@@ -38,9 +55,9 @@ main {
     left: -50%;
     width: 200%;
     height: 200%;
-    /* Updated: Radial gradients from the new accent colors */
-    background: radial-gradient(circle at top left, rgba(76, 175, 80, 0.15) 0%, transparent 50%), /* Vibrant Green tint */
-                radial-gradient(circle at bottom right, rgba(229, 127, 63, 0.15) 0%, transparent 50%); /* Warm Carrot Orange tint */
+    /* Updated: Radial gradients from accent colors for dynamic feel */
+    background: radial-gradient(circle at top left, rgba(0, 159, 227, 0.15) 0%, transparent 50%),
+      /* Vibrant Blue tint */ radial-gradient(circle at bottom right, rgba(255, 195, 0, 0.15) 0%, transparent 50%); /* Warm Yellow tint */
     animation: backgroundPan 20s infinite alternate ease-in-out;
     z-index: 1;
   }
@@ -57,9 +74,9 @@ main {
   h1 {
     font-size: 3.8rem;
     font-weight: 800;
-    color: #FFFFFF; /* Pure white for main title */
+    color: $color-text-light; /* Pure white for main title */
     margin-bottom: 1rem;
-    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.7);
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 255, 255, 0.8);
     animation: textAppear 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
     position: relative;
     z-index: 2;
@@ -67,13 +84,13 @@ main {
 
   .subtitle {
     font-size: 1.4rem;
-    color: #F0F8EC; /* Very light green-cream for subtitle on dark background for good contrast */
+    color: $color-text-light; /* Pure white for subtitle on dark background for good contrast */
     margin-bottom: 3rem;
     line-height: 1.6;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
     animation: textAppear 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards 0.2s;
     opacity: 0;
     transform: translateY(20px);
@@ -102,12 +119,12 @@ main {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.15); /* Slightly more opaque for clarity */
+    background-color: rgba(27, 43, 59, 0.7); /* Dark slate with increased opacity */
     border-radius: 40px;
     padding: 0.5rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px); /* Stronger blur */
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px); /* Stronger blur */
+    border: 1px solid rgba(255, 255, 255, 0.3);
     animation: slideInUpDelayed 1.8s ease-out forwards 0.4s;
     opacity: 0;
     transform: translateY(50px);
@@ -119,32 +136,32 @@ main {
       padding: 1rem 1.5rem;
       border: none;
       background: transparent;
-      color: #FFFFFF;
+      color: $color-text-light;
       font-size: 1.1rem;
       outline: none;
       width: 100%;
 
       &::placeholder {
-        color: rgba(255, 255, 255, 0.8);
+        color: $color-text-dark;
       }
 
       &:focus {
         &::placeholder {
-          color: rgba(255, 255, 255, 0.5);
+          color: rgba(255, 255, 255, 0.6);
         }
       }
     }
 
     .search-btn {
-      background: linear-gradient(45deg, #4CAF50, #FF9800); /* Vibrant Green to Bright Orange */
-      color: #FFFFFF;
+      background: $color-secondary-accent; /* Warm Yellow */
+      color: $color-dark-slate; /* Dark Slate for contrast on button */
       border: none;
       padding: 1rem 2rem;
       border-radius: 30px;
       cursor: pointer;
       font-size: 1.1rem;
       font-weight: 600;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
       transition: all 0.3s ease-in-out;
       letter-spacing: 0.5px;
       position: relative;
@@ -157,7 +174,7 @@ main {
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(255, 255, 255, 0.15); /* Slightly more opaque shimmer */
+        background: rgba(255, 255, 255, 0.2); /* Stronger shimmer */
         transform: scaleX(0);
         transform-origin: left;
         transition: transform 0.3s ease-out;
@@ -165,7 +182,8 @@ main {
 
       &:hover {
         transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        background: lighten($color-secondary-accent, 5%); /* Slightly lighter yellow on hover */
         &::after {
           transform: scaleX(1);
         }
@@ -173,7 +191,7 @@ main {
 
       &:active {
         transform: translateY(0);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
       }
     }
   }
@@ -223,19 +241,19 @@ main {
 /* --- Sections Styling --- */
 section {
   padding: 5rem 0;
-  background-color: #E4F0E0; /* Light sage green for general sections */
+  background-color: $color-section-bg-darker; /* Darker slate for general sections */
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05); /* Very subtle inner shadow for depth */
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.15); /* Stronger inner shadow for depth */
 
   h2 {
     font-size: 2.5rem;
-    color: #2E472C; /* Deep forest green for section titles */
+    color: $color-primary-bg; /* Vibrant Blue for section titles */
     margin-bottom: 3rem;
     position: relative;
     display: inline-block;
-    text-shadow: 0 0 5px rgba(46, 71, 44, 0.3); /* Greenish text shadow */
+    text-shadow: 0 0 5px rgba(0, 159, 227, 0.4); /* Blue-ish text shadow */
     animation: scaleIn 0.8s ease-out forwards;
     animation-delay: 0.2s;
     opacity: 0;
@@ -248,7 +266,7 @@ section {
       bottom: -10px;
       width: 80px;
       height: 4px;
-      background: linear-gradient(90deg, #E57F3F, #4CAF50); /* Warm Carrot Orange to Vibrant Green underline */
+      background: linear-gradient(90deg, $color-secondary-accent, $color-primary-bg); /* Warm Yellow to Vibrant Blue underline */
       border-radius: 2px;
       animation: expandUnderline 1s ease-out forwards;
       animation-delay: 0.4s;
@@ -292,9 +310,9 @@ section {
 
 /* --- Featured Products Section --- */
 .featured {
-  background-color: #F0F8EC; /* Lightest background for alternating section (green-cream) */
+  background-color: $color-dark-slate; /* Dark Slate for alternating section */
   padding: 6rem 0;
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.15);
 
   .products-grid {
     display: grid;
@@ -303,10 +321,10 @@ section {
     margin-top: 3rem;
 
     .product-card {
-      background-color: #FFFFFF; /* Pure white for card background for clean look */
+      background-color: $color-card-bg; /* Distinct dark shade for card background */
       border-radius: 15px;
       padding: 1.5rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Lighter shadow for lighter background */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Stronger shadow */
       transition: all 0.4s ease-in-out;
       overflow: hidden;
       display: flex;
@@ -314,7 +332,7 @@ section {
       align-items: center;
       text-align: center;
       position: relative;
-      border: 1px solid rgba(0, 0, 0, 0.05); /* Very subtle border */
+      border: 1px solid $color-border-subtle;
       animation: popIn 0.8s ease-out forwards;
       opacity: 0;
       transform: scale(0.9);
@@ -331,28 +349,28 @@ section {
         object-fit: contain;
         border-radius: 10px;
         margin-bottom: 1rem;
-        filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+        filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
         transition: transform 0.4s ease-in-out;
       }
 
       h3 {
         font-size: 1.3rem;
-        color: #2E472C; /* Deep forest green on light card */
+        color: $color-text-light; /* Pure White on dark card */
         margin-bottom: 0.5rem;
       }
 
       .price {
         font-size: 1.5rem;
         font-weight: 700;
-        color: #FF9800; /* Bright Orange for price - strong contrast */
-        text-shadow: 0 0 3px rgba(255, 152, 0, 0.3); /* Orange shadow */
+        color: $color-secondary-accent; /* Warm Yellow for price - strong contrast */
+        text-shadow: 0 0 3px rgba(255, 195, 0, 0.4);
       }
 
       &:hover {
         transform: translateY(-10px) scale(1.03);
-        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
-        background: linear-gradient(135deg, #E4F0E0 0%, #DAE8D5 100%); /* Subtle sage green gradient on hover */
-        border-color: rgba(76, 175, 80, 0.2); /* Hint of green on border */
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+        background: linear-gradient(135deg, lighten($color-card-bg, 5%) 0%, lighten($color-card-bg, 10%) 100%); /* Subtle lighter gradient on hover */
+        border-color: $color-primary-bg; /* Hint of blue on border */
         img {
           transform: scale(1.05) rotate(2deg);
         }
@@ -380,7 +398,7 @@ section {
 
 /* --- How It Works Section --- */
 .how-it-works {
-  background-color: #DAE8D5; /* Updated: Slightly deeper light sage green from palette */
+  background-color: $color-section-bg-lighter; /* Slightly lighter dark slate from palette */
   padding: 6rem 0;
 
   .steps {
@@ -391,14 +409,14 @@ section {
     margin-top: 3rem;
 
     .step {
-      background-color: #FFFFFF; /* Pure white for step cards */
+      background-color: $color-card-bg; /* Distinct dark shade for step cards */
       border-radius: 15px;
       padding: 2rem;
       max-width: 300px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       transition: all 0.4s ease-in-out;
       text-align: center;
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      border: 1px solid $color-border-subtle;
       animation: slideInFromBottom 0.9s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
       opacity: 0;
       transform: translateY(50px);
@@ -412,35 +430,35 @@ section {
       .step-number {
         width: 60px;
         height: 60px;
-        background: linear-gradient(45deg, #E57F3F, #4CAF50); /* Warm Carrot Orange to Vibrant Green gradient for numbers */
+        background: $color-secondary-accent; /* Warm Yellow for numbers */
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 2rem;
         font-weight: 700;
-        color: #FFFFFF;
+        color: $color-dark-slate; /* Dark Slate for contrast */
         margin: 0 auto 1.5rem;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        border: 2px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.4);
         transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
       }
 
       h3 {
         font-size: 1.4rem;
-        color: #2E472C; /* Deep forest green on light card */
+        color: $color-text-light; /* Pure White on dark card */
         margin-bottom: 0.5rem;
       }
 
       &:hover {
         transform: translateY(-12px) scale(1.03);
-        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
-        background: linear-gradient(135deg, #E4F0E0 0%, #DAE8D5 100%); /* Subtle sage green gradient on hover */
-        border-color: rgba(76, 175, 80, 0.2); /* Hint of green on border */
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+        background: linear-gradient(135deg, lighten($color-card-bg, 5%) 0%, lighten($color-card-bg, 10%) 100%); /* Subtle lighter gradient on hover */
+        border-color: $color-primary-bg; /* Hint of blue on border */
 
         .step-number {
           transform: scale(1.1) rotate(5deg);
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
       }
     }
@@ -467,9 +485,9 @@ section {
 
 /* --- Stores Section --- */
 .stores {
-  background-color: #E4F0E0; /* Updated: Soft, light sage green from palette */
+  background-color: $color-section-bg-darker; /* Darker slate from palette */
   padding: 6rem 0;
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.15);
 
   .stores-grid {
     display: grid;
@@ -478,17 +496,17 @@ section {
     margin-top: 3rem;
 
     .store-card {
-      background-color: #FFFFFF; /* Pure white for store card */
+      background-color: $color-card-bg; /* Distinct dark shade for store card */
       border-radius: 15px;
       padding: 1rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       transition: all 0.4s ease-in-out;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 120px;
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      border: 1px solid $color-border-subtle;
       animation: fadeInRotate 0.8s ease-out forwards;
       opacity: 0;
       transform: scale(0.8) rotateY(30deg);
@@ -503,18 +521,18 @@ section {
         max-width: 80%;
         max-height: 80px;
         object-fit: contain;
-        filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+        filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
         transition: transform 0.4s ease-in-out, filter 0.4s ease-in-out;
       }
 
       &:hover {
         transform: translateY(-8px) scale(1.05) rotateY(0deg);
-        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
-        background: linear-gradient(135deg, #E4F0E0 0%, #DAE8D5 100%); /* Subtle sage green gradient on hover */
-        border-color: rgba(76, 175, 80, 0.2); /* Hint of green on border */
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+        background: linear-gradient(135deg, lighten($color-card-bg, 5%) 0%, lighten($color-card-bg, 10%) 100%); /* Subtle lighter gradient on hover */
+        border-color: $color-primary-bg; /* Hint of blue on border */
         img {
           transform: scale(1.1);
-          filter: drop-shadow(0 0 15px rgba(76, 175, 80, 0.5)); /* Green glow */
+          filter: drop-shadow(0 0 15px rgba(0, 159, 227, 0.5)); /* Blue glow */
         }
       }
     }

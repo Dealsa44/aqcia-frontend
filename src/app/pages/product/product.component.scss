@@ -1,24 +1,37 @@
-/* Product Page Color Palette: Marketing Greenish & Carrot */
-/* Overall Page Background: #F0F8EC (Very light green-cream) */
-/* Element Base Color: #FFFFFF (Pure white for containers/cards) */
-/* Primary Text: #2E472C (Deep forest green for main headings) */
-/* Secondary Text/Labels: #5A6A4E (Muted sage green for descriptions, table headers) */
-/* Accent Gradient (Buttons/Highlights): linear-gradient(90deg, #4CAF50 0%, #FF9800 100%) (Vibrant Green to Bright Orange) */
-/* Secondary Accent Gradient (Hover/Active): linear-gradient(90deg, #FF9800 0%, #4CAF50 100%) (Bright Orange to Vibrant Green) - Reversed for energetic hover */
-/* Accent Colors: */
-/* - #E57F3F (Warm Carrot Orange, for stars, price highlights) */
-/* - #4CAF50 (Vibrant Green, for success/positive elements) */
-/* - #FF9800 (Bright Orange, for strong price/discount emphasis) */
-/* Borders/Subtle Details: rgba(0, 0, 0, 0.08) */
-/* Shadows: rgba(0, 0, 0, 0.06) - very light, diffused */
-/* Table Borders: rgba(0, 0, 0, 0.1) */
+/* Color Palette: Inspired by modern delivery apps */
+/* Primary Background: #009FE3 (Vibrant Blue) */
+/* Secondary Accent: #FFC300 (Warm Yellow) */
+/* Text/Icons: #FFFFFF (Pure White) */
+/* Darker Text/Subtle Elements: #A0A0A0 (Light Gray) */
+/* Success/Call to Action: #4CAF50 (Green) */
+/* Danger/Notification: #F44336 (Red) */
+/* General Background (for dropdowns, off-canvas): #1B2B3B (Dark Slate) */
+/* Subtle Border/Separator: rgba(255, 255, 255, 0.1) */
+/* Shadow Color: rgba(0, 0, 0, 0.2) */
+
+/* Define color variables for clarity and easy modification */
+$color-primary-bg: #009FE3;
+$color-secondary-accent: #FFC300;
+$color-text-light: #FFFFFF;
+$color-text-dark: #A0A0A0;
+$color-success: #4CAF50;
+$color-danger: #F44336;
+$color-dark-slate: #1B2B3B;
+$color-border-subtle: rgba(255, 255, 255, 0.1);
+$color-shadow: rgba(0, 0, 0, 0.2);
+$color-dark-slate-lighten: lighten($color-dark-slate, 3%);
+$color-gradient-start: #007bff; // A slightly darker blue for gradient
+$color-gradient-end: #0056b3; // Even darker blue for gradient
+$color-table-row-bg: lighten($color-dark-slate, 8%); // Slightly lighter dark slate for table rows
+$color-table-row-hover: lighten($color-dark-slate, 12%); // Even lighter on hover
+$color-review-bg: lighten($color-dark-slate, 5%); // Lighter dark slate for reviews
+$color-review-border: rgba(255, 255, 255, 0.05); // More subtle border for reviews
 
 .product-page {
-  background-color: #F0F8EC; /* Light green-cream background for the whole page */
   padding: 8rem 0 5rem;
   min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #5A6A4E; /* Muted sage green */
+  color: $color-text-light; /* Pure White text */
   position: relative;
   overflow: hidden;
 
@@ -31,22 +44,26 @@
   .not-found {
     text-align: center;
     font-size: 1.5rem;
-    color: #8C997C; /* Lighter sage green */
+    color: $color-text-dark; /* Light Gray */
     padding: 5rem 0;
     animation: fadeIn 0.8s ease-out forwards;
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   .product-details {
     display: flex;
     gap: 3rem; /* Spacing between left and right sections */
-    background-color: #FFFFFF;
+    background-color: $color-dark-slate-lighten; /* Slightly lighter Dark Slate */
     border-radius: 18px;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08); /* More prominent but still diffused shadow */
+    box-shadow: 0 15px 50px $color-shadow; /* More prominent but still diffused shadow */
     padding: 2.5rem;
     align-items: flex-start; /* Align content to the top */
     animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
@@ -54,8 +71,14 @@
     transform: translateY(20px);
 
     @keyframes slideInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .product-left {
@@ -64,7 +87,7 @@
       flex-direction: column;
       align-items: center; /* Center content within the left column */
       padding-right: 1.5rem; /* Space from the divider */
-      border-right: 1px solid rgba(0, 0, 0, 0.05); /* Subtle vertical divider */
+      border-right: 1px solid $color-border-subtle; /* Subtle vertical divider */
     }
 
     .product-image {
@@ -98,7 +121,7 @@
       h1 {
         font-size: 2.5rem;
         font-weight: 700;
-        color: #2E472C; /* Deep forest green */
+        color: $color-primary-bg; /* Vibrant Blue */
         margin-bottom: 0.8rem;
         text-align: left; /* Override section H1 center */
       }
@@ -106,12 +129,12 @@
       .description {
         font-size: 1rem;
         line-height: 1.6;
-        color: #5A6A4E; /* Muted sage green */
+        color: $color-text-dark; /* Light Gray */
         margin-bottom: 2rem;
       }
 
       .best-price {
-        background-color: #F0F8EC; /* Lighter background for best price block */
+        background-color: $color-dark-slate; /* Dark Slate for best price block */
         border-radius: 12px;
         padding: 1.5rem;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -121,7 +144,7 @@
 
         h3 {
           font-size: 1.1rem;
-          color: #5A6A4E; /* Muted sage green */
+          color: $color-text-dark; /* Light Gray */
           margin-bottom: 0.5rem;
         }
 
@@ -134,40 +157,40 @@
           .amount {
             font-size: 2.8rem; /* Large and bold for price */
             font-weight: 800;
-            color: #FF9800; /* Eye-catching Bright Orange */
-            text-shadow: 0 2px 5px rgba(255, 152, 0, 0.2);
+            color: $color-secondary-accent; /* Warm Yellow */
+            text-shadow: 0 2px 5px rgba(255, 195, 0, 0.2);
           }
 
           .market {
             font-size: 1.2rem;
             font-weight: 600;
-            color: #E57F3F; /* Warm Carrot Orange for market name */
+            color: $color-text-dark; /* Light Gray for market name */
           }
         }
 
         .add-to-cart {
           padding: 1rem 2rem;
-          background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%); /* Vibrant Green to Bright Orange gradient */
-          color: #FFFFFF;
+          background: $color-primary-bg; /* Vibrant Blue */
+          color: $color-text-light;
           border: none;
           border-radius: 30px;
           font-size: 1.1rem;
           font-weight: 600;
           cursor: pointer;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 4px 12px rgba(0, 159, 227, 0.15);
           transition: all 0.3s ease-in-out;
           letter-spacing: 0.5px;
           align-self: flex-start; /* Align button to the left */
 
           &:hover {
             transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(90deg, #FF9800 0%, #4CAF50 100%); /* Reversed gradient on hover */
+            box-shadow: 0 6px 18px rgba(0, 159, 227, 0.2);
+            background: linear-gradient(90deg, $color-gradient-start, $color-gradient-end); /* Darker blue gradient on hover */
           }
 
           &:active {
             transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 159, 227, 0.1);
           }
         }
       }
@@ -181,17 +204,18 @@
       padding-left: 1.5rem;
     }
 
-    .price-comparison, .reviews {
-      background-color: #FFFFFF;
+    .price-comparison,
+    .reviews {
+      background-color: $color-dark-slate-lighten; /* Slightly lighter Dark Slate */
       border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+      box-shadow: 0 8px 25px $color-shadow;
       padding: 2rem;
-      border: 1px solid rgba(0, 0, 0, 0.04);
+      border: 1px solid $color-border-subtle;
 
       h2 {
         font-size: 1.8rem;
         font-weight: 600;
-        color: #2E472C; /* Deep forest green */
+        color: $color-primary-bg; /* Vibrant Blue */
         margin-bottom: 1.5rem;
         text-align: left;
       }
@@ -210,31 +234,31 @@
               padding: 0.8rem 0.5rem;
               font-size: 0.95rem;
               font-weight: 600;
-              color: #5A6A4E; /* Muted sage green */
-              border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+              color: $color-text-dark; /* Light Gray */
+              border-bottom: 1px solid $color-border-subtle;
             }
           }
         }
 
         tbody {
           tr {
-            background-color: #F0F8EC; /* Light background for table rows */
+            background-color: $color-table-row-bg; /* Lighter dark slate for table rows */
             border-radius: 8px;
             transition: background-color 0.2s ease, transform 0.2s ease;
 
             &:hover {
-              background-color: #E6F0E0; /* Slightly darker green-cream on hover */
+              background-color: $color-table-row-hover; /* Even lighter on hover */
               transform: translateY(-2px);
             }
 
             td {
               padding: 1rem 0.5rem;
               font-size: 0.95rem;
-              color: #5A6A4E; /* Muted sage green */
+              color: $color-text-light; /* Pure White */
 
               &:first-child {
                 font-weight: 500;
-                color: #2E472C; /* Deep forest green */
+                color: $color-text-light; /* Pure White */
                 border-top-left-radius: 8px;
                 border-bottom-left-radius: 8px;
               }
@@ -246,13 +270,13 @@
 
             // Highlight the lowest price row (example based on final price)
             &.lowest-price-row {
-              background: linear-gradient(90deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+              background: linear-gradient(90deg, rgba(76, 175, 80, 0.2) 0%, rgba(76, 175, 80, 0.1) 100%);
               font-weight: 600;
-              border: 1px solid #4CAF50; /* Vibrant Green border */
+              border: 1px solid $color-success; /* Green border */
               td {
-                color: #2E472C; /* Deep forest green */
+                color: $color-text-light; /* Pure White */
                 &:last-child {
-                  color: #4CAF50; /* Vibrant Green for final lowest price */
+                  color: $color-success; /* Green for final lowest price */
                   font-weight: 700;
                 }
               }
@@ -264,17 +288,17 @@
 
     .reviews {
       .review {
-        background-color: #F0F8EC; /* Light background for individual reviews */
+        background-color: $color-review-bg; /* Lighter dark slate for individual reviews */
         border-radius: 10px;
         padding: 1.2rem;
         margin-bottom: 1.2rem;
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
-        border: 1px solid rgba(0, 0, 0, 0.03);
+        border: 1px solid $color-review-border;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
 
         &:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+          transform: translateY(-3px);
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
         }
 
         .review-header {
@@ -286,16 +310,16 @@
 
           .user {
             font-weight: 600;
-            color: #2E472C; /* Deep forest green */
+            color: $color-text-light; /* Pure White */
           }
 
           .rating {
-            color: #E57F3F; /* Warm Carrot Orange for review stars */
+            color: $color-secondary-accent; /* Warm Yellow for review stars */
             font-weight: 700;
           }
 
           .date {
-            color: #8C997C; /* Lighter sage green */
+            color: $color-text-dark; /* Light Gray */
             margin-left: auto; /* Push date to the right */
           }
         }
@@ -303,12 +327,12 @@
         .comment {
           font-size: 0.95rem;
           line-height: 1.5;
-          color: #5A6A4E; /* Muted sage green */
+          color: $color-text-dark; /* Light Gray */
         }
       }
       .no-reviews {
         font-style: italic;
-        color: #8C997C; /* Lighter sage green */
+        color: $color-text-dark; /* Light Gray */
         text-align: center;
         padding: 1rem 0;
       }
@@ -321,11 +345,12 @@
       gap: 2.5rem;
       padding: 2rem;
 
-      .product-left, .product-right {
+      .product-left,
+      .product-right {
         padding-right: 0;
         padding-left: 0;
         border-right: none; /* Remove vertical divider */
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Add horizontal divider */
+        border-bottom: 1px solid $color-border-subtle; /* Add horizontal divider */
         padding-bottom: 2.5rem;
       }
 
@@ -344,25 +369,26 @@
         text-align: center;
 
         h1 {
-            text-align: center;
+          text-align: center;
         }
 
         .description {
-            text-align: center;
+          text-align: center;
         }
 
         .best-price {
-            align-items: center; /* Center content in best price block */
+          align-items: center; /* Center content in best price block */
         }
 
         .add-to-cart {
-            align-self: center; /* Center button */
+          align-self: center; /* Center button */
         }
       }
 
-      .price-comparison, .reviews {
+      .price-comparison,
+      .reviews {
         h2 {
-            text-align: center;
+          text-align: center;
         }
       }
     }
@@ -408,12 +434,14 @@
         }
       }
 
-      .product-left, .product-right {
+      .product-left,
+      .product-right {
         padding-bottom: 2rem;
         padding-top: 2rem;
       }
 
-      .price-comparison, .reviews {
+      .price-comparison,
+      .reviews {
         padding: 1.5rem;
         h2 {
           font-size: 1.5rem;

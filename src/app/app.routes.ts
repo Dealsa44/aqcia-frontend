@@ -35,6 +35,7 @@ export const routes: Routes = [
   { path: ':lang/register', component: RegisterComponent },
   { path: ':lang/forgot-password', component: ForgotPasswordComponent },
   { path: ':lang/ending', component: EndingComponent },
+  // { path: ':lang/home', component: HomeComponent },
 
   {
     path: ':lang/profile',

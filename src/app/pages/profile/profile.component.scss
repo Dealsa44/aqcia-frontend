@@ -1,10 +1,35 @@
+/* Color Palette: Inspired by modern delivery apps */
+/* Primary Background: #009FE3 (Vibrant Blue) */
+/* Secondary Accent: #FFC300 (Warm Yellow) */
+/* Text/Icons: #FFFFFF (Pure White) */
+/* Darker Text/Subtle Elements: #A0A0A0 (Light Gray) */
+/* Success/Call to Action: #4CAF50 (Green) */
+/* Danger/Notification: #F44336 (Red) */
+/* General Background (for dropdowns, off-canvas): #1B2B3B (Dark Slate) */
+/* Subtle Border/Separator: rgba(255, 255, 255, 0.1) */
+/* Shadow Color: rgba(0, 0, 0, 0.2) */
+
+/* Define color variables for clarity and easy modification */
+$color-primary-bg: #009FE3;
+$color-secondary-accent: #FFC300;
+$color-text-light: #FFFFFF;
+$color-text-dark: #A0A0A0;
+$color-success: #4CAF50;
+$color-danger: #F44336;
+$color-dark-slate: #1B2B3B;
+$color-border-subtle: rgba(255, 255, 255, 0.1);
+$color-shadow: rgba(0, 0, 0, 0.2);
+$color-hover-secondary: lighten($color-secondary-accent, 5%);
+$color-hover-primary: darken($color-primary-bg, 5%);
+$color-dark-slate-lighten: lighten($color-dark-slate, 3%);
+
 /* General Body and Page Structure */
 body {
   font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background-color: #F0F8FF; /* Alice Blue for a soft background */
+  background-color: #FFFFFF; /* Pure White, as per the previous Markets page context */
   margin: 0;
   padding-top: 80px; /* To prevent content from being hidden by the fixed navbar */
-  color: #333;
+  color: $color-dark-slate; /* Dark Slate for general body text */
   line-height: 1.6;
 }
 
@@ -16,12 +41,13 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  margin-top: 4rem;
 }
 
 .profile-card {
-  background-color: #ffffff;
+  background-color: $color-dark-slate; /* Dark Slate background */
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px $color-shadow; /* Updated shadow */
   padding: 2.5rem;
   margin-top: 2rem;
   display: flex;
@@ -31,7 +57,7 @@ body {
 
 .profile-card h1 {
   text-align: center;
-  color: #1A5229; /* Deep Forest Green */
+  color: $color-primary-bg; /* Vibrant Blue */
   font-size: 2.5rem;
   margin-bottom: 2rem;
   font-weight: 700;
@@ -65,21 +91,21 @@ body {
   gap: 1.5rem;
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid $color-border-subtle; /* Subtle border */
 }
 
 .avatar {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #4CAF50, #E57F3F); /* Gradient from green to orange */
+  background-color: $color-primary-bg; /* Vibrant Blue for avatar background */
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 3rem;
-  color: #FFFFFF;
+  color: $color-text-light; /* Pure White text */
   font-weight: bold;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px $color-shadow; /* Updated shadow */
 }
 
 .profile-info {
@@ -88,13 +114,13 @@ body {
 
 .profile-info h2 {
   font-size: 1.8rem;
-  color: #1A5229;
+  color: $color-text-light; /* Pure White */
   margin: 0 0 0.5rem 0;
 }
 
 .profile-info p {
   font-size: 1.1rem;
-  color: #555;
+  color: $color-text-dark; /* Light Gray */
   margin: 0;
 }
 
@@ -115,45 +141,45 @@ body {
 }
 
 .edit-btn {
-  background-color: #E57F3F; /* Warm Carrot Orange */
-  color: #FFFFFF;
+  background-color: $color-secondary-accent; /* Warm Yellow */
+  color: $color-dark-slate; /* Dark Slate text */
   border: none;
-  box-shadow: 0 3px 10px rgba(229, 127, 63, 0.3);
+  box-shadow: 0 3px 10px rgba(255, 195, 0, 0.3);
 }
 
 .edit-btn:hover {
-  background-color: #d67236;
+  background-color: $color-hover-secondary; /* Lighter yellow on hover */
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(229, 127, 63, 0.4);
+  box-shadow: 0 5px 15px rgba(255, 195, 0, 0.4);
 }
 
 .logout-btn {
-  background-color: #DC3545; /* Red for danger */
-  color: #FFFFFF;
+  background-color: $color-danger; /* Red for danger */
+  color: $color-text-light; /* Pure White text */
   border: none;
   margin-top: 2rem;
   width: fit-content;
-  box-shadow: 0 3px 10px rgba(220, 53, 69, 0.2);
+  box-shadow: 0 3px 10px rgba(244, 67, 54, 0.2);
 }
 
 .logout-btn:hover {
-  background-color: #c82333;
+  background-color: darken($color-danger, 5%);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+  box-shadow: 0 5px 15px rgba(244, 67, 54, 0.3);
 }
 
 .view-cart-btn {
-  background: linear-gradient(45deg, #4CAF50, #FF9800); /* Gradient for cart button */
-  color: #FFFFFF;
+  background-color: $color-primary-bg; /* Vibrant Blue for cart button */
+  color: $color-text-light; /* Pure White text */
   border: none;
   width: 100%;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 10px rgba(0, 159, 227, 0.2);
 }
 
 .view-cart-btn:hover {
-  background: linear-gradient(45deg, #FF9800, #4CAF50);
+  background-color: $color-hover-primary; /* Darker blue on hover */
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 159, 227, 0.3);
 }
 
 /* Edit Form */
@@ -172,7 +198,7 @@ body {
 .form-group label {
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #1A5229;
+  color: $color-text-light; /* Pure White */
   font-size: 0.95rem;
 }
 
@@ -180,19 +206,20 @@ body {
 .form-group input[type="email"],
 .form-group input[type="password"] {
   padding: 0.9rem 1.2rem;
-  border: 1px solid #ccc;
+  border: 1px solid $color-border-subtle; /* Subtle border */
   border-radius: 8px;
   font-size: 1rem;
   transition: all 0.3s ease;
-  background-color: #fcfcfc;
+  background-color: $color-dark-slate-lighten; /* Slightly lighter dark slate */
+  color: $color-text-light; /* Pure White text */
 }
 
 .form-group input[type="text"]:focus,
 .form-group input[type="email"]:focus,
 .form-group input[type="password"]:focus {
-  border-color: #4CAF50; /* Vibrant Green on focus */
+  border-color: $color-primary-bg; /* Vibrant Blue on focus */
   outline: none;
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+  box-shadow: 0 0 0 3px rgba(0, 159, 227, 0.2);
 }
 
 .form-actions {
@@ -203,39 +230,40 @@ body {
 }
 
 .save-btn {
-  background: linear-gradient(45deg, #4CAF50, #1A5229); /* Green gradient */
-  color: #FFFFFF;
+  background-color: $color-primary-bg; /* Vibrant Blue */
+  color: $color-text-light; /* Pure White text */
   border: none;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+  box-shadow: 0 3px 10px rgba(0, 159, 227, 0.3);
 }
 
 .save-btn:hover:not(:disabled) {
-  background: linear-gradient(45deg, #1A5229, #4CAF50);
+  background-color: $color-hover-primary; /* Darker blue on hover */
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+  box-shadow: 0 5px 15px rgba(0, 159, 227, 0.4);
 }
 
 .save-btn:disabled {
-  background-color: #cccccc;
+  background-color: $color-dark-slate-lighten; /* Lighter dark slate when disabled */
+  color: $color-text-dark; /* Light gray text for disabled */
   cursor: not-allowed;
   opacity: 0.7;
   box-shadow: none;
 }
 
 .cancel-btn {
-  background-color: #6C757D; /* Grey for cancel */
-  color: #FFFFFF;
+  background-color: $color-text-dark; /* Light Gray for cancel */
+  color: $color-text-light; /* Pure White text */
   border: none;
-  box-shadow: 0 3px 10px rgba(108, 117, 125, 0.2);
+  box-shadow: 0 3px 10px rgba(160, 160, 160, 0.2);
 }
 
 .cancel-btn:hover {
-  background-color: #5a6268;
+  background-color: darken($color-text-dark, 5%);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+  box-shadow: 0 5px 15px rgba(160, 160, 160, 0.3);
 }
 
 /* Spinner for loading state */
@@ -259,9 +287,9 @@ body {
 
 /* Messages */
 .error-message {
-  background-color: #F8D7DA;
-  color: #721C24;
-  border: 1px solid #F5C6CB;
+  background-color: lighten($color-danger, 30%); /* Lighter red for error background */
+  color: darken($color-danger, 15%); /* Darker red for error text */
+  border: 1px solid $color-danger;
   border-radius: 8px;
   padding: 1rem;
   margin-top: 1.5rem;
@@ -270,9 +298,9 @@ body {
 }
 
 .success-message {
-  background-color: #D4EDDA;
-  color: #155724;
-  border: 1px solid #C3E6CB;
+  background-color: lighten($color-success, 30%); /* Lighter green for success background */
+  color: darken($color-success, 15%); /* Darker green for success text */
+  border: 1px solid $color-success;
   border-radius: 8px;
   padding: 1rem;
   margin-top: 1.5rem;
@@ -282,27 +310,27 @@ body {
 
 /* Right Column Sections */
 .section-card {
-  background-color: #F8F9FA; /* Light grey for sections */
+  background-color: $color-dark-slate-lighten; /* Slightly lighter dark slate for sections */
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 15px $color-shadow; /* Updated shadow */
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  border: 1px solid #eee;
+  border: 1px solid $color-border-subtle;
 }
 
 .section-card h3 {
-  color: #1A5229;
+  color: $color-primary-bg; /* Vibrant Blue */
   font-size: 1.5rem;
   margin-top: 0;
   margin-bottom: 0.8rem;
   padding-bottom: 0.8rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid $color-border-subtle;
 }
 
 .section-card p {
-  color: #666;
+  color: $color-text-dark; /* Light Gray */
   font-style: italic;
   text-align: center;
   margin: 0;
@@ -316,11 +344,11 @@ body {
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #333;
+  color: $color-text-light; /* Pure White */
 }
 
 .cart-summary span:last-child {
-  color: #E57F3F; /* Carrot Orange for price */
+  color: $color-secondary-accent; /* Warm Yellow for price */
   font-size: 1.2rem;
 }
 
@@ -335,20 +363,20 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center; /* Ensures vertical alignment */
-  background-color: #ffffff;
+  background-color: $color-dark-slate; /* Dark Slate for list items */
   padding: 0.8rem 1.2rem;
   border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border: 1px solid $color-border-subtle;
   font-size: 0.95rem; /* Base font size */
-  color: #444;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  color: $color-text-light; /* Pure White */
+  box-shadow: 0 2px 8px $color-shadow; /* Updated shadow */
   transition: all 0.2s ease-in-out; /* Smooth hover effect */
 }
 
 .store-item:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: #fcfcfc; /* Slightly lighter background on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+  background-color: lighten($color-dark-slate, 3%); /* Slightly lighter dark slate on hover */
 }
 
 .store-display {
@@ -366,24 +394,47 @@ body {
   object-fit: contain; /* Ensures the entire image is visible without cropping */
   border-radius: 5px; /* Slightly rounded corners for the logo */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  background-color: #FFFFFF; /* Ensures a clean background if image has transparent parts */
+  background-color: $color-text-light; /* Pure White background */
   padding: 3px; /* Small padding inside the border-radius */
 }
 
 .store-item span {
   font-weight: 600; /* Make the store name bolder */
-  color: #1A5229; /* Deep Forest Green for store names */
+  color: $color-text-light; /* Pure White for store names */
   font-size: 1.05rem; /* Slightly larger font for names */
   flex-grow: 1; /* Allow the name to take available space */
 }
 
+.remove-btn {
+  background-color: $color-danger; /* Red for remove button */
+  color: $color-text-light; /* Pure White */
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(244, 67, 54, 0.2);
+  &:hover {
+    background-color: darken($color-danger, 5%);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(244, 67, 54, 0.3);
+  }
+}
+
 /* Recent Searches Section */
 .searches-list {
-  /* Existing styles */
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
 .search-item {
-  /* Existing styles */
+  background-color: $color-dark-slate; /* Dark Slate for search items */
+  color: $color-text-light; /* Pure White */
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  border: 1px solid $color-border-subtle;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 8px $color-shadow;
 }
 
 /* Responsive adjustments */
@@ -483,5 +534,17 @@ body {
 
   .section-card h3 {
     font-size: 1.3rem;
+  }
+
+  .store-item {
+    flex-direction: column; /* Stack store name and remove button */
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .store-item .remove-btn {
+    align-self: flex-end; /* Align remove button to the right */
+    margin-top: 0.5rem;
+    width: fit-content;
   }
 }

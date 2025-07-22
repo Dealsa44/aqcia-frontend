@@ -1,22 +1,35 @@
-/* Market Details Page Color Palette: Marketing Greenish & Carrot */
-/* Overall Page Background: #F0F8EC (Very light green-cream) */
-/* Element Base Color: #FFFFFF (Pure white for cards, filters) */
-/* Primary Text: #2E472C (Deep forest green for headings) */
-/* Secondary Text/Labels: #5A6A4E (Muted sage green for paragraphs/labels) */
-/* Accent Gradient (Buttons/Highlights): linear-gradient(90deg, #4CAF50 0%, #FF9800 100%) (Vibrant Green to Bright Orange) */
-/* Secondary Accent Gradient (Hover/Active): linear-gradient(90deg, #FF9800 0%, #4CAF50 100%) (Bright Orange to Vibrant Green) - Reversed for energetic hover */
-/* Accent Colors: */
-/* - #E57F3F (Warm Carrot Orange, for stars, subtle highlights) */
-/* - #4CAF50 (Vibrant Green, for active elements/delivery tags) */
-/* Borders/Subtle Details: rgba(0, 0, 0, 0.08) */
-/* Shadows: rgba(0, 0, 0, 0.06) - very light, diffused */
+/* Color Palette: Inspired by modern delivery apps */
+/* Primary Background: #009FE3 (Vibrant Blue) */
+/* Secondary Accent: #FFC300 (Warm Yellow) */
+/* Text/Icons: #FFFFFF (Pure White) */
+/* Darker Text/Subtle Elements: #A0A0A0 (Light Gray) */
+/* Success/Call to Action: #4CAF50 (Green) */
+/* Danger/Notification: #F44336 (Red) */
+/* General Background (for dropdowns, off-canvas): #1B2B3B (Dark Slate) */
+/* Subtle Border/Separator: rgba(255, 255, 255, 0.1) */
+/* Shadow Color: rgba(0, 0, 0, 0.2) */
+
+/* Define color variables for clarity and easy modification */
+$color-primary-bg: #009FE3;
+$color-secondary-accent: #FFC300;
+$color-text-light: #FFFFFF;
+$color-text-dark: #A0A0A0;
+$color-success: #4CAF50;
+$color-danger: #F44336;
+$color-dark-slate: #1B2B3B;
+$color-border-subtle: rgba(255, 255, 255, 0.1);
+$color-shadow: rgba(0, 0, 0, 0.2);
+$color-hover-secondary: lighten($color-secondary-accent, 5%);
+$color-hover-primary: darken($color-primary-bg, 5%);
+$color-dark-slate-lighten: lighten($color-dark-slate, 3%); /* For lighter elements on dark background */
+
 
 .market-details-page {
-  background-color: #F0F8EC; /* Overall Page Background - Very light green-cream */
+  background-color: #FFFFFF; /* Pure White background */
   padding: 8rem 0 5rem;
   min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #5A6A4E; /* Muted sage green */
+  color: $color-dark-slate; /* Dark Slate for general text */
 }
 
 .market-details-page .container {
@@ -26,10 +39,10 @@
 }
 
 .market-details-page .market-header {
-  background-color: #FFFFFF; /* Element Base Color */
+  background-color: $color-dark-slate; /* Dark Slate background */
   border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06); /* Shadows */
-  border: 1px solid rgba(0, 0, 0, 0.04); /* Borders/Subtle Details */
+  box-shadow: 0 8px 25px $color-shadow; /* Updated shadow */
+  border: 1px solid $color-border-subtle; /* Subtle border */
   padding: 2.5rem 2rem;
   text-align: center;
   margin-bottom: 3rem;
@@ -44,8 +57,8 @@
     transform: translateY(-20px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
+    opacity: 1;
   }
 }
 
@@ -53,22 +66,22 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  object-fit: cover;
+  object-fit: cover; /* Ensures images cover their area */
   margin-bottom: 1.5rem;
-  border: 5px solid rgba(76, 175, 80, 0.1); /* Light border matching primary accent (green) */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 5px solid rgba(255, 255, 255, 0.1); /* Light border matching subtle elements */
+  box-shadow: 0 4px 15px $color-shadow; /* Updated shadow */
 }
 
 .market-details-page .market-header h1 {
   font-size: 2.8rem;
   font-weight: 700;
-  color: #2E472C; /* Primary Text - Deep forest green */
+  color: $color-primary-bg; /* Vibrant Blue for headings */
   margin-bottom: 0.8rem;
 }
 
 .market-details-page .market-header .description {
   font-size: 1.1rem;
-  color: #5A6A4E; /* Secondary Text - Muted sage green */
+  color: $color-text-dark; /* Light Gray for description */
   max-width: 800px;
   margin: 0 auto 1.5rem;
   line-height: 1.6;
@@ -80,7 +93,7 @@
   justify-content: center;
   gap: 0.5rem;
   font-size: 1.2rem;
-  color: #E57F3F; /* Warm Carrot Orange for stars */
+  color: $color-secondary-accent; /* Warm Yellow for stars */
 }
 
 .market-details-page .market-header .rating .stars {
@@ -90,15 +103,39 @@
 
 .market-details-page .market-header .rating .score {
   font-weight: 600;
-  color: #2E472C; /* Primary Text - Deep forest green */
+  color: $color-text-light; /* Pure White for score */
+}
+
+.favorite-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  background-color: $color-secondary-accent; /* Warm Yellow */
+  color: $color-dark-slate; /* Dark Slate text */
+  border: none;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease-in-out;
+  margin: 1rem auto;
+  display: block;
+
+  &:hover {
+    background-color: $color-hover-secondary; /* Lighter yellow on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+  }
 }
 
 /* Sections Styling */
 .market-details-page section {
-  background-color: #FFFFFF;
+  background-color: $color-dark-slate; /* Dark Slate background */
   border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 25px $color-shadow; /* Updated shadow */
+  border: 1px solid $color-border-subtle; /* Subtle border */
   padding: 2.5rem;
   margin-bottom: 3rem;
   animation: fadeInUp 0.8s ease-out forwards;
@@ -125,7 +162,7 @@
 .market-details-page section h2 {
   font-size: 2rem;
   font-weight: 600;
-  color: #2E472C; /* Deep forest green */
+  color: $color-primary-bg; /* Vibrant Blue */
   margin-bottom: 2rem;
   text-align: center;
   position: relative;
@@ -136,7 +173,7 @@
   display: block;
   width: 60px;
   height: 4px;
-  background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%); /* Accent Gradient - Green to Orange */
+  background-color: $color-primary-bg; /* Vibrant Blue line */
   margin: 0.8rem auto 0;
   border-radius: 2px;
 }
@@ -154,18 +191,18 @@
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  background-color: #F0F8EC; /* Lighter background for cards within sections (green-cream) */
+  background-color: $color-dark-slate-lighten; /* Slightly lighter dark slate for cards */
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px $color-shadow; /* Updated shadow */
   transition: all 0.3s ease;
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  border: 1px solid $color-border-subtle;
 }
 
 .market-details-page .category-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  background-color: #E8F0E4; /* Slightly darker green-cream on hover */
+  box-shadow: 0 8px 25px $color-shadow; /* Stronger shadow on hover */
+  background-color: lighten($color-dark-slate, 5%); /* Even lighter dark slate on hover */
 }
 
 .market-details-page .category-card img {
@@ -178,7 +215,7 @@
 .market-details-page .category-card h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #2E472C; /* Deep forest green */
+  color: $color-text-light; /* Pure White */
   text-align: center;
   margin: 0;
 }
@@ -188,8 +225,8 @@
   width: fit-content;
   margin: 0 auto;
   padding: 0.9rem 2rem;
-  background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%); /* Primary Accent Gradient - Green to Orange */
-  color: #FFFFFF;
+  background-color: $color-primary-bg; /* Vibrant Blue */
+  color: $color-text-light; /* Pure White text */
   border: none;
   border-radius: 25px;
   font-size: 1rem;
@@ -204,7 +241,7 @@
 .market-details-page .view-all:hover {
   transform: translateY(-3px);
   box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(90deg, #FF9800 0%, #4CAF50 100%); /* Secondary Accent Gradient - Orange to Green */
+  background-color: $color-hover-primary; /* Darker blue on hover */
 }
 
 /* Featured Products Section (reusing product card styles) */
@@ -215,33 +252,33 @@
 }
 
 .market-details-page .product-card {
-  background-color: #F0F8EC; /* Lighter background for cards within sections (green-cream) */
+  background-color: $color-dark-slate-lighten; /* Slightly lighter dark slate for cards */
   border-radius: 15px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 20px $color-shadow; /* Updated shadow */
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  border: 1px solid $color-border-subtle;
   transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
 }
 
 .market-details-page .product-card:hover {
   transform: translateY(-5px) scale(1.01);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); /* Stronger shadow on hover */
 }
 
 .market-details-page .product-card img {
   width: 100%;
   height: 160px;
-  object-fit: cover;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-  filter: brightness(0.99);
+  object-fit: cover; /* Ensures images cover their area */
+  border-bottom: 1px solid $color-border-subtle;
+  filter: brightness(0.9); /* Slightly dimmer for contrast */
 }
 
 .market-details-page .product-card h3 {
   font-size: 1.15rem;
   font-weight: 600;
-  color: #2E472C; /* Deep forest green */
+  color: $color-text-light; /* Pure White */
   margin: 1rem 1.2rem 0.5rem;
   line-height: 1.3;
 }
@@ -249,7 +286,7 @@
 .market-details-page .product-card .price {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #FF9800; /* Bright Orange for price */
+  color: $color-secondary-accent; /* Warm Yellow for price */
   margin: 0 1.2rem 1rem;
   display: flex;
   align-items: center;
@@ -258,8 +295,8 @@
 }
 
 .market-details-page .product-card .price .discount {
-  background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%); /* Vibrant Green to Bright Orange */
-  color: #FFFFFF;
+  background-color: $color-success; /* Green for discount tag */
+  color: $color-text-light; /* Pure White */
   padding: 0.2rem 0.6rem;
   border-radius: 5px;
   font-size: 0.8rem;
@@ -269,8 +306,8 @@
 
 .market-details-page .product-card .add-to-cart {
   padding: 0.7rem 1.2rem;
-  background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%); /* Vibrant Green to Bright Orange gradient */
-  color: #FFFFFF;
+  background-color: $color-secondary-accent; /* Warm Yellow */
+  color: $color-dark-slate; /* Dark Slate text */
   border: none;
   border-radius: 25px;
   font-size: 0.9rem;
@@ -287,7 +324,7 @@
 .market-details-page .product-card .add-to-cart:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(90deg, #FF9800 0%, #4CAF50 100%); /* Reversed gradient on hover */
+  background-color: $color-hover-secondary; /* Lighter yellow on hover */
 }
 
 /* Pricing Info Section */
@@ -299,16 +336,16 @@
 }
 
 .market-details-page .pricing-info .stat {
-  background-color: #F0F8EC; /* Green-cream */
+  background-color: $color-dark-slate-lighten; /* Slightly lighter dark slate */
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 15px $color-shadow; /* Updated shadow */
+  border: 1px solid $color-border-subtle;
 }
 
 .market-details-page .pricing-info .stat h3 {
   font-size: 1.05rem;
-  color: #5A6A4E; /* Muted sage green */
+  color: $color-text-dark; /* Light Gray */
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
@@ -316,7 +353,7 @@
 .market-details-page .pricing-info .stat .value {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #E57F3F; /* Warm Carrot Orange */
+  color: $color-secondary-accent; /* Warm Yellow */
 }
 
 /* Reviews Section */
@@ -326,11 +363,11 @@
   justify-content: center;
   gap: 0.8rem;
   margin-bottom: 2rem;
-  background-color: #F0F8EC; /* Green-cream */
+  background-color: $color-dark-slate-lighten; /* Slightly lighter dark slate */
   border-radius: 12px;
   padding: 1.2rem 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 15px $color-shadow; /* Updated shadow */
+  border: 1px solid $color-border-subtle;
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
@@ -338,19 +375,19 @@
 
 .market-details-page .reviews .overall-rating .stars {
   font-size: 2rem;
-  color: #E57F3F; /* Warm Carrot Orange */
+  color: $color-secondary-accent; /* Warm Yellow */
   letter-spacing: 2px;
 }
 
 .market-details-page .reviews .overall-rating .score {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #2E472C; /* Deep forest green */
+  color: $color-text-light; /* Pure White */
 }
 
 .market-details-page .reviews .overall-rating .label {
   font-size: 1rem;
-  color: #5A6A4E; /* Muted sage green */
+  color: $color-text-dark; /* Light Gray */
 }
 
 .market-details-page .reviews .add-review {
@@ -358,8 +395,8 @@
   width: fit-content;
   margin: 2rem auto 0;
   padding: 0.9rem 2rem;
-  background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%); /* Primary Accent Gradient - Green to Orange */
-  color: #FFFFFF;
+  background-color: $color-primary-bg; /* Vibrant Blue */
+  color: $color-text-light; /* Pure White text */
   border: none;
   border-radius: 25px;
   font-size: 1rem;
@@ -373,10 +410,11 @@
 .market-details-page .reviews .add-review:hover {
   transform: translateY(-3px);
   box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(90deg, #FF9800 0%, #4CAF50 100%); /* Secondary Accent Gradient - Orange to Green */
+  background-color: $color-hover-primary; /* Darker blue on hover */
 }
 
-/* Media Queries for Responsiveness */
+
+
 @media (max-width: 768px) {
   .market-details-page {
     padding: 6rem 0 3rem;
@@ -409,6 +447,11 @@
 
   .market-details-page .market-header .rating .stars {
     font-size: 1.4rem;
+  }
+
+  .favorite-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
   }
 
   .market-details-page section {
@@ -503,28 +546,5 @@
   .market-details-page .reviews .add-review {
     padding: 0.7rem 1.5rem;
     font-size: 0.9rem;
-  }
-}// pages/market-details/market-details.component.scss
-.favorite-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.2rem;
-  background: linear-gradient(90deg, #4CAF50 0%, #FF9800 100%);
-  color: #FFFFFF;
-  border: none;
-  border-radius: 30px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.25s ease-in-out;
-  margin: 1rem auto;
-  display: block;
-
-  &:hover {
-    background: linear-gradient(90deg, #FF9800 0%, #4CAF50 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
   }
 }

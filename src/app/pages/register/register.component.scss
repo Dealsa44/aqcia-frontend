@@ -1,17 +1,30 @@
-/* Refined Color Palette: Marketing Greenish & Carrot */
-/* Overall Page/Lightest Background: #F0F8EC */ /* Very light green-cream */
-/* Section Background 1: #E4F0E0 */ /* A soft, light sage green */
-/* Section Background 2: #DAE8D5 */ /* A slightly deeper, but still light, sage green */
-/* Main Text/Paragraphs: #5A6A4E */ /* Muted sage green - readable */
-/* Heading Text: #2E472C */ /* Deep forest green - for strong headings */
-/* Accent Gradient for elements/buttons: linear-gradient(45deg, #4CAF50, #FF9800) */ /* Vibrant Green to Bright Orange */
-/* Primary Accent Color (for highlights/underline): #E57F3F */ /* Warm Carrot Orange */
-/* Secondary Accent Color (for price/icons): #4CAF50 */ /* A vibrant green */
-/* Pure White for highest contrast elements: #FFFFFF */
+/* Color Palette: Inspired by modern delivery apps */
+/* Primary Background: #009FE3 (Vibrant Blue) */
+/* Secondary Accent: #FFC300 (Warm Yellow) */
+/* Text/Icons: #FFFFFF (Pure White) */
+/* Darker Text/Subtle Elements: #A0A0A0 (Light Gray) */
+/* Success/Call to Action: #4CAF50 (Green) */
+/* Danger/Notification: #F44336 (Red) */
+/* General Background (for dropdowns, off-canvas): #1B2B3B (Dark Slate) */
+/* Subtle Border/Separator: rgba(255, 255, 255, 0.1) */
+/* Shadow Color: rgba(0, 0, 0, 0.2) */
+
+/* Define color variables for clarity and easy modification */
+$color-primary-bg: #009FE3;
+$color-secondary-accent: #FFC300;
+$color-text-light: #FFFFFF;
+$color-text-dark: #A0A0A0;
+$color-success: #4CAF50;
+$color-danger: #F44336;
+$color-dark-slate: #1B2B3B;
+$color-border-subtle: rgba(255, 255, 255, 0.1);
+$color-shadow: rgba(0, 0, 0, 0.2);
+$color-dark-slate-lighten: lighten($color-dark-slate, 3%);
+$color-link-hover: darken($color-primary-bg, 10%);
+
 
 .register-page {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f8ec; /* Overall very light green-cream background */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,34 +34,36 @@
   overflow: hidden; /* Prevent overflow from background animations */
   position: relative; /* For pseudo-elements */
 
+  /* Fix for navbar overlap */
+  padding-top: 80px;
+
   /* Optional: Add subtle background patterns/gradients for more visual interest */
-}
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+    filter: blur(50px); /* Soft blur for a gentle glow */
+  }
 
-.register-page::before,
-.register-page::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.1;
-  filter: blur(50px); /* Soft blur for a gentle glow */
-}
+  &::before {
+    background: $color-primary-bg; /* Vibrant Blue */
+    width: 250px;
+    height: 250px;
+    top: -50px;
+    right: -50px;
+    animation: floatBubble 15s infinite ease-in-out alternate;
+  }
 
-.register-page::before {
-  background: #e57f3f; /* Warm Carrot Orange */
-  width: 250px;
-  height: 250px;
-  top: -50px;
-  right: -50px;
-  animation: floatBubble 15s infinite ease-in-out alternate;
-}
-
-.register-page::after {
-  background: #4caf50; /* Vibrant Green */
-  width: 200px;
-  height: 200px;
-  bottom: -50px;
-  left: -50px;
-  animation: floatBubble 18s infinite ease-in-out alternate-reverse;
+  &::after {
+    background: $color-secondary-accent; /* Warm Yellow */
+    width: 200px;
+    height: 200px;
+    bottom: -50px;
+    left: -50px;
+    animation: floatBubble 18s infinite ease-in-out alternate-reverse;
+  }
 }
 
 @keyframes floatBubble {
@@ -64,10 +79,10 @@
 }
 
 .register-card {
-  background-color: #ffffff; /* Pure white for the card background */
+  background-color: $color-dark-slate-lighten; /* Slightly lighter Dark Slate for the card background */
   border-radius: 20px;
   padding: 2rem 3rem; /* Reduced vertical padding, increased horizontal */
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05); /* Soft, prominent shadow */
+  box-shadow: 0 15px 40px $color-shadow, 0 0 0 1px $color-border-subtle; /* Soft, prominent shadow */
   text-align: center;
   max-width: 800px; /* Increased from 500px */
   width: 100%;
@@ -96,11 +111,11 @@
 h1 {
   font-size: 2.2rem; /* Slightly reduced */
   font-weight: 700;
-  color: #2e472c; /* Deep forest green */
+  color: $color-primary-bg; /* Vibrant Blue for headings */
   margin-bottom: 0.5rem; /* Reduced margin */
   position: relative;
   display: inline-block;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 2px 5px rgba(0, 159, 227, 0.1); /* Shadow with primary blue tint */
 }
 
 h1::after {
@@ -113,9 +128,9 @@ h1::after {
   height: 3px;
   background: linear-gradient(
     90deg,
-    #4caf50,
-    #e57f3f
-  ); /* Green to Carrot underline */
+    $color-primary-bg,
+    $color-secondary-accent
+  ); /* Vibrant Blue to Warm Yellow underline */
   border-radius: 1.5px;
   animation: expandUnderline 0.8s ease-out forwards 0.3s;
   opacity: 0;
@@ -134,7 +149,7 @@ h1::after {
 
 .subtitle {
   font-size: 1rem; /* Slightly reduced */
-  color: #5a6a4e; /* Muted sage green */
+  color: $color-text-dark; /* Light Gray for subtitles */
   margin-bottom: 0; /* Removed bottom margin */
   line-height: 1.4;
   animation: slideInText 0.8s ease-out forwards 0.5s;
@@ -203,7 +218,7 @@ form {
 label {
   display: block;
   font-size: 0.9rem; /* Slightly smaller */
-  color: #2e472c; /* Deep forest green for labels */
+  color: $color-text-light; /* Pure White for labels */
   margin-bottom: 0.4rem; /* Reduced margin */
   font-weight: 600;
 }
@@ -213,11 +228,11 @@ input[type="email"],
 input[type="password"] {
   width: 100%;
   padding: 0.8rem 1rem; /* Reduced padding */
-  border: 1px solid #dae8d5; /* Slightly deeper sage green border */
+  border: 1px solid $color-border-subtle; /* Subtle white border */
   border-radius: 8px; /* Slightly smaller radius */
   font-size: 0.95rem; /* Slightly smaller font */
-  color: #5a6a4e; /* Muted sage green for input text */
-  background-color: #f0f8ec; /* Very light green-cream for input background */
+  color: $color-text-light; /* Pure White for input text */
+  background-color: $color-dark-slate; /* Dark Slate for input background */
   transition: all 0.3s ease;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
@@ -227,15 +242,15 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
   outline: none;
-  border-color: #4caf50; /* Vibrant green on focus */
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2); /* Soft green glow */
-  background-color: #ffffff; /* White on focus */
+  border-color: $color-primary-bg; /* Vibrant Blue on focus */
+  box-shadow: 0 0 0 3px rgba(0, 159, 227, 0.2); /* Soft blue glow */
+  background-color: $color-dark-slate-lighten; /* Slightly lighter Dark Slate on focus */
 }
 
 input[type="text"]::placeholder,
 input[type="email"]::placeholder,
 input[type="password"]::placeholder {
-  color: #8c9f81; /* Lighter muted sage green */
+  color: $color-text-dark; /* Light Gray for placeholder */
 }
 
 .terms {
@@ -251,9 +266,9 @@ input[type="password"]::placeholder {
   -webkit-appearance: none;
   width: 18px; /* Slightly smaller */
   height: 18px;
-  border: 2px solid #dae8d5; /* Sage green border */
+  border: 2px solid $color-border-subtle; /* Subtle white border */
   border-radius: 4px; /* Smaller radius */
-  background-color: #e4f0e0; /* Soft sage green background */
+  background-color: $color-dark-slate; /* Dark Slate background */
   cursor: pointer;
   position: relative;
   transition: all 0.2s ease-in-out;
@@ -261,14 +276,14 @@ input[type="password"]::placeholder {
 }
 
 .terms input[type="checkbox"]:checked {
-  background-color: #4caf50; /* Vibrant green when checked */
-  border-color: #4caf50;
+  background-color: $color-primary-bg; /* Vibrant Blue when checked */
+  border-color: $color-primary-bg;
 }
 
 .terms input[type="checkbox"]:checked::after {
   content: "\2713"; /* Checkmark unicode */
   display: block;
-  color: #ffffff;
+  color: $color-text-light; /* Pure White */
   font-size: 12px; /* Smaller checkmark */
   position: absolute;
   top: 50%;
@@ -278,12 +293,12 @@ input[type="password"]::placeholder {
 
 .terms input[type="checkbox"]:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3); /* Green glow on focus */
+  box-shadow: 0 0 0 3px rgba(0, 159, 227, 0.3); /* Blue glow on focus */
 }
 
 .terms label {
   margin-bottom: 0; /* Override default label margin */
-  color: #5a6a4e; /* Muted sage green */
+  color: $color-text-dark; /* Light Gray */
   font-weight: 400; /* Regular weight for checkbox label */
   cursor: pointer;
   text-align: left; /* Ensure text aligns left */
@@ -300,15 +315,15 @@ input[type="password"]::placeholder {
 }
 
 .error-message {
-  color: #e57f3f; /* Warm Carrot Orange for errors */
-  background-color: rgba(229, 127, 63, 0.1);
-  border: 1px solid #e57f3f;
+  color: $color-danger; /* Red for errors */
+  background-color: lighten($color-danger, 30%); /* Lighter red for error background */
+  border: 1px solid $color-danger;
 }
 
 .success-message {
-  color: #4caf50; /* Vibrant Green for success */
-  background-color: rgba(76, 175, 80, 0.1);
-  border: 1px solid #4caf50;
+  color: $color-success; /* Green for success */
+  background-color: lighten($color-success, 30%); /* Lighter green for success background */
+  border: 1px solid $color-success;
 }
 
 @keyframes fadeIn {
@@ -331,19 +346,15 @@ input[type="password"]::placeholder {
 }
 
 button[type="submit"] {
-  background: linear-gradient(
-    45deg,
-    #4caf50,
-    #ff9800
-  ); /* Vibrant Green to Bright Orange */
-  color: #ffffff; /* Pure white text */
+  background: $color-primary-bg; /* Vibrant Blue */
+  color: $color-text-light; /* Pure white text */
   border: none;
   padding: 1rem 2.5rem; /* Slightly reduced padding */
   border-radius: 25px; /* Smaller radius */
   cursor: pointer;
   font-size: 1rem; /* Slightly smaller font */
   font-weight: 700;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+  box-shadow: 0 6px 15px rgba(0, 159, 227, 0.2); /* Shadow with primary blue tint */
   transition: all 0.3s ease-in-out;
   letter-spacing: 0.5px;
   position: relative;
@@ -368,7 +379,8 @@ button[type="submit"]::after {
 
 button[type="submit"]:hover {
   transform: translateY(-3px) scale(1.02); /* Reduced hover effect */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  background-color: $color-link-hover; /* Darker blue on hover */
+  box-shadow: 0 8px 20px rgba(0, 159, 227, 0.3);
 }
 
 button[type="submit"]:hover::after {
@@ -377,11 +389,12 @@ button[type="submit"]:hover::after {
 
 button[type="submit"]:active {
   transform: translateY(0);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 8px rgba(0, 159, 227, 0.15);
 }
 
 button[type="submit"]:disabled {
-  background: #cccccc;
+  background: $color-dark-slate; /* Dark Slate when disabled */
+  color: $color-text-dark; /* Light Gray text for disabled */
   cursor: not-allowed;
   box-shadow: none;
   transform: none;
@@ -405,7 +418,7 @@ button[type="submit"]:disabled::after {
 
 .spinner {
   border: 3px solid rgba(255, 255, 255, 0.3); /* Slightly smaller */
-  border-top: 3px solid #ffffff;
+  border-top: 3px solid $color-text-light; /* Pure White spinner */
   border-radius: 50%;
   width: 16px; /* Smaller spinner */
   height: 16px;
@@ -426,14 +439,14 @@ button[type="submit"]:disabled::after {
 
 .login-link {
   font-size: 0.9rem; /* Slightly smaller */
-  color: #5a6a4e; /* Muted sage green */
+  color: $color-text-dark; /* Light Gray */
   animation: fadeIn 0.8s ease-out forwards 1.3s;
   opacity: 0;
   transform: translateY(10px);
 }
 
 .login-link a {
-  color: #4caf50; /* Vibrant green for the link */
+  color: $color-primary-bg; /* Vibrant Blue for the link */
   text-decoration: none;
   font-weight: 600;
   position: relative;
@@ -449,12 +462,12 @@ button[type="submit"]:disabled::after {
   bottom: 0;
   width: 0;
   height: 2px;
-  background: #e57f3f; /* Warm Carrot Orange underline */
+  background: $color-secondary-accent; /* Warm Yellow underline */
   transition: width 0.3s ease;
 }
 
 .login-link a:hover {
-  color: #2e472c; /* Deep forest green on hover */
+  color: $color-link-hover; /* Darker blue on hover */
 }
 
 .login-link a:hover::after {
