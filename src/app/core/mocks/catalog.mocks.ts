@@ -7,6 +7,6 @@ export const catalogMocks = {
   noResultsMessage: ['პროდუქტი ვერ მოიძებნა', 'No products found', 'Товары не найдены'],
   selectCategoriesButton: ['კატეგორიების არჩევა', 'Select Categories', 'Выбрать категории'],
   applyFiltersButton: ['ფილტრების გამოყენება', 'Apply Filters', 'Применить фильтры'], 
-  selectedCategoriesLabel: ['არჩეული კატეგორიები:', 'Selected Categories:', 'Выбранные категории:'],
+  selectedCategoriesLabel: ['არჩეული კატეგორიები', 'Selected Categories', 'Выбранные категории'],
   modalSearchPlaceholder: ['ძებნა კატეგორიებში და პროდუქტებში...', 'Search in categories and products...', 'Поиск по категориям и товарам...'],
 };
