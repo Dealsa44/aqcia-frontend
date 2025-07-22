@@ -1,43 +1,54 @@
-/* Search Page Color Palette: Marketing Greenish & Carrot */
-/* Overall Page Background: #F0F8EC (Very light green-cream) */
-/* Element Base Color: #FFFFFF (Pure white for cards, filters) */
-/* Primary Text: #2E472C (Deep forest green for headings, product names) */
-/* Secondary Text/Labels: #5A6A4E (Muted sage green for descriptions, placeholders) */
-/* Accent Gradient (Buttons/Highlights): linear-gradient(90deg, #4CAF50 0%, #FF9800 100%) (Vibrant Green to Bright Orange) */
-/* Secondary Accent Gradient (Hover/Active): linear-gradient(90deg, #FF9800 0%, #4CAF50 100%) (Bright Orange to Vibrant Green) - Reversed for energetic hover) */
-/* Accent Colors: */
-/* - #E57F3F (Warm Carrot Orange, for stars, price highlights) */
-/* - #4CAF50 (Vibrant Green, for success/positive elements) */
-/* - #FF9800 (Bright Orange, for strong price emphasis) */
-/* Borders/Subtle Details: rgba(0, 0, 0, 0.08) */
-/* Shadows: rgba(0, 0, 0, 0.06) - very light, diffused */
+/* Color Palette: Inspired by modern delivery apps */
+/* Primary Background: #009FE3 (Vibrant Blue) */
+/* Secondary Accent: #FFC300 (Warm Yellow) */
+/* Text/Icons: #FFFFFF (Pure White) */
+/* Darker Text/Subtle Elements: #A0A0A0 (Light Gray) */
+/* Success/Call to Action: #4CAF50 (Green) */
+/* Danger/Notification: #F44336 (Red) */
+/* General Background (for dropdowns, off-canvas): #1B2B3B (Dark Slate) */
+/* Subtle Border/Separator: rgba(255, 255, 255, 0.1) */
+/* Shadow Color: rgba(0, 0, 0, 0.2) */
+
+/* Define color variables for clarity and easy modification */
+$color-primary-bg: #009FE3;
+$color-secondary-accent: #FFC300;
+$color-text-light: #FFFFFF;
+$color-text-dark: #A0A0A0;
+$color-success: #4CAF50;
+$color-danger: #F44336;
+$color-dark-slate: #1B2B3B;
+$color-border-subtle: rgba(255, 255, 255, 0.1);
+$color-shadow: rgba(0, 0, 0, 0.2);
+$color-hover-secondary: lighten($color-secondary-accent, 5%);
+$color-hover-primary: darken($color-primary-bg, 5%);
+
 
 .search-container {
-  background-color: #f0f8ec; /* Consistent light green-cream background */
-  padding: 8rem 1.5rem 5rem; /* Apply horizontal padding directly here */
+  // background-color: $color-primary-bg; /* Vibrant Blue background */
+  padding: 8rem 1.5rem 5rem;
   min-height: 100vh;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #5a6a4e; /* Muted sage green */
-  max-width: 1200px; /* Limit the max width of the entire content area */
-  margin: 0 auto; /* Center the entire search container */
-  box-sizing: border-box; /* Include padding in the width calculation */
+  color: $color-text-light; /* Pure White text for overall page */
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .search-container .filters {
-  width: 100%; /* Take full width of its constrained parent */
-  margin-bottom: 3rem; /* Center filters and add bottom margin */
-  padding: 1.5rem; /* Internal padding for the filter card */
-  background-color: #ffffff;
+  width: 100%;
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  background-color: $color-dark-slate; /* Dark Slate for filter card */
   border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06); /* Subtle shadow */
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 25px $color-shadow; /* Subtle shadow */
+  border: 1px solid $color-border-subtle;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Space between search input and category buttons */
+  gap: 1.5rem;
   animation: fadeInSlideIn 0.8s ease-out forwards;
   opacity: 0;
   transform: translateY(15px);
-  box-sizing: border-box; /* Include padding in the width calculation */
+  box-sizing: border-box;
 }
 
 @keyframes fadeInSlideIn {
@@ -54,131 +65,113 @@
 .search-container .filters input[type="text"] {
   width: 100%;
   padding: 1rem 1.2rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid $color-border-subtle;
   border-radius: 8px;
   font-size: 1.1rem;
-  color: #2e472c; /* Deep forest green */
-  background-color: #f0f8ec; /* Lighter background for input */
+  color: $color-text-light; /* Pure White text */
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white for input */
   transition: all 0.3s ease-in-out;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .search-container .filters input[type="text"]::placeholder {
-  color: #8c997c; /* Slightly lighter sage green for placeholder */
+  color: $color-text-dark; /* Light Gray for placeholder */
 }
 
 .search-container .filters input[type="text"]:focus {
   outline: none;
-  border-color: #4caf50; /* Vibrant Green */
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15); /* Softer focus halo */
+  border-color: $color-secondary-accent; /* Warm Yellow */
+  box-shadow: 0 0 0 3px rgba(255, 195, 0, 0.3); /* Softer focus halo */
 }
 
 .search-container .filters .category-filter-actions {
   display: flex;
-  gap: 1rem; /* Space between select categories and clear buttons */
-  justify-content: flex-start; /* Align items to the left */
+  gap: 1rem;
+  justify-content: flex-start;
 }
 
 .search-container .filters .category-filter-actions button {
   padding: 0.8rem 1.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid $color-border-subtle;
   border-radius: 25px;
-  background-color: #ffffff;
-  color: #5a6a4e; /* Muted sage green */
+  background-color: $color-dark-slate; /* Dark Slate */
+  color: $color-text-light; /* Pure White */
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 5px $color-shadow;
 }
 
 .search-container .filters .category-filter-actions button:hover {
-  border-color: #4caf50; /* Vibrant Green */
-  color: #2e472c; /* Deep forest green */
+  border-color: $color-secondary-accent; /* Warm Yellow */
+  color: $color-hover-secondary; /* Lighter yellow on hover */
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 8px $color-shadow;
 }
 
 .search-container .filters .category-filter-actions button.select-categories-button {
-  // Base styling for the main button - refined colors and shadow
-  background: linear-gradient(
-    90deg,
-    #4caf50 0%,
-    #ff9800 100%
-  ); /* Vibrant Green to Bright Orange gradient */
-  color: #ffffff;
-  border: 1px solid #e57f3f; /* Warm Carrot Orange border, slightly softer */
-  font-size: 1.05rem; // Slightly larger, but not too big
-  font-weight: 600; // Bolder but not extreme
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1),
-    0 0 0 2px rgba(76, 175, 80, 0.2); // Softer shadow and subtle green halo
-  transition: all 0.3s ease-in-out, transform 0.2s ease-out,
-    box-shadow 0.2s ease-out; // Smooth transitions for all properties
-
-  // Subtle, less obtrusive animation
+  background-color: $color-secondary-accent; /* Warm Yellow */
+  color: $color-dark-slate; /* Dark Slate text */
+  border: 1px solid $color-secondary-accent;
+  font-size: 1.05rem;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(255, 195, 0, 0.2);
+  transition: all 0.3s ease-in-out, transform 0.2s ease-out, box-shadow 0.2s ease-out;
   animation: subtleGlow 2s infinite ease-in-out alternate;
 }
 
 @keyframes subtleGlow {
   0% {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1),
-      0 0 0 2px rgba(76, 175, 80, 0.2); /* Initial green glow */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(255, 195, 0, 0.2);
   }
   100% {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15),
-      0 0 0 4px rgba(255, 152, 0, 0.25); /* Slightly larger shadow, orange glow */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 0 4px rgba(255, 195, 0, 0.4);
   }
 }
 
 .search-container .filters .category-filter-actions button.select-categories-button:hover {
-  background: linear-gradient(
-    90deg,
-    #ff9800 0%,
-    #4caf50 100%
-  ); /* Reversed gradient on hover */
-  transform: translateY(-3px); // Lift slightly
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15),
-    0 0 0 3px rgba(229, 127, 63, 0.4); // Stronger but not overwhelming shadow, carrot orange halo
-  animation: none; // Disable subtleGlow on hover for focused interaction
+  background-color: $color-hover-secondary; /* Lighter yellow on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15), 0 0 0 3px rgba(255, 195, 0, 0.5);
+  animation: none;
 }
 
 .search-container .filters .category-filter-actions button.select-categories-button:active {
-  transform: translateY(0); // Depress on click
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); // Smaller shadow when active
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
 .search-container .filters .category-filter-actions button.clear {
   background-color: transparent;
-  color: #8c997c; /* Lighter sage green */
-  border-color: #8c997c;
+  color: $color-text-dark; /* Light Gray */
+  border-color: $color-text-dark;
 }
 
 .search-container .filters .category-filter-actions button.clear:hover {
-  background-color: #f0f8ec; /* Very light green-cream on hover */
-  color: #2e472c; /* Deep forest green */
-  border-color: #2e472c;
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle white overlay on hover */
+  color: $color-text-light;
+  border-color: $color-text-light;
 }
 
 .search-container .results {
-  width: 100%; /* Take full width of its constrained parent */
-  /* padding: 0 1.5rem; - This is now handled by the parent .search-container */
-  /* margin: 0 auto; - This is now handled by the parent .search-container */
+  width: 100%;
 }
 
 .search-container .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem; /* Consistent gap with Markets page */
+  gap: 2rem;
 }
 
 .search-container .product-grid .product-card {
-  background-color: #ffffff;
+  background-color: $color-dark-slate; /* Dark Slate for product card */
   border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 25px $color-shadow;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid $color-border-subtle;
   transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
   animation: popInScale 0.7s ease-out forwards;
   opacity: 0;
@@ -193,14 +186,15 @@
 
 .search-container .product-grid .product-card:hover {
   transform: translateY(-5px) scale(1.01);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
 .search-container .product-grid .product-card img {
   width: 100%;
-  height: 180px; /* Consistent image height with Markets page */
+  height: 180px;
   object-fit: cover; /* Use contain for product images */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  background-color: $color-text-light; /* White background for image */
+  border-bottom: 1px solid $color-border-subtle;
   cursor: pointer;
   filter: brightness(0.99);
   transition: filter 0.25s ease;
@@ -221,9 +215,9 @@
 }
 
 .search-container .product-grid .product-card .product-info h3 {
-  font-size: 1.25rem; /* Slightly smaller for card titles */
+  font-size: 1.25rem;
   font-weight: 600;
-  color: #2e472c; /* Deep forest green */
+  color: $color-text-light; /* Pure White */
   margin-bottom: 0.5rem;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -231,40 +225,35 @@
 }
 
 .search-container .product-grid .product-card .product-info h3:hover {
-  color: #4caf50; /* Vibrant Green hover color for product name */
+  color: $color-secondary-accent; /* Warm Yellow on hover */
 }
 
 .search-container .product-grid .product-card .product-info .price-info {
-  margin-top: auto; /* Push price and button to the bottom */
+  margin-top: auto;
   margin-bottom: 1rem;
 }
 
 .search-container .product-grid .product-card .product-info .price-info .best-price {
   font-size: 0.95rem;
-  color: #5a6a4e; /* Muted sage green */
+  color: $color-text-dark; /* Light Gray */
   line-height: 1.5;
 }
 
 .search-container .product-grid .product-card .product-info .price-info .best-price strong {
-  font-size: 1.3rem; /* Larger price amount */
+  font-size: 1.3rem;
   font-weight: 700;
-  color: #ff9800; /* Bright Orange for strong price */
+  color: $color-secondary-accent; /* Warm Yellow for price */
   margin-left: 0.3rem;
 }
 .search-container .product-grid .product-card .product-info .price-info .best-price span:last-child {
-  // Market name
   font-weight: 500;
-  color: #e57f3f; /* Warm Carrot Orange for market name */
+  color: $color-text-dark; /* Light Gray for market name */
 }
 
 .search-container .product-grid .product-card .product-info .add-to-cart {
   padding: 0.8rem 1.2rem;
-  background: linear-gradient(
-    90deg,
-    #4caf50 0%,
-    #ff9800 100%
-  ); /* Vibrant Green to Bright Orange */
-  color: #ffffff;
+  background-color: $color-success; /* Green for Add to Cart */
+  color: $color-text-light;
   border: none;
   border-radius: 25px;
   font-size: 0.95rem;
@@ -279,11 +268,7 @@
 .search-container .product-grid .product-card .product-info .add-to-cart:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(
-    90deg,
-    #ff9800 0%,
-    #4caf50 100%
-  ); /* Reversed gradient on hover */
+  background-color: darken($color-success, 5%); /* Slightly darker green on hover */
 }
 
 .search-container .product-grid .product-card .product-info .add-to-cart:active {
@@ -305,15 +290,15 @@
 .search-container .no-results {
   text-align: center;
   font-size: 1.3rem;
-  color: #8c997c; /* Lighter sage green */
+  color: $color-text-dark; /* Light Gray */
   padding: 3rem 0;
-  background-color: #ffffff;
+  background-color: $color-dark-slate; /* Dark Slate */
   border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 25px $color-shadow;
+  border: 1px solid $color-border-subtle;
   animation: fadeIn 0.8s ease-out forwards;
-  width: 100%; /* Take full width of its constrained parent */
-  box-sizing: border-box; /* Include padding in the width calculation */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Modal Styles */
@@ -323,7 +308,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */
+  background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -341,15 +326,16 @@
 }
 
 .search-container .modal-content {
-  background-color: #ffffff;
+  background-color: $color-dark-slate; /* Dark Slate for modal content */
   padding: 2.5rem;
   border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
   position: relative;
   max-width: 500px;
   width: 90%;
   transform: translateY(0);
   animation: slideInModal 0.3s ease-out;
+  border: 1px solid $color-border-subtle;
 }
 
 @keyframes slideInModal {
@@ -364,7 +350,7 @@
 }
 
 .search-container .modal-content h2 {
-  color: #2e472c;
+  color: $color-text-light; /* Pure White */
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
   text-align: center;
@@ -372,14 +358,12 @@
 }
 
 .search-container .modal-content .category-checkboxes {
-  // Changed to flex column to stack items
   display: flex;
-  flex-direction: column; // Stack items vertically
-  gap: 0.8rem; // Spacing between items
-  // Removed justify-content: center; as it's not needed for column layout
-  max-height: 300px; /* Limit height for scrollable categories */
-  overflow-y: auto; /* Enable scrolling */
-  padding-right: 10px; /* Space for scrollbar */
+  flex-direction: column;
+  gap: 0.8rem;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 10px;
   margin-bottom: 2rem;
 }
 
@@ -389,42 +373,34 @@
   border-radius: 4px;
 }
 .search-container .modal-content .category-checkboxes::-webkit-scrollbar-thumb {
-  background-color: rgba(
-    76,
-    175,
-    80,
-    0.4
-  ); /* Vibrant Green with transparency */
+  background-color: rgba(0, 159, 227, 0.4); /* Vibrant Blue with transparency */
   border-radius: 4px;
 }
 .search-container .modal-content .category-checkboxes::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
 
 .search-container .modal-content .category-checkboxes label {
-  // Ensure each label takes full width and is centered if needed
-  display: flex; // Use flex to center content within the label
+  display: flex;
   align-items: center;
   gap: 0.7rem;
   font-size: 1.1rem;
-  color: #5a6a4e;
+  color: $color-text-light; /* Pure White */
   cursor: pointer;
   transition: color 0.2s ease;
-  padding: 0.8rem 1rem; // Adjusted padding for better visual
-  border-radius: 8px; // Less pill-shaped, more rectangular
-  background-color: #f8fcf7; /* Lighter background for checkboxes */
-  border: 1px solid rgba(0, 0, 0, 0.08); // Slightly stronger border
-  width: 100%; // Make it take full width
-  justify-content: flex-start; // Align content to the left
-  // Removed white-space: nowrap; as we want text to wrap if it's too long within the full width.
-  // If you *still* want to prevent text wrapping for extremely long names, add `text-overflow: ellipsis; overflow: hidden;`
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05); /* Very subtle white for checkbox background */
+  border: 1px solid $color-border-subtle;
+  width: 100%;
+  justify-content: flex-start;
 }
 
 .search-container .modal-content .category-checkboxes label:hover {
-  color: #2e472c;
-  background-color: #ebf5eb; /* Slightly darker on hover */
-  border-color: #4caf50; // Green border on hover
+  color: $color-secondary-accent; /* Warm Yellow on hover */
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: $color-secondary-accent;
 }
 
 .search-container .modal-content .category-checkboxes label input[type="checkbox"] {
@@ -432,27 +408,27 @@
   -webkit-appearance: none;
   width: 22px;
   height: 22px;
-  border: 2px solid #4caf50; /* Vibrant Green border */
+  border: 2px solid $color-secondary-accent; /* Warm Yellow border */
   border-radius: 5px;
-  background-color: #ffffff;
+  background-color: $color-dark-slate; /* Dark Slate for unchecked box */
   cursor: pointer;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease-in-out;
-  flex-shrink: 0; // Prevent checkbox from shrinking
+  flex-shrink: 0;
 }
 
 .search-container .modal-content .category-checkboxes label input[type="checkbox"]:checked {
-  background-color: #4caf50; /* Vibrant Green when checked */
-  border-color: #4caf50;
+  background-color: $color-secondary-accent; /* Warm Yellow when checked */
+  border-color: $color-secondary-accent;
 }
 
 .search-container .modal-content .category-checkboxes label input[type="checkbox"]:checked::before {
-  content: "✔"; /* Checkmark icon */
+  content: "✔";
   font-size: 16px;
-  color: #ffffff;
+  color: $color-dark-slate; /* Dark Slate checkmark */
   position: absolute;
   top: 50%;
   left: 50%;
@@ -461,15 +437,15 @@
 
 .search-container .modal-content .category-checkboxes label input[type="checkbox"]:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+  box-shadow: 0 0 0 3px rgba(255, 195, 0, 0.3);
 }
 
 .search-container .modal-content .apply-filters-button {
   display: block;
   width: 100%;
   padding: 1rem 1.5rem;
-  background: linear-gradient(90deg, #4caf50 0%, #ff9800 100%);
-  color: #ffffff;
+  background-color: $color-success; /* Green for Apply Filters */
+  color: $color-text-light;
   border: none;
   border-radius: 25px;
   font-size: 1.1rem;
@@ -480,7 +456,7 @@
 }
 
 .search-container .modal-content .apply-filters-button:hover {
-  background: linear-gradient(90deg, #ff9800 0%, #4caf50 100%);
+  background-color: darken($color-success, 5%);
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
@@ -492,16 +468,16 @@
   background: none;
   border: none;
   font-size: 1.8rem;
-  color: #8c997c;
+  color: $color-text-dark; /* Light Gray */
   cursor: pointer;
-  transition: color 0.2s ease;
-  padding: 5px 10px; /* Add padding for easier clicking */
-  line-height: 1; /* Adjust line-height to center 'x' */
+  transition: color 0.2s ease, transform 0.2s ease;
+  padding: 5px 10px;
+  line-height: 1;
 }
 
 .search-container .modal-content .close-modal-button:hover {
-  color: #2e472c;
-  transform: rotate(90deg); /* Small rotation on hover */
+  color: $color-text-light;
+  transform: rotate(90deg);
 }
 
 /* Specific styles for selected categories */
@@ -511,15 +487,15 @@
   align-items: center;
   gap: 0.8rem;
   padding: 0.8rem;
-  background-color: #f8fcf7;
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle white background */
   border-radius: 10px;
-  border: 1px solid rgba(76, 175, 80, 0.2);
+  border: 1px solid $color-border-subtle;
   animation: fadeIn 0.3s ease-out;
 }
 
 .selected-categories .selected-categories-label {
   font-size: 0.9rem;
-  color: #5a6a4e;
+  color: $color-text-dark; /* Light Gray */
   font-weight: 500;
 }
 
@@ -533,24 +509,16 @@
   display: inline-flex;
   align-items: center;
   padding: 0.4rem 0.8rem;
-  background: linear-gradient(
-    90deg,
-    rgba(76, 175, 80, 0.1) 0%,
-    rgba(255, 152, 0, 0.1) 100%
-  );
+  background-color: $color-secondary-accent; /* Warm Yellow */
   border-radius: 15px;
   font-size: 0.85rem;
-  color: #2e472c;
-  border: 1px solid rgba(76, 175, 80, 0.3);
+  color: $color-dark-slate; /* Dark Slate text */
+  border: 1px solid $color-secondary-accent;
   transition: all 0.2s ease;
 }
 
 .selected-categories .category-tag:hover {
-  background: linear-gradient(
-    90deg,
-    rgba(76, 175, 80, 0.2) 0%,
-    rgba(255, 152, 0, 0.2) 100%
-  );
+  background-color: $color-hover-secondary;
   transform: translateY(-1px);
 }
 
@@ -558,7 +526,7 @@
   margin-left: 0.4rem;
   background: none;
   border: none;
-  color: #e57f3f;
+  color: $color-danger; /* Red for remove icon */
   font-size: 1.1rem;
   line-height: 1;
   cursor: pointer;
@@ -567,13 +535,13 @@
 }
 
 .selected-categories .category-tag .remove-category:hover {
-  color: #ff5722;
+  color: darken($color-danger, 10%);
   transform: scale(1.2);
 }
 
 @media (max-width: 768px) {
   .search-container {
-    padding: 6rem 1rem 3rem; /* Adjust padding for smaller screens */
+    padding: 6rem 1rem 3rem;
   }
 
   .search-container .filters {
@@ -588,18 +556,18 @@
   }
 
   .search-container .filters .category-filter-actions {
-    flex-direction: column; /* Stack buttons vertically on small screens */
+    flex-direction: column;
     gap: 0.8rem;
   }
 
   .search-container .filters .category-filter-actions button {
-    width: 100%; /* Make buttons full width */
+    width: 100%;
     padding: 0.7rem 1.2rem;
     font-size: 0.9rem;
   }
 
   .search-container .product-grid {
-    grid-template-columns: 1fr; /* Single column on small screens */
+    grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
@@ -633,8 +601,7 @@
     margin-bottom: 1rem;
   }
   .search-container .modal-content .category-checkboxes {
-    // On small screens, keep them as column but adjust padding
-    gap: 0.6rem; // Slightly smaller gap on mobile
+    gap: 0.6rem;
     max-height: 250px;
   }
   .search-container .modal-content .category-checkboxes label {
@@ -660,13 +627,13 @@
 .modal-search-input {
   width: 100%;
   padding: 0.8rem 1rem 0.8rem 2.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid $color-border-subtle;
   border-radius: 8px;
   font-size: 1rem;
-  color: #2e472c;
-  background-color: #f8fcf7;
+  color: $color-text-light;
+  background-color: rgba(255, 255, 255, 0.05); /* Subtle white background */
   transition: all 0.3s ease;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%235a6a4e' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23A0A0A0' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E"); /* Light Gray search icon */
   background-repeat: no-repeat;
   background-position: 1rem center;
   background-size: 1rem;
@@ -674,12 +641,12 @@
 
 .modal-search-input:focus {
   outline: none;
-  border-color: #4caf50;
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  border-color: $color-secondary-accent;
+  box-shadow: 0 0 0 2px rgba(255, 195, 0, 0.3);
 }
 
 .product-count {
-  color: #8c997c;
+  color: $color-text-dark; /* Light Gray */
   font-size: 0.85em;
   margin-left: 0.3rem;
 }
@@ -687,7 +654,7 @@
 .no-results-found {
   text-align: center;
   padding: 1.5rem;
-  color: #8c997c;
+  color: $color-text-dark;
   font-size: 1rem;
   width: 100%;
 }

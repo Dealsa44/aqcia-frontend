@@ -1,51 +1,59 @@
-/* Markets Page Color Palette: Marketing Greenish & Carrot */
-/* Overall Page Background: #F0F8EC (Very light green-cream) */
-/* Element Base Color: #FFFFFF (Pure white for cards, filters) */
-/* Primary Text: #2E472C (Deep forest green for headings) */
-/* Secondary Text/Labels: #5A6A4E (Muted sage green for paragraphs/labels) */
-/* Accent Gradient (Buttons/Highlights): linear-gradient(90deg, #4CAF50 0%, #FF9800 100%) (Vibrant Green to Bright Orange) */
-/* Secondary Accent Gradient (Hover/Active): linear-gradient(90deg, #FF9800 0%, #4CAF50 100%) (Bright Orange to Vibrant Green) - Reversed for energetic hover */
-/* Accent Colors: */
-/* - #E57F3F (Warm Carrot Orange, for stars, subtle highlights) */
-/* - #4CAF50 (Vibrant Green, for active elements/delivery tags) */
-/* Borders/Subtle Details: rgba(0, 0, 0, 0.08) */
-/* Shadows: rgba(0, 0, 0, 0.06) - very light, diffused */
+/* Color Palette: Inspired by modern delivery apps */
+/* Primary Background: #009FE3 (Vibrant Blue) */
+/* Secondary Accent: #FFC300 (Warm Yellow) */
+/* Text/Icons: #FFFFFF (Pure White) */
+/* Darker Text/Subtle Elements: #A0A0A0 (Light Gray) */
+/* Success/Call to Action: #4CAF50 (Green) */
+/* Danger/Notification: #F44336 (Red) */
+/* General Background (for dropdowns, off-canvas): #1B2B3B (Dark Slate) */
+/* Subtle Border/Separator: rgba(255, 255, 255, 0.1) */
+/* Shadow Color: rgba(0, 0, 0, 0.2) */
+
+/* Define color variables for clarity and easy modification */
+$color-primary-bg: #009FE3;
+$color-secondary-accent: #FFC300;
+$color-text-light: #FFFFFF;
+$color-text-dark: #A0A0A0;
+$color-success: #4CAF50;
+$color-danger: #F44336;
+$color-dark-slate: #1B2B3B;
+$color-border-subtle: rgba(255, 255, 255, 0.1);
+$color-shadow: rgba(0, 0, 0, 0.2);
+$color-hover-secondary: lighten($color-secondary-accent, 5%);
+$color-hover-primary: darken($color-primary-bg, 5%);
 
 .markets-page {
-  background-color: #f0f8ec; /* Very light, clean green-cream background */
+  background-color: #FFFFFF; /* Changed to Pure White background */
   padding: 8rem 0 5rem;
   min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #5a6a4e; /* Muted sage green */
+  color: $color-dark-slate; /* Dark Slate for general text */
   position: relative;
   overflow: hidden;
-
-  // Removed overt animated background blobs for a cleaner look.
-  // We can add subtle, very diffused patterns if a user specifically requests it later.
 
   .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1.5rem;
     position: relative;
-    z-index: 1; /* Ensure content is always on top */
+    z-index: 1;
   }
 
   h1 {
-    font-size: 3rem; /* Slightly smaller for refinement */
-    font-weight: 700; /* A bit less 'raw' than 800 */
-    color: #2e472c; /* Deep forest green */
+    font-size: 3rem;
+    font-weight: 700;
+    color: $color-primary-bg; /* Vibrant Blue for headings */
     margin-bottom: 0.8rem;
     text-align: center;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     animation: slideInDown 0.7s ease-out forwards;
     opacity: 0;
   }
 
   .subtitle {
-    font-size: 1.1rem; /* Slightly smaller */
-    color: #5a6a4e; /* Muted sage green */
-    margin-bottom: 3.5rem; /* More space below subtitle */
+    font-size: 1.1rem;
+    color: $color-text-dark; /* Light Gray for subtitle */
+    margin-bottom: 3.5rem;
     text-align: center;
     max-width: 600px;
     margin-left: auto;
@@ -79,13 +87,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem; /* Reduced gap */
+    gap: 1.5rem;
     margin-bottom: 4rem;
-    background-color: #ffffff;
-    padding: 1.2rem 2rem; /* Reduced padding */
-    border-radius: 12px; /* Softer corners */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06); /* Lighter, more diffused shadow */
-    border: 1px solid rgba(0, 0, 0, 0.04); /* Very subtle border */
+    background-color: $color-dark-slate; /* Dark Slate for filter card */
+    padding: 1.2rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px $color-shadow;
+    border: 1px solid $color-border-subtle;
     animation: slideInUp 0.8s ease-out forwards 0.4s;
     opacity: 0;
     transform: translateY(15px);
@@ -104,55 +112,55 @@
     div {
       display: flex;
       align-items: center;
-      gap: 0.6rem; /* Reduced gap within filter elements */
+      gap: 0.6rem;
 
       label {
-        font-weight: 500; /* Less bold */
-        color: #5a6a4e; /* Softer color */
-        font-size: 1rem; /* Slightly smaller */
+        font-weight: 500;
+        color: $color-text-light; /* Pure White for labels */
+        font-size: 1rem;
       }
     }
 
     select {
-      padding: 0.7rem 1rem; /* Smaller padding */
-      border: 1px solid rgba(0, 0, 0, 0.12);
-      border-radius: 6px; /* Slightly sharper corners */
-      background-color: #f0f8ec; /* Light green-cream */
-      font-size: 0.95rem; /* Slightly smaller font */
-      color: #5a6a4e; /* Muted sage green */
+      padding: 0.7rem 1rem;
+      border: 1px solid $color-border-subtle;
+      border-radius: 6px;
+      background-color: rgba(255, 255, 255, 0.1); /* Subtle white for select background */
+      font-size: 0.95rem;
+      color: $color-text-light; /* Pure White for select text */
       appearance: none;
-      background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%235A6A4E%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.1L146.2%20204.4%2018.5%2074.5a17.6%2017.6%200%200%200-25.1%2024.5l130.6%20120.7a17.7%2017.7%200%200%200%2025.1%200L287%2094c6.4-5.1%206.4-15.6%200-20.7z%22%2F%3E%3C%2Fsvg%3E'); /* Muted sage green arrow */
+      background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.1L146.2%20204.4%2018.5%2074.5a17.6%2017.6%200%200%200-25.1%2024.5l130.6%20120.7a17.7%2017.7%200%200%200%2025.1%200L287%2094c6.4-5.1%206.4-15.6%200-20.7z%22%2F%3E%3C%2Fsvg%3E'); /* Pure White arrow */
       background-repeat: no-repeat;
-      background-position: right 0.6rem center; /* Adjusted arrow position */
-      background-size: 10px; /* Smaller arrow */
+      background-position: right 0.6rem center;
+      background-size: 10px;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03); /* Subtle inner shadow */
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
 
       &:hover {
-        border-color: rgba(76, 175, 80, 0.3); /* Softer green hover border */
+        border-color: $color-secondary-accent; /* Warm Yellow hover border */
       }
       &:focus {
-        border-color: #4caf50; /* Vibrant Green */
-        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15); /* Softer focus shadow */
+        border-color: $color-secondary-accent; /* Warm Yellow */
+        box-shadow: 0 0 0 3px rgba(255, 195, 0, 0.3); /* Softer focus shadow */
         outline: none;
       }
     }
 
     .rating-stars {
       display: flex;
-      gap: 0.2rem; /* Tighter gap */
+      gap: 0.2rem;
 
       span {
-        font-size: 1.3rem; /* Slightly smaller stars */
-        color: #e57f3f; /* Warm Carrot Orange for stars */
+        font-size: 1.3rem;
+        color: $color-secondary-accent; /* Warm Yellow for stars */
         cursor: pointer;
         transition: transform 0.15s ease, color 0.15s ease;
-        line-height: 1; /* Better vertical alignment */
+        line-height: 1;
 
         &:hover {
           transform: scale(1.1);
-          color: #ff9800; /* Bright Orange on hover */
+          color: $color-hover-secondary; /* Lighter yellow on hover */
         }
       }
     }
@@ -160,67 +168,64 @@
 
   .stores-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly smaller min-width */
-    gap: 2rem; /* Reduced gap between cards */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
 
     .store-card {
-      background-color: #ffffff;
-      border-radius: 15px; /* Softer radius */
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06); /* Lighter, more diffused shadow */
+      background-color: $color-dark-slate; /* Dark Slate for store card */
+      border-radius: 15px;
+      box-shadow: 0 8px 25px $color-shadow;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      border: 1px solid rgba(0, 0, 0, 0.04);
+      border: 1px solid $color-border-subtle;
       transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
       animation: popInScale 0.7s ease-out forwards;
       opacity: 0;
-      transform: scale(0.95); /* Start smaller for a pop-in effect */
+      transform: scale(0.95);
 
       @for $i from 1 through 6 {
         &:nth-child(#{$i}) {
-          animation-delay: #{$i * 0.08}s; /* Faster staggered animation */
+          animation-delay: #{$i * 0.08}s;
         }
       }
 
       &:hover {
-        transform: translateY(-5px) scale(1); /* Lighter lift, no scale increase */
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12); /* More prominent shadow on hover */
+        transform: translateY(-5px) scale(1.01); /* Slight lift and scale on hover */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* More prominent shadow on hover */
       }
 
       img {
         width: 100%;
-        height: 180px; /* Slightly smaller image height */
-        object-fit: cover;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-        filter: brightness(0.99); /* Even less dim */
+        height: 180px;
+        object-fit: cover; /* Changed to cover */
+        border-bottom: 1px solid $color-border-subtle;
+        filter: brightness(0.9); /* Slightly dim the image by default for text contrast */
         transition: filter 0.25s ease;
 
         &:hover {
-          filter: brightness(1);
+          filter: brightness(1); /* Brighten on hover */
         }
       }
 
       .store-info {
-        padding: 1.2rem; /* Reduced padding */
+        padding: 1.2rem;
         display: flex;
         flex-direction: column;
         flex-grow: 1;
 
         h2 {
-          font-size: 1.6rem; /* Slightly smaller */
-          font-weight: 600; /* Less bold than page title */
-          color: #2e472c; /* Deep forest green */
+          font-size: 1.6rem;
+          font-weight: 600;
+          color: $color-text-light; /* Pure White for store name */
           margin-bottom: 0.4rem;
           text-align: left;
           text-shadow: none;
-          &::after {
-            display: none;
-          }
         }
 
         .address {
-          font-size: 0.9rem; /* Slightly smaller */
-          color: #8c997c; /* Lighter sage green */
+          font-size: 0.9rem;
+          color: $color-text-dark; /* Light Gray for address */
           margin-bottom: 0.8rem;
           text-align: left;
         }
@@ -228,35 +233,35 @@
         .rating {
           display: flex;
           align-items: center;
-          gap: 0.4rem; /* Reduced gap */
+          gap: 0.4rem;
           margin-bottom: 1rem;
           justify-content: flex-start;
 
           .stars {
-            font-size: 1.2rem; /* Slightly smaller stars */
-            color: #e57f3f; /* Warm Carrot Orange */
+            font-size: 1.2rem;
+            color: $color-secondary-accent; /* Warm Yellow for stars */
           }
 
           .score {
-            font-size: 0.95rem; /* Slightly smaller score */
+            font-size: 0.95rem;
             font-weight: 600;
-            color: #2e472c; /* Deep forest green */
+            color: $color-text-light; /* Pure White for score */
           }
         }
 
         .details {
           display: flex;
           flex-wrap: wrap;
-          gap: 0.6rem; /* Tighter gap for tags */
+          gap: 0.6rem;
           margin-top: auto;
 
           span {
-            font-size: 0.85rem; /* Smaller tag font */
-            padding: 0.3rem 0.7rem; /* Smaller padding */
-            border-radius: 16px; /* Slightly tighter radius */
+            font-size: 0.85rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 16px;
             font-weight: 500;
-            color: #ffffff;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Lighter shadow */
+            color: $color-text-light;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
             transition: transform 0.2s ease;
 
             &:hover {
@@ -265,49 +270,33 @@
           }
 
           .delivery {
-            background: linear-gradient(
-              90deg,
-              #4caf50 0%,
-              #3a8a3e 100%
-            ); /* Solid green look with slight gradient */
+            background-color: $color-success; /* Green for delivery tag */
           }
 
           .locations {
-            background: linear-gradient(
-              90deg,
-              #e57f3f 0%,
-              #cc7038 100%
-            ); /* Solid carrot orange look with slight gradient */
+            background-color: $color-primary-bg; /* Vibrant Blue for locations tag */
           }
         }
 
         .view-store {
           margin-top: 1.5rem;
-          padding: 0.8rem 1.2rem; /* Smaller button padding */
-          background: linear-gradient(
-            90deg,
-            #4caf50 0%,
-            #ff9800 100%
-          ); /* Vibrant Green to Bright Orange gradient */
-          color: #ffffff;
+          padding: 0.8rem 1.2rem;
+          background-color: $color-secondary-accent; /* Warm Yellow for View Store button */
+          color: $color-dark-slate; /* Dark Slate text */
           border: none;
-          border-radius: 25px; /* Smaller radius */
-          font-size: 0.95rem; /* Smaller font */
+          border-radius: 25px;
+          font-size: 0.95rem;
           font-weight: 600;
           cursor: pointer;
-          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
           transition: all 0.25s ease-in-out;
-          letter-spacing: 0.3px; /* Slightly tighter spacing */
+          letter-spacing: 0.3px;
           align-self: flex-start;
 
           &:hover {
-            transform: translateY(-2px); /* Lighter lift */
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15); /* More prominent shadow on hover */
-            background: linear-gradient(
-              90deg,
-              #ff9800 0%,
-              #4caf50 100%
-            ); /* Transition to warmer gradient on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+            background-color: $color-hover-secondary; /* Lighter yellow on hover */
           }
 
           &:active {
@@ -347,7 +336,7 @@
       gap: 1rem;
       padding: 1rem;
       margin-bottom: 2.5rem;
-      align-items: stretch; /* Stretch filters to fill width */
+      align-items: stretch;
 
       div {
         flex-direction: column;
@@ -357,11 +346,11 @@
 
       select,
       .rating-stars {
-        width: 100%; /* Make select full width */
+        width: 100%;
       }
 
       .rating-stars {
-        justify-content: center; /* Center stars */
+        justify-content: center;
       }
     }
 
@@ -400,53 +389,53 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: rgba(255, 255, 255, 0.9); /* Slightly translucent white background */
-  border: 1px solid rgba(0, 0, 0, 0.08); /* Subtle border for definition */
-  border-radius: 50%; /* Perfect circle */
-  width: 2.8rem; /* Slightly larger size for better tap target */
-  height: 2.8rem; /* Equal height for circle */
+  background: $color-text-light; /* Pure white background */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 50%;
+  width: 2.8rem;
+  height: 2.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15); /* More noticeable shadow */
-  transition: all 0.3s ease-in-out; /* Smooth transitions for all properties */
-  z-index: 1; /* Ensure it stays on top */
-  overflow: hidden; /* Ensures star doesn't overflow if it briefly expands */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+  z-index: 1;
+  overflow: hidden;
 
   .favorite-icon {
-    font-size: 1.4rem; /* Larger star icon */
-    line-height: 1; /* Ensures proper vertical centering of the star */
-    color: #c0c0c0; /* Default light grey for not favorited */
-    transition: color 0.3s ease-in-out, transform 0.2s ease-out; /* Smooth color and transform for the icon itself */
+    font-size: 1.4rem;
+    line-height: 1;
+    color: $color-text-dark; /* Light Gray for not favorited */
+    transition: color 0.3s ease-in-out, transform 0.2s ease-out;
   }
 
   &:hover {
-    transform: scale(1.1); /* Pop out slightly on hover */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25); /* Stronger shadow on hover */
-    background: #ffffff; /* Solid white on hover */
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+    background: $color-text-light;
 
     .favorite-icon {
-      color: #e57f3f; /* Warm Carrot Orange on hover (before favoriting) */
-      transform: scale(1.15); /* Make the star slightly larger on hover */
+      color: $color-secondary-accent; /* Warm Yellow on hover (before favoriting) */
+      transform: scale(1.15);
     }
   }
 
-  // Style for when the item IS favorited
+  /* Style for when the item IS favorited */
   &.favorited {
-    background: #ffebe0; /* Light orange background when favorited */
-    border-color: #e57f3f; /* Carrot orange border when favorited */
+    background: lighten($color-secondary-accent, 30%); /* Lighter warm yellow when favorited */
+    border-color: $color-secondary-accent; /* Warm Yellow border when favorited */
 
     .favorite-icon {
-      color: #e57f3f; /* Warm Carrot Orange when favorited */
-      transform: scale(1); /* Ensure the star is back to normal size if already favorited */
+      color: $color-secondary-accent; /* Warm Yellow when favorited */
+      transform: scale(1);
     }
 
     &:hover {
-      background: #ffdbbf; /* Slightly darker orange on hover when already favorited */
+      background: lighten($color-secondary-accent, 20%); /* Slightly darker on hover when already favorited */
       .favorite-icon {
-        color: #cc7038; /* Darker orange on hover when already favorited */
-        transform: scale(1.15); /* Still scale the icon on hover when favorited */
+        color: darken($color-secondary-accent, 10%); /* Darker yellow on hover when already favorited */
+        transform: scale(1.15);
       }
     }
   }

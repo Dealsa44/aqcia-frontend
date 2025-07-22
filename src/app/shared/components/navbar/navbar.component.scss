@@ -1,33 +1,41 @@
-/* Color Palette: Marketing Freshness (Greenish & Carrot) */
-/* Primary Base (Deep Forest Green): #1A5229 */
-/* Secondary Base (Warm Carrot Orange): #E57F3F */
-/* Gradient Start: #4CAF50 (Vibrant Green) */
-/* Gradient End: #FF9800 (Bright Orange) */
-/* Accent/Text: #F0F8FF (Alice Blue - a very light, almost white, blue) */
-/* Subtle Shadow: rgba(0, 0, 0, 0.4) */
+/* Color Palette: Inspired by modern delivery apps */
+/* Primary Background: #009FE3 (Vibrant Blue) */
+/* Secondary Accent: #FFC300 (Warm Yellow) */
+/* Text/Icons: #FFFFFF (Pure White) */
+/* Darker Text/Subtle Elements: #A0A0A0 (Light Gray) */
+/* Success/Call to Action: #4CAF50 (Green) */
+/* Danger/Notification: #F44336 (Red) */
+/* General Background (for dropdowns, off-canvas): #1B2B3B (Dark Slate) */
+/* Subtle Border/Separator: rgba(255, 255, 255, 0.1) */
+/* Shadow Color: rgba(0, 0, 0, 0.2) */
+
+/* Define color variables for clarity and easy modification */
+$color-primary-bg: #009FE3;
+$color-secondary-accent: #FFC300;
+$color-text-light: #FFFFFF;
+$color-text-dark: #A0A0A0;
+$color-success: #4CAF50;
+$color-danger: #F44336;
+$color-dark-slate: #1B2B3B;
+$color-border-subtle: rgba(255, 255, 255, 0.1);
+$color-shadow: rgba(0, 0, 0, 0.2);
+$color-hover-secondary: lighten($color-secondary-accent, 5%);
+$color-hover-primary: darken($color-primary-bg, 5%);
 
 .navbar {
-  background: linear-gradient(
-    90deg,
-    #1a5229 0%,
-    #e57f3f 100%
-  ); /* Deep forest green to warm carrot orange base */
+  background-color: $color-primary-bg; /* Vibrant Blue background */
   padding: 1rem 0;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 15px $color-shadow;
   transition: all 0.4s ease-in-out;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid $color-border-subtle;
 
   &.sticky {
-    background: linear-gradient(
-      90deg,
-      #10361a 0%,
-      #b86730 100%
-    ); /* Slightly darker green to orange when sticky */
+    background-color: darken($color-primary-bg, 8%); /* Slightly darker blue when sticky */
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     transform: translateY(0);
     animation: fadeInDown 0.6s ease-out;
@@ -54,18 +62,18 @@
   }
 
   .logo {
-    color: #f0f8ff; /* Alice Blue for logo */
+    color: $color-text-light; /* Pure White for logo */
     font-size: 2rem;
     font-weight: 800;
     text-decoration: none;
     letter-spacing: 1px;
-    text-shadow: 0 0 5px rgba(240, 248, 255, 0.5);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
     transition: all 0.3s ease-in-out;
 
     &:hover {
-      color: #ff9800; /* Bright orange on hover */
-      transform: scale(1.05) rotate(-2deg);
-      text-shadow: 0 0 10px #ff9800;
+      color: $color-secondary-accent; /* Warm Yellow on hover */
+      transform: scale(1.05);
+      text-shadow: 0 0 10px $color-secondary-accent;
     }
   }
 
@@ -76,7 +84,7 @@
     transition: all 0.5s ease-in-out;
 
     .nav-link {
-      color: #f0f8ff; /* Alice Blue for links */
+      color: $color-text-light; /* Pure White for links */
       text-decoration: none;
       font-size: 1.05rem;
       font-weight: 500;
@@ -92,11 +100,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(
-          45deg,
-          #4caf50,
-          #ff9800
-        ); /* Vibrant green to bright orange */
+        background-color: $color-secondary-accent; /* Warm Yellow hover background */
         z-index: -1;
         transform: scaleX(0);
         transform-origin: right;
@@ -105,9 +109,9 @@
       }
 
       &:hover {
-        color: #ffffff; /* White on hover for contrast */
-        transform: translateY(-5px) scale(1.02);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        color: $color-dark-slate; /* Dark Slate on hover for contrast */
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 20px $color-shadow;
         &::before {
           transform: scaleX(1);
           transform-origin: left;
@@ -115,14 +119,10 @@
       }
 
       &.active-link {
-        background: linear-gradient(
-          45deg,
-          #4caf50,
-          #ff9800
-        ); /* Active link background */
-        color: #ffffff;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        transform: translateY(-3px); /* Slightly lift active link */
+        background-color: $color-secondary-accent; /* Warm Yellow for active link */
+        color: $color-dark-slate; /* Dark Slate for active link text */
+        box-shadow: 0 5px 15px $color-shadow;
+        transform: translateY(-3px);
       }
 
       &.cart-link {
@@ -130,25 +130,23 @@
         align-items: center;
         gap: 0.6rem;
         position: relative;
-        overflow: visible; /* To ensure the cart-badge is not clipped */
+        overflow: visible;
 
         i {
-          font-size: 1.3rem; /* Keep for slightly larger icon */
+          font-size: 1.3rem;
         }
 
-        /* The span now acts as the primary positioning reference for the badge */
         span {
           position: relative;
           display: inline-block;
         }
 
-        /* Styling for the badge specifically within the cart nav-link */
         .cart-badge {
           position: absolute;
-          top: -8px; /* Move up to be above the text */
-          right: -23px; /* Move right to be just outside the text */
-          background-color: #ff5252;
-          color: white;
+          top: -8px;
+          right: -23px;
+          background-color: $color-danger; /* Red for danger/notification */
+          color: $color-text-light;
           border-radius: 50%;
           width: 20px;
           height: 20px;
@@ -158,7 +156,7 @@
           font-size: 0.7rem;
           font-weight: bold;
           animation: pulse 1.5s infinite;
-          z-index: 1; /* Ensure it stays on top */
+          z-index: 1;
         }
       }
     }
@@ -168,8 +166,8 @@
       cursor: pointer;
 
       .dropdown-toggle {
-        background: linear-gradient(45deg, #4caf50, #ff9800);
-        color: #ffffff;
+        background-color: $color-secondary-accent; /* Warm Yellow for dropdown toggle */
+        color: $color-dark-slate; /* Dark Slate for toggle text */
         border: none;
         padding: 0.7rem 1.2rem;
         border-radius: 30px;
@@ -180,19 +178,19 @@
         display: flex;
         align-items: center;
         gap: 0.6rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 2px 8px $color-shadow;
 
         &::after {
-          content: "▼"; /* Dropdown arrow */
+          content: "▼";
           font-size: 0.6rem;
           margin-left: 0.6rem;
           transition: transform 0.3s ease-in-out;
         }
 
         &:hover {
-          background: linear-gradient(45deg, #ff9800, #4caf50);
-          transform: translateY(-5px);
-          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+          background-color: $color-hover-secondary; /* Lighter Yellow on hover */
+          transform: translateY(-3px);
+          box-shadow: 0 6px 15px $color-shadow;
         }
       }
 
@@ -200,7 +198,7 @@
         position: absolute;
         top: calc(100% + 12px);
         left: 0;
-        background-color: #1a5229; /* Deep forest green background for menu */
+        background-color: $color-dark-slate; /* Dark Slate background for menu */
         border-radius: 10px;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
         overflow: hidden;
@@ -209,7 +207,7 @@
         transform: translateY(-15px) scale(0.95);
         pointer-events: none;
         transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        border: 1px solid $color-border-subtle;
         animation: swingIn 0.4s ease-out forwards;
 
         button {
@@ -219,24 +217,22 @@
           text-align: left;
           background: none;
           border: none;
-          color: #f0f8ff;
+          color: $color-text-light;
           font-size: 1rem;
           cursor: pointer;
-          transition: background-color 0.2s ease-in-out,
-            color 0.2s ease-in-out;
+          transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 
           &:hover {
-            background-color: rgba(76, 175, 80, 0.2); /* Subtle green hover */
-            color: #ffffff;
+            background-color: rgba($color-primary-bg, 0.2); /* Subtle Blue hover */
+            color: $color-text-light;
           }
 
           &:not(:last-child) {
-            border-bottom: 1px solid rgba(240, 248, 255, 0.1);
+            border-bottom: 1px solid $color-border-subtle;
           }
         }
       }
 
-      // Dropdown active state handled by Angular's @if
       &:has(.dropdown-menu:not(:empty)) .dropdown-toggle::after {
         transform: rotate(180deg);
       }
@@ -276,7 +272,7 @@
       display: block;
       width: 30px;
       height: 3px;
-      background-color: #f0f8ff; /* Alice Blue for hamburger lines */
+      background-color: $color-text-light; /* Pure White for hamburger lines */
       margin: 6px 0;
       border-radius: 2px;
       transition: all 0.3s ease-in-out;
@@ -289,20 +285,15 @@
       top: 100%;
       left: 0;
       width: 100%;
-      background: linear-gradient(
-        180deg,
-        #1a5229 0%,
-        #e57f3f 100%
-      ); /* Full height gradient */
+      background-color: $color-dark-slate; /* Dark Slate background for mobile menu */
       flex-direction: column;
       align-items: flex-start;
       padding: 1.5rem 1.5rem;
-      /* REMOVED: border-top to connect navbar and menu */
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 8px 20px $color-shadow;
       transform: translateY(-100%);
       opacity: 0;
       pointer-events: none;
-      gap: 0.5rem; /* CHANGED: Add gap between nav items */
+      gap: 0.5rem;
       transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55),
         opacity 0.5s ease-out;
 
@@ -315,25 +306,22 @@
 
       .nav-link {
         width: 100%;
-        padding: 1rem 1.2rem; /* Keep this as the consistent padding */
-        border-bottom: 1px solid rgba(240, 248, 255, 0.1);
-        margin: 0; /* ADDED: Remove any margin */
+        padding: 1rem 1.2rem;
+        border-bottom: 1px solid $color-border-subtle;
+        margin: 0;
 
         &.active-link {
-          background: linear-gradient(
-            90deg,
-            #4caf50 0%,
-            #ff9800 100%
-          ); /* Active link background on mobile */
-          transform: none; /* Remove transform on mobile active */
+          background-color: $color-secondary-accent; /* Warm Yellow for active link on mobile */
+          color: $color-dark-slate;
+          transform: none;
           box-shadow: none;
         }
 
         &::before {
-          display: none; /* Hide hover effect on mobile menu items */
+          display: none;
         }
         &:hover {
-          background-color: rgba(76, 175, 80, 0.2); /* Consistent hover */
+          background-color: rgba($color-primary-bg, 0.2); /* Subtle Blue hover on mobile */
           transform: none;
           box-shadow: none;
         }
@@ -344,18 +332,17 @@
       }
 
       .cart-link {
-        justify-content: flex-start; /* Align cart content to the left on mobile */
-        // margin-top: 1rem; /* CHANGED: Add margin to separate cart from nav links */
-        padding: 1rem 1.2rem; /* Force the same padding as other nav-links */
-        height: auto; /* Ensure height adjusts to content with padding */
+        justify-content: flex-start;
+        padding: 1rem 1.2rem;
+        height: auto;
       }
 
       .dropdown {
         width: 100%;
-        margin: 0.5rem 0; /* ADDED: Add margin between dropdown buttons */
+        margin: 0.5rem 0;
 
         &:first-of-type {
-          margin-top: 1rem; /* ADDED: Extra margin before first dropdown */
+          margin-top: 1rem;
         }
 
         .dropdown-toggle {
@@ -364,26 +351,21 @@
         }
 
         .dropdown-menu {
-          position: static; /* Allows menu to flow in document */
+          position: static;
           width: 100%;
           box-shadow: none;
           border: none;
-          background-color: #10361a; /* Slightly darker green for nested menu */
+          background-color: lighten($color-dark-slate, 5%); /* Slightly lighter Dark Slate for nested menu */
           margin-top: 0.8rem;
           padding: 0.5rem 0;
-          animation: none; /* Disable desktop dropdown animation */
+          animation: none;
           border-radius: 8px;
 
           button {
             padding: 0.8rem 2rem;
-            border-bottom: 1px solid rgba(240, 248, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             &:hover {
-              background-color: rgba(
-                229,
-                127,
-                63,
-                0.2
-              ); /* Subtle orange hover */
+              background-color: rgba($color-primary-bg, 0.2); /* Subtle Blue hover */
             }
           }
         }
@@ -391,7 +373,7 @@
     }
 
     .hamburger {
-      display: block; /* Show hamburger on mobile */
+      display: block;
 
       &.active {
         span:nth-child(1) {
@@ -412,8 +394,8 @@
     position: absolute;
     top: -8px;
     right: -8px;
-    background-color: #ff5252;
-    color: white;
+    background-color: $color-danger;
+    color: $color-text-light;
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -464,11 +446,11 @@
 .floating-cart {
   display: inline-flex;
   align-items: center;
-  background: linear-gradient(45deg, #4caf50, #ff9800);
-  color: white;
+  background-color: $color-success; /* Green for success/call to action */
+  color: $color-text-light;
   padding: 12px 20px;
   border-radius: 30px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px $color-shadow;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -478,6 +460,7 @@
   &:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    background-color: darken($color-success, 5%); /* Slightly darker green on hover */
   }
 
   .floating-cart-text {
@@ -500,8 +483,8 @@
     position: absolute;
     top: -8px;
     right: -8px;
-    background-color: #ff5252;
-    color: white;
+    background-color: $color-danger;
+    color: $color-text-light;
     border-radius: 50%;
     width: 20px;
     height: 20px;
