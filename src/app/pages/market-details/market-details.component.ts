@@ -201,6 +201,49 @@ export class MarketDetailsComponent implements OnInit {
     });
   }
 
+  calculateMarketStats() {
+    console.log('📊 MarketDetailsComponent - calculateMarketStats called');
+    
+    if (this.marketId.toLowerCase() === 'agrohub') {
+      // Calculate stats for Agrohub using real data
+      if (this.apiProducts.length > 0) {
+        this.averagePrice = 0; // Will be calculated when prices are loaded
+        this.priceRange = 'Loading...';
+        this.discountCount = 0;
+        console.log('📊 MarketDetailsComponent - Agrohub stats calculated');
+      }
+    } else {
+      // Calculate stats for mock markets
+      const marketProducts = productsMocks.products.filter((product) =>
+        product.prices.some(
+          (price) => price.market.toLowerCase() === this.marketId.toLowerCase()
+        )
+      );
+
+      const prices = marketProducts.flatMap((product) =>
+        product.prices
+          .filter(
+            (price) => price.market.toLowerCase() === this.marketId.toLowerCase()
+          )
+          .map((price) => price.price - (price.discount || 0))
+      );
+
+      if (prices.length > 0) {
+        const minPrice = Math.min(...prices);
+        const maxPrice = Math.max(...prices);
+        this.averagePrice = prices.reduce((a, b) => a + b, 0) / prices.length;
+        this.priceRange = `${minPrice.toFixed(2)} - ${maxPrice.toFixed(2)}`;
+        this.discountCount = marketProducts.filter((product) =>
+          product.prices.some(
+            (price) =>
+              price.market.toLowerCase() === this.marketId.toLowerCase() &&
+              price.discount > 0
+          )
+        ).length;
+      }
+    }
+  }
+
   getCurrentText(items: string[] | any[]) {
     return items[this.languageService.getCurrentLanguage()];
   }
