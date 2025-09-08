@@ -38,7 +38,7 @@ export class CartService {
     return {
       items: [...this.cartItems],
       total: this.getTotalPrice(),
-      count: this.getTotalItems()
+      count: this.getTotalItemCount()
     };
   }
 
