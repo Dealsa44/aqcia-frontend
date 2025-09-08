@@ -50,7 +50,7 @@ export interface ApiPrice {
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = environment.apiUrl;
+  private baseUrl = 'https://aqcia-api-g2afh7hcdvdffsg5.northeurope-01.azurewebsites.net';
 
   constructor(private http: HttpClient) {}
 
