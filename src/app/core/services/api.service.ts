@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, timeout } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 export interface ApiProduct {
   product_id: number;
@@ -66,14 +66,42 @@ export class ApiService {
     console.log('🌐 Full URL:', url);
     console.log('🔒 URL starts with https:', url.startsWith('https://'));
     
-    // Add timeout and more detailed logging
-    return this.http.get<ApiProduct[]>(url).pipe(
-      timeout(10000), // 10 second timeout
+    // Add comprehensive error handling and logging
+    return this.http.get<ApiProduct[]>(url, {
+      observe: 'response',
+      reportProgress: true
+    }).pipe(
+      timeout(15000), // 15 second timeout
       tap({
-        next: (data) => console.log('✅ HTTP request successful, received data:', data),
-        error: (error) => console.log('❌ HTTP request failed:', error),
+        next: (response) => {
+          console.log('✅ HTTP request successful!');
+          console.log('📊 Response status:', response.status);
+          console.log('📋 Response headers:', response.headers);
+          console.log('📦 Response body length:', response.body?.length || 0);
+          console.log('🔍 First few items:', response.body?.slice(0, 3));
+        },
+        error: (error) => {
+          console.log('❌ HTTP request failed!');
+          console.log('🚨 Error type:', error.constructor.name);
+          console.log('📊 Error status:', error.status);
+          console.log('📋 Error statusText:', error.statusText);
+          console.log('🌐 Error URL:', error.url);
+          console.log('📝 Error message:', error.message);
+          console.log('🔍 Full error object:', error);
+          
+          // Check if it's a network error
+          if (error.status === 0) {
+            console.log('🌐 Network error detected - possible CORS or connectivity issue');
+          }
+          
+          // Check if it's a timeout
+          if (error.name === 'TimeoutError') {
+            console.log('⏰ Request timed out after 15 seconds');
+          }
+        },
         complete: () => console.log('🏁 HTTP request completed')
-      })
+      }),
+      map(response => response.body || [])
     );
   }
 
