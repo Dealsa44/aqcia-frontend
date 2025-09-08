@@ -60,7 +60,8 @@ export class ApiService {
 
   // Get all products
   getProducts(skip: number = 0, limit: number = 100): Observable<ApiProduct[]> {
-    const url = `${this.baseUrl}/products?skip=${skip}&limit=${limit}`;
+    const timestamp = Date.now();
+    const url = `${this.baseUrl}/products?skip=${skip}&limit=${limit}&v=${timestamp}`;
     console.log('🔍 API Service - getProducts called');
     console.log('📍 Base URL:', this.baseUrl);
     console.log('🌐 Full URL:', url);
