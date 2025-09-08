@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Product } from '../../core/interfaces/product.interface';
 import { ProductAnimationService } from '../../core/services/product-animation.service';
+import { ApiService, ApiProduct, ApiCategory, ApiSubcategory, ApiPrice } from '../../core/services/api.service';
 
 @Component({
   selector: 'app-search',
@@ -23,9 +24,14 @@ export class CatalogComponent implements OnInit {
   catalogMocks = catalogMocks;
   searchTerm = '';
   // selectedCategory = ''; // No longer needed for single selection
-  products: Product[] = productsMocks.products as Product[]; // Explicitly type as Product[]
-  categories = productsMocks.categories;
-  filteredProducts: Product[] = this.products;
+  products: Product[] = []; // Will be populated from API
+  categories: any[] = []; // Will be populated from API
+  filteredProducts: Product[] = [];
+  
+  // Loading states
+  isLoadingProducts = true;
+  isLoadingCategories = true;
+  errorMessage = '';
 
   showCategoryModal = false;
   selectedCategories: string[] = []; // New property to store multiple selected categories
@@ -40,10 +46,13 @@ export class CatalogComponent implements OnInit {
     public cartService: CartService,
     private router: Router,
     private route: ActivatedRoute,
-    private productAnimationService: ProductAnimationService
+    private productAnimationService: ProductAnimationService,
+    private apiService: ApiService
   ) {}
 
   ngOnInit() {
+    this.loadData();
+    
     this.route.queryParams.subscribe((params: any) => {
       if (params['q']) {
         this.searchTerm = params['q'];
@@ -56,7 +65,74 @@ export class CatalogComponent implements OnInit {
       }
       this.searchProducts(); // Call searchProducts to apply initial filters
     });
+  }
 
+  loadData() {
+    // Load products from API
+    this.apiService.getProducts().subscribe({
+      next: (apiProducts) => {
+        this.products = this.convertApiProductsToProducts(apiProducts);
+        this.filteredProducts = this.products;
+        this.isLoadingProducts = false;
+        this.updateCategoryCounts();
+      },
+      error: (error) => {
+        console.error('Error loading products:', error);
+        this.errorMessage = 'Failed to load products. Using mock data.';
+        // Fallback to mock data
+        this.products = productsMocks.products as Product[];
+        this.filteredProducts = this.products;
+        this.isLoadingProducts = false;
+        this.updateCategoryCounts();
+      }
+    });
+
+    // Load categories from API
+    this.apiService.getCategories().subscribe({
+      next: (apiCategories) => {
+        this.categories = this.convertApiCategoriesToCategories(apiCategories);
+        this.isLoadingCategories = false;
+        this.updateCategoryCounts();
+      },
+      error: (error) => {
+        console.error('Error loading categories:', error);
+        // Fallback to mock data
+        this.categories = productsMocks.categories;
+        this.isLoadingCategories = false;
+        this.updateCategoryCounts();
+      }
+    });
+  }
+
+  convertApiProductsToProducts(apiProducts: ApiProduct[]): Product[] {
+    return apiProducts.map(apiProduct => ({
+      id: apiProduct.product_id,
+      name: [apiProduct.name, apiProduct.name, apiProduct.name], // Same name for all languages for now
+      image: apiProduct.image_url || 'default-product.jpg',
+      category: apiProduct.subcategory_id.toString(),
+      description: ['', '', ''], // No description from API yet
+      prices: [
+        { 
+          market: 'Agrohub', 
+          price: 0, // Will be populated when we get prices
+          discount: 0, 
+          history: [0] 
+        }
+      ],
+      reviews: [],
+      nutrition: { calories: 0, protein: 0, carbs: 0, fat: 0 }
+    }));
+  }
+
+  convertApiCategoriesToCategories(apiCategories: ApiCategory[]): any[] {
+    return apiCategories.map(apiCategory => ({
+      id: apiCategory.id.toString(),
+      name: [apiCategory.name_ka, apiCategory.name_en, apiCategory.name_ru],
+      icon: apiCategory.icon || 'default-category.jpg'
+    }));
+  }
+
+  updateCategoryCounts() {
     this.allCategories = this.categories.map((category) => ({
       ...category,
       productCount: this.products.filter((p) => p.category === category.id)
@@ -96,6 +172,27 @@ export class CatalogComponent implements OnInit {
   }
 
   searchProducts() {
+    if (this.searchTerm.trim()) {
+      // Use API search for real-time results
+      this.apiService.searchProducts(this.searchTerm).subscribe({
+        next: (apiProducts) => {
+          this.filteredProducts = this.convertApiProductsToProducts(apiProducts);
+          this.applyCategoryFilter();
+        },
+        error: (error) => {
+          console.error('Search error:', error);
+          // Fallback to local search
+          this.performLocalSearch();
+        }
+      });
+    } else {
+      // No search term, show all products with category filter
+      this.filteredProducts = this.products;
+      this.applyCategoryFilter();
+    }
+  }
+
+  performLocalSearch() {
     const searchTermLower = this.searchTerm.toLowerCase();
     this.filteredProducts = this.products.filter((product: Product) => {
       const nameMatch = product.name.some((name: string) =>
@@ -107,6 +204,14 @@ export class CatalogComponent implements OnInit {
         this.selectedCategories.includes(product.category);
       return nameMatch && categoryMatch;
     });
+  }
+
+  applyCategoryFilter() {
+    if (this.selectedCategories.length > 0) {
+      this.filteredProducts = this.filteredProducts.filter((product: Product) =>
+        this.selectedCategories.includes(product.category)
+      );
+    }
   }
 
   getCurrentText(items: string[] | any[]) {

@@ -36,12 +36,27 @@
   </div>
 
   <div class="results">
-    @if (filteredProducts.length > 0) {
+    <!-- Loading state -->
+    @if (isLoadingProducts) {
+    <div class="loading">
+      <p>Loading products from Agrohub...</p>
+    </div>
+    }
+    
+    <!-- Error state -->
+    @if (errorMessage) {
+    <div class="error">
+      <p>{{ errorMessage }}</p>
+    </div>
+    }
+    
+    <!-- Products grid -->
+    @if (!isLoadingProducts && filteredProducts.length > 0) {
     <div class="product-grid">
       @for (product of filteredProducts; track product.id) {
       <div class="product-card">
         <img
-          [src]="'assets/imgs/products/' + product.image"
+          [src]="product.image.startsWith('http') ? product.image : 'assets/imgs/products/' + product.image"
           [alt]="getCurrentText(product.name)"
           [routerLink]="[
             '/',
@@ -75,7 +90,7 @@
       </div>
       }
     </div>
-    } @else {
+    } @else if (!isLoadingProducts && filteredProducts.length === 0) {
     <div class="no-results">
       {{ getCurrentText(catalogMocks.noResultsMessage) }}
     </div>

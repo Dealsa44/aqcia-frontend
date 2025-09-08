@@ -22,6 +22,38 @@ $color-shadow: rgba(0, 0, 0, 0.2);
 $color-hover-secondary: lighten($color-secondary-accent, 5%);
 $color-hover-primary: darken($color-primary-bg, 5%);
 
+/* Loading and Error States */
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: $color-text-dark;
+  font-size: 1.1rem;
+  
+  p {
+    margin: 0;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: inline-block;
+  }
+}
+
+.error {
+  text-align: center;
+  padding: 2rem;
+  color: $color-danger;
+  font-size: 1.1rem;
+  
+  p {
+    margin: 0;
+    padding: 1rem;
+    background: rgba(244, 67, 54, 0.1);
+    border: 1px solid $color-danger;
+    border-radius: 8px;
+    display: inline-block;
+  }
+}
+
 
 .search-container {
   // background-color: $color-primary-bg; /* Vibrant Blue background */
