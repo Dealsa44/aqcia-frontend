@@ -114,7 +114,7 @@ export class CatalogComponent implements OnInit {
     });
 
     // Load categories from API
-    this.apiService.getCategories().subscribe({
+    this.apiService.getAllCategories().subscribe({
       next: (apiCategories: ApiCategory[]) => {
         this.categories = this.convertApiCategoriesToCategories(apiCategories);
         this.isLoadingCategories = false;
@@ -135,7 +135,7 @@ export class CatalogComponent implements OnInit {
       id: apiProduct.product_id,
       name: [apiProduct.name, apiProduct.name, apiProduct.name], // Same name for all languages for now
       image: apiProduct.image_url || 'default-product.jpg',
-      category: apiProduct.subcategory_id.toString(),
+      category: this.mapSubcategoryToCategory(apiProduct.subcategory_id),
       description: ['', '', ''], // No description from API yet
       prices: [
         { 
@@ -148,6 +148,39 @@ export class CatalogComponent implements OnInit {
       reviews: [],
       nutrition: { calories: 0, protein: 0, carbs: 0, fat: 0 }
     }));
+  }
+
+  mapSubcategoryToCategory(subcategoryId: number): string {
+    // Simple mapping from subcategory to main category
+    // This should be improved with proper API data
+    const categoryMap: { [key: number]: string } = {
+      2: '1',   // Spices -> Food
+      3: '1',   // Sauces -> Food
+      4: '1',   // Dairy -> Food
+      6: '1',   // Pickles -> Food
+      7: '1',   // Spices -> Food
+      8: '1',   // Juices -> Food
+      9: '1',   // Capers -> Food
+      10: '2',  // Kitchenware -> Household
+      16: '1',  // Salads -> Food
+      24: '1',  // Bread -> Food
+      25: '1',  // Baguettes -> Food
+      26: '1',  // Toast bread -> Food
+      34: '1',  // Meat -> Food
+      35: '1',  // Vegetables -> Food
+      36: '1',  // Fruits -> Food
+      37: '1',  // Herbs -> Food
+      41: '1',  // Meat -> Food
+      42: '1',  // Meat -> Food
+      46: '1',  // Fish -> Food
+      47: '1',  // Sausages -> Food
+      49: '1',  // Cheese -> Food
+      51: '1',  // Cheese -> Food
+      52: '1',  // Cheese -> Food
+      56: '1'   // Mayonnaise -> Food
+    };
+    
+    return categoryMap[subcategoryId] || '1'; // Default to Food category
   }
 
   convertApiCategoriesToCategories(apiCategories: ApiCategory[]): any[] {

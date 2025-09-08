@@ -62,6 +62,7 @@ export class ProductComponent implements OnInit {
       next: (apiProduct: ApiProduct) => {
         console.log('✅ ProductComponent - Product loaded successfully from API:', apiProduct);
         this.apiProduct = apiProduct;
+        this.product = this.convertApiProductToProduct(apiProduct);
         this.isLoadingProduct = false;
         this.loadPrices(productId);
       },
@@ -77,6 +78,23 @@ export class ProductComponent implements OnInit {
         this.isLoadingProduct = false;
       }
     });
+  }
+
+  convertApiProductToProduct(apiProduct: ApiProduct): any {
+    console.log('🔄 ProductComponent - Converting API product to display format');
+    return {
+      id: apiProduct.product_id,
+      name: [apiProduct.name, apiProduct.name, apiProduct.name], // Multi-language array
+      description: [apiProduct.description || '', apiProduct.description || '', apiProduct.description || ''],
+      image: apiProduct.image_url,
+      images: [apiProduct.image_url], // Single image for now
+      prices: [], // Will be populated by loadPrices
+      rating: 4.5, // Default rating
+      discount: 0, // Will be calculated from prices
+      brand: apiProduct.brand || '',
+      barcode: apiProduct.bar_code || '',
+      subcategory_id: apiProduct.subcategory_id
+    };
   }
 
   loadPrices(productId: number) {
