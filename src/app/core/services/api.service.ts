@@ -40,10 +40,14 @@ export class ApiService {
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {
-    // Ensure HTTPS is always used
-    if (this.apiUrl.startsWith('http://')) {
-      this.apiUrl = this.apiUrl.replace('http://', 'https://');
-      console.warn('API URL was HTTP, converted to HTTPS:', this.apiUrl);
+    // Force HTTPS and log the URL
+    this.apiUrl = this.apiUrl.replace('http://', 'https://');
+    console.log('API Service initialized with URL:', this.apiUrl);
+    
+    // Additional safety check
+    if (!this.apiUrl.startsWith('https://')) {
+      this.apiUrl = 'https://' + this.apiUrl.replace(/^https?:\/\//, '');
+      console.warn('Forced HTTPS conversion:', this.apiUrl);
     }
   }
 
