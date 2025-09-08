@@ -70,13 +70,13 @@ export class CatalogComponent implements OnInit {
   loadData() {
     // Load products from API
     this.apiService.getProducts().subscribe({
-      next: (apiProducts) => {
+      next: (apiProducts: ApiProduct[]) => {
         this.products = this.convertApiProductsToProducts(apiProducts);
         this.filteredProducts = this.products;
         this.isLoadingProducts = false;
         this.updateCategoryCounts();
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error loading products:', error);
         this.errorMessage = 'Failed to load products. Using mock data.';
         // Fallback to mock data
@@ -89,12 +89,12 @@ export class CatalogComponent implements OnInit {
 
     // Load categories from API
     this.apiService.getCategories().subscribe({
-      next: (apiCategories) => {
+      next: (apiCategories: ApiCategory[]) => {
         this.categories = this.convertApiCategoriesToCategories(apiCategories);
         this.isLoadingCategories = false;
         this.updateCategoryCounts();
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error loading categories:', error);
         // Fallback to mock data
         this.categories = productsMocks.categories;
@@ -175,11 +175,11 @@ export class CatalogComponent implements OnInit {
     if (this.searchTerm.trim()) {
       // Use API search for real-time results
       this.apiService.searchProducts(this.searchTerm).subscribe({
-        next: (apiProducts) => {
+        next: (apiProducts: ApiProduct[]) => {
           this.filteredProducts = this.convertApiProductsToProducts(apiProducts);
           this.applyCategoryFilter();
         },
-        error: (error) => {
+        error: (error: any) => {
           console.error('Search error:', error);
           // Fallback to local search
           this.performLocalSearch();
