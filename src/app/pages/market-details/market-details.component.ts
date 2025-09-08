@@ -248,20 +248,20 @@ export class MarketDetailsComponent implements OnInit {
     return items[this.languageService.getCurrentLanguage()];
   }
 
-  addToCart(product: any) {
+  addToCart(product: any, event?: MouseEvent) {
     const marketPrice = product.prices.find(
       (p: any) => p.market.toLowerCase() === this.marketId.toLowerCase()
     );
 
     if (marketPrice) {
-      this.cartService.addToCart({
+      this.cartService.addToCartWithAnimation({
         id: product.id,
         name: product.name,
         price: marketPrice.price - (marketPrice.discount || 0),
         image: product.image,
         quantity: 1,
         market: this.marketId,
-      });
+      }, event);
     }
   }
   getStars(rating: number): string {

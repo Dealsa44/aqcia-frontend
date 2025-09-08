@@ -74,7 +74,7 @@
             <span class="discount">-{{ getDiscount(product) }}%</span>
             }
           </p>
-          <button class="add-to-cart" (click)="addToCart(product)">
+          <button class="add-to-cart" (click)="addToCart(product, $event)">
             {{ getCurrentText(marketData.addToCart) }}
           </button>
         </div>

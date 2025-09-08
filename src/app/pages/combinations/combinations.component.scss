@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /* Color Palette: Inspired by modern delivery apps */
 /* Primary Background: #009FE3 (Vibrant Blue) */
 /* Secondary Accent: #FFC300 (Warm Yellow) */
@@ -19,10 +21,10 @@ $color-danger: #F44336;
 $color-dark-slate: #1B2B3B;
 $color-border-subtle: rgba(255, 255, 255, 0.1);
 $color-shadow: rgba(0, 0, 0, 0.2);
-$color-hover-secondary: lighten($color-secondary-accent, 5%);
-$color-hover-primary: darken($color-primary-bg, 5%);
-$color-dark-slate-lighten: lighten($color-dark-slate, 3%);
-$color-dark-slate-darken: darken($color-dark-slate, 3%);
+$color-hover-secondary: color.adjust($color-secondary-accent, $lightness: 5%);
+$color-hover-primary: color.adjust($color-primary-bg, $lightness: -5%);
+$color-dark-slate-lighten: color.adjust($color-dark-slate, $lightness: 3%);
+$color-dark-slate-darken: color.adjust($color-dark-slate, $lightness: -3%);
 
 
 .combinations-page {

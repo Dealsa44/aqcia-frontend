@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /* Color Palette: Inspired by modern delivery apps */
 /* Primary Background: #009FE3 (Vibrant Blue) */
 /* Secondary Accent: #FFC300 (Warm Yellow) */
@@ -19,12 +21,12 @@ $color-danger: #F44336;
 $color-dark-slate: #1B2B3B;
 $color-border-subtle: rgba(255, 255, 255, 0.1);
 $color-shadow: rgba(0, 0, 0, 0.2);
-$color-dark-slate-lighten: lighten($color-dark-slate, 3%);
+$color-dark-slate-lighten: color.adjust($color-dark-slate, $lightness: 3%);
 $color-gradient-start: #007bff; // A slightly darker blue for gradient
 $color-gradient-end: #0056b3; // Even darker blue for gradient
-$color-table-row-bg: lighten($color-dark-slate, 8%); // Slightly lighter dark slate for table rows
-$color-table-row-hover: lighten($color-dark-slate, 12%); // Even lighter on hover
-$color-review-bg: lighten($color-dark-slate, 5%); // Lighter dark slate for reviews
+$color-table-row-bg: color.adjust($color-dark-slate, $lightness: 8%); // Slightly lighter dark slate for table rows
+$color-table-row-hover: color.adjust($color-dark-slate, $lightness: 12%); // Even lighter on hover
+$color-review-bg: color.adjust($color-dark-slate, $lightness: 5%); // Lighter dark slate for reviews
 $color-review-border: rgba(255, 255, 255, 0.05); // More subtle border for reviews
 
 .product-page {

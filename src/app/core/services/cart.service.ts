@@ -74,13 +74,6 @@ export class CartService {
     this.saveCart();
   }
 
-  /**
-   * Legacy addToCart method (kept for backward compatibility)
-   * @deprecated Use addToCartWithAnimation instead
-   */
-  addToCart(item: any) {
-    this.addToCartWithAnimation(item);
-  }
 
   removeFromCart(id: number) {
     this.cartItems = this.cartItems.filter(item => item.id !== id);

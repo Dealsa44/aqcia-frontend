@@ -4,19 +4,23 @@ export const navbarMocks = {
     {
       titles: ['მარკეტები', 'Markets', 'Магазины'],
       path: 'markets',
+      icon: 'store',
     },
     {
       titles: ['კატალოგი', 'Catalog', 'Каталог'],
       path: 'catalog',
+      icon: 'th-large',
     },
     {
       titles: ['შესვლა', 'Login', 'Войти'],
       path: 'login',
+      icon: 'sign-in',
       authState: 'loggedOut', // Add this to identify login state
     },
     {
       titles: ['პროფილი', 'Profile', 'Профиль'],
       path: 'profile',
+      icon: 'user',
       authState: 'loggedIn', // Add this to identify logged in state
     },
   ],

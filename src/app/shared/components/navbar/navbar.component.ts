@@ -28,14 +28,15 @@ export class NavbarComponent implements OnDestroy {
 
   navData = navbarMocks;
   currentCity = this.navData.cities[0];
-  isMenuOpen = false;
   isLanguageOpen = false;
   isCityOpen = false;
   isSticky = false;
   cartItemCount = 0;
+  showItemDrop = false;
   private cartSubscription: Subscription;
-  mobileView = window.innerWidth <= 992; // Initialize based on current width
+  mobileView = window.innerWidth < 768; // Mobile-first: mobile below 768px
   private resizeSubscription: Subscription;
+  private previousCartCount = 0;
 
   constructor(
     public languageService: LanguageService,
@@ -44,23 +45,28 @@ export class NavbarComponent implements OnDestroy {
     public router: Router
   ) {
     this.cartSubscription = this.cartService.cart$.subscribe(() => {
-      this.cartItemCount = this.cartService.getTotalItemCount();
+      const newCount = this.cartService.getTotalItemCount();
+      
+      // Trigger item drop animation when cart count increases
+      if (newCount > this.previousCartCount) {
+        this.triggerItemDropAnimation();
+      }
+      
+      this.cartItemCount = newCount;
+      this.previousCartCount = newCount;
     });
     this.resizeSubscription = fromEvent(window, 'resize')
       .pipe(
         debounceTime(100) // Debounce to avoid excessive checks
       )
       .subscribe(() => {
-        this.mobileView = window.innerWidth <= 992;
+        this.mobileView = window.innerWidth < 768;
       });
   }
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
     this.isSticky = window.pageYOffset > 0;
-  }
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
   }
 
   toggleLanguage() {
@@ -117,4 +123,13 @@ export class NavbarComponent implements OnDestroy {
   // You might want to adjust this based on your actual currency formatting needs
   return `${total.toFixed(2)} ₾`; // Using Georgian Lari symbol as example
 }
+
+  triggerItemDropAnimation() {
+    this.showItemDrop = true;
+    
+    // Hide animation after it completes
+    setTimeout(() => {
+      this.showItemDrop = false;
+    }, 1000);
+  }
 }

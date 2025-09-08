@@ -1,95 +1,209 @@
+<!-- Mobile-First Top Navigation -->
 <nav class="navbar" [class.sticky]="isSticky">
   <div class="container">
-    <a
-      [routerLink]="['/', languageService.getCurrentLanguageCode(), 'catalog']"
-      class="logo"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-    >
-      {{ getCurrentText(navData.logo) }}
-    </a>
-
-    <div class="nav-items" [class.active]="isMenuOpen">
-      @for (item of getNavItems(); track $index) {
+    <!-- Left Side: Logo + Desktop Navigation -->
+    <div class="nav-left">
+      <!-- Logo with Beautiful Animation -->
       <a
-        [routerLink]="[
-          '/',
-          languageService.getCurrentLanguageCode(),
-          item.path
-        ]"
-        class="nav-link"
-        (click)="isMenuOpen = false"
+        [routerLink]="['/', languageService.getCurrentLanguageCode(), 'catalog']"
+        class="logo"
         routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [title]="getCurrentText(navData.logo)"
       >
-        {{ getCurrentText(item.titles) }}
+        <div class="logo-container">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="logo-svg">
+            <defs>
+              <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#FFC300;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#009FE3;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <rect width="36" height="36" rx="10" fill="url(#logoGradient)" class="logo-bg"/>
+            <path d="M9 13h18v2.5H9v-2.5zm0 4.5h18v2.5H9v-2.5zm0 4.5h14v2.5H9v-2.5z" fill="white" class="logo-icon"/>
+          </svg>
+          <div class="logo-ripple"></div>
+        </div>
       </a>
-      }
 
-      <a
-        [routerLink]="['/', languageService.getCurrentLanguageCode(), 'cart']"
-        class="nav-link cart-link"
-        (click)="isMenuOpen = false"
-        routerLinkActive="active-link"
+      <!-- Desktop Navigation -->
+      <div class="desktop-nav">
+        @for (item of getNavItems(); track $index) {
+        <a
+          [routerLink]="[
+            '/',
+            languageService.getCurrentLanguageCode(),
+            item.path
+          ]"
+          class="nav-link"
+          routerLinkActive="active-link"
+          [title]="getCurrentText(item.titles)"
+        >
+          <div class="nav-icon-container">
+            <i class="fa fa-{{ item.icon || 'circle' }}"></i>
+            <div class="nav-icon-bg"></div>
+          </div>
+          <span class="nav-text">{{ getCurrentText(item.titles) }}</span>
+        </a>
+        }
+      </div>
+    </div>
+
+    <!-- Right Side Actions -->
+    <div class="nav-actions">
+      <!-- Cart Button with Beautiful Animation (Desktop Only) -->
+      <button 
+        class="nav-action-btn cart-btn desktop-cart" 
+        (click)="navigateToCart()"
+        [title]="getCurrentText(navData.cart.title)"
+        *ngIf="!mobileView"
       >
-        <i class="fa fa-{{ navData.cart.icon }}"></i>
-        <span>
-          {{ getCurrentText(navData.cart.title) }}
-          <span class="cart-badge" *ngIf="cartItemCount > 0">
-            {{ cartItemCount }}
-          </span>
+        <div class="cart-icon-container">
+          <i class="fa fa-{{ navData.cart.icon }}"></i>
+          <div class="cart-pulse"></div>
+        </div>
+        <span class="cart-badge" *ngIf="cartItemCount > 0">
+          <span class="badge-number">{{ cartItemCount }}</span>
+          <div class="badge-ripple"></div>
         </span>
-      </a>
+      </button>
 
+      <!-- City Selector -->
       <div class="dropdown" (click)="$event.stopPropagation()">
-        <button class="dropdown-toggle" (click)="toggleCity()">
-          {{ getCurrentText(currentCity.name) }}
+        <button class="nav-action-btn dropdown-toggle" (click)="toggleCity()" [title]="getCurrentText(currentCity.name)">
+          <div class="dropdown-icon-container">
+            <i class="fa fa-map-marker"></i>
+            <div class="dropdown-icon-bg"></div>
+          </div>
+          <span class="dropdown-text">{{ getCurrentText(currentCity.name) }}</span>
         </button>
         @if (isCityOpen) {
         <div class="dropdown-menu">
           @for (city of navData.cities; track $index) {
-          <button (click)="selectCity(city)">
-            {{ getCurrentText(city.name) }}
+          <button (click)="selectCity(city)" class="dropdown-item">
+            <i class="fa fa-map-marker"></i>
+            <span>{{ getCurrentText(city.name) }}</span>
+            <div class="dropdown-item-bg"></div>
           </button>
           }
         </div>
         }
       </div>
 
+      <!-- Language Selector -->
       <div class="dropdown" (click)="$event.stopPropagation()">
-        <button class="dropdown-toggle" (click)="toggleLanguage()">
-          {{
-            navData.languages[
-              languageService.getCurrentLanguage()
-            ].code.toUpperCase()
-          }}
+        <button class="nav-action-btn dropdown-toggle" (click)="toggleLanguage()">
+          <div class="dropdown-icon-container">
+            <i class="fa fa-globe"></i>
+            <div class="dropdown-icon-bg"></div>
+          </div>
+          <span class="dropdown-text">
+            {{ navData.languages[languageService.getCurrentLanguage()].code.toUpperCase() }}
+          </span>
         </button>
         @if (isLanguageOpen) {
         <div class="dropdown-menu">
           @for (lang of navData.languages; track $index; let i = $index) {
-          <button (click)="setLanguage(i)">
-            {{ getCurrentText(lang.name) }} ({{ lang.code.toUpperCase() }})
+          <button (click)="setLanguage(i)" class="dropdown-item">
+            <i class="fa fa-globe"></i>
+            <span>{{ getCurrentText(lang.name) }} ({{ lang.code.toUpperCase() }})</span>
+            <div class="dropdown-item-bg"></div>
           </button>
           }
         </div>
         }
       </div>
     </div>
-
-    <button class="hamburger" (click)="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
   </div>
 </nav>
 
-<div class="floating-cart-wrapper" *ngIf="mobileView">
-  <div class="floating-cart" (click)="navigateToCart()">
-    <span class="floating-cart-text">
-      {{ getCurrentText(navData.cart.goToCartText) }}
-      <span class="floating-cart-price">({{ getTotalPrice() }})</span>
+<!-- Bottom Navigation for Mobile -->
+<div class="bottom-nav" *ngIf="mobileView">
+  <a
+    [routerLink]="['/', languageService.getCurrentLanguageCode(), 'catalog']"
+    class="bottom-nav-item"
+    routerLinkActive="active"
+    [title]="'Catalog'"
+  >
+    <div class="bottom-nav-icon">
+      <i class="fa fa-th-large"></i>
+      <div class="bottom-nav-ripple"></div>
+    </div>
+    <span>Catalog</span>
+  </a>
+  
+  <a
+    [routerLink]="['/', languageService.getCurrentLanguageCode(), 'markets']"
+    class="bottom-nav-item"
+    routerLinkActive="active"
+    [title]="'Markets'"
+  >
+    <div class="bottom-nav-icon">
+      <i class="fa fa-store"></i>
+      <div class="bottom-nav-ripple"></div>
+    </div>
+    <span>Markets</span>
+  </a>
+  
+  <a
+    [routerLink]="['/', languageService.getCurrentLanguageCode(), 'combinations']"
+    class="bottom-nav-item"
+    routerLinkActive="active"
+    [title]="'Combinations'"
+  >
+    <div class="bottom-nav-icon">
+      <i class="fa fa-random"></i>
+      <div class="bottom-nav-ripple"></div>
+    </div>
+    <span>Combinations</span>
+  </a>
+  
+  <button 
+    class="bottom-nav-item cart-btn" 
+    (click)="navigateToCart()"
+    [title]="getCurrentText(navData.cart.title)"
+  >
+    <div class="bottom-nav-icon">
+      <i class="fa fa-{{ navData.cart.icon }}"></i>
+      <div class="bottom-nav-ripple"></div>
+      <!-- Item dropping animation -->
+      <div class="item-drop-animation" *ngIf="showItemDrop">
+        <i class="fa fa-shopping-cart"></i>
+      </div>
+    </div>
+    <span>Cart</span>
+    <span class="cart-badge" *ngIf="cartItemCount > 0">
+      <span class="badge-number">{{ cartItemCount }}</span>
+      <div class="badge-ripple"></div>
     </span>
+  </button>
+  
+  <a
+    [routerLink]="['/', languageService.getCurrentLanguageCode(), 'profile']"
+    class="bottom-nav-item"
+    routerLinkActive="active"
+    [title]="'Profile'"
+  >
+    <div class="bottom-nav-icon">
+      <i class="fa fa-user"></i>
+      <div class="bottom-nav-ripple"></div>
+    </div>
+    <span>Profile</span>
+  </a>
+</div>
+
+<!-- Floating Action Button for Cart (when not in bottom nav) -->
+<div class="fab-cart" *ngIf="!mobileView && cartItemCount > 0" (click)="navigateToCart()">
+  <div class="fab-icon">
     <i class="fa fa-{{ navData.cart.icon }}"></i>
-    <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+    <div class="fab-pulse"></div>
+    <!-- Item dropping animation -->
+    <div class="item-drop-animation" *ngIf="showItemDrop">
+      <i class="fa fa-shopping-cart"></i>
+    </div>
   </div>
+  <span class="fab-badge">
+    <span class="badge-number">{{ cartItemCount }}</span>
+    <div class="badge-ripple"></div>
+  </span>
 </div>

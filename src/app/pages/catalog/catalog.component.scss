@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /* Color Palette: Inspired by modern delivery apps */
 /* Primary Background: #009FE3 (Vibrant Blue) */
 /* Secondary Accent: #FFC300 (Warm Yellow) */
@@ -19,8 +21,8 @@ $color-danger: #F44336;
 $color-dark-slate: #1B2B3B;
 $color-border-subtle: rgba(255, 255, 255, 0.1);
 $color-shadow: rgba(0, 0, 0, 0.2);
-$color-hover-secondary: lighten($color-secondary-accent, 5%);
-$color-hover-primary: darken($color-primary-bg, 5%);
+$color-hover-secondary: color.adjust($color-secondary-accent, $lightness: 5%);
+$color-hover-primary: color.adjust($color-primary-bg, $lightness: -5%);
 
 /* Loading and Error States */
 .loading {
@@ -300,7 +302,7 @@ $color-hover-primary: darken($color-primary-bg, 5%);
 .search-container .product-grid .product-card .product-info .add-to-cart:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-  background-color: darken($color-success, 5%); /* Slightly darker green on hover */
+  background-color: color.adjust($color-success, $lightness: -5%); /* Slightly darker green on hover */
 }
 
 .search-container .product-grid .product-card .product-info .add-to-cart:active {
@@ -488,7 +490,7 @@ $color-hover-primary: darken($color-primary-bg, 5%);
 }
 
 .search-container .modal-content .apply-filters-button:hover {
-  background-color: darken($color-success, 5%);
+  background-color: color.adjust($color-success, $lightness: -5%);
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
@@ -567,7 +569,7 @@ $color-hover-primary: darken($color-primary-bg, 5%);
 }
 
 .selected-categories .category-tag .remove-category:hover {
-  color: darken($color-danger, 10%);
+  color: color.adjust($color-danger, $lightness: -10%);
   transform: scale(1.2);
 }
 

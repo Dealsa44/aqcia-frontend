@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /* Color Palette: Inspired by modern delivery apps */
 /* Primary Background: #009FE3 (Vibrant Blue) */
 /* Secondary Accent: #FFC300 (Warm Yellow) */
@@ -19,7 +21,7 @@ $color-danger: #F44336;
 $color-dark-slate: #1B2B3B;
 $color-border-subtle: rgba(255, 255, 255, 0.1);
 $color-shadow: rgba(0, 0, 0, 0.2);
-$color-dark-slate-lighten: lighten($color-dark-slate, 3%);
+$color-dark-slate-lighten: color.adjust($color-dark-slate, $lightness: 3%);
 $color-gradient-start: #007bff; // A slightly darker blue for gradient
 $color-gradient-end: #0056b3; // Even darker blue for gradient
 $color-section-bg-darker: #152330; // Slightly darker than $color-dark-slate for contrast
@@ -183,7 +185,7 @@ main {
       &:hover {
         transform: translateY(-3px) scale(1.02);
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-        background: lighten($color-secondary-accent, 5%); /* Slightly lighter yellow on hover */
+        background: color.adjust($color-secondary-accent, $lightness: 5%); /* Slightly lighter yellow on hover */
         &::after {
           transform: scaleX(1);
         }
@@ -369,7 +371,7 @@ section {
       &:hover {
         transform: translateY(-10px) scale(1.03);
         box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
-        background: linear-gradient(135deg, lighten($color-card-bg, 5%) 0%, lighten($color-card-bg, 10%) 100%); /* Subtle lighter gradient on hover */
+        background: linear-gradient(135deg, color.adjust($color-card-bg, $lightness: 5%) 0%, color.adjust($color-card-bg, $lightness: 10%) 100%); /* Subtle lighter gradient on hover */
         border-color: $color-primary-bg; /* Hint of blue on border */
         img {
           transform: scale(1.05) rotate(2deg);
@@ -453,7 +455,7 @@ section {
       &:hover {
         transform: translateY(-12px) scale(1.03);
         box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
-        background: linear-gradient(135deg, lighten($color-card-bg, 5%) 0%, lighten($color-card-bg, 10%) 100%); /* Subtle lighter gradient on hover */
+        background: linear-gradient(135deg, color.adjust($color-card-bg, $lightness: 5%) 0%, color.adjust($color-card-bg, $lightness: 10%) 100%); /* Subtle lighter gradient on hover */
         border-color: $color-primary-bg; /* Hint of blue on border */
 
         .step-number {
@@ -528,7 +530,7 @@ section {
       &:hover {
         transform: translateY(-8px) scale(1.05) rotateY(0deg);
         box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
-        background: linear-gradient(135deg, lighten($color-card-bg, 5%) 0%, lighten($color-card-bg, 10%) 100%); /* Subtle lighter gradient on hover */
+        background: linear-gradient(135deg, color.adjust($color-card-bg, $lightness: 5%) 0%, color.adjust($color-card-bg, $lightness: 10%) 100%); /* Subtle lighter gradient on hover */
         border-color: $color-primary-bg; /* Hint of blue on border */
         img {
           transform: scale(1.1);

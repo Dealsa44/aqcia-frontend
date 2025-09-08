@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /* Color Palette: Inspired by modern delivery apps */
 /* Primary Background: #009FE3 (Vibrant Blue) */
 /* Secondary Accent: #FFC300 (Warm Yellow) */
@@ -19,9 +21,9 @@ $color-danger: #F44336;
 $color-dark-slate: #1B2B3B;
 $color-border-subtle: rgba(255, 255, 255, 0.1);
 $color-shadow: rgba(0, 0, 0, 0.2);
-$color-hover-secondary: lighten($color-secondary-accent, 5%);
-$color-hover-primary: darken($color-primary-bg, 5%);
-$color-dark-slate-lighten: lighten($color-dark-slate, 3%);
+$color-hover-secondary: color.adjust($color-secondary-accent, $lightness: 5%);
+$color-hover-primary: color.adjust($color-primary-bg, $lightness: -5%);
+$color-dark-slate-lighten: color.adjust($color-dark-slate, $lightness: 3%);
 
 
 .login-page {
@@ -265,7 +267,7 @@ input[type="password"] {
 
 .error-message {
   color: $color-danger; /* Red for error text */
-  background-color: lighten($color-danger, 30%); /* Lighter red for error background */
+  background-color: color.adjust($color-danger, $lightness: 30%); /* Lighter red for error background */
   border: 1px solid $color-danger;
   border-radius: 8px;
   padding: 0.6rem 0.9rem; /* Reduced padding */
@@ -463,7 +465,7 @@ button[type="submit"] {
       border: 1px solid $color-border-subtle;
 
       &:hover {
-        background-color: lighten($color-text-light, 2%);
+        background-color: color.adjust($color-text-light, $lightness: 2%);
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
       }
     }
@@ -474,7 +476,7 @@ button[type="submit"] {
       border: 1px solid #3b5998;
 
       &:hover {
-        background-color: darken(#3b5998, 5%);
+        background-color: color.adjust(#3b5998, $lightness: -5%);
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
       }
     }

@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /* Color Palette: Inspired by modern delivery apps */
 /* Primary Background: #009FE3 (Vibrant Blue) */
 /* Secondary Accent: #FFC300 (Warm Yellow) */
@@ -19,8 +21,8 @@ $color-danger: #F44336;
 $color-dark-slate: #1B2B3B;
 $color-border-subtle: rgba(255, 255, 255, 0.1);
 $color-shadow: rgba(0, 0, 0, 0.2);
-$color-hover-secondary: lighten($color-secondary-accent, 5%);
-$color-hover-primary: darken($color-primary-bg, 5%);
+$color-hover-secondary: color.adjust($color-secondary-accent, $lightness: 5%);
+$color-hover-primary: color.adjust($color-primary-bg, $lightness: -5%);
 
 .markets-page {
   background-color: #FFFFFF; /* Changed to Pure White background */
@@ -423,7 +425,7 @@ $color-hover-primary: darken($color-primary-bg, 5%);
 
   /* Style for when the item IS favorited */
   &.favorited {
-    background: lighten($color-secondary-accent, 30%); /* Lighter warm yellow when favorited */
+    background: color.adjust($color-secondary-accent, $lightness: 30%); /* Lighter warm yellow when favorited */
     border-color: $color-secondary-accent; /* Warm Yellow border when favorited */
 
     .favorite-icon {
@@ -432,9 +434,9 @@ $color-hover-primary: darken($color-primary-bg, 5%);
     }
 
     &:hover {
-      background: lighten($color-secondary-accent, 20%); /* Slightly darker on hover when already favorited */
+      background: color.adjust($color-secondary-accent, $lightness: 20%); /* Slightly darker on hover when already favorited */
       .favorite-icon {
-        color: darken($color-secondary-accent, 10%); /* Darker yellow on hover when already favorited */
+        color: color.adjust($color-secondary-accent, $lightness: -10%); /* Darker yellow on hover when already favorited */
         transform: scale(1.15);
       }
     }

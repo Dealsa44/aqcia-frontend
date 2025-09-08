@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /* Color Palette: Inspired by modern delivery apps */
 /* Primary Background: #009FE3 (Vibrant Blue) */
 /* Secondary Accent: #FFC300 (Warm Yellow) */
@@ -19,8 +21,8 @@ $color-danger: #F44336;
 $color-dark-slate: #1B2B3B;
 $color-border-subtle: rgba(255, 255, 255, 0.1);
 $color-shadow: rgba(0, 0, 0, 0.2);
-$color-dark-slate-lighten: lighten($color-dark-slate, 3%);
-$color-link-hover: darken($color-primary-bg, 10%);
+$color-dark-slate-lighten: color.adjust($color-dark-slate, $lightness: 3%);
+$color-link-hover: color.adjust($color-primary-bg, $lightness: -10%);
 
 
 .register-page {
@@ -316,13 +318,13 @@ input[type="password"]::placeholder {
 
 .error-message {
   color: $color-danger; /* Red for errors */
-  background-color: lighten($color-danger, 30%); /* Lighter red for error background */
+  background-color: color.adjust($color-danger, $lightness: 30%); /* Lighter red for error background */
   border: 1px solid $color-danger;
 }
 
 .success-message {
   color: $color-success; /* Green for success */
-  background-color: lighten($color-success, 30%); /* Lighter green for success background */
+  background-color: color.adjust($color-success, $lightness: 30%); /* Lighter green for success background */
   border: 1px solid $color-success;
 }
 

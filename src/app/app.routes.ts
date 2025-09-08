@@ -43,5 +43,5 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: '', redirectTo: '/en/catalog', pathMatch: 'full' },
-  { path: '**', redirectTo: '/en/catlog' },
+  { path: '**', redirectTo: '/en/catalog' },
 ];

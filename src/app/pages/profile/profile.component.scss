@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /* Color Palette: Inspired by modern delivery apps */
 /* Primary Background: #009FE3 (Vibrant Blue) */
 /* Secondary Accent: #FFC300 (Warm Yellow) */
@@ -19,9 +21,9 @@ $color-danger: #F44336;
 $color-dark-slate: #1B2B3B;
 $color-border-subtle: rgba(255, 255, 255, 0.1);
 $color-shadow: rgba(0, 0, 0, 0.2);
-$color-hover-secondary: lighten($color-secondary-accent, 5%);
-$color-hover-primary: darken($color-primary-bg, 5%);
-$color-dark-slate-lighten: lighten($color-dark-slate, 3%);
+$color-hover-secondary: color.adjust($color-secondary-accent, $lightness: 5%);
+$color-hover-primary: color.adjust($color-primary-bg, $lightness: -5%);
+$color-dark-slate-lighten: color.adjust($color-dark-slate, $lightness: 3%);
 
 /* General Body and Page Structure */
 body {
@@ -163,7 +165,7 @@ body {
 }
 
 .logout-btn:hover {
-  background-color: darken($color-danger, 5%);
+  background-color: color.adjust($color-danger, $lightness: -5%);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(244, 67, 54, 0.3);
 }
@@ -261,7 +263,7 @@ body {
 }
 
 .cancel-btn:hover {
-  background-color: darken($color-text-dark, 5%);
+  background-color: color.adjust($color-text-dark, $lightness: -5%);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(160, 160, 160, 0.3);
 }
@@ -287,8 +289,8 @@ body {
 
 /* Messages */
 .error-message {
-  background-color: lighten($color-danger, 30%); /* Lighter red for error background */
-  color: darken($color-danger, 15%); /* Darker red for error text */
+  background-color: color.adjust($color-danger, $lightness: 30%); /* Lighter red for error background */
+  color: color.adjust($color-danger, $lightness: -15%); /* Darker red for error text */
   border: 1px solid $color-danger;
   border-radius: 8px;
   padding: 1rem;
@@ -298,8 +300,8 @@ body {
 }
 
 .success-message {
-  background-color: lighten($color-success, 30%); /* Lighter green for success background */
-  color: darken($color-success, 15%); /* Darker green for success text */
+  background-color: color.adjust($color-success, $lightness: 30%); /* Lighter green for success background */
+  color: color.adjust($color-success, $lightness: -15%); /* Darker green for success text */
   border: 1px solid $color-success;
   border-radius: 8px;
   padding: 1rem;
@@ -376,7 +378,7 @@ body {
 .store-item:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
-  background-color: lighten($color-dark-slate, 3%); /* Slightly lighter dark slate on hover */
+  background-color: color.adjust($color-dark-slate, $lightness: 3%); /* Slightly lighter dark slate on hover */
 }
 
 .store-display {
@@ -414,7 +416,7 @@ body {
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(244, 67, 54, 0.2);
   &:hover {
-    background-color: darken($color-danger, 5%);
+    background-color: color.adjust($color-danger, $lightness: -5%);
     transform: translateY(-1px);
     box-shadow: 0 3px 8px rgba(244, 67, 54, 0.3);
   }
