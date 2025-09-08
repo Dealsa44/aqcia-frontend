@@ -3,6 +3,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
+// Debug: Log the API URL to ensure it's correct
+console.log('API URL:', environment.apiUrl);
+
 export interface BackendProduct {
   product_id: number;
   name: string;
@@ -36,7 +39,13 @@ export interface BackendPrice {
 export class ApiService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // Ensure HTTPS is always used
+    if (this.apiUrl.startsWith('http://')) {
+      this.apiUrl = this.apiUrl.replace('http://', 'https://');
+      console.warn('API URL was HTTP, converted to HTTPS:', this.apiUrl);
+    }
+  }
 
   // Product methods
   getProducts(skip: number = 0, limit: number = 100): Observable<BackendProduct[]> {
