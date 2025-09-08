@@ -1,11 +1,12 @@
 // pages/markets/markets.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
 import { marketsMocks } from '../../core/mocks/markets.mocks';
 import { AuthService } from '../../core/services/auth.service';
 import { marketDetailsMocks } from '../../core/mocks/market-details.mocks';
+import { ApiService, ApiStore } from '../../core/services/api.service';
 
 @Component({
   selector: 'app-markets',
@@ -14,19 +15,67 @@ import { marketDetailsMocks } from '../../core/mocks/market-details.mocks';
   templateUrl: './markets.component.html',
   styleUrls: ['./markets.component.scss'],
 })
-export class MarketsComponent {
+export class MarketsComponent implements OnInit {
   marketDetailsMocks = marketDetailsMocks;
   mocks = marketsMocks;
   selectedCity = 0;
   Math = Math; // Expose Math to template
   favoriteStores: string[] = [];
+  
+  // Real API data
+  stores: ApiStore[] = [];
+  isLoadingStores = true;
+  storesError = '';
 
   constructor(
     public languageService: LanguageService,
     public router: Router,
-    public authService: AuthService
+    public authService: AuthService,
+    private apiService: ApiService
   ) {
+    console.log('🏪 MarketsComponent initialized');
     this.loadFavoriteStores();
+  }
+
+  ngOnInit() {
+    console.log('🏪 MarketsComponent - ngOnInit called');
+    this.loadStores();
+  }
+
+  loadStores() {
+    console.log('🏪 MarketsComponent - loadStores called');
+    this.isLoadingStores = true;
+    this.storesError = '';
+
+    this.apiService.getStores().subscribe({
+      next: (apiStores: ApiStore[]) => {
+        console.log('✅ MarketsComponent - Stores loaded successfully:', apiStores.length);
+        this.stores = apiStores;
+        this.isLoadingStores = false;
+      },
+      error: (error) => {
+        console.error('❌ MarketsComponent - Error loading stores:', error);
+        this.storesError = 'Failed to load stores. Using mock data.';
+        this.isLoadingStores = false;
+        // Fallback to mock data
+        this.stores = this.convertMocksToApiStores();
+      }
+    });
+  }
+
+  convertMocksToApiStores(): ApiStore[] {
+    console.log('🔄 MarketsComponent - Converting mocks to API stores');
+    return this.mocks.map((mock, index) => ({
+      id: index + 1,
+      name: mock.name,
+      address: mock.address,
+      latitude: mock.latitude || 0,
+      longitude: mock.longitude || 0,
+      phone: mock.phone || '',
+      email: mock.email || '',
+      website: mock.website || '',
+      opening_hours: mock.opening_hours || '9:00-21:00'
+    }));
   }
 
   getCurrentText(items: string[] | any[]) {

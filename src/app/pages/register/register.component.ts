@@ -7,6 +7,7 @@ import { LanguageService } from '../../core/services/language.service';
 import { AuthService } from '../../core/services/auth.service';
 import { registerMocks } from '../../core/mocks/register.mocks';
 import { loginMocks } from '../../core/mocks/login.mocks';
+import { ApiService } from '../../core/services/api.service';
 
 @Component({
   selector: 'app-register',
@@ -32,20 +33,32 @@ export class RegisterComponent {
   constructor(
     public languageService: LanguageService,
     private authService: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private apiService: ApiService
+  ) {
+    console.log('📝 RegisterComponent initialized');
+  }
 
   getCurrentText(items: string[] | any[]) {
     return items[this.languageService.getCurrentLanguage()];
   }
 
   onSubmit() {
+    console.log('📝 RegisterComponent - onSubmit called');
+    console.log('📝 Register data:', { 
+      username: this.registerData.username,
+      email: this.registerData.email,
+      passwordLength: this.registerData.password.length,
+      termsAccepted: this.termsAccepted
+    });
+    
     this.isLoading = true;
     this.errorMessage = '';
     this.successMessage = '';
 
     // Validate passwords match
     if (this.registerData.password !== this.registerData.confirmPassword) {
+      console.log('❌ RegisterComponent - Password mismatch');
       this.errorMessage = this.getCurrentText(registerMocks.passwordMismatchError);
       this.isLoading = false;
       return;
@@ -53,6 +66,7 @@ export class RegisterComponent {
 
     // Validate terms accepted
     if (!this.termsAccepted) {
+      console.log('❌ RegisterComponent - Terms not accepted');
       this.errorMessage = this.getCurrentText(registerMocks.termsError);
       this.isLoading = false;
       return;

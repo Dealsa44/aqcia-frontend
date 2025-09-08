@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../core/services/language.service';
 import { CartService } from '../../core/services/cart.service';
@@ -7,6 +7,7 @@ import { productsMocks } from '../../core/mocks/products.mocks';
 import { cartMocks } from '../../core/mocks/cart.mocks';
 import { marketsMocks } from '../../core/mocks/markets.mocks';
 import { combinationsMocks } from '../../core/mocks/combinations.mocks';
+import { ApiService } from '../../core/services/api.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,7 @@ import { combinationsMocks } from '../../core/mocks/combinations.mocks';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
   combinationsMocks = combinationsMocks;
   productsMocks = productsMocks;
   cartMocks = cartMocks;
@@ -27,15 +28,46 @@ export class CartComponent {
   showAllItems: boolean = false; // Initially show only a few items
   maxItemsToShow: number = 3; // Number of items to show before collapsing
 
+  // Real API data
+  cartData: any = null;
+  isLoadingCart = true;
+  cartError = '';
+
   constructor(
     public languageService: LanguageService,
-    public cartService: CartService
-  ) {}
+    public cartService: CartService,
+    private apiService: ApiService
+  ) {
+    console.log('🛒 CartComponent initialized');
+  }
 
   ngOnInit() {
+    console.log('🛒 CartComponent - ngOnInit called');
+    this.loadCart();
     this.calculateMarketCombinations();
     this.cartService.cart$.subscribe(() => {
       this.calculateMarketCombinations();
+    });
+  }
+
+  loadCart() {
+    console.log('🛒 CartComponent - loadCart called');
+    this.isLoadingCart = true;
+    this.cartError = '';
+
+    this.apiService.getCart().subscribe({
+      next: (cartData: any) => {
+        console.log('✅ CartComponent - Cart loaded successfully:', cartData);
+        this.cartData = cartData;
+        this.isLoadingCart = false;
+      },
+      error: (error) => {
+        console.error('❌ CartComponent - Error loading cart:', error);
+        this.cartError = 'Failed to load cart. Using local cart.';
+        this.isLoadingCart = false;
+        // Fallback to local cart service
+        this.cartData = this.cartService.getCart();
+      }
     });
   }
 
