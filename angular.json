@@ -31,8 +31,16 @@
                 "input": "src/assets",
                 "output": "/assets/"
               },
-              "public/staticwebapp.config.json",
-              "public/web.config"
+              {
+                "glob": "staticwebapp.config.json",
+                "input": "public",
+                "output": "/"
+              },
+              {
+                "glob": "web.config",
+                "input": "public",
+                "output": "/"
+              }
             ],
             "styles": ["src/styles.scss"],
             "scripts": [],
@@ -91,8 +99,16 @@
                 "input": "src/assets",
                 "output": "/assets/"
               },
-              "public/staticwebapp.config.json",
-              "public/web.config"
+              {
+                "glob": "staticwebapp.config.json",
+                "input": "public",
+                "output": "/"
+              },
+              {
+                "glob": "web.config",
+                "input": "public",
+                "output": "/"
+              }
             ],
             "styles": ["src/styles.scss"],
             "scripts": []
