@@ -68,16 +68,26 @@ export class CatalogComponent implements OnInit {
   }
 
   loadData() {
+    console.log('🔄 CatalogComponent - loadData() called');
+    console.log('🔗 About to call apiService.getProducts()');
+    
     // Load products from API
     this.apiService.getProducts().subscribe({
       next: (apiProducts: ApiProduct[]) => {
+        console.log('✅ API call successful, received products:', apiProducts.length);
         this.products = this.convertApiProductsToProducts(apiProducts);
         this.filteredProducts = this.products;
         this.isLoadingProducts = false;
         this.updateCategoryCounts();
       },
       error: (error: any) => {
-        console.error('Error loading products:', error);
+        console.error('❌ Error loading products:', error);
+        console.error('🔍 Error details:', {
+          status: error.status,
+          statusText: error.statusText,
+          url: error.url,
+          message: error.message
+        });
         this.errorMessage = 'Failed to load products. Using mock data.';
         // Fallback to mock data
         this.products = productsMocks.products as Product[];

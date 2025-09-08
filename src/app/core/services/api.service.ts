@@ -51,11 +51,20 @@ export interface ApiPrice {
 export class ApiService {
   private baseUrl = 'https://aqcia-api-g2afh7hcdvdffsg5.northeurope-01.azurewebsites.net';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    console.log('🚀 API Service initialized');
+    console.log('📍 Base URL set to:', this.baseUrl);
+    console.log('🔒 Base URL is HTTPS:', this.baseUrl.startsWith('https://'));
+  }
 
   // Get all products
   getProducts(skip: number = 0, limit: number = 100): Observable<ApiProduct[]> {
-    return this.http.get<ApiProduct[]>(`${this.baseUrl}/products?skip=${skip}&limit=${limit}`);
+    const url = `${this.baseUrl}/products?skip=${skip}&limit=${limit}`;
+    console.log('🔍 API Service - getProducts called');
+    console.log('📍 Base URL:', this.baseUrl);
+    console.log('🌐 Full URL:', url);
+    console.log('🔒 URL starts with https:', url.startsWith('https://'));
+    return this.http.get<ApiProduct[]>(url);
   }
 
   // Get all categories
