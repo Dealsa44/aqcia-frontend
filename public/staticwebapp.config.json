@@ -1,6 +1,10 @@
 {
   "routes": [
     {
+      "route": "/api/*",
+      "allowedRoles": ["anonymous"]
+    },
+    {
       "route": "/*",
       "serve": "/index.html",
       "statusCode": 200
@@ -9,5 +13,8 @@
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": ["/images/*.{png,jpg,jpeg,gif,ico,svg}", "/css/*", "/js/*"]
+  },
+  "globalHeaders": {
+    "Content-Security-Policy": "upgrade-insecure-requests"
   }
 }

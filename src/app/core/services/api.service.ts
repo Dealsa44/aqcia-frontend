@@ -56,16 +56,36 @@ export class ApiService {
     console.log('🚀 API Service initialized');
     console.log('📍 Base URL set to:', this.baseUrl);
     console.log('🔒 Base URL is HTTPS:', this.baseUrl.startsWith('https://'));
+    console.log('🌐 Window location:', window.location.href);
+    console.log('🔒 Window protocol:', window.location.protocol);
+    console.log('🏠 Window origin:', window.location.origin);
+    console.log('🔍 Environment check:', typeof window !== 'undefined' ? 'Browser' : 'Server');
   }
 
   // Get all products
   getProducts(skip: number = 0, limit: number = 100): Observable<ApiProduct[]> {
     const timestamp = Date.now();
-    const url = `${this.baseUrl}/products?skip=${skip}&limit=${limit}&v=${timestamp}`;
+    const url = `${this.baseUrl}/products/?skip=${skip}&limit=${limit}&v=${timestamp}`;
+    
     console.log('🔍 API Service - getProducts called');
     console.log('📍 Base URL:', this.baseUrl);
     console.log('🌐 Full URL:', url);
     console.log('🔒 URL starts with https:', url.startsWith('https://'));
+    console.log('🔍 URL analysis:', {
+      fullUrl: url,
+      baseUrl: this.baseUrl,
+      isHttps: url.startsWith('https://'),
+      protocol: url.split('://')[0],
+      host: url.split('://')[1]?.split('/')[0]
+    });
+    
+    // Check if there are any redirects or modifications
+    console.log('🔍 HTTP Client configuration check:');
+    console.log('🔍 HttpClient instance:', this.http);
+    console.log('🔍 Request options:', {
+      observe: 'response',
+      reportProgress: true
+    });
     
     // Add comprehensive error handling and logging
     return this.http.get<ApiProduct[]>(url, {

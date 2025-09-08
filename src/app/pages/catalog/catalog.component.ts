@@ -70,6 +70,21 @@ export class CatalogComponent implements OnInit {
   loadData() {
     console.log('🔄 CatalogComponent - loadData() called');
     console.log('🔗 About to call apiService.getProducts()');
+    console.log('🌐 Current window location:', window.location.href);
+    console.log('🔒 Current window protocol:', window.location.protocol);
+    console.log('🏠 Current window origin:', window.location.origin);
+    console.log('🔍 Document location:', document.location.href);
+    console.log('🔍 Document protocol:', document.location.protocol);
+    console.log('🔍 Document origin:', document.location.origin);
+    
+    // Check for service workers
+    if ('serviceWorker' in navigator) {
+      console.log('🔍 Service Worker detected:', navigator.serviceWorker);
+    }
+    
+    // Check for any global fetch modifications
+    console.log('🔍 Native fetch available:', typeof fetch);
+    console.log('🔍 XMLHttpRequest available:', typeof XMLHttpRequest);
     
     // Load products from API
     this.apiService.getProducts().subscribe({
