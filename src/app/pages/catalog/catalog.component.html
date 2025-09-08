@@ -36,23 +36,7 @@
   </div>
 
   <div class="results">
-    <!-- Loading State -->
-    @if (isLoadingProducts) {
-    <div class="loading-container">
-      <div class="loading-spinner"></div>
-      <p>{{ getCurrentText(['მონაცემების ჩატვირთვა...', 'Loading data...', 'Загрузка данных...']) }}</p>
-    </div>
-    }
-    
-    <!-- Error State -->
-    @if (apiError && !isLoadingProducts) {
-    <div class="error-container">
-      <p class="error-message">{{ apiError }}</p>
-    </div>
-    }
-    
-    <!-- Products Grid -->
-    @if (filteredProducts.length > 0 && !isLoadingProducts) {
+    @if (filteredProducts.length > 0) {
     <div class="product-grid">
       @for (product of filteredProducts; track product.id) {
       <div class="product-card">

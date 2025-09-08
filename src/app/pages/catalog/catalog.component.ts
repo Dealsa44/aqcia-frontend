@@ -5,7 +5,6 @@ import { LanguageService } from '../../core/services/language.service';
 import { productsMocks } from '../../core/mocks/products.mocks';
 import { catalogMocks } from '../../core/mocks/catalog.mocks';
 import { CartService } from '../../core/services/cart.service';
-import { ApiService, BackendProduct, BackendCategory } from '../../core/services/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -24,9 +23,9 @@ export class CatalogComponent implements OnInit {
   catalogMocks = catalogMocks;
   searchTerm = '';
   // selectedCategory = ''; // No longer needed for single selection
-  products: Product[] = []; // Will be loaded from API
-  categories: any[] = []; // Will be loaded from API
-  filteredProducts: Product[] = [];
+  products: Product[] = productsMocks.products as Product[]; // Explicitly type as Product[]
+  categories = productsMocks.categories;
+  filteredProducts: Product[] = this.products;
 
   showCategoryModal = false;
   selectedCategories: string[] = []; // New property to store multiple selected categories
@@ -36,23 +35,15 @@ export class CatalogComponent implements OnInit {
   filteredModalCategories: any[] = [];
   allCategories: any[] = [];
 
-  // Loading states
-  isLoadingProducts = false;
-  isLoadingCategories = false;
-  apiError = '';
-
   constructor(
     public languageService: LanguageService,
     public cartService: CartService,
     private router: Router,
     private route: ActivatedRoute,
-    private productAnimationService: ProductAnimationService,
-    private apiService: ApiService
+    private productAnimationService: ProductAnimationService
   ) {}
 
   ngOnInit() {
-    this.loadData();
-    
     this.route.queryParams.subscribe((params: any) => {
       if (params['q']) {
         this.searchTerm = params['q'];
@@ -65,56 +56,7 @@ export class CatalogComponent implements OnInit {
       }
       this.searchProducts(); // Call searchProducts to apply initial filters
     });
-  }
 
-  loadData() {
-    this.loadProducts();
-    this.loadCategories();
-  }
-
-  loadProducts() {
-    this.isLoadingProducts = true;
-    this.apiError = '';
-    
-    this.apiService.getProducts().subscribe({
-      next: (backendProducts: BackendProduct[]) => {
-        // Transform backend products to frontend format
-        this.products = this.transformBackendProducts(backendProducts);
-        this.filteredProducts = [...this.products];
-        this.isLoadingProducts = false;
-      },
-      error: (error) => {
-        console.error('Error loading products:', error);
-        this.apiError = 'Failed to load products. Using mock data.';
-        // Fallback to mock data
-        this.products = productsMocks.products as Product[];
-        this.filteredProducts = [...this.products];
-        this.isLoadingProducts = false;
-      }
-    });
-  }
-
-  loadCategories() {
-    this.isLoadingCategories = true;
-    
-    this.apiService.getCategories().subscribe({
-      next: (backendCategories: BackendCategory[]) => {
-        // Transform backend categories to frontend format
-        this.categories = this.transformBackendCategories(backendCategories);
-        this.updateAllCategories();
-        this.isLoadingCategories = false;
-      },
-      error: (error) => {
-        console.error('Error loading categories:', error);
-        // Fallback to mock categories
-        this.categories = productsMocks.categories;
-        this.updateAllCategories();
-        this.isLoadingCategories = false;
-      }
-    });
-  }
-
-  updateAllCategories() {
     this.allCategories = this.categories.map((category) => ({
       ...category,
       productCount: this.products.filter((p) => p.category === category.id)
@@ -122,38 +64,6 @@ export class CatalogComponent implements OnInit {
     }));
 
     this.filteredModalCategories = [...this.allCategories];
-  }
-
-  transformBackendProducts(backendProducts: BackendProduct[]): Product[] {
-    return backendProducts.map(product => ({
-      id: product.product_id,
-      name: [product.name, product.name, product.name], // Same name for all languages for now
-      image: product.image_url || 'default-product.jpg',
-      category: product.subcategory_id?.toString() || 'uncategorized',
-      description: ['No description available', 'No description available', 'No description available'],
-      prices: [
-        { market: 'Unknown Store', price: 0, discount: 0, history: [0] }
-      ],
-      reviews: [],
-      nutrition: {
-        calories: 0,
-        protein: 0,
-        carbs: 0,
-        fat: 0
-      }
-    }));
-  }
-
-  transformBackendCategories(backendCategories: BackendCategory[]): any[] {
-    return backendCategories.map(category => ({
-      id: category.id.toString(),
-      name: [
-        category.name_ka || category.name,
-        category.name_en || category.name,
-        category.name_ru || category.name
-      ],
-      icon: category.icon || 'default-category.jpg'
-    }));
   }
   filterModalCategories() {
     const searchTerm = this.modalSearchTerm.toLowerCase().trim();
@@ -186,29 +96,6 @@ export class CatalogComponent implements OnInit {
   }
 
   searchProducts() {
-    if (this.searchTerm.trim()) {
-      // Use API search for better results
-      this.isLoadingProducts = true;
-      this.apiService.searchProducts(this.searchTerm).subscribe({
-        next: (backendProducts: BackendProduct[]) => {
-          this.products = this.transformBackendProducts(backendProducts);
-          this.applyCategoryFilter();
-          this.isLoadingProducts = false;
-        },
-        error: (error) => {
-          console.error('Search error:', error);
-          // Fallback to local search
-          this.performLocalSearch();
-          this.isLoadingProducts = false;
-        }
-      });
-    } else {
-      // No search term, load all products
-      this.loadProducts();
-    }
-  }
-
-  performLocalSearch() {
     const searchTermLower = this.searchTerm.toLowerCase();
     this.filteredProducts = this.products.filter((product: Product) => {
       const nameMatch = product.name.some((name: string) =>
@@ -219,15 +106,6 @@ export class CatalogComponent implements OnInit {
         this.selectedCategories.length === 0 ||
         this.selectedCategories.includes(product.category);
       return nameMatch && categoryMatch;
-    });
-  }
-
-  applyCategoryFilter() {
-    this.filteredProducts = this.products.filter((product: Product) => {
-      const categoryMatch =
-        this.selectedCategories.length === 0 ||
-        this.selectedCategories.includes(product.category);
-      return categoryMatch;
     });
   }
 
@@ -281,7 +159,7 @@ export class CatalogComponent implements OnInit {
   clearFilters() {
     this.searchTerm = '';
     this.selectedCategories = []; // Clear all selected categories
-    this.loadProducts(); // Reload all products
+    this.filteredProducts = this.products;
     this.closeCategoryModal(); // Ensure modal is closed if open
   }
   getCategoryName(categoryId: string): string {
