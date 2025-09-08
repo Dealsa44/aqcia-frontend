@@ -85,7 +85,7 @@ export class ProductComponent implements OnInit {
     return {
       id: apiProduct.product_id,
       name: [apiProduct.name, apiProduct.name, apiProduct.name], // Multi-language array
-      description: [apiProduct.description || '', apiProduct.description || '', apiProduct.description || ''],
+      description: ['', '', ''], // No description available from API
       image: apiProduct.image_url,
       images: [apiProduct.image_url], // Single image for now
       prices: [], // Will be populated by loadPrices
