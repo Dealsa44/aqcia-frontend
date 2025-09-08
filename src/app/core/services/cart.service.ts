@@ -34,6 +34,14 @@ export class CartService {
     return [...this.cartItems];
   }
 
+  getCart() {
+    return {
+      items: [...this.cartItems],
+      total: this.getTotalPrice(),
+      count: this.getTotalItems()
+    };
+  }
+
   /**
    * Unified method to add product to cart with optional animation
    * @param product The product to add

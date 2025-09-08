@@ -65,10 +65,10 @@ export class MarketsComponent implements OnInit {
 
   convertMocksToApiStores(): ApiStore[] {
     console.log('🔄 MarketsComponent - Converting mocks to API stores');
-    return this.mocks.map((mock, index) => ({
+    return this.mocks.stores.map((mock: any, index: number) => ({
       id: index + 1,
-      name: mock.name,
-      address: mock.address,
+      name: mock.name[0], // Take first language
+      address: mock.address[0], // Take first language
       latitude: mock.latitude || 0,
       longitude: mock.longitude || 0,
       phone: mock.phone || '',
