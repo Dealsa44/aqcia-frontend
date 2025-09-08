@@ -57,16 +57,23 @@ export class ProductComponent implements OnInit {
     this.isLoadingProduct = true;
     this.productError = '';
 
+    // Try to load from API first
     this.apiService.getProduct(productId).subscribe({
       next: (apiProduct: ApiProduct) => {
-        console.log('✅ ProductComponent - Product loaded successfully:', apiProduct);
+        console.log('✅ ProductComponent - Product loaded successfully from API:', apiProduct);
         this.apiProduct = apiProduct;
         this.isLoadingProduct = false;
         this.loadPrices(productId);
       },
       error: (error) => {
-        console.error('❌ ProductComponent - Error loading product:', error);
-        this.productError = 'Failed to load product details. Using mock data.';
+        console.error('❌ ProductComponent - Error loading product from API:', error);
+        console.log('🔄 ProductComponent - Falling back to mock data');
+        
+        // Fallback to mock data
+        this.product = productsMocks.products.find(p => p.id === productId);
+        if (!this.product) {
+          this.productError = 'Product not found.';
+        }
         this.isLoadingProduct = false;
       }
     });

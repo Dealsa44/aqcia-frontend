@@ -86,7 +86,8 @@ export class CatalogComponent implements OnInit {
     console.log('🔍 Native fetch available:', typeof fetch);
     console.log('🔍 XMLHttpRequest available:', typeof XMLHttpRequest);
     
-    // Load products from API
+    // Load Agrohub products from API
+    console.log('🛍️ CatalogComponent - Loading Agrohub products');
     this.apiService.getProducts().subscribe({
       next: (apiProducts: ApiProduct[]) => {
         console.log('✅ API call successful, received products:', apiProducts.length);

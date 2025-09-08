@@ -47,20 +47,31 @@ export class MarketsComponent implements OnInit {
     this.isLoadingStores = true;
     this.storesError = '';
 
-    this.apiService.getStores().subscribe({
-      next: (apiStores: ApiStore[]) => {
-        console.log('✅ MarketsComponent - Stores loaded successfully:', apiStores.length);
-        this.stores = apiStores;
-        this.isLoadingStores = false;
-      },
-      error: (error) => {
-        console.error('❌ MarketsComponent - Error loading stores:', error);
-        this.storesError = 'Failed to load stores. Using mock data.';
-        this.isLoadingStores = false;
-        // Fallback to mock data
-        this.stores = this.convertMocksToApiStores();
-      }
-    });
+    // For now, use mock data but add Agrohub as first store
+    this.stores = this.getAgrohubStores();
+    this.isLoadingStores = false;
+  }
+
+  getAgrohubStores(): ApiStore[] {
+    console.log('🏪 MarketsComponent - Creating Agrohub stores');
+    
+    // Real Agrohub store
+    const agrohubStore: ApiStore = {
+      id: 1,
+      name: 'Agrohub',
+      address: 'Tbilisi, Georgia',
+      latitude: 41.7151,
+      longitude: 44.8271,
+      phone: '+995 32 2 123 456',
+      email: 'info@agrohub.ge',
+      website: 'https://agrohub.ge',
+      opening_hours: '9:00-21:00'
+    };
+
+    // Add mock stores for other markets
+    const mockStores = this.convertMocksToApiStores();
+    
+    return [agrohubStore, ...mockStores];
   }
 
   convertMocksToApiStores(): ApiStore[] {
@@ -91,12 +102,25 @@ export class MarketsComponent implements OnInit {
     return '★'.repeat(Math.floor(rating));
   }
   viewStore(marketName: string) {
-    this.router.navigate([
-      '/',
-      this.languageService.getCurrentLanguageCode(),
-      'market-details',
-      marketName.toLowerCase(),
-    ]);
+    console.log('🏪 MarketsComponent - viewStore called for:', marketName);
+    
+    if (marketName.toLowerCase() === 'agrohub') {
+      // Navigate to Agrohub market details with real data
+      this.router.navigate([
+        '/',
+        this.languageService.getCurrentLanguageCode(),
+        'market-details',
+        'agrohub'
+      ]);
+    } else {
+      // Navigate to other market details (mock data)
+      this.router.navigate([
+        '/',
+        this.languageService.getCurrentLanguageCode(),
+        'market-details',
+        marketName.toLowerCase(),
+      ]);
+    }
   }
 
   loadFavoriteStores() {

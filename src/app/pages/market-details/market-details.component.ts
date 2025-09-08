@@ -1,5 +1,5 @@
 // pages/market-details/market-details.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from '../../core/services/language.service';
@@ -9,6 +9,7 @@ import { marketsMocks } from '../../core/mocks/markets.mocks';
 import { CartService } from '../../core/services/cart.service';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { ApiService, ApiCategory, ApiProduct } from '../../core/services/api.service';
 
 @Component({
   selector: 'app-market-details',
@@ -17,7 +18,7 @@ import { AuthService } from '../../core/services/auth.service';
   templateUrl: './market-details.component.html',
   styleUrls: ['./market-details.component.scss'],
 })
-export class MarketDetailsComponent {
+export class MarketDetailsComponent implements OnInit {
   marketId: string = '';
   market: any;
   marketData = marketDetailsMocks;
@@ -28,21 +29,69 @@ export class MarketDetailsComponent {
   discountCount: number = 0;
   isFavorite = false;
 
+  // Real API data for Agrohub
+  apiCategories: ApiCategory[] = [];
+  apiProducts: ApiProduct[] = [];
+  isLoadingCategories = true;
+  isLoadingProducts = true;
+  categoriesError = '';
+  productsError = '';
+
   constructor(
     private route: ActivatedRoute,
     public languageService: LanguageService,
     private router: Router,
     public cartService: CartService,
-    public authService: AuthService
+    public authService: AuthService,
+    private apiService: ApiService
   ) {
+    console.log('🏪 MarketDetailsComponent initialized');
     this.route.params.subscribe((params) => {
       this.marketId = params['id'];
+      console.log('🏪 MarketDetailsComponent - Market ID:', this.marketId);
       this.loadMarketData();
     });
     this.checkFavoriteStatus();
   }
 
+  ngOnInit() {
+    console.log('🏪 MarketDetailsComponent - ngOnInit called');
+  }
+
   loadMarketData() {
+    console.log('🏪 MarketDetailsComponent - loadMarketData called for:', this.marketId);
+    
+    if (this.marketId.toLowerCase() === 'agrohub') {
+      // Load real Agrohub data
+      this.loadAgrohubData();
+    } else {
+      // Load mock data for other markets
+      this.loadMockMarketData();
+    }
+  }
+
+  loadAgrohubData() {
+    console.log('🏪 MarketDetailsComponent - Loading Agrohub data');
+    
+    // Set Agrohub market info
+    this.market = {
+      name: ['Agrohub', 'Agrohub', 'Agrohub'],
+      image: 'https://static.agrohub.lemon.do/Agrohub_files/logo.png',
+      rating: 4.8,
+      delivery: true,
+      locations: 15,
+      address: ['Tbilisi, Georgia', 'თბილისი, საქართველო', 'Тбилиси, Грузия']
+    };
+
+    // Load real categories and products
+    this.loadAgrohubCategories();
+    this.loadAgrohubProducts();
+    this.calculateMarketStats();
+  }
+
+  loadMockMarketData() {
+    console.log('🏪 MarketDetailsComponent - Loading mock market data');
+    
     this.market = marketsMocks.stores.find(
       (store) => store.name[0].toLowerCase() === this.marketId.toLowerCase()
     );
@@ -98,6 +147,58 @@ export class MarketDetailsComponent {
         )
       ).length;
     }
+  }
+
+  loadAgrohubCategories() {
+    console.log('🏪 MarketDetailsComponent - Loading Agrohub categories');
+    this.isLoadingCategories = true;
+    this.categoriesError = '';
+
+    this.apiService.getAllCategories().subscribe({
+      next: (categories: ApiCategory[]) => {
+        console.log('✅ MarketDetailsComponent - Categories loaded:', categories.length);
+        this.apiCategories = categories;
+        this.categories = categories.map(cat => ({
+          id: cat.id,
+          name: [cat.name_en, cat.name_ka, cat.name_ru],
+          icon: cat.icon,
+          productCount: 0 // Will be updated when products load
+        }));
+        this.isLoadingCategories = false;
+      },
+      error: (error) => {
+        console.error('❌ MarketDetailsComponent - Error loading categories:', error);
+        this.categoriesError = 'Failed to load categories.';
+        this.isLoadingCategories = false;
+      }
+    });
+  }
+
+  loadAgrohubProducts() {
+    console.log('🏪 MarketDetailsComponent - Loading Agrohub products');
+    this.isLoadingProducts = true;
+    this.productsError = '';
+
+    this.apiService.getProducts(0, 20).subscribe({
+      next: (products: ApiProduct[]) => {
+        console.log('✅ MarketDetailsComponent - Products loaded:', products.length);
+        this.apiProducts = products;
+        this.featuredProducts = products.slice(0, 8).map(product => ({
+          id: product.product_id,
+          name: [product.name, product.name, product.name],
+          price: 0, // Will be updated with real prices
+          image: product.image_url,
+          rating: 4.5,
+          discount: 0
+        }));
+        this.isLoadingProducts = false;
+      },
+      error: (error) => {
+        console.error('❌ MarketDetailsComponent - Error loading products:', error);
+        this.productsError = 'Failed to load products.';
+        this.isLoadingProducts = false;
+      }
+    });
   }
 
   getCurrentText(items: string[] | any[]) {
