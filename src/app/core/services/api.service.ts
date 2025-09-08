@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, timeout } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 export interface ApiProduct {
   product_id: number;
@@ -64,7 +65,16 @@ export class ApiService {
     console.log('📍 Base URL:', this.baseUrl);
     console.log('🌐 Full URL:', url);
     console.log('🔒 URL starts with https:', url.startsWith('https://'));
-    return this.http.get<ApiProduct[]>(url);
+    
+    // Add timeout and more detailed logging
+    return this.http.get<ApiProduct[]>(url).pipe(
+      timeout(10000), // 10 second timeout
+      tap({
+        next: (data) => console.log('✅ HTTP request successful, received data:', data),
+        error: (error) => console.log('❌ HTTP request failed:', error),
+        complete: () => console.log('🏁 HTTP request completed')
+      })
+    );
   }
 
   // Get all categories
