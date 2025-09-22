@@ -32,6 +32,7 @@ export class CatalogComponent implements OnInit {
   isLoadingProducts = true;
   isLoadingCategories = true;
   errorMessage = '';
+  isInitialLoad = true; // Track if this is the initial load
 
   showCategoryModal = false;
   selectedCategories: string[] = []; // New property to store multiple selected categories
@@ -48,7 +49,26 @@ export class CatalogComponent implements OnInit {
     private route: ActivatedRoute,
     private productAnimationService: ProductAnimationService,
     private apiService: ApiService
-  ) {}
+  ) {
+    // Add mobile-specific error recovery
+    this.setupMobileErrorRecovery();
+  }
+
+  private setupMobileErrorRecovery() {
+    // Add a global error handler for mobile browsers
+    window.addEventListener('error', (event) => {
+      if (this.isInitialLoad && event.error?.message?.includes('fetch')) {
+        console.log('🔄 Mobile browser fetch error detected, attempting recovery...');
+        // Try to reload data after a short delay
+        setTimeout(() => {
+          if (this.isInitialLoad) {
+            console.log('🔄 Attempting to reload data...');
+            this.loadData();
+          }
+        }, 3000);
+      }
+    });
+  }
 
   ngOnInit() {
     // Scroll to top when component initializes
@@ -73,13 +93,44 @@ export class CatalogComponent implements OnInit {
   loadData() {
     console.log('🔄 CatalogComponent - Starting data load...');
     
-    // Load Agrohub products from API
+    // Load categories first, then products to avoid simultaneous requests on mobile
+    this.loadCategories();
+  }
+
+  private loadCategories() {
+    console.log('🔄 CatalogComponent - Loading categories...');
+    this.apiService.getAllCategories().subscribe({
+      next: (apiCategories: ApiCategory[]) => {
+        console.log('✅ CatalogComponent - Categories loaded successfully:', apiCategories.length);
+        this.categories = this.convertApiCategoriesToCategories(apiCategories);
+        this.isLoadingCategories = false;
+        this.updateCategoryCounts();
+        
+        // Load products after categories are loaded
+        this.loadProducts();
+      },
+      error: (error: any) => {
+        console.error('❌ CatalogComponent - Error loading categories:', error);
+        // Fallback to mock data
+        this.categories = productsMocks.categories;
+        this.isLoadingCategories = false;
+        this.updateCategoryCounts();
+        
+        // Still try to load products even if categories fail
+        this.loadProducts();
+      }
+    });
+  }
+
+  private loadProducts() {
+    console.log('🔄 CatalogComponent - Loading products...');
     this.apiService.getProducts().subscribe({
       next: (apiProducts: ApiProduct[]) => {
         console.log('✅ CatalogComponent - Products loaded successfully:', apiProducts.length);
         this.products = this.convertApiProductsToProducts(apiProducts);
         this.filteredProducts = this.products;
         this.isLoadingProducts = false;
+        this.isInitialLoad = false;
         this.updateCategoryCounts();
       },
       error: (error: any) => {
@@ -100,23 +151,7 @@ export class CatalogComponent implements OnInit {
         this.products = productsMocks.products as Product[];
         this.filteredProducts = this.products;
         this.isLoadingProducts = false;
-        this.updateCategoryCounts();
-      }
-    });
-
-    // Load categories from API
-    this.apiService.getAllCategories().subscribe({
-      next: (apiCategories: ApiCategory[]) => {
-        console.log('✅ CatalogComponent - Categories loaded successfully:', apiCategories.length);
-        this.categories = this.convertApiCategoriesToCategories(apiCategories);
-        this.isLoadingCategories = false;
-        this.updateCategoryCounts();
-      },
-      error: (error: any) => {
-        console.error('❌ CatalogComponent - Error loading categories:', error);
-        // Fallback to mock data
-        this.categories = productsMocks.categories;
-        this.isLoadingCategories = false;
+        this.isInitialLoad = false;
         this.updateCategoryCounts();
       }
     });

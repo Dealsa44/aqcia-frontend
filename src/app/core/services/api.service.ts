@@ -130,10 +130,10 @@ export class ApiService {
     }).pipe(
       timeout(20000), // Increased timeout for mobile networks
       retry({
-        count: this.mobileBrowserService.isMobileBrowser() ? 3 : 1,
+        count: this.mobileBrowserService.isMobileBrowser() ? 2 : 1,
         delay: (error, retryCount) => {
           console.log(`🔄 Retry attempt ${retryCount} for mobile browser`);
-          return new Promise(resolve => setTimeout(resolve, 1000 * retryCount));
+          return new Promise(resolve => setTimeout(resolve, 2000 * retryCount));
         }
       }),
       tap({

@@ -28,9 +28,10 @@
 
       <div class="results">
         <!-- Loading state -->
-        @if (isLoadingProducts) {
+        @if (isLoadingProducts || isInitialLoad) {
         <div class="loading">
           <p>Loading products from Agrohub...</p>
+          <div class="loading-spinner"></div>
         </div>
         }
         
