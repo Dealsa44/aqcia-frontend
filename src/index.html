@@ -2,13 +2,162 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>MarketsStartup</title>
+  <title>Markets Startup - Grocery Price Comparison</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="GroceryCompare.ico",>
+  
+  <!-- Viewport and responsive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="GroceryCompare.ico">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- Theme colors for different platforms -->
+  <meta name="theme-color" content="#1976d2">
+  <meta name="msapplication-TileColor" content="#1976d2">
+  <meta name="msapplication-navbutton-color" content="#1976d2">
+  
+  <!-- iOS specific meta tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Markets">
+  <meta name="apple-touch-fullscreen" content="yes">
+  
+  <!-- iOS icons -->
+  <link rel="apple-touch-icon" href="assets/icons/icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="assets/icons/icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/icon-192x192.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="assets/icons/icon-192x192.png">
+  
+  <!-- iOS splash screens -->
+  <link rel="apple-touch-startup-image" href="assets/splash/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+  <link rel="apple-touch-startup-image" href="assets/splash/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+  <link rel="apple-touch-startup-image" href="assets/splash/iphone6plus_splash.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)">
+  <link rel="apple-touch-startup-image" href="assets/splash/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
+  <link rel="apple-touch-startup-image" href="assets/splash/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)">
+  
+  <!-- Android Chrome specific -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Markets">
+  
+  <!-- Windows specific -->
+  <meta name="msapplication-TileImage" content="assets/icons/icon-144x144.png">
+  <meta name="msapplication-config" content="browserconfig.xml">
+  
+  <!-- Security -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self' https://aqcia-api-g2afh7hcdvdffsg5.northeurope-01.azurewebsites.net;">
+  
+  <!-- Preconnect to external resources -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <!-- External stylesheets -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="main.js" as="script">
+  <link rel="preload" href="styles.css" as="style">
 </head>
 <body>
   <app-root></app-root>
+  
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('SW registered: ', registration);
+            
+            // Check for updates
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  // New content is available, show update notification
+                  if (confirm('New version available! Reload to update?')) {
+                    window.location.reload();
+                  }
+                }
+              });
+            });
+          })
+          .catch((registrationError) => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+    
+    // PWA Install Prompt
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      e.preventDefault();
+      // Stash the event so it can be triggered later
+      deferredPrompt = e;
+      
+      // Show install button or notification
+      showInstallButton();
+    });
+    
+    function showInstallButton() {
+      // Create install button or show notification
+      const installButton = document.createElement('button');
+      installButton.textContent = 'Install App';
+      installButton.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #1976d2;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      `;
+      
+      installButton.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          // Show the install prompt
+          deferredPrompt.prompt();
+          
+          // Wait for the user to respond to the prompt
+          const { outcome } = await deferredPrompt.userChoice;
+          console.log(`User response to the install prompt: ${outcome}`);
+          
+          // Clear the deferredPrompt variable
+          deferredPrompt = null;
+          
+          // Hide the install button
+          installButton.remove();
+        }
+      });
+      
+      document.body.appendChild(installButton);
+      
+      // Auto-hide after 10 seconds
+      setTimeout(() => {
+        if (installButton.parentNode) {
+          installButton.remove();
+        }
+      }, 10000);
+    }
+    
+    // Track PWA install events
+    window.addEventListener('appinstalled', (evt) => {
+      console.log('PWA was installed');
+      // Track installation in analytics
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'pwa_install', {
+          event_category: 'PWA',
+          event_label: 'App Installed'
+        });
+      }
+    });
+  </script>
 </body>
 </html>

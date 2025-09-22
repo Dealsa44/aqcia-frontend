@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet, NavigationEnd, Router } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { ProductAnimationComponent } from './shared/components/product-animation/product-animation.component';
+import { PWAInstallComponent } from './shared/components/pwa-install/pwa-install.component';
 import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavbarComponent, RouterModule, ProductAnimationComponent],
+  imports: [CommonModule, RouterOutlet, NavbarComponent, RouterModule, ProductAnimationComponent, PWAInstallComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

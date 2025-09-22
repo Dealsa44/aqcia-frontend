@@ -25,6 +25,10 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/GroceryCompare.ico",
+              "src/manifest.json",
+              "src/sw.js",
+              "src/offline.html",
+              "src/version.json",
               "src/assets",
               {
                 "glob": "**/*",
@@ -38,6 +42,11 @@
               },
               {
                 "glob": "web.config",
+                "input": "public",
+                "output": "/"
+              },
+              {
+                "glob": "browserconfig.xml",
                 "input": "public",
                 "output": "/"
               }

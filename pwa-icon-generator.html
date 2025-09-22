@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Icon Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .icon-preview {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin: 5px;
+        }
+        button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <h1>PWA Icon Generator</h1>
+    <p>This tool generates PWA icons from the base SVG design.</p>
+    
+    <div>
+        <button onclick="generateAllIcons()">Generate All Icons</button>
+        <button onclick="downloadAllIcons()">Download All Icons</button>
+    </div>
+    
+    <div id="iconPreviews"></div>
+
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        const generatedIcons = {};
+
+        function generateIcon(size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Background circle
+            ctx.fillStyle = '#1976d2';
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2 - 4, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // White border
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = Math.max(2, size/64);
+            ctx.stroke();
+            
+            // Shopping cart icon
+            const centerX = size/2;
+            const centerY = size/2;
+            const cartWidth = size * 0.3;
+            const cartHeight = size * 0.2;
+            
+            // Cart body
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(centerX - cartWidth/2, centerY - cartHeight/2, cartWidth, cartHeight);
+            
+            // Cart handle
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = Math.max(2, size/64);
+            ctx.beginPath();
+            ctx.moveTo(centerX - cartWidth/2 - size*0.05, centerY - cartHeight/2);
+            ctx.quadraticCurveTo(centerX - cartWidth/2 - size*0.1, centerY - cartHeight/2 - size*0.05, 
+                                centerX - cartWidth/2 - size*0.05, centerY - cartHeight/2 - size*0.1);
+            ctx.moveTo(centerX + cartWidth/2 + size*0.05, centerY - cartHeight/2);
+            ctx.quadraticCurveTo(centerX + cartWidth/2 + size*0.1, centerY - cartHeight/2 - size*0.05, 
+                                centerX + cartWidth/2 + size*0.05, centerY - cartHeight/2 - size*0.1);
+            ctx.stroke();
+            
+            // Cart wheels
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(centerX - cartWidth/3, centerY + cartHeight/2 + size*0.05, size*0.03, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(centerX + cartWidth/3, centerY + cartHeight/2 + size*0.05, size*0.03, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Shopping items
+            ctx.fillStyle = '#4caf50';
+            ctx.fillRect(centerX - cartWidth/6, centerY - cartHeight/4, size*0.02, size*0.04);
+            ctx.fillStyle = '#ff9800';
+            ctx.fillRect(centerX, centerY - cartHeight/4, size*0.02, size*0.04);
+            ctx.fillStyle = '#f44336';
+            ctx.fillRect(centerX + cartWidth/6, centerY - cartHeight/4, size*0.02, size*0.04);
+            
+            return canvas;
+        }
+
+        function generateAllIcons() {
+            const container = document.getElementById('iconPreviews');
+            container.innerHTML = '';
+            
+            sizes.forEach(size => {
+                const canvas = generateIcon(size);
+                generatedIcons[size] = canvas;
+                
+                const preview = document.createElement('div');
+                preview.className = 'icon-preview';
+                preview.innerHTML = `
+                    <div>${size}x${size}</div>
+                    <canvas width="${size}" height="${size}"></canvas>
+                    <br>
+                    <button onclick="downloadIcon(${size})">Download</button>
+                `;
+                
+                const previewCanvas = preview.querySelector('canvas');
+                const previewCtx = previewCanvas.getContext('2d');
+                previewCtx.drawImage(canvas, 0, 0);
+                
+                container.appendChild(preview);
+            });
+        }
+
+        function downloadIcon(size) {
+            const canvas = generatedIcons[size];
+            if (!canvas) return;
+            
+            const link = document.createElement('a');
+            link.download = `icon-${size}x${size}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        function downloadAllIcons() {
+            sizes.forEach(size => {
+                setTimeout(() => downloadIcon(size), size * 10);
+            });
+        }
+
+        // Generate icons on page load
+        window.onload = generateAllIcons;
+    </script>
+</body>
+</html>

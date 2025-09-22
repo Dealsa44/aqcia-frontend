@@ -1,70 +1,89 @@
 {
-  "name": "Markets Startup",
+  "name": "Markets Startup - Grocery Comparison",
   "short_name": "Markets",
-  "description": "Grocery comparison app for finding the best deals",
+  "description": "Compare grocery prices across different markets and find the best deals. Save money on your shopping with our comprehensive price comparison tool.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#1976d2",
   "orientation": "portrait-primary",
-  "update_via_cache": "none",
   "scope": "/",
+  "id": "markets-startup-pwa",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["shopping", "utilities", "productivity"],
+  "screenshots": [
+    {
+      "src": "assets/screenshots/desktop-screenshot.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop view of Markets app"
+    },
+    {
+      "src": "assets/screenshots/mobile-screenshot.png", 
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile view of Markets app"
+    }
+  ],
   "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    },
     {
       "src": "GroceryCompare.ico",
       "sizes": "64x64",
       "type": "image/x-icon"
-    },
-    {
-      "src": "assets/icons/icon-72x72.png",
-      "sizes": "72x72",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "assets/icons/icon-96x96.png",
-      "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "assets/icons/icon-128x128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "assets/icons/icon-144x144.png",
-      "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "assets/icons/icon-152x152.png",
-      "sizes": "152x152",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "assets/icons/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "assets/icons/icon-384x384.png",
-      "sizes": "384x384",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "assets/icons/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
     }
   ],
-  "categories": ["shopping", "utilities"],
-  "lang": "en",
-  "dir": "ltr"
+  "shortcuts": [
+    {
+      "name": "Compare Products",
+      "short_name": "Compare",
+      "description": "Quickly compare product prices",
+      "url": "/catalog",
+      "icons": [
+        {
+          "src": "GroceryCompare.ico",
+          "sizes": "64x64"
+        }
+      ]
+    },
+    {
+      "name": "View Cart",
+      "short_name": "Cart",
+      "description": "Check your shopping cart",
+      "url": "/cart",
+      "icons": [
+        {
+          "src": "GroceryCompare.ico",
+          "sizes": "64x64"
+        }
+      ]
+    },
+    {
+      "name": "Find Markets",
+      "short_name": "Markets",
+      "description": "Browse nearby markets",
+      "url": "/markets",
+      "icons": [
+        {
+          "src": "GroceryCompare.ico",
+          "sizes": "64x64"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  }
 }
