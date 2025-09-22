@@ -61,21 +61,33 @@
     // Mobile browser detection and error handling
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    // Temporarily disabled service worker to prevent reload loops
-    // if ('serviceWorker' in navigator) {
-    //   window.addEventListener('load', () => {
-    //     navigator.serviceWorker.register('/sw.js')
-    //       .then((registration) => {
-    //         console.log('SW registered: ', registration);
-    //       })
-    //       .catch((registrationError) => {
-    //         console.log('SW registration failed: ', registrationError);
-    //         // Don't block app loading if SW fails
-    //       });
-    //   });
-    // } else if (isMobile) {
-    //   console.log('Service Worker not supported on this mobile browser');
-    // }
+    // Service Worker registration for PWA updates
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('✅ SW registered: ', registration);
+            
+            // Check for updates
+            registration.addEventListener('updatefound', () => {
+              console.log('🔄 PWA update found!');
+              const newWorker = registration.installing;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  console.log('🔄 New PWA version available!');
+                  // Auto-update for better UX
+                  newWorker.postMessage({ action: 'skipWaiting' });
+                }
+              });
+            });
+          })
+          .catch((registrationError) => {
+            console.log('❌ SW registration failed: ', registrationError);
+          });
+      });
+    } else if (isMobile) {
+      console.log('Service Worker not supported on this mobile browser');
+    }
     
     // Global error handler for mobile browsers
     window.addEventListener('error', (event) => {

@@ -1,7 +1,7 @@
 // Service Worker for PWA
-// Version: 1.0.0
+// Version: 1.0.1
 
-const CACHE_NAME = 'markets-app-v1';
+const CACHE_NAME = 'markets-app-v1.0.1';
 const STATIC_FILES = [
   '/',
   '/index.html',
@@ -88,5 +88,18 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-// Simple message handling - removed to prevent reload loops
+// Message handling for PWA updates
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.action === 'skipWaiting') {
+    console.log('🔄 Service Worker: skipWaiting requested');
+    self.skipWaiting();
+  }
+});
+
+// Handle controller change (when new SW takes control)
+self.addEventListener('controllerchange', () => {
+  console.log('🔄 Service Worker: New version activated');
+  // Reload the page to use the new version
+  window.location.reload();
+});
 

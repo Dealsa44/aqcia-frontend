@@ -119,9 +119,9 @@
 }
 
 .select-categories-button {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
   color: white;
-  box-shadow: 0 8px 24px rgba(0, 159, 227, 0.3);
+  box-shadow: 0 8px 24px rgba(255, 68, 68, 0.3);
   animation: buttonPulse 3s ease-in-out infinite;
 }
 
