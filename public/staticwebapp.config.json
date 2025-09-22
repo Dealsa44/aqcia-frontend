@@ -15,7 +15,7 @@
     "exclude": ["/images/*.{png,jpg,jpeg,gif,ico,svg}", "/css/*", "/js/*", "/*.css", "/*.js", "/*.ico", "/*.png", "/*.jpg", "/*.jpeg", "/*.gif", "/*.svg", "/*.woff", "/*.woff2", "/*.ttf", "/*.eot"]
   },
   "globalHeaders": {
-    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self' https://aqcia-api-g2afh7hcdvdffsg5.northeurope-01.azurewebsites.net; upgrade-insecure-requests"
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self' https://aqcia-api-g2afh7hcdvdffsg5.northeurope-01.azurewebsites.net https://*.azurewebsites.net wss: ws:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
   },
   "mimeTypes": {
     ".css": "text/css",

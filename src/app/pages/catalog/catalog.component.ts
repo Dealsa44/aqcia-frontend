@@ -71,16 +71,31 @@ export class CatalogComponent implements OnInit {
   }
 
   loadData() {
+    console.log('🔄 CatalogComponent - Starting data load...');
+    
     // Load Agrohub products from API
     this.apiService.getProducts().subscribe({
       next: (apiProducts: ApiProduct[]) => {
+        console.log('✅ CatalogComponent - Products loaded successfully:', apiProducts.length);
         this.products = this.convertApiProductsToProducts(apiProducts);
         this.filteredProducts = this.products;
         this.isLoadingProducts = false;
         this.updateCategoryCounts();
       },
       error: (error: any) => {
-        this.errorMessage = 'Failed to load products. Using mock data.';
+        console.error('❌ CatalogComponent - Error loading products:', error);
+        
+        // Enhanced error handling for mobile browsers
+        if (error.status === 0) {
+          this.errorMessage = 'Network error. Please check your internet connection.';
+        } else if (error.status === 403) {
+          this.errorMessage = 'Access denied. Please try refreshing the page.';
+        } else if (error.status >= 500) {
+          this.errorMessage = 'Server error. Please try again later.';
+        } else {
+          this.errorMessage = 'Failed to load products. Using mock data.';
+        }
+        
         // Fallback to mock data
         this.products = productsMocks.products as Product[];
         this.filteredProducts = this.products;
@@ -92,11 +107,13 @@ export class CatalogComponent implements OnInit {
     // Load categories from API
     this.apiService.getAllCategories().subscribe({
       next: (apiCategories: ApiCategory[]) => {
+        console.log('✅ CatalogComponent - Categories loaded successfully:', apiCategories.length);
         this.categories = this.convertApiCategoriesToCategories(apiCategories);
         this.isLoadingCategories = false;
         this.updateCategoryCounts();
       },
       error: (error: any) => {
+        console.error('❌ CatalogComponent - Error loading categories:', error);
         // Fallback to mock data
         this.categories = productsMocks.categories;
         this.isLoadingCategories = false;

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, timeout } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, timeout, retry, catchError, throwError } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
+import { MobileBrowserService } from './mobile-browser.service';
 
 export interface ApiProduct {
   product_id: number;
@@ -97,9 +99,22 @@ export interface ApiNotification {
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'https://aqcia-api-g2afh7hcdvdffsg5.northeurope-01.azurewebsites.net';
+  private baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {
+  // Mobile-friendly headers
+  private getHttpOptions() {
+    const mobileHeaders = this.mobileBrowserService.getMobileHeaders();
+    return {
+      headers: new HttpHeaders(mobileHeaders)
+    };
+  }
+
+  constructor(
+    private http: HttpClient,
+    private mobileBrowserService: MobileBrowserService
+  ) {
+    // Log mobile browser info for debugging
+    this.mobileBrowserService.logMobileInfo();
   }
 
   // Get all products
@@ -109,71 +124,87 @@ export class ApiService {
     
     // Add comprehensive error handling and logging
     return this.http.get<ApiProduct[]>(url, {
+      ...this.getHttpOptions(),
       observe: 'response',
       reportProgress: true
     }).pipe(
-      timeout(15000), // 15 second timeout
+      timeout(20000), // Increased timeout for mobile networks
+      retry({
+        count: this.mobileBrowserService.isMobileBrowser() ? 3 : 1,
+        delay: (error, retryCount) => {
+          console.log(`🔄 Retry attempt ${retryCount} for mobile browser`);
+          return new Promise(resolve => setTimeout(resolve, 1000 * retryCount));
+        }
+      }),
       tap({
         next: (response) => {
+          console.log('✅ API Response received:', response.status);
         },
         error: (error) => {
+          console.error('❌ API Error:', error);
         },
-        complete: () => {}
+        complete: () => {
+          console.log('✅ API Request completed');
+        }
       }),
-      map(response => response.body || [])
+      map(response => response.body || []),
+      catchError(error => {
+        console.error('❌ Final API Error after retries:', error);
+        return throwError(() => error);
+      })
     );
   }
 
   // Get all categories
   getCategories(): Observable<ApiCategory[]> {
-    return this.http.get<ApiCategory[]>(`${this.baseUrl}/catalog/categories/v2`);
+    return this.http.get<ApiCategory[]>(`${this.baseUrl}/catalog/categories/v2`, this.getHttpOptions());
   }
 
   // Get all subcategories
   getSubcategories(): Observable<ApiSubcategory[]> {
-    return this.http.get<ApiSubcategory[]>(`${this.baseUrl}/catalog/subcategories`);
+    return this.http.get<ApiSubcategory[]>(`${this.baseUrl}/catalog/subcategories`, this.getHttpOptions());
   }
 
   // Search products
   searchProducts(query: string): Observable<ApiProduct[]> {
-    return this.http.get<ApiProduct[]>(`${this.baseUrl}/search?q=${query}`);
+    return this.http.get<ApiProduct[]>(`${this.baseUrl}/search?q=${query}`, this.getHttpOptions());
   }
 
   // Get product by ID
   getProduct(id: number): Observable<ApiProduct> {
-    return this.http.get<ApiProduct>(`${this.baseUrl}/products/${id}`);
+    return this.http.get<ApiProduct>(`${this.baseUrl}/products/${id}`, this.getHttpOptions());
   }
 
   // Get prices for a product
   getProductPrices(productId: number): Observable<ApiPrice[]> {
-    return this.http.get<ApiPrice[]>(`${this.baseUrl}/prices/product/${productId}`);
+    return this.http.get<ApiPrice[]>(`${this.baseUrl}/prices/product/${productId}`, this.getHttpOptions());
   }
 
   // Get subcategories for a category
   getSubcategoriesForCategory(categoryId: number): Observable<ApiSubcategory[]> {
-    return this.http.get<ApiSubcategory[]>(`${this.baseUrl}/catalog/categories/${categoryId}/subcategories`);
+    return this.http.get<ApiSubcategory[]>(`${this.baseUrl}/catalog/categories/${categoryId}/subcategories`, this.getHttpOptions());
   }
 
   // ===== CATEGORIES & SUBCATEGORIES =====
   
   // Get all categories (v2)
   getAllCategories(): Observable<ApiCategory[]> {
-    return this.http.get<ApiCategory[]>(`${this.baseUrl}/catalog/categories/v2`);
+    return this.http.get<ApiCategory[]>(`${this.baseUrl}/catalog/categories/v2`, this.getHttpOptions());
   }
 
   // Get category by ID
   getCategory(id: number): Observable<ApiCategory> {
-    return this.http.get<ApiCategory>(`${this.baseUrl}/catalog/categories/v2/${id}`);
+    return this.http.get<ApiCategory>(`${this.baseUrl}/catalog/categories/v2/${id}`, this.getHttpOptions());
   }
 
   // Get all subcategories
   getAllSubcategories(): Observable<ApiSubcategory[]> {
-    return this.http.get<ApiSubcategory[]>(`${this.baseUrl}/catalog/subcategories`);
+    return this.http.get<ApiSubcategory[]>(`${this.baseUrl}/catalog/subcategories`, this.getHttpOptions());
   }
 
   // Get subcategory by ID
   getSubcategory(id: number): Observable<ApiSubcategory> {
-    return this.http.get<ApiSubcategory>(`${this.baseUrl}/catalog/subcategories/${id}`);
+    return this.http.get<ApiSubcategory>(`${this.baseUrl}/catalog/subcategories/${id}`, this.getHttpOptions());
   }
 
   // ===== SEARCH =====
@@ -182,19 +213,19 @@ export class ApiService {
   searchProductsComprehensive(query: string, skip: number = 0, limit: number = 100): Observable<ApiProduct[]> {
     const url = `${this.baseUrl}/search?q=${encodeURIComponent(query)}&skip=${skip}&limit=${limit}`;
     
-    return this.http.get<ApiProduct[]>(url);
+    return this.http.get<ApiProduct[]>(url, this.getHttpOptions());
   }
 
   // ===== STORES =====
   
   // Get all stores
   getStores(): Observable<ApiStore[]> {
-    return this.http.get<ApiStore[]>(`${this.baseUrl}/stores`);
+    return this.http.get<ApiStore[]>(`${this.baseUrl}/stores`, this.getHttpOptions());
   }
 
   // Get store by ID
   getStore(id: number): Observable<ApiStore> {
-    return this.http.get<ApiStore>(`${this.baseUrl}/stores/${id}`);
+    return this.http.get<ApiStore>(`${this.baseUrl}/stores/${id}`, this.getHttpOptions());
   }
 
   // ===== USERS =====
@@ -244,11 +275,11 @@ export class ApiService {
   
   // Health check
   getHealth(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/health`);
+    return this.http.get<any>(`${this.baseUrl}/health`, this.getHttpOptions());
   }
 
   // Debug info
   getDebugInfo(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/debug`);
+    return this.http.get<any>(`${this.baseUrl}/debug`, this.getHttpOptions());
   }
 }
