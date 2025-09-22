@@ -1,7 +1,7 @@
 // Service Worker for PWA
-// Version: 1.0.1
+// Version: 1.0.2
 
-const CACHE_NAME = 'markets-app-v1.0.1';
+const CACHE_NAME = 'markets-app-v1.0.2';
 const STATIC_FILES = [
   '/',
   '/index.html',
