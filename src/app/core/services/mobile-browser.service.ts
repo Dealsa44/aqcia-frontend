@@ -43,10 +43,10 @@ export class MobileBrowserService {
    */
   supportsModernFeatures(): boolean {
     return !!(
-      window.fetch &&
-      window.Promise &&
-      window.localStorage &&
-      window.sessionStorage &&
+      typeof window.fetch === 'function' &&
+      typeof window.Promise === 'function' &&
+      typeof window.localStorage !== 'undefined' &&
+      typeof window.sessionStorage !== 'undefined' &&
       'serviceWorker' in navigator
     );
   }
