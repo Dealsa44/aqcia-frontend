@@ -1,51 +1,132 @@
 <div class="market-products-page">
-  <div class="container">
-    <div class="header">
-      <h1>
-        {{ getCurrentText(market.name) }}
-        @if (category) {
-        <span> - {{ getCurrentText(category.name) }}</span>
-        }
-      </h1>
-      <a
-        [routerLink]="[
-          '/',
-          languageService.getCurrentLanguageCode(),
-          'market-details',
-          marketId
-        ]"
-        class="back-link"
-      >
-        {{ getCurrentText(marketProductsMocks.backToMarket) }}
-      </a>
-    </div>
-
-    @if (products.length > 0) {
-    <div class="products-grid">
-      @for (product of products; track product.id) {
-      <div class="product-card">
-        <img
-          [src]="'assets/imgs/products/' + product.image"
-          [alt]="getCurrentText(product.name)"
-        />
-        <h3>{{ getCurrentText(product.name) }}</h3>
-        <p class="description">{{ getCurrentText(product.description) }}</p>
-        <p class="price">
-          ₾{{ getMarketPrice(product).toFixed(2) }}
-          @if (hasDiscount(product)) {
-          <span class="discount">-{{ getDiscount(product).toFixed(0) }}%</span>
+  <div class="page-container">
+    <div class="market-products-card">
+      <div class="header">
+        <h1>
+          {{ getCurrentText(market.name) }}
+          @if (category) {
+          <span> - {{ getCurrentText(category.name) }}</span>
           }
-        </p>
-        <button class="add-to-cart" (click)="addToCart(product, $event)">
-          {{ getCurrentText(marketProductsMocks.addToCart) }}
-        </button>
+        </h1>
+        <a
+          [routerLink]="[
+            '/',
+            languageService.getCurrentLanguageCode(),
+            'market-details',
+            marketId
+          ]"
+          class="back-link"
+        >
+          {{ getCurrentText(marketProductsMocks.backToMarket) }}
+        </a>
+      </div>
+
+      <div class="search-section">
+        @if (!category) {
+        <div class="filter-buttons">
+                <button class="select-categories-btn" (click)="openCategoryModal()">
+                  {{ getCurrentText(marketProductsMocks.selectCategories) }}
+                  @if (selectedCategories.length > 0) {
+                  <span class="category-count-badge">{{ selectedCategories.length }}</span>
+                  }
+                </button>
+          <button class="clear-filters-btn" (click)="clearFilters()">
+            {{ getCurrentText(marketProductsMocks.clearFilters) }}
+          </button>
+        </div>
+        }
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="searchProducts()"
+          [placeholder]="getCurrentText(marketProductsMocks.searchPlaceholder)"
+          class="search-input"
+        />
+      </div>
+
+      @if (filteredProducts.length > 0) {
+      <div class="products-grid">
+        @for (product of filteredProducts; track product.id) {
+        <div class="product-card">
+          <img
+            [src]="'assets/imgs/products/' + product.image"
+            [alt]="getCurrentText(product.name)"
+          />
+          <div class="product-info">
+            <h3>{{ getCurrentText(product.name) }}</h3>
+            <p class="description">{{ getCurrentText(product.description) }}</p>
+            <div class="price-section">
+              <p class="price">
+                ₾{{ getMarketPrice(product).toFixed(2) }}
+                @if (hasDiscount(product)) {
+                <span class="discount">-{{ getDiscount(product).toFixed(0) }}%</span>
+                }
+              </p>
+              <button class="add-to-cart" (click)="addToCart(product, $event)">
+                {{ getCurrentText(marketProductsMocks.addToCart) }}
+              </button>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+      } @else {
+      <div class="no-products">
+        @if (searchTerm || selectedCategories.length > 0) {
+        {{ getCurrentText(marketProductsMocks.noResultsFound) }}
+        } @else {
+        {{ getCurrentText(marketProductsMocks.noProductsFound) }}
+        }
       </div>
       }
     </div>
-    } @else {
-    <div class="no-products">
-      {{ getCurrentText(marketProductsMocks.noProductsFound) }}
-    </div>
-    }
   </div>
 </div>
+
+@if (showCategoryModal) {
+ <div class="modal-overlay" (click)="closeCategoryModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>{{ getCurrentText(marketProductsMocks.selectCategories) }}</h2>
+
+    <div class="modal-search-container">
+      <input
+        type="text"
+        [(ngModel)]="modalSearchTerm"
+        (input)="filterModalCategories()"
+        [placeholder]="getCurrentText(marketProductsMocks.modalSearchPlaceholder)"
+        class="modal-search-input"
+      />
+    </div>
+    
+    <div class="category-checkboxes">
+      @if (filteredModalCategories.length > 0) {
+        @for (category of filteredModalCategories; track category.id) {
+          <label class="category-item">
+            <input
+              type="checkbox"
+              [value]="category.id"
+              (change)="onCategoryCheckboxChange($event)"
+              [checked]="selectedCategories.includes(category.id)"
+            />
+            {{ getCurrentText(category.name) }}
+            <span class="product-count">
+              ({{ getProductsInCategoryCount(category.id) }})
+            </span>
+          </label>
+        }
+      } @else {
+        <div class="no-results">
+          {{ getCurrentText(marketProductsMocks.noResultsMessage) }}
+        </div>
+      }
+    </div>
+    
+    <button class="apply-filters-button" (click)="applyCategoryFilters()">
+      {{ getCurrentText(marketProductsMocks.applyFilters) }}
+    </button>
+    <button class="close-modal-button" (click)="closeCategoryModal()">
+      ✖
+    </button>
+  </div>
+</div>
+}

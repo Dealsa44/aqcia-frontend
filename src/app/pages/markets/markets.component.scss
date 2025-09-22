@@ -1,444 +1,440 @@
-@use "sass:color";
-
-/* Color Palette: Inspired by modern delivery apps */
-/* Primary Background: #009FE3 (Vibrant Blue) */
-/* Secondary Accent: #FFC300 (Warm Yellow) */
-/* Text/Icons: #FFFFFF (Pure White) */
-/* Darker Text/Subtle Elements: #A0A0A0 (Light Gray) */
-/* Success/Call to Action: #4CAF50 (Green) */
-/* Danger/Notification: #F44336 (Red) */
-/* General Background (for dropdowns, off-canvas): #1B2B3B (Dark Slate) */
-/* Subtle Border/Separator: rgba(255, 255, 255, 0.1) */
-/* Shadow Color: rgba(0, 0, 0, 0.2) */
-
-/* Define color variables for clarity and easy modification */
-$color-primary-bg: #009FE3;
-$color-secondary-accent: #FFC300;
-$color-text-light: #FFFFFF;
-$color-text-dark: #A0A0A0;
-$color-success: #4CAF50;
-$color-danger: #F44336;
-$color-dark-slate: #1B2B3B;
-$color-border-subtle: rgba(255, 255, 255, 0.1);
-$color-shadow: rgba(0, 0, 0, 0.2);
-$color-hover-secondary: color.adjust($color-secondary-accent, $lightness: 5%);
-$color-hover-primary: color.adjust($color-primary-bg, $lightness: -5%);
-
+/* Mobile-First Markets Page with Glowing Animations */
 .markets-page {
-  background-color: #FFFFFF; /* Changed to Pure White background */
-  padding: 8rem 0 5rem;
-  min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: $color-dark-slate; /* Dark Slate for general text */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: auto;
+  padding: 70px 0 100px 0; /* Top padding for navbar, increased bottom padding for navigation bar */
+  position: relative;
+}
+
+.page-container {
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.markets-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 1rem 1.5rem;
+  box-shadow: 
+    0 20px 40px rgba(0, 159, 227, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
+  animation: cardFloat 6s ease-in-out infinite;
+  width: 100%;
+  max-width: 400px; /* Same as other pages */
+  margin: 0 auto;
+}
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    position: relative;
-    z-index: 1;
-  }
+.markets-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, 
+    rgba(0, 159, 227, 0.05) 0%, 
+    transparent 25%, 
+    rgba(255, 195, 0, 0.03) 50%, 
+    transparent 75%, 
+    rgba(76, 175, 80, 0.04) 100%);
+  animation: shimmer 8s linear infinite;
+  z-index: -1;
+}
 
-  h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    color: $color-primary-bg; /* Vibrant Blue for headings */
-    margin-bottom: 0.8rem;
-    text-align: center;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    animation: slideInDown 0.7s ease-out forwards;
-    opacity: 0;
-  }
+.markets-card h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textGlow 4s ease-in-out infinite;
+}
 
-  .subtitle {
-    font-size: 1.1rem;
-    color: $color-text-dark; /* Light Gray for subtitle */
-    margin-bottom: 3.5rem;
-    text-align: center;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
-    animation: fadeIn 0.9s ease-out forwards 0.2s;
-    opacity: 0;
-  }
+.subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 400;
+}
 
-  @keyframes slideInDown {
-    from {
-      transform: translateY(-20px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
+.search-section {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  border-radius: 16px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 
+    0 8px 16px rgba(0, 159, 227, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  animation: cardFloat 6s ease-in-out infinite;
+}
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+.search-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, 
+    rgba(0, 159, 227, 0.03) 0%, 
+    transparent 25%, 
+    rgba(255, 195, 0, 0.02) 50%, 
+    transparent 75%, 
+    rgba(76, 175, 80, 0.02) 100%);
+  animation: shimmer 8s linear infinite;
+  z-index: -1;
+}
 
-  .filters {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 4rem;
-    background-color: $color-dark-slate; /* Dark Slate for filter card */
-    padding: 1.2rem 2rem;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px $color-shadow;
-    border: 1px solid $color-border-subtle;
-    animation: slideInUp 0.8s ease-out forwards 0.4s;
-    opacity: 0;
-    transform: translateY(15px);
+.search-input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border: 2px solid var(--color-gray-200);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
 
-    @keyframes slideInUp {
-      from {
-        transform: translateY(15px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 0 0 4px rgba(0, 159, 227, 0.1),
+    0 8px 16px rgba(0, 159, 227, 0.15);
+  animation: inputGlow 2s ease-in-out infinite;
+}
 
-    div {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+.no-results {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  border-radius: 16px;
+  color: var(--text-secondary);
+  font-style: italic;
+  box-shadow: 
+    0 8px 16px rgba(0, 159, 227, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: cardFloat 6s ease-in-out infinite;
+}
 
-      label {
-        font-weight: 500;
-        color: $color-text-light; /* Pure White for labels */
-        font-size: 1rem;
-      }
-    }
+.stores-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-    select {
-      padding: 0.7rem 1rem;
-      border: 1px solid $color-border-subtle;
-      border-radius: 6px;
-      background-color: rgba(255, 255, 255, 0.1); /* Subtle white for select background */
-      font-size: 0.95rem;
-      color: $color-text-light; /* Pure White for select text */
-      appearance: none;
-      background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.1L146.2%20204.4%2018.5%2074.5a17.6%2017.6%200%200%200-25.1%2024.5l130.6%20120.7a17.7%2017.7%200%200%200%2025.1%200L287%2094c6.4-5.1%206.4-15.6%200-20.7z%22%2F%3E%3C%2Fsvg%3E'); /* Pure White arrow */
-      background-repeat: no-repeat;
-      background-position: right 0.6rem center;
-      background-size: 10px;
-      cursor: pointer;
-      transition: all 0.2s ease-in-out;
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+.store-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 
+    0 8px 16px rgba(0, 159, 227, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  animation: cardFloat 6s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
 
-      &:hover {
-        border-color: $color-secondary-accent; /* Warm Yellow hover border */
-      }
-      &:focus {
-        border-color: $color-secondary-accent; /* Warm Yellow */
-        box-shadow: 0 0 0 3px rgba(255, 195, 0, 0.3); /* Softer focus shadow */
-        outline: none;
-      }
-    }
+.store-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, 
+    rgba(0, 159, 227, 0.03) 0%, 
+    transparent 25%, 
+    rgba(255, 195, 0, 0.02) 50%, 
+    transparent 75%, 
+    rgba(76, 175, 80, 0.02) 100%);
+  animation: shimmer 8s linear infinite;
+  z-index: -1;
+}
 
-    .rating-stars {
-      display: flex;
-      gap: 0.2rem;
+.store-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  transition: transform 0.3s ease;
+}
 
-      span {
-        font-size: 1.3rem;
-        color: $color-secondary-accent; /* Warm Yellow for stars */
-        cursor: pointer;
-        transition: transform 0.15s ease, color 0.15s ease;
-        line-height: 1;
+.store-card img:hover {
+  transform: scale(1.02);
+}
 
-        &:hover {
-          transform: scale(1.1);
-          color: $color-hover-secondary; /* Lighter yellow on hover */
-        }
-      }
-    }
-  }
+.store-info {
+  position: relative;
+}
 
-  .stores-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+.store-info h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
 
-    .store-card {
-      background-color: $color-dark-slate; /* Dark Slate for store card */
-      border-radius: 15px;
-      box-shadow: 0 8px 25px $color-shadow;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid $color-border-subtle;
-      transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
-      animation: popInScale 0.7s ease-out forwards;
-      opacity: 0;
-      transform: scale(0.95);
+.address {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
 
-      @for $i from 1 through 6 {
-        &:nth-child(#{$i}) {
-          animation-delay: #{$i * 0.08}s;
-        }
-      }
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
 
-      &:hover {
-        transform: translateY(-5px) scale(1.01); /* Slight lift and scale on hover */
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* More prominent shadow on hover */
-      }
+.stars {
+  color: var(--color-secondary);
+  font-size: 1rem;
+  animation: starGlow 3s ease-in-out infinite;
+}
 
-      img {
-        width: 100%;
-        height: 180px;
-        object-fit: cover; /* Changed to cover */
-        border-bottom: 1px solid $color-border-subtle;
-        filter: brightness(0.9); /* Slightly dim the image by default for text contrast */
-        transition: filter 0.25s ease;
+.score {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
 
-        &:hover {
-          filter: brightness(1); /* Brighten on hover */
-        }
-      }
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
 
-      .store-info {
-        padding: 1.2rem;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
+.delivery {
+  background: rgba(76, 175, 80, 0.1);
+  color: var(--color-accent);
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  animation: tagFloat 4s ease-in-out infinite;
+}
 
-        h2 {
-          font-size: 1.6rem;
-          font-weight: 600;
-          color: $color-text-light; /* Pure White for store name */
-          margin-bottom: 0.4rem;
-          text-align: left;
-          text-shadow: none;
-        }
+.locations {
+  background: rgba(0, 159, 227, 0.1);
+  color: var(--color-primary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(0, 159, 227, 0.2);
+  animation: tagFloat 4s ease-in-out infinite;
+}
 
-        .address {
-          font-size: 0.9rem;
-          color: $color-text-dark; /* Light Gray for address */
-          margin-bottom: 0.8rem;
-          text-align: left;
-        }
+.view-store {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white;
+  border: none;
+  padding: 0.625rem 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 159, 227, 0.3);
+  animation: buttonPulse 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
 
-        .rating {
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
-          margin-bottom: 1rem;
-          justify-content: flex-start;
-
-          .stars {
-            font-size: 1.2rem;
-            color: $color-secondary-accent; /* Warm Yellow for stars */
-          }
-
-          .score {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: $color-text-light; /* Pure White for score */
-          }
-        }
-
-        .details {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.6rem;
-          margin-top: auto;
-
-          span {
-            font-size: 0.85rem;
-            padding: 0.3rem 0.7rem;
-            border-radius: 16px;
-            font-weight: 500;
-            color: $color-text-light;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-            transition: transform 0.2s ease;
-
-            &:hover {
-              transform: translateY(-2px);
-            }
-          }
-
-          .delivery {
-            background-color: $color-success; /* Green for delivery tag */
-          }
-
-          .locations {
-            background-color: $color-primary-bg; /* Vibrant Blue for locations tag */
-          }
-        }
-
-        .view-store {
-          margin-top: 1.5rem;
-          padding: 0.8rem 1.2rem;
-          background-color: $color-secondary-accent; /* Warm Yellow for View Store button */
-          color: $color-dark-slate; /* Dark Slate text */
-          border: none;
-          border-radius: 25px;
-          font-size: 0.95rem;
-          font-weight: 600;
-          cursor: pointer;
-          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-          transition: all 0.25s ease-in-out;
-          letter-spacing: 0.3px;
-          align-self: flex-start;
-
-          &:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-            background-color: $color-hover-secondary; /* Lighter yellow on hover */
-          }
-
-          &:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-          }
-        }
-      }
-    }
-
-    @keyframes popInScale {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-  }
-
-  @media (max-width: 768px) {
-    padding: 6rem 0 3rem;
-
-    h1 {
-      font-size: 2.2rem;
-    }
-
-    .subtitle {
-      font-size: 0.95rem;
-      margin-bottom: 2rem;
-    }
-
-    .filters {
-      flex-direction: column;
-      gap: 1rem;
-      padding: 1rem;
-      margin-bottom: 2.5rem;
-      align-items: stretch;
-
-      div {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.4rem;
-      }
-
-      select,
-      .rating-stars {
-        width: 100%;
-      }
-
-      .rating-stars {
-        justify-content: center;
-      }
-    }
-
-    .stores-list {
-      grid-template-columns: 1fr;
-      gap: 1.2rem;
-
-      .store-card {
-        .store-info {
-          padding: 1rem;
-
-          h2 {
-            font-size: 1.4rem;
-          }
-
-          .address {
-            font-size: 0.85rem;
-          }
-
-          .details {
-            justify-content: center;
-          }
-
-          .view-store {
-            width: 100%;
-            text-align: center;
-            padding: 0.7rem 1rem;
-          }
-        }
-      }
-    }
-  }
+.view-store:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 159, 227, 0.4);
 }
 
 .favorite-btn {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: $color-text-light; /* Pure white background */
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(0, 159, 227, 0.2);
   border-radius: 50%;
-  width: 2.8rem;
-  height: 2.8rem;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease-in-out;
-  z-index: 1;
-  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 159, 227, 0.2);
+  animation: buttonPulse 3s ease-in-out infinite;
+}
 
+.favorite-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 159, 227, 0.3);
+}
+
+.favorite-btn.favorited {
+  background: rgba(255, 195, 0, 0.9);
+  border-color: var(--color-secondary);
+  box-shadow: 0 4px 12px rgba(255, 195, 0, 0.3);
+}
+
+.favorite-icon {
+  font-size: 1.2rem;
+  color: var(--color-primary);
+  transition: all 0.3s ease;
+}
+
+.favorite-btn.favorited .favorite-icon {
+  color: var(--color-secondary-dark);
+}
+
+/* Animations */
+@keyframes cardFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes starGlow {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes tagFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes inputGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 0 4px rgba(0, 159, 227, 0.1),
+      0 8px 16px rgba(0, 159, 227, 0.15);
+  }
+  50% {
+    box-shadow: 
+      0 0 0 6px rgba(0, 159, 227, 0.15),
+      0 12px 24px rgba(0, 159, 227, 0.2);
+  }
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    box-shadow: 0 8px 24px rgba(0, 159, 227, 0.3);
+  }
+  50% {
+    box-shadow: 0 12px 32px rgba(0, 159, 227, 0.4);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .markets-page {
+    padding: 70px 0 100px 0; /* Consistent padding on mobile with increased bottom */
+  }
+  
+  .page-container {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .markets-page {
+    padding: 70px 0 100px 0; /* Consistent padding on very small screens with increased bottom */
+  }
+  
+  .page-container {
+    padding: 0 0.5rem;
+  }
+  
+  .markets-card {
+    padding: 1.5rem 1rem;
+    border-radius: 20px;
+  }
+  
+  .markets-card h1 {
+    font-size: 1.75rem;
+  }
+  
+  .search-section {
+    padding: 0.75rem;
+  }
+  
+  .store-card {
+    padding: 0.75rem;
+  }
+  
+  .store-card img {
+    height: 100px;
+  }
+  
+  .favorite-btn {
+    width: 32px;
+    height: 32px;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+  
   .favorite-icon {
-    font-size: 1.4rem;
-    line-height: 1;
-    color: $color-text-dark; /* Light Gray for not favorited */
-    transition: color 0.3s ease-in-out, transform 0.2s ease-out;
-  }
-
-  &:hover {
-    transform: scale(1.1);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
-    background: $color-text-light;
-
-    .favorite-icon {
-      color: $color-secondary-accent; /* Warm Yellow on hover (before favoriting) */
-      transform: scale(1.15);
-    }
-  }
-
-  /* Style for when the item IS favorited */
-  &.favorited {
-    background: color.adjust($color-secondary-accent, $lightness: 30%); /* Lighter warm yellow when favorited */
-    border-color: $color-secondary-accent; /* Warm Yellow border when favorited */
-
-    .favorite-icon {
-      color: $color-secondary-accent; /* Warm Yellow when favorited */
-      transform: scale(1);
-    }
-
-    &:hover {
-      background: color.adjust($color-secondary-accent, $lightness: 20%); /* Slightly darker on hover when already favorited */
-      .favorite-icon {
-        color: color.adjust($color-secondary-accent, $lightness: -10%); /* Darker yellow on hover when already favorited */
-        transform: scale(1.15);
-      }
-    }
+    font-size: 1rem;
   }
 }

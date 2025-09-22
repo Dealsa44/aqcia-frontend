@@ -30,12 +30,10 @@ export class NavbarComponent implements OnDestroy {
   currentCity = this.navData.cities[0];
   isLanguageOpen = false;
   isCityOpen = false;
-  isSticky = false;
   cartItemCount = 0;
+  mobileView = true; // Always show mobile layout for mobile app
   showItemDrop = false;
   private cartSubscription: Subscription;
-  mobileView = window.innerWidth < 768; // Mobile-first: mobile below 768px
-  private resizeSubscription: Subscription;
   private previousCartCount = 0;
 
   constructor(
@@ -55,19 +53,9 @@ export class NavbarComponent implements OnDestroy {
       this.cartItemCount = newCount;
       this.previousCartCount = newCount;
     });
-    this.resizeSubscription = fromEvent(window, 'resize')
-      .pipe(
-        debounceTime(100) // Debounce to avoid excessive checks
-      )
-      .subscribe(() => {
-        this.mobileView = window.innerWidth < 768;
-      });
+    // Removed resize listener since we always use mobile layout
   }
 
-  @HostListener('window:scroll', ['$event'])
-  checkScroll() {
-    this.isSticky = window.pageYOffset > 0;
-  }
 
   toggleLanguage() {
     this.isLanguageOpen = !this.isLanguageOpen;
@@ -113,9 +101,21 @@ export class NavbarComponent implements OnDestroy {
       'cart',
     ]);
   }
+
+  navigateToPage(route: string) {
+    const currentUrl = this.router.url;
+    const targetUrl = `/${this.languageService.getCurrentLanguageCode()}/${route}`;
+    
+    if (currentUrl === targetUrl) {
+      // If already on the same page, instantly jump to top
+      window.scrollTo(0, 0);
+    } else {
+      // Navigate to the page (app component will handle scroll to top)
+      this.router.navigate([targetUrl]);
+    }
+  }
   ngOnDestroy() {
     this.cartSubscription.unsubscribe();
-    this.resizeSubscription?.unsubscribe();
   }
   getTotalPrice(): string {
   const total = this.cartService.getTotalPrice();
@@ -131,5 +131,83 @@ export class NavbarComponent implements OnDestroy {
     setTimeout(() => {
       this.showItemDrop = false;
     }, 1000);
+  }
+
+  isProfileActive(): boolean {
+    const currentUrl = this.router.url;
+    const profileRoutes = ['profile', 'login', 'register', 'forgot-password'];
+    return profileRoutes.some(route => currentUrl.includes(route));
+  }
+
+  isMarketsActive(): boolean {
+    const currentUrl = this.router.url;
+    const marketsRoutes = ['markets', 'market-details', 'market-products'];
+    return marketsRoutes.some(route => currentUrl.includes(route));
+  }
+
+  shouldShowBackButton(): boolean {
+    const currentUrl = this.router.url;
+    
+    // Don't show back button on main pages
+    const mainPages = ['catalog', 'cart', 'profile', 'markets'];
+    const authPages = ['login', 'register', 'forgot-password'];
+    
+    // Check if current URL contains any main page or auth page
+    const isMainPage = mainPages.some(page => currentUrl.includes(page));
+    const isAuthPage = authPages.some(page => currentUrl.includes(page));
+    
+    // Don't show back button if it's a main page or auth page
+    if (isMainPage || isAuthPage) {
+      return false;
+    }
+    
+    // Show back button for all other pages (child pages)
+    return true;
+  }
+
+  goBack() {
+    const currentUrl = this.router.url;
+    const languageCode = this.languageService.getCurrentLanguageCode();
+    
+    // Smart back navigation based on current page
+    if (currentUrl.includes('market-details')) {
+      // From market-details, go back to markets
+      this.router.navigate([`/${languageCode}/markets`]);
+    } else if (currentUrl.includes('market-products')) {
+      // From market-products, go back to market-details
+      // Extract market ID from current URL
+      const urlParts = currentUrl.split('/');
+      const marketProductsIndex = urlParts.findIndex(part => part === 'market-products');
+      if (marketProductsIndex > 0) {
+        const marketId = urlParts[marketProductsIndex - 1];
+        this.router.navigate([`/${languageCode}/market-details/${marketId}`]);
+      } else {
+        // Fallback to markets if can't determine market ID
+        this.router.navigate([`/${languageCode}/markets`]);
+      }
+    } else if (currentUrl.includes('product')) {
+      // From product page, check referrer or go to catalog
+      const referrer = document.referrer;
+      if (referrer.includes('market-products')) {
+        // Came from market-products, go back there
+        const referrerParts = referrer.split('/');
+        const marketProductsIndex = referrerParts.findIndex(part => part === 'market-products');
+        if (marketProductsIndex > 0) {
+          const marketId = referrerParts[marketProductsIndex - 1];
+          this.router.navigate([`/${languageCode}/market-products/${marketId}`]);
+        } else {
+          this.router.navigate([`/${languageCode}/catalog`]);
+        }
+      } else if (referrer.includes('catalog')) {
+        // Came from catalog, go back there
+        this.router.navigate([`/${languageCode}/catalog`]);
+      } else {
+        // Default to catalog
+        this.router.navigate([`/${languageCode}/catalog`]);
+      }
+    } else {
+      // Default fallback - go to catalog
+      this.router.navigate([`/${languageCode}/catalog`]);
+    }
   }
 }

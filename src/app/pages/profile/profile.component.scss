@@ -1,76 +1,71 @@
-@use "sass:color";
-
-/* Color Palette: Inspired by modern delivery apps */
-/* Primary Background: #009FE3 (Vibrant Blue) */
-/* Secondary Accent: #FFC300 (Warm Yellow) */
-/* Text/Icons: #FFFFFF (Pure White) */
-/* Darker Text/Subtle Elements: #A0A0A0 (Light Gray) */
-/* Success/Call to Action: #4CAF50 (Green) */
-/* Danger/Notification: #F44336 (Red) */
-/* General Background (for dropdowns, off-canvas): #1B2B3B (Dark Slate) */
-/* Subtle Border/Separator: rgba(255, 255, 255, 0.1) */
-/* Shadow Color: rgba(0, 0, 0, 0.2) */
-
-/* Define color variables for clarity and easy modification */
-$color-primary-bg: #009FE3;
-$color-secondary-accent: #FFC300;
-$color-text-light: #FFFFFF;
-$color-text-dark: #A0A0A0;
-$color-success: #4CAF50;
-$color-danger: #F44336;
-$color-dark-slate: #1B2B3B;
-$color-border-subtle: rgba(255, 255, 255, 0.1);
-$color-shadow: rgba(0, 0, 0, 0.2);
-$color-hover-secondary: color.adjust($color-secondary-accent, $lightness: 5%);
-$color-hover-primary: color.adjust($color-primary-bg, $lightness: -5%);
-$color-dark-slate-lighten: color.adjust($color-dark-slate, $lightness: 3%);
-
-/* General Body and Page Structure */
-body {
-  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background-color: #FFFFFF; /* Pure White, as per the previous Markets page context */
-  margin: 0;
-  padding-top: 80px; /* To prevent content from being hidden by the fixed navbar */
-  color: $color-dark-slate; /* Dark Slate for general body text */
-  line-height: 1.6;
-}
-
+/* Mobile-First Profile Page with Glowing Animations */
 .profile-page {
-  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: auto;
+  padding: 70px 0 100px 0; /* Increased bottom padding to prevent navigation bar overlap */
+  position: relative;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  margin-top: 4rem;
+.page-container {
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .profile-card {
-  background-color: $color-dark-slate; /* Dark Slate background */
-  border-radius: 15px;
-  box-shadow: 0 10px 30px $color-shadow; /* Updated shadow */
-  padding: 2.5rem;
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 1rem 1.5rem;
+  box-shadow: 
+    0 20px 40px rgba(0, 159, 227, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  animation: cardFloat 6s ease-in-out infinite;
+  width: 100%;
+  max-width: 400px; /* Same as other pages */
+  margin: 0 auto;
+  padding-bottom: 4rem; /* Add space for logout button */
+}
+
+.profile-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, 
+    rgba(0, 159, 227, 0.05) 0%, 
+    transparent 25%, 
+    rgba(255, 195, 0, 0.03) 50%, 
+    transparent 75%, 
+    rgba(76, 175, 80, 0.04) 100%);
+  animation: shimmer 8s linear infinite;
+  z-index: -1;
 }
 
 .profile-card h1 {
-  text-align: center;
-  color: $color-primary-bg; /* Vibrant Blue */
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textGlow 4s ease-in-out infinite;
 }
 
-/* Profile Layout */
 .profile-layout {
   display: flex;
-  gap: 2.5rem;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .profile-left {
@@ -83,31 +78,31 @@ body {
   min-width: 280px;
   display: flex;
   flex-direction: column;
-  gap: 1.8rem;
+  gap: 1.5rem;
 }
 
-/* Profile Header (Non-Edit Mode) */
 .profile-header {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid $color-border-subtle; /* Subtle border */
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 159, 227, 0.1);
 }
 
 .avatar {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background-color: $color-primary-bg; /* Vibrant Blue for avatar background */
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3rem;
-  color: $color-text-light; /* Pure White text */
+  font-size: 1.5rem;
+  color: white;
   font-weight: bold;
-  box-shadow: 0 4px 15px $color-shadow; /* Updated shadow */
+  box-shadow: 0 8px 24px rgba(0, 159, 227, 0.3);
+  animation: avatarPulse 3s ease-in-out infinite;
 }
 
 .profile-info {
@@ -115,438 +110,491 @@ body {
 }
 
 .profile-info h2 {
-  font-size: 1.8rem;
-  color: $color-text-light; /* Pure White */
-  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .profile-info p {
-  font-size: 1.1rem;
-  color: $color-text-dark; /* Light Gray */
-  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
 }
 
-/* Buttons */
-.edit-btn,
-.logout-btn,
-.view-cart-btn,
-.save-btn,
-.cancel-btn,
-.remove-btn {
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.edit-btn {
-  background-color: $color-secondary-accent; /* Warm Yellow */
-  color: $color-dark-slate; /* Dark Slate text */
-  border: none;
-  box-shadow: 0 3px 10px rgba(255, 195, 0, 0.3);
-}
-
-.edit-btn:hover {
-  background-color: $color-hover-secondary; /* Lighter yellow on hover */
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 195, 0, 0.4);
-}
-
-.logout-btn {
-  background-color: $color-danger; /* Red for danger */
-  color: $color-text-light; /* Pure White text */
-  border: none;
-  margin-top: 2rem;
-  width: fit-content;
-  box-shadow: 0 3px 10px rgba(244, 67, 54, 0.2);
-}
-
-.logout-btn:hover {
-  background-color: color.adjust($color-danger, $lightness: -5%);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(244, 67, 54, 0.3);
-}
-
-.view-cart-btn {
-  background-color: $color-primary-bg; /* Vibrant Blue for cart button */
-  color: $color-text-light; /* Pure White text */
-  border: none;
-  width: 100%;
-  box-shadow: 0 3px 10px rgba(0, 159, 227, 0.2);
-}
-
-.view-cart-btn:hover {
-  background-color: $color-hover-primary; /* Darker blue on hover */
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 159, 227, 0.3);
-}
-
-/* Edit Form */
 .edit-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.75rem;
   margin-top: 1rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .form-group label {
+  margin-bottom: 0.25rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: $color-text-light; /* Pure White */
-  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-size: 0.85rem;
 }
 
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="password"] {
-  padding: 0.9rem 1.2rem;
-  border: 1px solid $color-border-subtle; /* Subtle border */
-  border-radius: 8px;
-  font-size: 1rem;
+.form-group input {
+  padding: 0.625rem 0.875rem;
+  border: 2px solid var(--color-gray-200);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
   transition: all 0.3s ease;
-  background-color: $color-dark-slate-lighten; /* Slightly lighter dark slate */
-  color: $color-text-light; /* Pure White text */
+  position: relative;
+  z-index: 1;
 }
 
-.form-group input[type="text"]:focus,
-.form-group input[type="email"]:focus,
-.form-group input[type="password"]:focus {
-  border-color: $color-primary-bg; /* Vibrant Blue on focus */
+.form-group input:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 159, 227, 0.2);
+  border-color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 0 0 4px rgba(0, 159, 227, 0.1),
+    0 8px 16px rgba(0, 159, 227, 0.15);
+  animation: inputGlow 2s ease-in-out infinite;
 }
 
 .form-actions {
   display: flex;
   gap: 1rem;
-  justify-content: flex-end; /* Align buttons to the right */
+  justify-content: flex-end;
   margin-top: 1rem;
 }
 
-.save-btn {
-  background-color: $color-primary-bg; /* Vibrant Blue */
-  color: $color-text-light; /* Pure White text */
+.edit-btn,
+.logout-btn,
+.view-cart-btn,
+.save-btn,
+.cancel-btn {
+  padding: 0.625rem 1.25rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
   border: none;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 3px 10px rgba(0, 159, 227, 0.3);
+}
+
+.edit-btn {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+  color: var(--text-primary);
+  box-shadow: 0 8px 24px rgba(255, 195, 0, 0.3);
+  animation: buttonPulse 3s ease-in-out infinite;
+  margin-top: 1rem; /* Add space between profile header and edit button */
+  width: 100%; /* Make it full width under the profile info */
+}
+
+.edit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(255, 195, 0, 0.4);
+}
+
+.logout-btn {
+  background: linear-gradient(135deg, var(--color-danger) 0%, #c82333 100%);
+  color: white;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  box-shadow: 0 8px 24px rgba(244, 67, 54, 0.3);
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(244, 67, 54, 0.4);
+}
+
+.view-cart-btn {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 159, 227, 0.3);
+}
+
+.view-cart-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 159, 227, 0.4);
+}
+
+.save-btn {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 159, 227, 0.3);
 }
 
 .save-btn:hover:not(:disabled) {
-  background-color: $color-hover-primary; /* Darker blue on hover */
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 159, 227, 0.4);
+  box-shadow: 0 12px 32px rgba(0, 159, 227, 0.4);
 }
 
 .save-btn:disabled {
-  background-color: $color-dark-slate-lighten; /* Lighter dark slate when disabled */
-  color: $color-text-dark; /* Light gray text for disabled */
+  opacity: 0.6;
   cursor: not-allowed;
-  opacity: 0.7;
-  box-shadow: none;
+  transform: none;
 }
 
 .cancel-btn {
-  background-color: $color-text-dark; /* Light Gray for cancel */
-  color: $color-text-light; /* Pure White text */
-  border: none;
-  box-shadow: 0 3px 10px rgba(160, 160, 160, 0.2);
+  background: linear-gradient(135deg, var(--color-gray-500) 0%, var(--color-gray-600) 100%);
+  color: white;
+  box-shadow: 0 8px 24px rgba(158, 158, 158, 0.3);
 }
 
 .cancel-btn:hover {
-  background-color: color.adjust($color-text-dark, $lightness: -5%);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(160, 160, 160, 0.3);
+  box-shadow: 0 12px 32px rgba(158, 158, 158, 0.4);
 }
 
-/* Spinner for loading state */
 .spinner {
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-top: 3px solid #FFFFFF;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  width: 18px;
-  height: 18px;
+  border-top-color: white;
   animation: spin 1s linear infinite;
+  margin-left: 0.5rem;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Messages */
 .error-message {
-  background-color: color.adjust($color-danger, $lightness: 30%); /* Lighter red for error background */
-  color: color.adjust($color-danger, $lightness: -15%); /* Darker red for error text */
-  border: 1px solid $color-danger;
-  border-radius: 8px;
+  background: rgba(244, 67, 54, 0.1);
+  color: var(--color-danger);
+  border: 1px solid rgba(244, 67, 54, 0.2);
+  border-radius: 12px;
   padding: 1rem;
-  margin-top: 1.5rem;
-  font-size: 0.95rem;
-  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: errorShake 0.5s ease-in-out;
 }
 
 .success-message {
-  background-color: color.adjust($color-success, $lightness: 30%); /* Lighter green for success background */
-  color: color.adjust($color-success, $lightness: -15%); /* Darker green for success text */
-  border: 1px solid $color-success;
-  border-radius: 8px;
+  background: rgba(76, 175, 80, 0.1);
+  color: var(--color-accent);
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  border-radius: 12px;
   padding: 1rem;
-  margin-top: 1.5rem;
-  font-size: 0.95rem;
-  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: successGlow 2s ease-in-out infinite;
 }
 
-/* Right Column Sections */
 .section-card {
-  background-color: $color-dark-slate-lighten; /* Slightly lighter dark slate for sections */
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 5px 15px $color-shadow; /* Updated shadow */
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  border: 1px solid $color-border-subtle;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  border-radius: 16px;
+  padding: 1rem; /* Reduced from 1.5rem */
+  box-shadow: 
+    0 8px 16px rgba(0, 159, 227, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  animation: cardFloat 6s ease-in-out infinite;
+}
+
+.section-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, 
+    rgba(0, 159, 227, 0.03) 0%, 
+    transparent 25%, 
+    rgba(255, 195, 0, 0.02) 50%, 
+    transparent 75%, 
+    rgba(76, 175, 80, 0.02) 100%);
+  animation: shimmer 8s linear infinite;
+  z-index: -1;
 }
 
 .section-card h3 {
-  color: $color-primary-bg; /* Vibrant Blue */
-  font-size: 1.5rem;
-  margin-top: 0;
-  margin-bottom: 0.8rem;
-  padding-bottom: 0.8rem;
-  border-bottom: 1px solid $color-border-subtle;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 159, 227, 0.1);
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .section-card p {
-  color: $color-text-dark; /* Light Gray */
-  font-style: italic;
+  color: var(--text-secondary);
   text-align: center;
-  margin: 0;
+  font-style: italic;
+  font-size: 0.9rem;
 }
 
-/* Current Cart Section */
 .cart-summary {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
   margin-bottom: 1rem;
-  color: $color-text-light; /* Pure White */
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 159, 227, 0.1);
 }
 
 .cart-summary span:last-child {
-  color: $color-secondary-accent; /* Warm Yellow for price */
-  font-size: 1.2rem;
+  color: var(--color-accent);
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
-/* Favorite Stores Section */
 .stores-list {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.75rem;
 }
 
 .store-item {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Ensures vertical alignment */
-  background-color: $color-dark-slate; /* Dark Slate for list items */
-  padding: 0.8rem 1.2rem;
-  border-radius: 8px;
-  border: 1px solid $color-border-subtle;
-  font-size: 0.95rem; /* Base font size */
-  color: $color-text-light; /* Pure White */
-  box-shadow: 0 2px 8px $color-shadow; /* Updated shadow */
-  transition: all 0.2s ease-in-out; /* Smooth hover effect */
+  align-items: center;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0.75rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 159, 227, 0.1);
+  transition: all 0.3s ease;
 }
 
 .store-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
-  background-color: color.adjust($color-dark-slate, $lightness: 3%); /* Slightly lighter dark slate on hover */
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 159, 227, 0.15);
 }
 
 .store-display {
   display: flex;
-  align-items: center; /* Aligns logo and text vertically */
-  gap: 0.8rem; /* Space between logo and name */
-}
-.store-display img {
-  cursor: pointer;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .store-logo {
-  width: 35px; /* Adjust size as needed for your SVGs/PNGs */
-  height: 35px; /* Maintain aspect ratio */
-  object-fit: contain; /* Ensures the entire image is visible without cropping */
-  border-radius: 5px; /* Slightly rounded corners for the logo */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  background-color: $color-text-light; /* Pure White background */
-  padding: 3px; /* Small padding inside the border-radius */
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.store-logo:hover {
+  transform: scale(1.1);
 }
 
 .store-item span {
-  font-weight: 600; /* Make the store name bolder */
-  color: $color-text-light; /* Pure White for store names */
-  font-size: 1.05rem; /* Slightly larger font for names */
-  flex-grow: 1; /* Allow the name to take available space */
+  font-weight: 500;
+  color: var(--text-primary);
 }
 
 .remove-btn {
-  background-color: $color-danger; /* Red for remove button */
-  color: $color-text-light; /* Pure White */
+  background: linear-gradient(135deg, var(--color-danger) 0%, #c82333 100%);
+  color: white;
   border: none;
-  padding: 0.5rem 1rem;
-  font-size: 0.85rem;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(244, 67, 54, 0.2);
-  &:hover {
-    background-color: color.adjust($color-danger, $lightness: -5%);
-    transform: translateY(-1px);
-    box-shadow: 0 3px 8px rgba(244, 67, 54, 0.3);
-  }
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
 }
 
-/* Recent Searches Section */
+.remove-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(244, 67, 54, 0.4);
+}
+
 .searches-list {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 .search-item {
-  background-color: $color-dark-slate; /* Dark Slate for search items */
-  color: $color-text-light; /* Pure White */
-  padding: 0.8rem 1.2rem;
-  border-radius: 8px;
-  border: 1px solid $color-border-subtle;
-  font-size: 0.95rem;
-  box-shadow: 0 2px 8px $color-shadow;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0.75rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 159, 227, 0.1);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
 }
 
-/* Responsive adjustments */
-@media (max-width: 992px) {
+.search-item:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 159, 227, 0.15);
+}
+
+/* Animations */
+@keyframes cardFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes avatarPulse {
+  0%, 100% {
+    box-shadow: 0 8px 24px rgba(0, 159, 227, 0.3);
+  }
+  50% {
+    box-shadow: 0 12px 32px rgba(0, 159, 227, 0.4);
+  }
+}
+
+@keyframes inputGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 0 4px rgba(0, 159, 227, 0.1),
+      0 8px 16px rgba(0, 159, 227, 0.15);
+  }
+  50% {
+    box-shadow: 
+      0 0 0 6px rgba(0, 159, 227, 0.15),
+      0 12px 24px rgba(0, 159, 227, 0.2);
+  }
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    box-shadow: 0 8px 24px rgba(0, 159, 227, 0.3);
+  }
+  50% {
+    box-shadow: 0 12px 32px rgba(0, 159, 227, 0.4);
+  }
+}
+
+@keyframes errorShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes successGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 70px 0 100px 0; /* Consistent padding on mobile with increased bottom */
+  }
+  
+  .page-container {
+    padding: 0 1rem;
+  }
+  
   .profile-layout {
     flex-direction: column;
   }
-
+  
   .profile-left,
   .profile-right {
     min-width: unset;
     width: 100%;
   }
-
-  .profile-card {
-    padding: 1.5rem;
-  }
-
-  .profile-card h1 {
-    font-size: 2rem;
-  }
-
+  
   .profile-header {
     flex-direction: column;
     text-align: center;
     gap: 1rem;
   }
-
-  .profile-info h2 {
-    font-size: 1.6rem;
-  }
-
-  .edit-btn {
-    width: 100%;
-    margin-top: 1rem;
-  }
-
+  
   .form-actions {
     flex-direction: column;
-    gap: 0.8rem;
   }
-
-  .save-btn,
-  .cancel-btn,
-  .logout-btn {
-    width: 100%;
-    text-align: center;
-    justify-content: center;
+  
+  .store-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .remove-btn {
+    align-self: flex-end;
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 480px) {
+  .profile-page {
+    padding: 70px 0 100px 0; /* Consistent padding on very small screens with increased bottom */
+  }
+  
+  .page-container {
+    padding: 0 0.5rem;
+  }
+  
   .profile-card {
-    padding: 1rem;
-    margin-top: 1rem;
+    padding: 1.5rem 1rem;
+    border-radius: 20px;
   }
-
+  
   .profile-card h1 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
   }
-
-  .profile-header {
-    padding-bottom: 1rem;
+  
+  .form-group input {
+    padding: 0.875rem 1rem;
   }
-
-  .avatar {
-    width: 60px;
-    height: 60px;
-    font-size: 2.2rem;
-  }
-
-  .profile-info h2 {
-    font-size: 1.4rem;
-  }
-
-  .profile-info p {
-    font-size: 1rem;
-  }
-
+  
   .edit-btn,
   .logout-btn,
   .view-cart-btn,
   .save-btn,
   .cancel-btn {
-    padding: 0.7rem 1.2rem;
-    font-size: 0.95rem;
-  }
-
-  .form-group input {
-    padding: 0.8rem 1rem;
-  }
-
-  .section-card {
-    padding: 1.2rem;
-  }
-
-  .section-card h3 {
-    font-size: 1.3rem;
-  }
-
-  .store-item {
-    flex-direction: column; /* Stack store name and remove button */
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .store-item .remove-btn {
-    align-self: flex-end; /* Align remove button to the right */
-    margin-top: 0.5rem;
-    width: fit-content;
+    padding: 0.875rem 1.5rem;
   }
 }

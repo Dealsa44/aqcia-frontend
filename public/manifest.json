@@ -1,0 +1,26 @@
+{
+  "name": "Markets Startup",
+  "short_name": "Markets",
+  "description": "Grocery comparison app for finding the best deals",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1976d2",
+  "orientation": "portrait-primary",
+  "update_via_cache": "none",
+  "version": "1.0.14",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "GroceryCompare.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": [
+    "shopping",
+    "utilities"
+  ],
+  "lang": "en",
+  "dir": "ltr"
+}

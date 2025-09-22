@@ -60,7 +60,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    this.router.navigate([this.languageService.getCurrentLanguageCode(), 'home']);
+    this.router.navigate([this.languageService.getCurrentLanguageCode(), 'catalog']);
   }
 
   updateProfile(updatedUser: any): boolean {

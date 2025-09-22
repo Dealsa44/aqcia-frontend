@@ -51,6 +51,9 @@ export class CatalogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Scroll to top when component initializes
+    window.scrollTo(0, 0);
+    
     this.loadData();
     
     this.route.queryParams.subscribe((params: any) => {
@@ -68,42 +71,15 @@ export class CatalogComponent implements OnInit {
   }
 
   loadData() {
-    console.log('🔄 CatalogComponent - loadData() called');
-    console.log('🔗 About to call apiService.getProducts()');
-    console.log('🌐 Current window location:', window.location.href);
-    console.log('🔒 Current window protocol:', window.location.protocol);
-    console.log('🏠 Current window origin:', window.location.origin);
-    console.log('🔍 Document location:', document.location.href);
-    console.log('🔍 Document protocol:', document.location.protocol);
-    console.log('🔍 Document origin:', document.location.origin);
-    
-    // Check for service workers
-    if ('serviceWorker' in navigator) {
-      console.log('🔍 Service Worker detected:', navigator.serviceWorker);
-    }
-    
-    // Check for any global fetch modifications
-    console.log('🔍 Native fetch available:', typeof fetch);
-    console.log('🔍 XMLHttpRequest available:', typeof XMLHttpRequest);
-    
     // Load Agrohub products from API
-    console.log('🛍️ CatalogComponent - Loading Agrohub products');
     this.apiService.getProducts().subscribe({
       next: (apiProducts: ApiProduct[]) => {
-        console.log('✅ API call successful, received products:', apiProducts.length);
         this.products = this.convertApiProductsToProducts(apiProducts);
         this.filteredProducts = this.products;
         this.isLoadingProducts = false;
         this.updateCategoryCounts();
       },
       error: (error: any) => {
-        console.error('❌ Error loading products:', error);
-        console.error('🔍 Error details:', {
-          status: error.status,
-          statusText: error.statusText,
-          url: error.url,
-          message: error.message
-        });
         this.errorMessage = 'Failed to load products. Using mock data.';
         // Fallback to mock data
         this.products = productsMocks.products as Product[];
@@ -121,7 +97,6 @@ export class CatalogComponent implements OnInit {
         this.updateCategoryCounts();
       },
       error: (error: any) => {
-        console.error('Error loading categories:', error);
         // Fallback to mock data
         this.categories = productsMocks.categories;
         this.isLoadingCategories = false;

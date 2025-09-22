@@ -1,5 +1,5 @@
 <div class="profile-page">
-  <div class="container">
+  <div class="page-container">
     <div class="profile-card">
       <h1>{{ getCurrentText(profileMocks.title) }}</h1>
 
@@ -15,12 +15,14 @@
               <h2>{{ profileData.username }}</h2>
               <p>{{ profileData.email }}</p>
             </div>
-
-            <button class="edit-btn" (click)="toggleEditMode()">
-              {{ getCurrentText(profileMocks.editButton) }}
-            </button>
             }
           </div>
+
+          @if (!editMode) {
+          <button class="edit-btn" (click)="toggleEditMode()">
+            {{ getCurrentText(profileMocks.editButton) }}
+          </button>
+          }
 
           @if (editMode) {
           <form
@@ -100,9 +102,6 @@
           </div>
           }
 
-          <button class="logout-btn" (click)="logout()">
-            {{ getCurrentText(profileMocks.logoutButton) }}
-          </button>
         </div>
 
         <div class="profile-right">
@@ -173,6 +172,10 @@
           </div>
         </div>
       </div>
+
+      <button class="logout-btn" (click)="logout()">
+        {{ getCurrentText(profileMocks.logoutButton) }}
+      </button>
     </div>
   </div>
 </div>

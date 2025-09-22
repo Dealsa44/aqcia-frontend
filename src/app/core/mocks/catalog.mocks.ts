@@ -1,5 +1,6 @@
 // src/app/core/mocks/catalog.mocks.ts
 export const catalogMocks = {
+  title: ['კატალოგი', 'Catalog', 'Каталог'],
   searchPlaceholder: ['მოძებნეთ პროდუქტი...', 'Search for a product...', 'Искать товар...'],
   clearFiltersButton: ['გასუფთავება', 'Clear', 'Очистить'],
   bestPriceLabel: ['საუკეთესო ფასი:', 'Best price:', 'Лучшая цена:'],

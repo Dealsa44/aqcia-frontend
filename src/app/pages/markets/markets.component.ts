@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { LanguageService } from '../../core/services/language.service';
 import { marketsMocks } from '../../core/mocks/markets.mocks';
 import { AuthService } from '../../core/services/auth.service';
@@ -11,7 +12,7 @@ import { ApiService, ApiStore } from '../../core/services/api.service';
 @Component({
   selector: 'app-markets',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './markets.component.html',
   styleUrls: ['./markets.component.scss'],
 })
@@ -21,6 +22,10 @@ export class MarketsComponent implements OnInit {
   selectedCity = 0;
   Math = Math; // Expose Math to template
   favoriteStores: string[] = [];
+  
+  // Search functionality
+  searchTerm = '';
+  filteredStores: any[] = [];
   
   // Real API data
   stores: ApiStore[] = [];
@@ -39,6 +44,8 @@ export class MarketsComponent implements OnInit {
 
   ngOnInit() {
     console.log('🏪 MarketsComponent - ngOnInit called');
+    // Scroll to top when component initializes
+    window.scrollTo(0, 0);
     this.loadStores();
   }
 
@@ -49,6 +56,7 @@ export class MarketsComponent implements OnInit {
 
     // For now, use mock data but add Agrohub as first store
     this.stores = this.getAgrohubStores();
+    this.filteredStores = this.mocks.stores; // Initialize with mock stores for display
     this.isLoadingStores = false;
   }
 
@@ -95,6 +103,20 @@ export class MarketsComponent implements OnInit {
 
   selectCity(index: number) {
     this.selectedCity = index;
+  }
+
+  searchMarkets() {
+    if (!this.searchTerm.trim()) {
+      this.filteredStores = this.mocks.stores;
+      return;
+    }
+
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredStores = this.mocks.stores.filter(store => {
+      const name = this.getCurrentText(store.name).toLowerCase();
+      const address = this.getCurrentText(store.address).toLowerCase();
+      return name.includes(searchLower) || address.includes(searchLower);
+    });
   }
 
   // Helper method to get star rating

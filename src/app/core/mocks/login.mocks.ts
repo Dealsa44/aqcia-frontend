@@ -1,7 +1,6 @@
 // core/mocks/login.mocks.ts
 export const loginMocks = {
   title: ['შესვლა', 'Login', 'Вход'],
-  subtitle: ['გთხოვთ შეიყვანოთ თქვენი ინფორმაცია', 'Please enter your details', 'Пожалуйста, введите ваши данные'],
   emailOrUsernameLabel: ['იმეილი ან მომხმარებელი', 'Email or Username', 'Email или имя пользователя'],
   emailOrUsernamePlaceholder: ['შეიყვანეთ იმეილი ან მომხმარებელი', 'Enter your email or username', 'Введите email или имя пользователя'],
   passwordLabel: ['პაროლი', 'Password', 'Пароль'],

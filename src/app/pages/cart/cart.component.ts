@@ -43,6 +43,8 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     console.log('🛒 CartComponent - ngOnInit called');
+    // Scroll to top when component initializes
+    window.scrollTo(0, 0);
     this.loadCart();
     this.calculateMarketCombinations();
     this.cartService.cart$.subscribe(() => {

@@ -1,9 +1,8 @@
 <!-- pages/login/login.component.html -->
 <div class="login-page">
-  <div class="container">
+  <div class="page-container">
     <div class="login-card">
       <h1>{{ getCurrentText(loginMocks.title) }}</h1>
-      <p class="subtitle">{{ getCurrentText(loginMocks.subtitle) }}</p>
 
       <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
         <div class="form-group">
@@ -26,9 +25,9 @@
             [placeholder]="getCurrentText(loginMocks.passwordPlaceholder)">
         </div>
 
-        <div class="form-group remember-me">
-          <input type="checkbox" id="rememberMe" name="rememberMe">
+        <div class="remember-me">
           <label for="rememberMe">{{ getCurrentText(loginMocks.rememberMe) }}</label>
+          <input type="checkbox" id="rememberMe" name="rememberMe">
         </div>
 
         @if (errorMessage) {

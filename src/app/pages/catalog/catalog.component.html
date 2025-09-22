@@ -1,100 +1,93 @@
-<div class="search-container">
-  <div class="filters">
-    <div class="category-filter-actions">
-      <button
-        class="select-categories-button main-category-button"
-        (click)="openCategoryModal()"
-      >
-        {{ getCurrentText(catalogMocks.selectCategoriesButton) }}
-      </button>
-      <button class="clear" (click)="clearFilters()">
-        {{ getCurrentText(catalogMocks.clearFiltersButton) }}
-      </button>
-    </div>
-    <div class="selected-categories" *ngIf="selectedCategories.length > 0">
-      <span class="selected-categories-label">
-        {{ getCurrentText(catalogMocks.selectedCategoriesLabel) }}:
-      </span>
-      <div class="category-tags">
-        <span
-          class="category-tag"
-          *ngFor="let categoryId of selectedCategories"
-        >
-          {{ getCategoryName(categoryId) }}
-          <button class="remove-category" (click)="removeCategory(categoryId)">
-            ×
-          </button>
-        </span>
-      </div>
-    </div>
-    <input
-      type="text"
-      [(ngModel)]="searchTerm"
-      (input)="searchProducts()"
-      [placeholder]="getCurrentText(catalogMocks.searchPlaceholder)"
-    />
-  </div>
+<div class="catalog-page">
+  <div class="page-container">
+    <div class="catalog-card">
+      <h1>{{ getCurrentText(catalogMocks.title) }}</h1>
 
-  <div class="results">
-    <!-- Loading state -->
-    @if (isLoadingProducts) {
-    <div class="loading">
-      <p>Loading products from Agrohub...</p>
-    </div>
-    }
-    
-    <!-- Error state -->
-    @if (errorMessage) {
-    <div class="error">
-      <p>{{ errorMessage }}</p>
-    </div>
-    }
-    
-    <!-- Products grid -->
-    @if (!isLoadingProducts && filteredProducts.length > 0) {
-    <div class="product-grid">
-      @for (product of filteredProducts; track product.id) {
-      <div class="product-card">
-        <img
-          [src]="product.image.startsWith('http') ? product.image : 'assets/imgs/products/' + product.image"
-          [alt]="getCurrentText(product.name)"
-          [routerLink]="[
-            '/',
-            languageService.getCurrentLanguageCode(),
-            'product',
-            product.id
-          ]"
-        />
-        <div class="product-info">
-          <h3
-            [routerLink]="[
-              '/',
-              languageService.getCurrentLanguageCode(),
-              'product',
-              product.id
-            ]"
+      <div class="filters">
+        <div class="category-filter-actions">
+          <button
+            class="select-categories-button main-category-button"
+            (click)="openCategoryModal()"
           >
-            {{ getCurrentText(product.name) }}
-          </h3>
-          <div class="price-info">
-            <span class="best-price">
-              {{ getCurrentText(catalogMocks.bestPriceLabel) }}
-              <strong>{{ getLowestPrice(product).price.toFixed(2) }} ₾</strong>
-              ({{ getLowestPrice(product).market }})
-            </span>
-          </div>
-          <button class="add-to-cart" (click)="addToCart(product, $event)">
-            {{ getCurrentText(catalogMocks.addToCartButton) }}
+            {{ getCurrentText(catalogMocks.selectCategoriesButton) }}
+            @if (selectedCategories.length > 0) {
+            <span class="category-count-badge">{{ selectedCategories.length }}</span>
+            }
+          </button>
+          <button class="clear" (click)="clearFilters()">
+            {{ getCurrentText(catalogMocks.clearFiltersButton) }}
           </button>
         </div>
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="searchProducts()"
+          [placeholder]="getCurrentText(catalogMocks.searchPlaceholder)"
+        />
       </div>
-      }
+
+      <div class="results">
+        <!-- Loading state -->
+        @if (isLoadingProducts) {
+        <div class="loading">
+          <p>Loading products from Agrohub...</p>
+        </div>
+        }
+        
+        <!-- Error state -->
+        @if (errorMessage) {
+        <div class="error">
+          <p>{{ errorMessage }}</p>
+        </div>
+        }
+        
+        <!-- Products grid -->
+        @if (!isLoadingProducts && filteredProducts.length > 0) {
+        <div class="product-grid">
+          @for (product of filteredProducts; track product.id) {
+          <div class="product-card">
+            <img
+              [src]="product.image.startsWith('http') ? product.image : 'assets/imgs/products/' + product.image"
+              [alt]="getCurrentText(product.name)"
+              [routerLink]="[
+                '/',
+                languageService.getCurrentLanguageCode(),
+                'product',
+                product.id
+              ]"
+            />
+            <div class="product-info">
+              <h3
+                [routerLink]="[
+                  '/',
+                  languageService.getCurrentLanguageCode(),
+                  'product',
+                  product.id
+                ]"
+              >
+                {{ getCurrentText(product.name) }}
+              </h3>
+              <div class="price-info">
+                <span class="best-price">
+                  {{ getCurrentText(catalogMocks.bestPriceLabel) }}
+                  <strong>{{ getLowestPrice(product).price.toFixed(2) }} ₾</strong>
+                  ({{ getLowestPrice(product).market }})
+                </span>
+              </div>
+              <button class="add-to-cart" (click)="addToCart(product, $event)">
+                {{ getCurrentText(catalogMocks.addToCartButton) }}
+              </button>
+            </div>
+          </div>
+          }
+        </div>
+        } @else if (!isLoadingProducts && filteredProducts.length === 0) {
+        <div class="no-results">
+          {{ getCurrentText(catalogMocks.noResultsMessage) }}
+        </div>
+        }
+      </div>
     </div>
-    } @else if (!isLoadingProducts && filteredProducts.length === 0) {
-    <div class="no-results">
-      {{ getCurrentText(catalogMocks.noResultsMessage) }}
-    </div>
-    }
   </div>
 
   @if (showCategoryModal) {

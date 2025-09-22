@@ -1,5 +1,5 @@
 // pages/profile/profile.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -17,7 +17,7 @@ import { cartMocks } from '../../core/mocks/cart.mocks';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   cartMocks = cartMocks;
   profileMocks = profileMocks;
   profileData: any = {};
@@ -41,6 +41,11 @@ export class ProfileComponent {
       // Load favorite stores and recent searches from localStorage
       this.loadUserData();
     }
+  }
+
+  ngOnInit() {
+    // Scroll to top when component initializes
+    window.scrollTo(0, 0);
   }
 
   getCurrentText(items: string[] | any[]) {

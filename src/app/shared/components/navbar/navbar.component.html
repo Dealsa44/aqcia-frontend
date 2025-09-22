@@ -1,53 +1,19 @@
 <!-- Mobile-First Top Navigation -->
-<nav class="navbar" [class.sticky]="isSticky">
-  <div class="container">
-    <!-- Left Side: Logo + Desktop Navigation -->
-    <div class="nav-left">
-      <!-- Logo with Beautiful Animation -->
-      <a
-        [routerLink]="['/', languageService.getCurrentLanguageCode(), 'catalog']"
-        class="logo"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }"
-        [title]="getCurrentText(navData.logo)"
-      >
-        <div class="logo-container">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="logo-svg">
-            <defs>
-              <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#FFC300;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#009FE3;stop-opacity:1" />
-              </linearGradient>
-            </defs>
-            <rect width="36" height="36" rx="10" fill="url(#logoGradient)" class="logo-bg"/>
-            <path d="M9 13h18v2.5H9v-2.5zm0 4.5h18v2.5H9v-2.5zm0 4.5h14v2.5H9v-2.5z" fill="white" class="logo-icon"/>
-          </svg>
-          <div class="logo-ripple"></div>
-        </div>
-      </a>
+<nav class="navbar">
+  <div class="navbar-content">
 
-      <!-- Desktop Navigation -->
-      <div class="desktop-nav">
-        @for (item of getNavItems(); track $index) {
-        <a
-          [routerLink]="[
-            '/',
-            languageService.getCurrentLanguageCode(),
-            item.path
-          ]"
-          class="nav-link"
-          routerLinkActive="active-link"
-          [title]="getCurrentText(item.titles)"
-        >
-          <div class="nav-icon-container">
-            <i class="fa fa-{{ item.icon || 'circle' }}"></i>
-            <div class="nav-icon-bg"></div>
-          </div>
-          <span class="nav-text">{{ getCurrentText(item.titles) }}</span>
-        </a>
-        }
-      </div>
-    </div>
+    <!-- Back Button (Left Side) -->
+    <button 
+      class="back-btn" 
+      (click)="goBack()"
+      *ngIf="shouldShowBackButton()"
+      [title]="'Go Back'"
+    >
+      <i class="fa fa-arrow-left"></i>
+    </button>
+
+    <!-- Spacer when no back button -->
+    <div *ngIf="!shouldShowBackButton()"></div>
 
     <!-- Right Side Actions -->
     <div class="nav-actions">
@@ -117,12 +83,13 @@
   </div>
 </nav>
 
-<!-- Bottom Navigation for Mobile -->
-<div class="bottom-nav" *ngIf="mobileView">
+<!-- Bottom Navigation - Always visible for mobile app -->
+<div class="bottom-nav">
+  <div class="bottom-nav-content">
   <a
-    [routerLink]="['/', languageService.getCurrentLanguageCode(), 'catalog']"
+    (click)="navigateToPage('catalog')"
     class="bottom-nav-item"
-    routerLinkActive="active"
+    [class.active]="router.url.includes('catalog')"
     [title]="'Catalog'"
   >
     <div class="bottom-nav-icon">
@@ -133,9 +100,9 @@
   </a>
   
   <a
-    [routerLink]="['/', languageService.getCurrentLanguageCode(), 'markets']"
+    (click)="navigateToPage('markets')"
     class="bottom-nav-item"
-    routerLinkActive="active"
+    [class.active]="isMarketsActive()"
     [title]="'Markets'"
   >
     <div class="bottom-nav-icon">
@@ -145,22 +112,11 @@
     <span>Markets</span>
   </a>
   
-  <a
-    [routerLink]="['/', languageService.getCurrentLanguageCode(), 'combinations']"
-    class="bottom-nav-item"
-    routerLinkActive="active"
-    [title]="'Combinations'"
-  >
-    <div class="bottom-nav-icon">
-      <i class="fa fa-random"></i>
-      <div class="bottom-nav-ripple"></div>
-    </div>
-    <span>Combinations</span>
-  </a>
   
-  <button 
-    class="bottom-nav-item cart-btn" 
-    (click)="navigateToCart()"
+  <a
+    (click)="navigateToPage('cart')"
+    class="bottom-nav-item cart-btn"
+    [class.active]="router.url.includes('cart')"
     [title]="getCurrentText(navData.cart.title)"
   >
     <div class="bottom-nav-icon">
@@ -176,12 +132,12 @@
       <span class="badge-number">{{ cartItemCount }}</span>
       <div class="badge-ripple"></div>
     </span>
-  </button>
+  </a>
   
   <a
-    [routerLink]="['/', languageService.getCurrentLanguageCode(), 'profile']"
+    (click)="navigateToPage('profile')"
     class="bottom-nav-item"
-    routerLinkActive="active"
+    [class.active]="isProfileActive()"
     [title]="'Profile'"
   >
     <div class="bottom-nav-icon">
@@ -190,6 +146,7 @@
     </div>
     <span>Profile</span>
   </a>
+  </div>
 </div>
 
 <!-- Floating Action Button for Cart (when not in bottom nav) -->

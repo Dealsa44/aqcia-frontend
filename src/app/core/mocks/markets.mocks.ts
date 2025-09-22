@@ -6,6 +6,8 @@ export const marketsMocks = {
     'Discover all grocery stores in your city',
     'Откройте для себя все продуктовые магазины в вашем городе'
   ],
+  searchPlaceholder: ['მოძებნეთ მარკეტი...', 'Search for a market...', 'Искать магазин...'],
+  noResultsMessage: ['მარკეტი ვერ მოიძებნა', 'No markets found', 'Магазины не найдены'],
   filters: {
     city: ['ქალაქი', 'City', 'Город'],
     rating: ['რეიტინგი', 'Rating', 'Рейтинг']

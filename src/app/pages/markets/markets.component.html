@@ -1,76 +1,73 @@
-<section class="markets-page">
-  <div class="container">
-    <h1>{{ getCurrentText(mocks.title) }}</h1>
-    <p class="subtitle">{{ getCurrentText(mocks.subtitle) }}</p>
+<div class="markets-page">
+  <div class="page-container">
+    <div class="markets-card">
+      <h1>{{ getCurrentText(mocks.title) }}</h1>
+      <p class="subtitle">{{ getCurrentText(mocks.subtitle) }}</p>
 
-    <div class="filters">
-      <div class="city-filter">
-        <label>{{ getCurrentText(mocks.filters.city) }}:</label>
-        <select (change)="selectCity($any($event.target).value)">
-          @for (city of mocks.cities; track $index) {
-          <option [value]="$index">{{ getCurrentText(city) }}</option>
-          }
-        </select>
-      </div>
-      <div class="rating-filter">
-        <label>{{ getCurrentText(mocks.filters.rating) }}:</label>
-        <div class="rating-stars">
-          <span>★</span>
-          <span>★</span>
-          <span>★</span>
-          <span>★</span>
-          <span>★</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="stores-list">
-      @for (store of mocks.stores; track $index) {
-      <div class="store-card">
-        <img
-          [src]="'assets/imgs/stores/' + store.image"
-          [alt]="getCurrentText(store.name)"
+      <div class="search-section">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="searchMarkets()"
+          [placeholder]="getCurrentText(mocks.searchPlaceholder)"
+          class="search-input"
         />
-        <div class="store-info">
-          <h2>{{ getCurrentText(store.name) }}</h2>
-          <p class="address">{{ getCurrentText(store.address) }}</p>
-          <div class="rating">
-            <span class="stars">{{ getStars(store.rating) }}</span>
-            <span class="score">{{ store.rating }}</span>
-          </div>
-          <div class="details">
-            @if (store.delivery) {
-            <span class="delivery">{{
-              getCurrentText(mocks.labels.delivery)
-            }}</span>
-            }
-            <span class="locations">
-              {{ store.locations }} {{ getCurrentText(mocks.labels.locations) }}
-            </span>
+      </div>
+
+      <div class="stores-list">
+        @for (store of filteredStores; track $index) {
+        <div class="store-card">
+          <img
+            [src]="'assets/imgs/stores/' + store.image"
+            [alt]="getCurrentText(store.name)"
+          />
+          <div class="store-info">
+            <h2>{{ getCurrentText(store.name) }}</h2>
+            <p class="address">{{ getCurrentText(store.address) }}</p>
+            <div class="rating">
+              <span class="stars">{{ getStars(store.rating) }}</span>
+              <span class="score">{{ store.rating }}</span>
+            </div>
+            <div class="details">
+              @if (store.delivery) {
+              <span class="delivery">{{
+                getCurrentText(mocks.labels.delivery)
+              }}</span>
+              }
+              <span class="locations">
+                {{ store.locations }} {{ getCurrentText(mocks.labels.locations) }}
+              </span>
+            </div>
+            <button
+              class="view-store"
+              (click)="viewStore(getCurrentText(store.name))"
+            >
+              {{ getCurrentText(mocks.labels.viewStore) }}
+            </button>
           </div>
           <button
-            class="view-store"
-            (click)="viewStore(getCurrentText(store.name))"
+            class="favorite-btn"
+            [class.favorited]="isFavorite(getCurrentText(store.name))"
+            (click)="toggleFavorite(getCurrentText(store.name))"
+            [attr.aria-label]="
+              isFavorite(getCurrentText(store.name))
+                ? 'Remove from favorites'
+                : 'Add to favorites'
+            "
           >
-            {{ getCurrentText(mocks.labels.viewStore) }}
+            <span class="favorite-icon">
+              {{ isFavorite(getCurrentText(store.name)) ? "★" : "☆" }}
+            </span>
           </button>
         </div>
-        <button
-          class="favorite-btn"
-          [class.favorited]="isFavorite(getCurrentText(store.name))"
-          (click)="toggleFavorite(getCurrentText(store.name))"
-          [attr.aria-label]="
-            isFavorite(getCurrentText(store.name))
-              ? 'Remove from favorites'
-              : 'Add to favorites'
-          "
-        >
-          <span class="favorite-icon">
-            {{ isFavorite(getCurrentText(store.name)) ? "★" : "☆" }}
-          </span>
-        </button>
+        }
+      </div>
+
+      @if (filteredStores.length === 0 && searchTerm) {
+      <div class="no-results">
+        {{ getCurrentText(mocks.noResultsMessage) }}
       </div>
       }
     </div>
   </div>
-</section>
+</div>
