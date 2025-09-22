@@ -104,6 +104,15 @@ export class ApiService {
   // Mobile-friendly headers
   private getHttpOptions() {
     const mobileHeaders = this.mobileBrowserService.getMobileHeaders();
+    
+    // iOS-specific headers
+    if (this.mobileBrowserService.getMobileBrowserType() === 'iOS') {
+      mobileHeaders['X-Requested-With'] = 'XMLHttpRequest';
+      mobileHeaders['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+      mobileHeaders['Pragma'] = 'no-cache';
+      mobileHeaders['Expires'] = '0';
+    }
+    
     return {
       headers: new HttpHeaders(mobileHeaders)
     };

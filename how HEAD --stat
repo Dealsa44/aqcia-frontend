@@ -1,0 +1,51 @@
+[33mcommit cd728f91b78f3b0e55ebaa50319d02c3a14651c8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Dealsa44 <z_tavartkiladze@cu.edu.ge>
+Date:   Mon Sep 22 23:03:15 2025 +0400
+
+    d
+
+angular.json
+src/app/core/services/api.service.ts
+src/app/pages/catalog/catalog.component.html
+src/app/pages/catalog/catalog.component.ts
+
+[33mcommit 290b16e85dbee355e532bb9a3dc6851ac7cf2611[m
+Author: Dealsa44 <z_tavartkiladze@cu.edu.ge>
+Date:   Mon Sep 22 22:57:38 2025 +0400
+
+    d
+
+angular.json
+
+[33mcommit 98d713727db6572abd3d24521720e627cf4e468b[m
+Author: Dealsa44 <z_tavartkiladze@cu.edu.ge>
+Date:   Mon Sep 22 22:55:29 2025 +0400
+
+    d
+
+src/app/core/services/mobile-browser.service.ts
+
+[33mcommit 206195b567a5336619f6be206b4fe9963c35112f[m
+Author: Dealsa44 <z_tavartkiladze@cu.edu.ge>
+Date:   Mon Sep 22 22:53:20 2025 +0400
+
+    d
+
+public/staticwebapp.config.json
+src/app/app.component.ts
+src/app/core/services/api.service.ts
+src/app/core/services/mobile-browser.service.ts
+src/app/pages/catalog/catalog.component.ts
+src/index.html
+
+[33mcommit 6708f84783c47d7dcb1856d51d7a866e13cc4bef[m
+Author: Dealsa44 <z_tavartkiladze@cu.edu.ge>
+Date:   Mon Sep 22 22:21:37 2025 +0400
+
+    d
+
+angular.json
+public/staticwebapp.config.json
+public/sw.js
+src/app/core/services/pwa.service.ts
+src/index.html

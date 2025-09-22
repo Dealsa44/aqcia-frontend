@@ -68,6 +68,23 @@ export class CatalogComponent implements OnInit {
         }, 3000);
       }
     });
+
+    // iOS-specific error handling for Promise rejections
+    window.addEventListener('unhandledrejection', (event) => {
+      console.error('🚨 Unhandled promise rejection on iOS:', event.reason);
+      // Prevent the default behavior to avoid crashes
+      event.preventDefault();
+      
+      // If it's during initial load, try to recover
+      if (this.isInitialLoad && event.reason?.message?.includes('fetch')) {
+        console.log('🔄 iOS Promise rejection detected, attempting recovery...');
+        setTimeout(() => {
+          if (this.isInitialLoad) {
+            this.loadData();
+          }
+        }, 2000);
+      }
+    });
   }
 
   ngOnInit() {
@@ -374,6 +391,15 @@ export class CatalogComponent implements OnInit {
         p.category === categoryId &&
         p.name.some((name) => name.toLowerCase().includes(searchTerm))
     ).length;
+  }
+
+  // TrackBy function for *ngFor to improve iOS performance
+  trackByProductId(index: number, product: Product): number {
+    return product.id;
+  }
+
+  trackByCategoryId(index: number, category: any): string {
+    return category.id;
   }
   
 }

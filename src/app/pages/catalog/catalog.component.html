@@ -10,9 +10,7 @@
             (click)="openCategoryModal()"
           >
             {{ getCurrentText(catalogMocks.selectCategoriesButton) }}
-            @if (selectedCategories.length > 0) {
-            <span class="category-count-badge">{{ selectedCategories.length }}</span>
-            }
+            <span *ngIf="selectedCategories.length > 0" class="category-count-badge">{{ selectedCategories.length }}</span>
           </button>
           <button class="clear" (click)="clearFilters()">
             {{ getCurrentText(catalogMocks.clearFiltersButton) }}
@@ -28,25 +26,19 @@
 
       <div class="results">
         <!-- Loading state -->
-        @if (isLoadingProducts || isInitialLoad) {
-        <div class="loading">
+        <div *ngIf="isLoadingProducts || isInitialLoad" class="loading">
           <p>Loading products from Agrohub...</p>
           <div class="loading-spinner"></div>
         </div>
-        }
         
         <!-- Error state -->
-        @if (errorMessage) {
-        <div class="error">
+        <div *ngIf="errorMessage" class="error">
           <p>{{ errorMessage }}</p>
         </div>
-        }
         
         <!-- Products grid -->
-        @if (!isLoadingProducts && filteredProducts.length > 0) {
-        <div class="product-grid">
-          @for (product of filteredProducts; track product.id) {
-          <div class="product-card">
+        <div *ngIf="!isLoadingProducts && filteredProducts.length > 0" class="product-grid">
+          <div *ngFor="let product of filteredProducts; trackBy: trackByProductId" class="product-card">
             <img
               [src]="product.image.startsWith('http') ? product.image : 'assets/imgs/products/' + product.image"
               [alt]="getCurrentText(product.name)"
@@ -80,36 +72,31 @@
               </button>
             </div>
           </div>
-          }
         </div>
-        } @else if (!isLoadingProducts && filteredProducts.length === 0) {
-        <div class="no-results">
+        <div *ngIf="!isLoadingProducts && filteredProducts.length === 0" class="no-results">
           {{ getCurrentText(catalogMocks.noResultsMessage) }}
         </div>
-        }
       </div>
     </div>
   </div>
 
-  @if (showCategoryModal) {
- <div class="modal-overlay" (click)="closeCategoryModal()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <h2>{{ getCurrentText(catalogMocks.selectCategoriesButton) }}</h2>
+  <div *ngIf="showCategoryModal" class="modal-overlay" (click)="closeCategoryModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>{{ getCurrentText(catalogMocks.selectCategoriesButton) }}</h2>
 
-    <div class="modal-search-container">
-      <input
-        type="text"
-        [(ngModel)]="modalSearchTerm"
-        (input)="filterModalCategories()"
-        [placeholder]="getCurrentText(catalogMocks.modalSearchPlaceholder)"
-        class="modal-search-input"
-      />
-    </div>
-    
-    <div class="category-checkboxes">
-      @if (filteredModalCategories.length > 0) {
-        @for (category of filteredModalCategories; track category.id) {
-          <label class="category-item">
+      <div class="modal-search-container">
+        <input
+          type="text"
+          [(ngModel)]="modalSearchTerm"
+          (input)="filterModalCategories()"
+          [placeholder]="getCurrentText(catalogMocks.modalSearchPlaceholder)"
+          class="modal-search-input"
+        />
+      </div>
+      
+      <div class="category-checkboxes">
+        <div *ngIf="filteredModalCategories.length > 0">
+          <label *ngFor="let category of filteredModalCategories; trackBy: trackByCategoryId" class="category-item">
             <input
               type="checkbox"
               [value]="category.id"
@@ -121,21 +108,18 @@
               ({{ getProductsInCategoryCount(category.id) }})
             </span>
           </label>
-        }
-      } @else {
-        <div class="no-results">
+        </div>
+        <div *ngIf="filteredModalCategories.length === 0" class="no-results">
           {{ getCurrentText(catalogMocks.noResultsMessage) }}
         </div>
-      }
+      </div>
+      
+      <button class="apply-filters-button" (click)="applyCategoryFilters()">
+        {{ getCurrentText(catalogMocks.applyFiltersButton) }}
+      </button>
+      <button class="close-modal-button" (click)="closeCategoryModal()">
+        ✖
+      </button>
     </div>
-    
-    <button class="apply-filters-button" (click)="applyCategoryFilters()">
-      {{ getCurrentText(catalogMocks.applyFiltersButton) }}
-    </button>
-    <button class="close-modal-button" (click)="closeCategoryModal()">
-      ✖
-    </button>
   </div>
-</div>
-  }
 </div>
