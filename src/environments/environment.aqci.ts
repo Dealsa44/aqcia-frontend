@@ -1,6 +1,6 @@
 export const environment = {
-  production: false,
+  production: true,
   apiUrl: 'https://aqcia-api-g2afh7hcdvdffsg5.northeurope-01.azurewebsites.net',
-  domain: 'localhost',
-  baseUrl: 'http://localhost:4200'
+  domain: 'aqci.ge',
+  baseUrl: 'https://aqci.ge'
 };

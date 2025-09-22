@@ -4,7 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:aqci": "ng serve --configuration=aqci",
+    "start:azure": "ng serve --configuration=azure",
     "build": "ng build --configuration=production",
+    "build:aqci": "ng build --configuration=aqci",
+    "build:azure": "ng build --configuration=azure",
+    "build:prod": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

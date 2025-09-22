@@ -72,6 +72,56 @@
                 }
               ]
             },
+            "aqci": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2MB",
+                  "maximumError": "5MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "10kB",
+                  "maximumError": "20kB"
+                }
+              ],
+              "outputHashing": "all",
+              "optimization": {
+                "scripts": false,
+                "styles": false
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.aqci.ts"
+                }
+              ]
+            },
+            "azure": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2MB",
+                  "maximumError": "5MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "10kB",
+                  "maximumError": "20kB"
+                }
+              ],
+              "outputHashing": "all",
+              "optimization": {
+                "scripts": false,
+                "styles": false
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.azure.ts"
+                }
+              ]
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
@@ -85,6 +135,12 @@
           "configurations": {
             "production": {
               "buildTarget": "markets_startup:build:production"
+            },
+            "aqci": {
+              "buildTarget": "markets_startup:build:aqci"
+            },
+            "azure": {
+              "buildTarget": "markets_startup:build:azure"
             },
             "development": {
               "buildTarget": "markets_startup:build:development"

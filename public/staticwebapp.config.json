@@ -16,5 +16,9 @@
   },
   "globalHeaders": {
     "Content-Security-Policy": "upgrade-insecure-requests"
-  }
+  },
+  "customDomains": [
+    "aqci.ge",
+    "www.aqci.ge"
+  ]
 }
