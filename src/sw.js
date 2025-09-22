@@ -1,11 +1,9 @@
 // Service Worker for PWA Auto-Update System
-// Version: 2.0.0
+// Version: 1.0.0
 
-const CACHE_VERSION = '1.0.14';
-const CACHE_NAME = `markets-app-v${CACHE_VERSION}`;
-const STATIC_CACHE_NAME = `markets-static-v${CACHE_VERSION}`;
-const DYNAMIC_CACHE_NAME = `markets-dynamic-v${CACHE_VERSION}`;
-const RUNTIME_CACHE_NAME = `markets-runtime-v${CACHE_VERSION}`;
+const CACHE_NAME = 'markets-app-v1';
+const STATIC_CACHE_NAME = 'markets-static-v1';
+const DYNAMIC_CACHE_NAME = 'markets-dynamic-v1';
 
 // Files to cache immediately
 const STATIC_FILES = [
@@ -31,12 +29,16 @@ const CACHE_FIRST_PATTERNS = [
 
 // Install event - cache static files
 self.addEventListener('install', (event) => {
+  console.log('[SW] Installing service worker...');
+  
   event.waitUntil(
     caches.open(STATIC_CACHE_NAME)
       .then((cache) => {
+        console.log('[SW] Caching static files');
         return cache.addAll(STATIC_FILES);
       })
       .then(() => {
+        console.log('[SW] Static files cached successfully');
         return self.skipWaiting();
       })
       .catch((error) => {
@@ -47,6 +49,8 @@ self.addEventListener('install', (event) => {
 
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
+  console.log('[SW] Activating service worker...');
+  
   event.waitUntil(
     caches.keys()
       .then((cacheNames) => {
@@ -56,12 +60,14 @@ self.addEventListener('activate', (event) => {
             if (cacheName !== CACHE_NAME && 
                 cacheName !== STATIC_CACHE_NAME && 
                 cacheName !== DYNAMIC_CACHE_NAME) {
+              console.log('[SW] Deleting old cache:', cacheName);
               return caches.delete(cacheName);
             }
           })
         );
       })
       .then(() => {
+        console.log('[SW] Service worker activated');
         return self.clients.claim();
       })
   );
@@ -97,25 +103,19 @@ async function networkFirstStrategy(request) {
   try {
     const networkResponse = await fetch(request);
     
-    // Cache successful responses by creating a new response
+    // Clone the response before caching
+    const responseToCache = networkResponse.clone();
+    
+    // Cache successful responses
     if (networkResponse.ok) {
-      try {
-        const responseData = await networkResponse.arrayBuffer();
-        const responseToCache = new Response(responseData, {
-          status: networkResponse.status,
-          statusText: networkResponse.statusText,
-          headers: networkResponse.headers
-        });
-        
-        const cache = await caches.open(DYNAMIC_CACHE_NAME);
-        await cache.put(request, responseToCache);
-      } catch (cacheError) {
-        // Silent fail for cache errors
-      }
+      const cache = await caches.open(DYNAMIC_CACHE_NAME);
+      cache.put(request, responseToCache);
     }
     
     return networkResponse;
   } catch (error) {
+    console.log('[SW] Network failed, trying cache:', request.url);
+    
     // Fallback to cache if network fails
     const cachedResponse = await caches.match(request);
     if (cachedResponse) {
@@ -143,19 +143,8 @@ async function cacheFirstStrategy(request) {
     const networkResponse = await fetch(request);
     
     if (networkResponse.ok) {
-      try {
-        const responseData = await networkResponse.arrayBuffer();
-        const responseToCache = new Response(responseData, {
-          status: networkResponse.status,
-          statusText: networkResponse.statusText,
-          headers: networkResponse.headers
-        });
-        
-        const cache = await caches.open(DYNAMIC_CACHE_NAME);
-        await cache.put(request, responseToCache);
-      } catch (cacheError) {
-        // Silent fail for cache errors
-      }
+      const cache = await caches.open(DYNAMIC_CACHE_NAME);
+      cache.put(request, networkResponse.clone());
     }
     
     return networkResponse;
@@ -169,56 +158,19 @@ async function cacheFirstStrategy(request) {
 async function staleWhileRevalidateStrategy(request) {
   const cachedResponse = await caches.match(request);
   
-  // If we have a cached response, return it immediately
-  if (cachedResponse) {
-    // Update cache in background without blocking
-    // Don't try to clone responses in background - just fetch and cache directly
-    fetch(request.url).then(async (networkResponse) => {
-      if (networkResponse.ok) {
-        try {
-          // Create a new response from the same data to avoid cloning issues
-          const responseData = await networkResponse.arrayBuffer();
-          const newResponse = new Response(responseData, {
-            status: networkResponse.status,
-            statusText: networkResponse.statusText,
-            headers: networkResponse.headers
-          });
-          
-          const cache = await caches.open(DYNAMIC_CACHE_NAME);
-          await cache.put(request, newResponse);
-        } catch (error) {
-          // Silent fail for background cache updates
-        }
-      }
-    }).catch(() => {
-      // Ignore network errors for background updates
-    });
-    
-    return cachedResponse;
-  }
-  
-  // No cached response, fetch from network
-  try {
-    const networkResponse = await fetch(request);
-    
+  // Fetch in background to update cache
+  const fetchPromise = fetch(request).then((networkResponse) => {
     if (networkResponse.ok) {
-      // Create a new response instead of cloning to avoid issues
-      const responseData = await networkResponse.arrayBuffer();
-      const responseToCache = new Response(responseData, {
-        status: networkResponse.status,
-        statusText: networkResponse.statusText,
-        headers: networkResponse.headers
-      });
-      
-      const cache = await caches.open(DYNAMIC_CACHE_NAME);
-      await cache.put(request, responseToCache);
+      const cache = caches.open(DYNAMIC_CACHE_NAME);
+      cache.then((c) => c.put(request, networkResponse.clone()));
     }
-    
     return networkResponse;
-  } catch (error) {
-    console.error('[SW] Failed to fetch:', request.url, error);
-    throw error;
-  }
+  }).catch(() => {
+    // Ignore network errors for background updates
+  });
+  
+  // Return cached response immediately if available
+  return cachedResponse || fetchPromise;
 }
 
 // Helper functions to determine caching strategy
@@ -244,45 +196,24 @@ self.addEventListener('message', (event) => {
 // Check for updates by comparing cache versions
 async function checkForUpdates() {
   try {
-    // Fetch the current version from the server with cache busting
-    const response = await fetch(`/version.json?t=${Date.now()}`, {
-      cache: 'no-cache',
-      headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache'
-      }
-    });
-    
+    // Fetch the current version from the server
+    const response = await fetch('/version.json?' + Date.now());
     if (!response.ok) {
       throw new Error('Failed to fetch version');
     }
     
     const serverVersion = await response.json();
-    const currentVersion = CACHE_VERSION;
-    
+    const currentVersion = CACHE_NAME.split('-v')[1];
     
     if (serverVersion.version !== currentVersion) {
-      // Force update by clearing all caches and reloading
-      await clearAllCaches();
+      console.log('[SW] Update available:', serverVersion.version);
       
       // Notify all clients about the update
       const clients = await self.clients.matchAll();
       clients.forEach(client => {
         client.postMessage({
           type: 'UPDATE_AVAILABLE',
-          version: serverVersion.version,
-          currentVersion: currentVersion
-        });
-      });
-      
-      // Auto-update by skipping waiting and claiming clients
-      await self.skipWaiting();
-      await self.clients.claim();
-      
-      // Force reload all clients
-      clients.forEach(client => {
-        client.postMessage({
-          type: 'FORCE_RELOAD'
+          version: serverVersion.version
         });
       });
     }
@@ -291,25 +222,8 @@ async function checkForUpdates() {
   }
 }
 
-// Clear all caches to force fresh download
-async function clearAllCaches() {
-  try {
-    const cacheNames = await caches.keys();
-    await Promise.all(
-        cacheNames.map(cacheName => {
-          return caches.delete(cacheName);
-        })
-    );
-  } catch (error) {
-    // Silent fail for cache clearing
-  }
-}
-
-// Periodic update check every 30 seconds for immediate updates
-setInterval(checkForUpdates, 30 * 1000);
-
-// Check for updates immediately when service worker starts
-checkForUpdates();
+// Periodic update check every 2 minutes
+setInterval(checkForUpdates, 2 * 60 * 1000);
 
 // Special handling for iOS Safari
 if (navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad')) {
@@ -324,3 +238,4 @@ if (navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad
   });
 }
 
+console.log('[SW] Service worker loaded successfully');

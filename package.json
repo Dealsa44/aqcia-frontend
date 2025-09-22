@@ -1,6 +1,6 @@
 {
   "name": "markets-startup",
-  "version": "1.0.14",
+  "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -11,11 +11,7 @@
     "build:azure": "ng build --configuration=azure",
     "build:prod": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "update-version": "node scripts/update-version.js",
-    "build:with-version": "npm run update-version && ng build --configuration=production",
-    "build:pwa": "node scripts/build-pwa.js && ng build --configuration=production",
-    "build:pwa:azure": "node scripts/build-pwa.js && ng build --configuration=azure"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {

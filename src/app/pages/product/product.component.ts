@@ -53,18 +53,23 @@ export class ProductComponent implements OnInit {
   }
 
   loadProduct(productId: number) {
+    console.log('🛍️ ProductComponent - loadProduct called for ID:', productId);
     this.isLoadingProduct = true;
     this.productError = '';
 
     // Try to load from API first
     this.apiService.getProduct(productId).subscribe({
       next: (apiProduct: ApiProduct) => {
+        console.log('✅ ProductComponent - Product loaded successfully from API:', apiProduct);
         this.apiProduct = apiProduct;
         this.product = this.convertApiProductToProduct(apiProduct);
         this.isLoadingProduct = false;
         this.loadPrices(productId);
       },
       error: (error) => {
+        console.error('❌ ProductComponent - Error loading product from API:', error);
+        console.log('🔄 ProductComponent - Falling back to mock data');
+        
         // Fallback to mock data
         this.product = productsMocks.products.find(p => p.id === productId);
         if (!this.product) {
@@ -76,6 +81,7 @@ export class ProductComponent implements OnInit {
   }
 
   convertApiProductToProduct(apiProduct: ApiProduct): any {
+    console.log('🔄 ProductComponent - Converting API product to display format');
     return {
       id: apiProduct.product_id,
       name: [apiProduct.name, apiProduct.name, apiProduct.name], // Multi-language array

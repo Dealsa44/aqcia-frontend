@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet, NavigationEnd, Router } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { ProductAnimationComponent } from './shared/components/product-animation/product-animation.component';
-import { PwaUpdateService } from './core/services/pwa-update.service';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -17,10 +16,7 @@ import { filter } from 'rxjs/operators';
 export class AppComponent implements OnInit {
   title = 'markets_startup';
 
-  constructor(
-    private router: Router,
-    private pwaUpdateService: PwaUpdateService
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.router.events
@@ -29,18 +25,5 @@ export class AppComponent implements OnInit {
         // Scroll to top when navigating to a different page
         window.scrollTo(0, 0);
       });
-
-    // Initialize PWA update service
-    this.initializePwaUpdates();
-  }
-
-  private initializePwaUpdates(): void {
-    // Subscribe to update notifications
-    this.pwaUpdateService.updateInfo$.subscribe(updateInfo => {
-      if (updateInfo.available) {
-        // Auto-apply updates in production
-        this.pwaUpdateService.showUpdateNotification();
-      }
-    });
   }
 }
