@@ -52,7 +52,6 @@
   
   <!-- Preload critical resources -->
   <link rel="preload" href="main.js" as="script" crossorigin>
-  <link rel="preload" href="styles.css" as="style">
 </head>
 <body>
   <app-root></app-root>
@@ -62,32 +61,62 @@
     // Mobile browser detection and error handling
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then((registration) => {
-            console.log('SW registered: ', registration);
-          })
-          .catch((registrationError) => {
-            console.log('SW registration failed: ', registrationError);
-            // Don't block app loading if SW fails
-          });
-      });
-    } else if (isMobile) {
-      console.log('Service Worker not supported on this mobile browser');
-    }
+    // Temporarily disabled service worker to prevent reload loops
+    // if ('serviceWorker' in navigator) {
+    //   window.addEventListener('load', () => {
+    //     navigator.serviceWorker.register('/sw.js')
+    //       .then((registration) => {
+    //         console.log('SW registered: ', registration);
+    //       })
+    //       .catch((registrationError) => {
+    //         console.log('SW registration failed: ', registrationError);
+    //         // Don't block app loading if SW fails
+    //       });
+    //   });
+    // } else if (isMobile) {
+    //   console.log('Service Worker not supported on this mobile browser');
+    // }
     
     // Global error handler for mobile browsers
     window.addEventListener('error', (event) => {
       console.error('Global error:', event.error);
+      console.error('Error details:', {
+        message: event.message,
+        filename: event.filename,
+        lineno: event.lineno,
+        colno: event.colno,
+        error: event.error
+      });
       // Don't let errors crash the app
     });
     
     window.addEventListener('unhandledrejection', (event) => {
       console.error('Unhandled promise rejection:', event.reason);
+      console.error('Promise rejection details:', {
+        reason: event.reason,
+        promise: event.promise
+      });
       // Prevent the default behavior
       event.preventDefault();
     });
+    
+    // Debug logging
+    console.log('App starting...');
+    console.log('User agent:', navigator.userAgent);
+    console.log('Is mobile:', isMobile);
+    console.log('Online status:', navigator.onLine);
+    
+    // Check if styles are loading correctly
+    const checkStyles = () => {
+      const links = document.querySelectorAll('link[rel="stylesheet"]');
+      console.log('Stylesheet links found:', links.length);
+      links.forEach((link, index) => {
+        console.log(`Stylesheet ${index + 1}:`, link.href);
+      });
+    };
+    
+    // Check styles after a short delay
+    setTimeout(checkStyles, 1000);
     
     // PWA Install Prompt
     let deferredPrompt;

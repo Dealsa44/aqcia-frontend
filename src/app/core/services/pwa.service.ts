@@ -45,14 +45,14 @@ export class PWAService {
       this.isOnlineSubject.next(false);
     });
 
-    // Listen for service worker messages
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.addEventListener('message', (event) => {
-        if (event.data.type === 'UPDATE_AVAILABLE') {
-          this.updateAvailableSubject.next(true);
-        }
-      });
-    }
+    // Disabled automatic update checking to prevent reload loops
+    // if ('serviceWorker' in navigator) {
+    //   navigator.serviceWorker.addEventListener('message', (event) => {
+    //     if (event.data.type === 'UPDATE_AVAILABLE') {
+    //       this.updateAvailableSubject.next(true);
+    //     }
+    //   });
+    // }
   }
 
   async installApp(): Promise<boolean> {
@@ -82,7 +82,8 @@ export class PWAService {
       const registration = await navigator.serviceWorker.getRegistration();
       if (registration && registration.waiting) {
         registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-        window.location.reload();
+        // Don't auto-reload, let user decide
+        console.log('Update applied, please refresh manually');
       }
     }
   }

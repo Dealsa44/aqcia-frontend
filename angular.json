@@ -70,10 +70,10 @@
                 }
               ],
               "outputHashing": "all",
-        "optimization": {
-          "scripts": false,
-          "styles": false
-        },
+              "optimization": {
+                "scripts": false,
+                "styles": false
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
